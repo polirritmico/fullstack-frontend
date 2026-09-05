@@ -8,4 +8,7 @@
     --kiltro-color-four: #F2EFE7;
 
 }
+html {
+    background-color: var(--kiltro-color-two);
+}
 
