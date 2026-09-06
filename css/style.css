@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 :root {
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
     /*color palette */
     /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
 
