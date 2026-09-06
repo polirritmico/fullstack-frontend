@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 :root {
     /*color palette */
     /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
@@ -7,8 +8,21 @@
     --kiltro-color-three: #C8DFDB;
     --kiltro-color-four: #F2EFE7;
 
+
+.texto-normal {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 400;
+}
+
+.texto-fuerte {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 700;
+}
+
+
 }
 html {
     background-color: var(--kiltro-color-two);
 }
+
 
