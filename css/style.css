@@ -27,4 +27,7 @@ html {
     background-color: var(--kiltro-color-two);   
     
 }
+header {
+    font-family: "PT Sans", sans-serif;
+}
 
