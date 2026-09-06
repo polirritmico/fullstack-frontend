@@ -27,6 +27,7 @@
 .texto-fuerte {
     font-family: "PT Sans", sans-serif;
     font-weight: 700;
+    
 }
 
 
@@ -46,3 +47,12 @@ body {
     background-color: var(--kiltro-color-four);
 }
 
+.confi-footer {
+    background-color: var(--kiltro-color-three);
+    color: black;
+    padding: 20px;
+    padding-left: 20px;
+    text-align: left;
+    font-family: "PT Sans", sans-serif;
+    
+}
