@@ -21,6 +21,7 @@
 
 
 html {
-    background-color: var(--kiltro-color-two);
-    scroll-behavior: auto;
+    background-color: var(--kiltro-color-two);   
+    
 }
+
