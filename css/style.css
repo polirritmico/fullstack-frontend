@@ -12,6 +12,12 @@
     --kiltro-color-four: #F2EFE7;
 }
 
+.card-img-top-css {
+  height: 250px;
+  object-fit: cover;
+}
+
+
 .texto-normal {
     font-family: "PT Sans", sans-serif;
     font-weight: 400;
