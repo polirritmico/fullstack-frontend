@@ -12,6 +12,7 @@
     --kiltro-color-four: #F2EFE7;
 }
 
+
 .card-img-top-css {
   height: 250px;
   object-fit: cover;
@@ -29,11 +30,19 @@
 }
 
 
-html {
-    background-color: var(--kiltro-color-two);   
-    
-}
+
 header {
     font-family: "PT Sans", sans-serif;
+}
+
+
+body {
+    margin: 0;
+    background-color: var(--kiltro-color-two);
+}
+
+
+.seccion-cards {
+    background-color: var(--kiltro-color-four);
 }
 
