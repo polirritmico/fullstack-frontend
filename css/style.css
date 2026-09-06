@@ -7,7 +7,7 @@
     --kiltro-color-two: #66A3BF;
     --kiltro-color-three: #C8DFDB;
     --kiltro-color-four: #F2EFE7;
-
+}
 
 .texto-normal {
     font-family: "PT Sans", sans-serif;
@@ -20,9 +20,6 @@
 }
 
 
-}
 html {
-    background-color: var(--kiltro-color-two);
+    background-color: var(--kiltro-color-two)
 }
-
-
