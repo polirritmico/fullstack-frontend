@@ -21,5 +21,15 @@ input{
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
+}
+
+button{
+    width: 20%;
+    padding: 10px;
+    background-color: #0d6efd;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
