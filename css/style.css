@@ -37,22 +37,33 @@ header {
 }
 
 
+/*
+  Color de fondo de toda la página.
+  margin: 0 le quita el margen que el navegador le pone al body por defecto;
+  sin eso se ve un borde blanco alrededor.
+  Las citas y el blog no tienen background propio, así que se ven de este color.
+*/
 body {
     margin: 0;
     background-color: var(--kiltro-color-two);
 }
 
 
+/*
+  Solo el bloque de las dos tarjetas del header (Veterinaria y Tienda).
+  Le doy un color distinto al del body para que el header se separe
+  visualmente del resto de la página.
+*/
 .seccion-cards {
     background-color: var(--kiltro-color-four);
 }
 
+/* Estilos del footer simple: color, aire interno y texto centrado */
 .confi-footer {
     background-color: var(--kiltro-color-three);
     color: black;
     padding: 20px;
-    padding-left: 20px;
-    text-align: left;
+    text-align: center;
     font-family: "PT Sans", sans-serif;
     
 }
