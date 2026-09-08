@@ -41,7 +41,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="../index.html"
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="../index.html"
                     >Inicio</a
                   >
                 </li>
@@ -59,10 +62,48 @@
                 </li>
               </ul>
             </div>
+
+            <!-- BOTÓN CARRITO -->
+            <button
+              class="btn btn-outline-dark ms-3"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <i class="bi bi-cart3"></i>
+              Carrito
+            </button>
           </div>
         </nav>
       </section>
     </header>
+
+    <!-- OFFCANVAS DEL CARRITO -->
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+          <i class="bi bi-cart3"></i>
+          Mi carrito
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <p>Tu carrito está vacío.</p>
+      </div>
+    </div>
 
     <section class="container-fluid mt-4 px-4">
       <!-- CARRUSEL -->
