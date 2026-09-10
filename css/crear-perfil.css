@@ -30,7 +30,7 @@ input{
     
 }
 
-button{
+.formulario button{
     width: 20%;
     padding: 10px;
     background-color: #0d6efd;
