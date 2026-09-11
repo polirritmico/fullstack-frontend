@@ -38,6 +38,8 @@ header {
 
 
 
+
+
 body {
     margin: 0;
     background-color: var(--kiltro-color-four);
@@ -56,4 +58,11 @@ body {
     text-align: center;
     font-family: "PT Sans", sans-serif;
     
+}
+
+.fondo-completo {
+    background-image: url('../img/fondo-historia.jpg'); /* Cambia 'ruta-de-la-imagen.jpg' por la ruta de tu imagen */
+    background-size: cover;       /* Cubre todo el espacio disponible sin deformar la imagen */
+    background-position: center;  /* Centra la imagen para que el punto clave no se corte */
+    background-repeat: no-repeat; /* Evita que la foto se repita en mosaico */
 }
