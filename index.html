@@ -146,59 +146,85 @@
 
 
 
-    <section class="container py-5 seccion-cards border border-1  border-light-subtle" ;
-      style="border-radius: 10px; background-color: #F2EFE7">
-      <div class="row px-5">
-        <div class="col-7">
-          <h2 class="texto-fuerte display 1" style="text-align: center;">Conoce como tener un buen cuidado sobre tu
-            animal segun nuestros veterinarios</h2>
-          <p class="texto-normal;  letter-spacing: 5px; mt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Quisquam, autem aliquam! Reprehenderit dolores odio quae a tempore, possimus ratione libero quo! Dolores
-            tenetur illum suscipit! Alias mollitia autem quas voluptate? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Molestiae, dicta consequatur expedita, reprehenderit et consectetur qui accusantium ipsum
-            quae numquam est quis! Voluptatibus ipsam ducimus quisquam eligendi, reprehenderit dolor eos!</p>
-          <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="button">Button</button>
+  <!-- SECCIÓN 1: TIENDA Y ALIMENTOS -->
+ 
+  <section class="container py-5 seccion-cards border border-1 border-light-subtle" style="border-radius: 10px; background-color: #F2EFE7">
+    <div class="row px-5">
+      <div class="col-7">
+        
+        <!-- use dipslay 6 para tamaño--> 
+            
+        <h2 class="texto-fuerte display-6 text-center">La mejor nutrición y accesorios para tu animal</h2>
+        
+        <!-- articulo 1 -->
+        <p class="texto-normal mt-3" style="letter-spacing: 2px;">
+          En nuestra Clínica J-Kiltro, estamos convencidos de que la salud de tu compañero de cuatro patas comienza por su plato. Por eso, hemos seleccionado cuidadosamente una tienda con los mejores alimentos y artículos del mercado, pensando siempre en sus necesidades específicas.
+        </p>
 
-          </div>
+        <!-- me faltaba el colapse para poder hacerlo como foro, averiguando pude hacerlo bien y el id-->
+        <div class="collapse" id="articuloTienda">
+          <p class="texto-normal mt-2" style="letter-spacing: 2px;">
+            Trabajamos con marcas de nutrición premium que garantizan un aporte equilibrado, mejorando su pelaje, su digestión y su energía diaria. Además, sabemos que el bienestar no es solo salud física, sino también mental. En nuestra sección de accesorios, encontrarás desde juguetes interactivos que estimulan su inteligencia, hasta camas ergonómicas para un descanso reparador y accesorios de paseo seguros. Cada producto que ofrecemos ha sido revisado y aprobado por nuestros especialistas, asegurando que te lleves a casa solo lo mejor. ¡Ven a descubrir todo lo que tenemos para mimar a tu animal!
+          </p>
         </div>
-        <div class="col-5">
-          <img class="img-fluid mx-auto d-block" alt="500x500" src="img/pexels-amar-30070537.jpg"
-            style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
+
+        <div class="d-grid gap-2 col-6 mx-auto mt-4">
+          <!-- AGREGADO: Los atributos data-bs-toggle y data-bs-target conectan el botón con el id "articuloTienda" -->
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#articuloTienda" aria-expanded="false" aria-controls="articuloTienda">
+            Ver más
+          </button>
         </div>
+
       </div>
-    </section>
-    <div class="col-4 mx-auto" ;>
-      <hr>
-      
+      <div class="col-5">
+        <img class="img-fluid mx-auto d-block" alt="500x500" src="img/pexels-amar-30070537.jpg" style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
+      </div>
     </div>
+  </section>
 
-    <section class="container py-5 seccion-cards border border-1  border-light-subtle" ;
-      style="border-radius: 10px; background-color: #F2EFE7">
-      <div class="row px-5">
-
-        <div class="col-5">
-          <img class="img-fluid mx-auto d-block" alt="500x500" src="img/pexels-amar-30070537.jpg"
-            style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
-        </div>
-        <div class="col-7">
-          <h2 class="texto-fuerte display 1" style="text-align: center;">Conoce como tener un buen cuidado sobre tu
-            animal segun nuestros veterinarios</h2>
-          <p class="texto-normal;  letter-spacing: 5px; mt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Quisquam, autem aliquam! Reprehenderit dolores odio quae a tempore, possimus ratione libero quo! Dolores
-            tenetur illum suscipit! Alias mollitia autem quas voluptate? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Molestiae, dicta consequatur expedita, reprehenderit et consectetur qui accusantium ipsum
-            quae numquam est quis! Voluptatibus ipsam ducimus quisquam eligendi, reprehenderit dolor eos!</p>
-          <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="button">Button</button>
-
-          </div>
-        </div>
-    </section>
-    <div class="col-4 mx-auto" ;></div>
+  <!-- SEPARADOR -->
+  <!-- Limpié los div mal cerrados y los puntos y comas sueltos -->
+  <div class="col-4 mx-auto my-4">
     <hr>
-    </div>
+  </div>
 
+  <!-- SECCIÓN 2: VETERINARIOS Y TALENTO -->
+  <section class="container py-5 seccion-cards border border-1 border-light-subtle" style="border-radius: 10px; background-color: #F2EFE7">
+    <div class="row px-5">
+
+      <div class="col-5">
+        <img class="img-fluid mx-auto d-block" alt="500x500" src="img/pexels-amar-30070537.jpg" style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
+      </div>
+      
+      <div class="col-7">
+        <h2 class="texto-fuerte display-6 text-center">Talento médico y calidad de atención</h2>
+        
+        <p class="texto-normal mt-3" style="letter-spacing: 2px;">
+          Nuestro mayor orgullo en Clínica J-Kiltro es el increíble talento humano que nos respalda. Contamos con un equipo de médicos veterinarios apasionados y altamente capacitados, cuya vocación principal es el amor y respeto por cada animal que cruza nuestras puertas.
+        </p>
+
+        <!-- AGREGADO: Nuevo contenedor oculto, esta vez con id="articuloVeterinarios" -->
+        <div class="collapse" id="articuloVeterinarios">
+          <p class="texto-normal mt-2" style="letter-spacing: 2px;">
+            Entendemos que traer a tu mascota a la clínica puede generar estrés, por lo que nuestros doctores se esfuerzan en brindar una atención empática, paciente y cercana. Se toman el tiempo necesario para escuchar tus dudas y examinar a tu compañero con la mayor delicadeza. Además, nuestro equipo está en constante actualización médica para ofrecer diagnósticos precisos y tratamientos de vanguardia. Desde chequeos preventivos hasta casos más complejos, trabajamos en conjunto para garantizar la mejor calidad de vida para tu mascota.
+          </p>
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto mt-4">
+          <!-- AGREGADO: El botón ahora apunta al id "articuloVeterinarios" -->
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#articuloVeterinarios" aria-expanded="false" aria-controls="articuloVeterinarios">
+            Ver más
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARADOR -->
+  <div class="col-4 mx-auto my-4">
+    <hr>
+  </div>
 
 
   </main>
