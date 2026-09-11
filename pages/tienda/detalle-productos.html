@@ -46,10 +46,14 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../../pages/contacto.html">Contactanos</a>
+                  <a class="nav-link" href="../../pages/contacto.html"
+                    >Contactanos</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../../pages/historia.html">Historia</a>
+                  <a class="nav-link" href="../../pages/historia.html"
+                    >Historia</a
+                  >
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Servicios</a>
@@ -60,10 +64,14 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../../pages/tienda/index.html">Productos</a>
+                  <a class="nav-link" href="../../pages/tienda/index.html"
+                    >Productos</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../../pages/perfil/crear-perfil.html"
+                  <a
+                    class="nav-link"
+                    href="../../pages/perfil/crear-perfil.html"
                     >Crear Perfil</a
                   >
                 </li>
@@ -74,7 +82,9 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="../../pages/perfil/historial-compras.html"
+                  <a
+                    class="nav-link"
+                    href="../../pages/perfil/historial-compras.html"
                     >Mis Compras</a
                   >
                 </li>
@@ -123,292 +133,151 @@
       </div>
     </div>
 
-    <section class="container-fluid mt-4 px-4">
-      <div class="row">
-        <!-- COLUMNA IZQUIERDA: FILTROS -->
-        <div class="col-12 col-md-3 mb-4">
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <!-- Categoría -->
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  Categoría
-                </button>
-              </h2>
+    <main class="detalle-producto py-5">
+      <div class="container">
+        <!-- Navegación secundaria -->
+        <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="../../index.html">Inicio</a>
+            </li>
 
-              <div
-                id="flush-collapseOne"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <p>Refrigeración</p>
-                  <p>Calefacción</p>
-                  <p>Ventilación</p>
-                </div>
-              </div>
+            <li class="breadcrumb-item">
+              <a href="./index.html">Productos</a>
+            </li>
+
+            <li
+              id="breadcrumb-producto"
+              class="breadcrumb-item active"
+              aria-current="page"
+            >
+              Detalle del producto
+            </li>
+          </ol>
+        </nav>
+
+        <div class="row g-5 align-items-start">
+          <!-- IMAGEN -->
+          <div class="col-12 col-lg-6">
+            <div class="card border-0 shadow-sm p-4">
+              <img
+                id="producto-imagen"
+                src="../../img/pexels-amar-30070537.jpg"
+                class="img-fluid detalle-producto__imagen"
+                alt="Producto"
+              />
+            </div>
+          </div>
+
+          <!-- INFORMACIÓN -->
+          <div class="col-12 col-lg-6">
+            <span id="producto-categoria" class="badge text-bg-primary mb-3">
+              Categoría
+            </span>
+
+            <h1 id="producto-nombre" class="mb-3">Nombre del producto</h1>
+
+            <p id="producto-precio" class="fs-2 fw-bold text-primary">
+              $29.990
+            </p>
+
+            <p id="producto-descripcion" class="text-body-secondary">
+              Aquí se mostrará la descripción completa del producto, sus
+              principales características y recomendaciones de uso.
+            </p>
+
+            <hr />
+
+            <p>
+              <strong>Disponibilidad:</strong>
+              <span id="producto-stock" class="text-success"> En stock </span>
+            </p>
+
+            <div class="mb-4">
+              <label for="producto-cantidad" class="form-label">
+                Cantidad
+              </label>
+
+              <input
+                id="producto-cantidad"
+                class="form-control"
+                type="number"
+                min="1"
+                value="1"
+                style="max-width: 100px"
+              />
             </div>
 
-            <!-- Precio -->
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  Precio
-                </button>
-              </h2>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+              <button class="btn btn-primary btn-lg" type="button">
+                <i class="bi bi-cart-plus me-2"></i>
+                Agregar al carrito
+              </button>
 
-              <div
-                id="flush-collapseTwo"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <p>$0 - $20.000</p>
-                  <p>$20.000 - $50.000</p>
-                  <p>$50.000 o más</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Marca -->
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Marca
-                </button>
-              </h2>
-
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <p>Marca A</p>
-                  <p>Marca B</p>
-                  <p>Marca C</p>
-                </div>
-              </div>
+              <a href="./index.html" class="btn btn-outline-secondary btn-lg">
+                Volver a la tienda
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: PRODUCTOS -->
-        <div class="col-12 col-md-9">
-          <div class="row g-4" style="background-color: #f2f2f2">
-            <!-- Card 1 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 1"
-                />
+        <!-- INFORMACIÓN ADICIONAL -->
+        <section class="mt-5">
+          <div class="accordion" id="informacionProducto">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#caracteristicas"
+                  aria-expanded="true"
+                  aria-controls="caracteristicas"
+                >
+                  Características
+                </button>
+              </h2>
 
-                <div class="card-body">
-                  <h5 class="card-title">Card 1</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+              <div
+                id="caracteristicas"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#informacionProducto"
+              >
+                <div id="producto-caracteristicas" class="accordion-body">
+                  Aquí se mostrarán las características del producto.
                 </div>
               </div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 2"
-                />
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#envios"
+                  aria-expanded="false"
+                  aria-controls="envios"
+                >
+                  Envíos y devoluciones
+                </button>
+              </h2>
 
-                <div class="card-body">
-                  <h5 class="card-title">Card 2</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 3"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 3</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 4"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 4</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 5"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 5</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 6"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 6</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 7"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 7</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 8"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 8</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 rounded-5 text-center">
-                <img
-                  src="../../img/pexels-amar-30070537.jpg"
-                  class="card-img-top"
-                  alt="Producto 9"
-                />
-
-                <div class="card-body">
-                  <h5 class="card-title">Card 9</h5>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+              <div
+                id="envios"
+                class="accordion-collapse collapse"
+                data-bs-parent="#informacionProducto"
+              >
+                <div class="accordion-body">
+                  Envíos disponibles dentro de Chile. El tiempo de entrega
+                  dependerá de la ubicación del cliente.
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-    </section>
+    </main>
 
     <div class="container">
       <footer class="py-3 my-4">
