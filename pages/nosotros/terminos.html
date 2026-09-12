@@ -1,226 +1,367 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jKiltro</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>j-kiltro</title>
+    <!-- CSS de Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
 
-  <!-- CSS de Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <!--Bootstrap Icons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
 
-  <!--Bootstrap Icons  -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="css/style.css" />
-</head>
+  <body>
+    <header>
+      <section>
+        <nav class="navbar navbar-expand-md" style="background-color: #c8dfdb">
+          <div class="container">
+            <a class="navbar-brand" href="#">
+              <img
+                src="../../img/logo-mark.svg"
+                alt="Logo de la empresa"
+                width="75"
+                height="75"
+                class="me-3"
+              />
+              jKiltro
+            </a>
 
-<body>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-  <header>
-    <section>
-      <nav class="navbar navbar-expand-md" style="background-color: #c8dfdb">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="../../img/logo-mark.svg" alt="Logo de la empresa" width="75" height="75" class="me-3" />
-            J-Kiltro
-          </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Inicio</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contactanos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Historia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Servicios</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Quienes Somos</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </section>
+    </header>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <main class="pt-5" style="background-color: #c8dfdb">
+      <section class="container-fluid" style="margin-top: 7%">
+        <div class="row justify-content-center">
+          <div class="accordion col-10" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne"
+                  aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne"
+                >
+                  E-Commerce: Términos y Condiciones de Venta de Productos
+                </button>
+              </h2>
+              <div
+                id="panelsStayOpen-collapseOne"
+                class="accordion-collapse collapse show"
+              >
+                <div class="accordion-body">
+                  <h3>Términos y Condiciones E-commerce</h3>
+                  <strong>Última actualización: [11/09/26] </strong> <br />
+                  <p
+                    class="texto-normal"
+                    style="text-align: justify; font-size: 18px"
+                  >
+                    <br />
+                    <strong
+                      >1. Términos y Condiciones: E-commerce (Venta de
+                      Productos)</strong
+                    ><br />
+                    Última actualización: [11/09/26] <br />
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contactanos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Historia</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Quienes Somos</a>
-              </li>
-            </ul>
+                    Bienvenido/a a jKiltro. Al utilizar nuestro sitio web y/o
+                    comprar algo de nosotros, participas en nuestro "Servicio" y
+                    aceptas los siguientes términos y condiciones.
+                    <br />
+                    <br />
+                    <strong>Uso del Sitio:</strong> Debes ser mayor de edad para
+                    realizar compras en este sitio. No puedes usar los productos
+                    de jKiltro para ningún propósito ilegal o no autorizado.
+                    <br />
+                    <strong>Precios y Productos:</strong> Los precios de
+                    nuestros productos están sujetos a cambios sin previo aviso.
+                    En jKiltro nos reservamos el derecho de modificar o
+                    discontinuar un producto en cualquier momento. Hacemos el
+                    mayor esfuerzo para mostrar los colores y las imágenes de
+                    los productos con la mayor precisión posible, pero no
+                    garantizamos que el monitor de tu computadora muestre los
+                    colores de manera exacta.
+                    <br />
+                    <strong>Pagos y Facturación:</strong> Te comprometes a
+                    proporcionar información de compra y cuenta actual, completa
+                    y precisa para todas las compras realizadas en nuestra
+                    tienda.
+                    <br />
+                    <strong>Envíos y Entregas:</strong> Los plazos de envío son
+                    estimados y comienzan a correr desde la confirmación del
+                    pago. Los envíos se realizan a través de las empresas
+                    establecidas en la plataforma y los costos son calculados al
+                    momento del checkout.
+                    <br />
+                    <strong>Garantía Legal y Devoluciones:</strong> De acuerdo
+                    con la Ley del Consumidor en Chile, si un producto nuevo
+                    sale defectuoso, le faltan piezas o no es apto para el uso
+                    al que fue destinado, tienes derecho a elegir entre el
+                    cambio, la reparación gratuita o la devolución de lo pagado
+                    en un plazo de 6 meses desde la recepción de tu compra en
+                    jKiltro.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseTwo"
+                >
+                  Servicios Veterinarios
+                </button>
+              </h2>
+              <div
+                id="panelsStayOpen-collapseTwo"
+                class="accordion-collapse collapse"
+              >
+                <div class="accordion-body">
+                  <h3>Términos y Condiciones Servicios Veterinarios</h3>
+                  <strong>Última actualización: [11/09/26] </strong> <br />
+                  <p
+                    class="texto-normal"
+                    style="text-align: justify; font-size: 18px"
+                  >
+                    <br />
+                    <strong
+                      >3. Términos y Condiciones: Servicios Veterinarios y
+                      Responsabilidad Médica</strong
+                    ><br />
+                    Última actualización: [11/09/26] <br />
+
+                    Estos términos regulan las condiciones bajo las cuales se
+                    prestan las atenciones y servicios veterinarios asociados a
+                    jKiltro, así como las limitaciones de responsabilidad del
+                    equipo médico.
+                    <br />
+                    <br />
+                    <strong
+                      >Limitación de Responsabilidad en Casos Graves:</strong
+                    >
+                    Los doctores y profesionales veterinarios actuarán siempre
+                    con la mayor diligencia y ética profesional. Sin embargo,
+                    jKiltro y el equipo médico no se hacen responsables por
+                    complicaciones, secuelas o el desenlace fatal en pacientes
+                    que ingresen en estado de extrema gravedad, con traumas
+                    severos, enfermedades terminales o cuadros clínicos muy
+                    avanzados.
+                    <br />
+                    <strong>Atención de Urgencias y Casos Críticos:</strong> En
+                    situaciones de riesgo vital, el equipo médico enfocará sus
+                    esfuerzos en la estabilización del paciente según los
+                    recursos disponibles. No se puede garantizar la recuperación
+                    o supervivencia del animal cuando su estado de salud al
+                    momento del ingreso sea crítico o inestable.
+                    <br />
+                    <strong>Riesgos Inherentes y Consentimiento:</strong> Todo
+                    procedimiento médico, tratamiento, uso de medicamentos,
+                    anestesia o cirugía conlleva riesgos imprevisibles. Al
+                    acceder a estos servicios, el responsable del animal asume
+                    conocer estos riesgos y libera de responsabilidad a los
+                    profesionales tratantes frente a reacciones adversas o
+                    complicaciones biológicas que escapen al control médico
+                    razonable.
+                    <br />
+                    <strong>Derivaciones:</strong> Si la gravedad del cuadro
+                    clínico supera la capacidad resolutiva de las instalaciones
+                    o del equipo, se recomendará la derivación a un centro de
+                    mayor complejidad. jKiltro no se hace responsable por los
+                    costos externos, traslados o la evolución del paciente una
+                    vez derivado.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseThree"
+                >
+                  Cookies y Política de Privacidad
+                </button>
+              </h2>
+              <div
+                id="panelsStayOpen-collapseThree"
+                class="accordion-collapse collapse"
+              >
+                <div class="accordion-body">
+                  <h3>Política de Cookies</h3>
+                  <strong>Última actualización: [11/09/26] </strong> <br />
+                  <p
+                    class="texto-normal"
+                    style="text-align: justify; font-size: 18px"
+                  >
+                    <br />
+                    <strong>3. Política de Cookies</strong><br />
+                    Última actualización: [11/09/26] <br />
+
+                    En jKiltro utilizamos cookies y tecnologías similares para
+                    mejorar tu experiencia de navegación, analizar el tráfico
+                    del sitio y personalizar el contenido.
+                    <br />
+                    ¿Qué son las cookies? Las cookies son pequeños archivos de
+                    texto que se almacenan en tu navegador o dispositivo cuando
+                    visitas una página web. Permiten que el sitio web recuerde
+                    tus acciones y preferencias (como el inicio de sesión, el
+                    idioma o los artículos en tu carrito) durante un período de
+                    tiempo.
+                    <br />
+                    ¿Qué tipo de cookies utilizamos en jKiltro?
+                    <br />
+                    <strong>Cookies Esenciales:</strong> Son estrictamente
+                    necesarias para el funcionamiento del sitio web (ej.
+                    mantener los productos en el carrito de compras, permitir un
+                    checkout seguro). No se pueden desactivar en nuestros
+                    sistemas.
+                    <br />
+                    <strong>Cookies de Rendimiento y Análisis:</strong> Nos
+                    permiten contar las visitas y las fuentes de tráfico para
+                    poder medir y mejorar el rendimiento de nuestro sitio. Nos
+                    ayudan a saber qué páginas de jKiltro son las más y menos
+                    populares (ej. Google Analytics).
+                    <br />
+                    <strong>Cookies de Marketing o Publicidad:</strong> Pueden
+                    ser establecidas a través de nuestro sitio por nuestros
+                    socios publicitarios para construir un perfil de tus
+                    intereses y mostrarte anuncios relevantes en otros sitios
+                    web.
+                    <br />
+                    <strong>¿Cómo gestionar tus cookies?</strong>
+                    Puedes configurar tu navegador para que rechace todas o
+                    algunas cookies, o para que te avise cuando los sitios web
+                    configuren o accedan a las cookies. Si desactivas o rechazas
+                    las cookies, ten en cuenta que algunas partes de la
+                    plataforma de jKiltro pueden volverse inaccesibles o no
+                    funcionar correctamente.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-    </section>
-  </header>
-
-
-  <main class="pt-5" style="background-color: #c8dfdb ">
-
-    <section class="container-fluid" style="margin-top: 7%;">
-      <div class="row justify-content-center">
-
-
-        <div class="accordion col-10" id="accordionPanelsStayOpenExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                aria-controls="panelsStayOpen-collapseOne">
-                E-Commerce: Términos y Condiciones de Venta de Productos
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-              <div class="accordion-body">
-                <h3>Términos y Condiciones E-commerce</h3>
-                <strong>Última actualización: [11/09/26] </strong> <br>
-                <p class="texto-normal" style="text-align: justify; font-size: 18px;">
-
-                  <br>
-                  <strong>1. Términos y Condiciones: E-commerce (Venta de Productos)</strong><br>
-                  Última actualización: [11/09/26] <br>
-                  
-                  Bienvenido/a a j-kiltro. Al utilizar nuestro sitio web y/o comprar algo de nosotros, participas en nuestro "Servicio" y aceptas los siguientes términos y condiciones.
-                  <br>
-                  <br>
-                  <strong>Uso del Sitio:</strong> Debes ser mayor de edad para realizar compras en este sitio. No puedes usar los productos de j-kiltro para ningún propósito ilegal o no autorizado.
-                  <br>
-                  <strong>Precios y Productos:</strong> Los precios de nuestros productos están sujetos a cambios sin previo aviso. En j-kiltro nos reservamos el derecho de modificar o discontinuar un producto en cualquier momento. Hacemos el mayor esfuerzo para mostrar los colores y las imágenes de los productos con la mayor precisión posible, pero no garantizamos que el monitor de tu computadora muestre los colores de manera exacta.
-                  <br>
-                  <strong>Pagos y Facturación:</strong> Te comprometes a proporcionar información de compra y cuenta actual, completa y precisa para todas las compras realizadas en nuestra tienda.
-                  <br>
-                  <strong>Envíos y Entregas:</strong> Los plazos de envío son estimados y comienzan a correr desde la confirmación del pago. Los envíos se realizan a través de las empresas establecidas en la plataforma y los costos son calculados al momento del checkout.
-                  <br>
-                  <strong>Garantía Legal y Devoluciones:</strong> De acuerdo con la Ley del Consumidor en Chile, si un producto nuevo sale defectuoso, le faltan piezas o no es apto para el uso al que fue destinado, tienes derecho a elegir entre el cambio, la reparación gratuita o la devolución de lo pagado en un plazo de 6 meses desde la recepción de tu compra en j-kiltro.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapseTwo">
-                Servicios Veterinarios
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-              <div class="accordion-body">
-                <h3>Términos y Condiciones Servicios Veterinarios</h3>
-                <strong>Última actualización: [11/09/26] </strong> <br>
-                <p class="texto-normal" style="text-align: justify; font-size: 18px;">
-
-                  <br>
-                  <strong>3. Términos y Condiciones: Servicios Veterinarios y Responsabilidad Médica</strong><br>
-                  Última actualización: [11/09/26] <br>
-                  
-                  Estos términos regulan las condiciones bajo las cuales se prestan las atenciones y servicios veterinarios asociados a j-kiltro, así como las limitaciones de responsabilidad del equipo médico.
-                  <br>
-                  <br>
-                  <strong>Limitación de Responsabilidad en Casos Graves:</strong> Los doctores y profesionales veterinarios actuarán siempre con la mayor diligencia y ética profesional. Sin embargo, j-kiltro y el equipo médico no se hacen responsables por complicaciones, secuelas o el desenlace fatal en pacientes que ingresen en estado de extrema gravedad, con traumas severos, enfermedades terminales o cuadros clínicos muy avanzados.
-                  <br>
-                  <strong>Atención de Urgencias y Casos Críticos:</strong> En situaciones de riesgo vital, el equipo médico enfocará sus esfuerzos en la estabilización del paciente según los recursos disponibles. No se puede garantizar la recuperación o supervivencia del animal cuando su estado de salud al momento del ingreso sea crítico o inestable.
-                  <br>
-                  <strong>Riesgos Inherentes y Consentimiento:</strong> Todo procedimiento médico, tratamiento, uso de medicamentos, anestesia o cirugía conlleva riesgos imprevisibles. Al acceder a estos servicios, el responsable del animal asume conocer estos riesgos y libera de responsabilidad a los profesionales tratantes frente a reacciones adversas o complicaciones biológicas que escapen al control médico razonable.
-                  <br>
-                  <strong>Derivaciones:</strong> Si la gravedad del cuadro clínico supera la capacidad resolutiva de las instalaciones o del equipo, se recomendará la derivación a un centro de mayor complejidad. j-kiltro no se hace responsable por los costos externos, traslados o la evolución del paciente una vez derivado.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapseThree">
-                Cookies y Política de Privacidad
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-              <div class="accordion-body">
-                <h3>Política de Cookies</h3>
-                <strong>Última actualización: [11/09/26] </strong> <br>
-                <p class="texto-normal" style="text-align: justify; font-size: 18px;">
-
-                  <br>
-                  <strong>3. Política de Cookies</strong><br>
-                  Última actualización: [11/09/26] <br>
-                  
-                  En j-kiltro utilizamos cookies y tecnologías similares para mejorar tu experiencia de navegación,
-                  analizar el tráfico del sitio y personalizar el contenido.
-                  <br>
-                  ¿Qué son las cookies?
-                  Las cookies son pequeños archivos de texto que se almacenan en tu navegador o dispositivo cuando
-                  visitas una página web. Permiten que el sitio web recuerde tus acciones y preferencias (como el inicio
-                  de sesión, el idioma o los artículos en tu carrito) durante un período de tiempo.
-                  <br>
-                  ¿Qué tipo de cookies utilizamos en j-kiltro?
-                  <br>
-                  <strong>Cookies Esenciales:</strong> Son estrictamente necesarias para el funcionamiento del sitio web (ej. mantener
-                  los productos en el carrito de compras, permitir un checkout seguro). No se pueden desactivar en
-                  nuestros sistemas.
-                  <br>
-                  <strong>Cookies de Rendimiento y Análisis:</strong> Nos permiten contar las visitas y las fuentes de tráfico para poder
-                  medir y mejorar el rendimiento de nuestro sitio. Nos ayudan a saber qué páginas de j-kiltro son las
-                  más y menos populares (ej. Google Analytics).
-                  <br>
-                  <strong>Cookies de Marketing o Publicidad:</strong> Pueden ser establecidas a través de nuestro sitio por nuestros
-                  socios publicitarios para construir un perfil de tus intereses y mostrarte anuncios relevantes en
-                  otros sitios web.
-                  <br>
-                  <strong>¿Cómo gestionar tus cookies?</strong>
-                  Puedes configurar tu navegador para que rechace todas o algunas cookies, o para que te avise cuando
-                  los sitios web configuren o accedan a las cookies. Si desactivas o rechazas las cookies, ten en cuenta
-                  que algunas partes de la plataforma de j-kiltro pueden volverse inaccesibles o no funcionar
-                  correctamente.
-                </p>
-              </div>
-            </div>
-          </div>
+      </section>
+    </main>
+    <div
+      class="container-fluid"
+      style="
+        background-color: #c8dfdb;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="row">
+        <div class="col text-center">
+          <h1 class="texto-fuerte">¡Gracias por visitar nuestro sitio web!</h1>
+          <p class="texto-normal">
+            Si tienes alguna pregunta o necesitas más información, no dudes en
+            contactarnos.
+          </p>
+          <a href="#" class="btn btn-primary">Leer nuevamente</a>
         </div>
-
-
-      </div>
-    </section>
-
-   
-
-  </main>
-  <div class="container-fluid" style="background-color: #c8dfdb; height: 400px; display: flex; justify-content: center; align-items: center;">
-    <div class="row">
-      <div class="col text-center">
-        <h1 class="texto-fuerte">¡Gracias por visitar nuestro sitio web!</h1>
-        <p class="texto-normal">Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.</p>
-        <a href="#" class="btn btn-primary">Leer nuevamente</a>
       </div>
     </div>
 
-  </div>
+    <div class="container-fluid">
+      <footer class="py-4 my-5">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Veterinaria</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Tienda</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Contactanos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Historia</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">servicios</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Quienes Somos</a
+            >
+          </li>
+        </ul>
+        <p class="text-center text-body-secondary">© 2026 jKiltro</p>
+      </footer>
+    </div>
 
-
-
-  <div class="container-fluid ">
-    <footer class=" py-4 my-5">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Veterinaria</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Tienda</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contactanos</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Historia</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">servicios</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Quienes Somos</a></li>
-      </ul>
-      <p class="text-center text-body-secondary">© 2026 J-Kiltro</p>
-    </footer>
-  </div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
+
