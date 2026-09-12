@@ -47,6 +47,7 @@
 .btn-outline-primary {
   --bs-btn-color: var(--jk-color-primary);
   --bs-btn-border-color: var(--jk-color-primary);
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: var(--jk-color-primary);
   --bs-btn-hover-border-color: var(--jk-color-primary);
   --bs-btn-active-bg: var(--jk-color-primary);
@@ -54,7 +55,7 @@
 }
 
 .text-bg-warning {
-  color: #ffffff !important;
+  color: #fff !important;
   background-color: RGBA(
     var(--bs-warning-rgb),
     var(--bs-bg-opacity, 1)
@@ -62,10 +63,10 @@
 }
 
 .btn-warning {
-  --bs-btn-color: #ffffff;
+  --bs-btn-color: #fff;
   --bs-btn-bg: var(--jk-color-warning);
   --bs-btn-border-color: var(--jk-color-warning);
-  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: color-mix(in srgb, var(--jk-color-warning), black 15%);
   --bs-btn-hover-border-color: color-mix(
     in srgb,
