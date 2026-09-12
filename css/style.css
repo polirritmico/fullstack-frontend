@@ -75,3 +75,13 @@ body {
     background-repeat: no-repeat; /* Evita que la foto se repita en mosaico */
     min-height: 100vh;
 }
+
+.fondo-para-citas {
+    /* la tecnica que use para dejarlo transparente  */
+    background-image: linear-gradient(rgba(242, 239, 231, 0.7), rgba(242, 239, 231, 0.7)), url('../img/fondo-historia.jpg');
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    min-height: 100vh;
+    
+}

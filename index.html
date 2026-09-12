@@ -23,8 +23,8 @@
       <nav class="navbar navbar-expand-md" style="background-color: #c8dfdb">
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="img/logo-mark.svg" alt="Logo de la empresa" width="75" height="75" class="me-3"/>  
-             J-Kiltro
+            <img src="img/logo-mark.svg" alt="Logo de la empresa" width="75" height="75" class="me-3" />
+            J-Kiltro
           </a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -65,7 +65,7 @@
 
               <!-- no se centraba boton tuve que usar flexbox-->
               <div class="card-body d-flex flex-column align-items-center">
-                <h1 class="card-title texto-fuerte style="text-align: center">
+                <h1 class="card-title texto-fuerte style=" text-align: center">
                   Veterinaria
                 </h1>
                 <p class="card-text opacity-75" style="text-align: center">
@@ -88,7 +88,7 @@
                 <h1 class="card-title texto-fuerte" style="text-align: center">
                   Tienda
                 </h1>
-                 <p class="card-text opacity-75" style="text-align: center"</p>
+                <p class="card-text opacity-75" style="text-align: center" </p>
                   Conoce nuestras tiendas a lo largo de Chile
                 </p>
 
@@ -104,7 +104,7 @@
 
 
   <main class="pt-5" style="background-color: #c8dfdb ">
-    <div class="container">
+    <div class="container fondo-para-citas" style="border-radius: 2%;">
       <div class="row">
         <div class="col-12" style="margin-bottom: 3%; margin-top: 5%">
           <figure class="text-center">
@@ -147,85 +147,105 @@
 
 
 
-  <!-- SECCIÓN 1: TIENDA Y ALIMENTOS -->
- 
-  <section class="container py-5 seccion-cards border border-1 border-light-subtle" style="border-radius: 10px; background-color: #F2EFE7">
-    <div class="row px-5">
-      <div class="col-7">
-        
-        <!-- use dipslay 6 para tamaño--> 
-            
-        <h2 class="texto-fuerte display-6 text-center">La mejor nutrición y accesorios para tu animal</h2>
-        
-        <!-- articulo 1 -->
-        <p class="texto-normal mt-3" style="letter-spacing: 2px;">
-          En nuestra Clínica J-Kiltro, estamos convencidos de que la salud de tu compañero de cuatro patas comienza por su plato. Por eso, hemos seleccionado cuidadosamente una tienda con los mejores alimentos y artículos del mercado, pensando siempre en sus necesidades específicas.
-        </p>
+    <!-- SECCIÓN 1: TIENDA Y ALIMENTOS -->
 
-        <!-- me faltaba el colapse para poder hacerlo como foro, averiguando pude hacerlo bien y el id-->
-        <div class="collapse" id="articuloTienda">
-          <p class="texto-normal mt-2" style="letter-spacing: 2px;">
-            Trabajamos con marcas de nutrición premium que garantizan un aporte equilibrado, mejorando su pelaje, su digestión y su energía diaria. Además, sabemos que el bienestar no es solo salud física, sino también mental. En nuestra sección de accesorios, encontrarás desde juguetes interactivos que estimulan su inteligencia, hasta camas ergonómicas para un descanso reparador y accesorios de paseo seguros. Cada producto que ofrecemos ha sido revisado y aprobado por nuestros especialistas, asegurando que te lleves a casa solo lo mejor. ¡Ven a descubrir todo lo que tenemos para mimar a tu animal!
+    <section class="container py-5 seccion-cards border border-1 border-light-subtle"
+      style="border-radius: 10px; background-color: #F2EFE7">
+      <div class="row px-5">
+        <div class="col-7">
+
+          <!-- use dipslay 6 para tamaño-->
+
+          <h2 class="texto-fuerte display-6 text-center">La mejor nutrición y accesorios para tu animal</h2>
+
+          <!-- articulo 1 -->
+          <p class="texto-normal mt-3" style="letter-spacing: 2px;">
+            En nuestra Clínica J-Kiltro, estamos convencidos de que la salud de tu compañero de cuatro patas comienza
+            por su plato. Por eso, hemos seleccionado cuidadosamente una tienda con los mejores alimentos y artículos
+            del mercado, pensando siempre en sus necesidades específicas.
           </p>
-        </div>
 
-        <div class="d-grid gap-2 col-6 mx-auto mt-4">
-          <!-- AGREGADO: Los atributos data-bs-toggle y data-bs-target conectan el botón con el id "articuloTienda" -->
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#articuloTienda" aria-expanded="false" aria-controls="articuloTienda">
-            Ver más
-          </button>
-        </div>
+          <!-- me faltaba el colapse para poder hacerlo como foro, averiguando pude hacerlo bien y el id-->
+          <div class="collapse" id="articuloTienda">
+            <p class="texto-normal mt-2" style="letter-spacing: 2px;">
+              Trabajamos con marcas de nutrición premium que garantizan un aporte equilibrado, mejorando su pelaje, su
+              digestión y su energía diaria. Además, sabemos que el bienestar no es solo salud física, sino también
+              mental. En nuestra sección de accesorios, encontrarás desde juguetes interactivos que estimulan su
+              inteligencia, hasta camas ergonómicas para un descanso reparador y accesorios de paseo seguros. Cada
+              producto que ofrecemos ha sido revisado y aprobado por nuestros especialistas, asegurando que te lleves a
+              casa solo lo mejor. ¡Ven a descubrir todo lo que tenemos para mimar a tu animal!
+            </p>
+          </div>
 
+          <div class="d-grid gap-2 col-6 mx-auto mt-4">
+            <!-- AGREGADO: Los atributos data-bs-toggle y data-bs-target conectan el botón con el id "articuloTienda" -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#articuloTienda"
+              aria-expanded="false" aria-controls="articuloTienda">
+              Ver más
+            </button>
+          </div>
+
+        </div>
+        <div class="col-5">
+          <img class="img-fluid mx-auto d-block" alt="500x500" src="img/comida.jpg"
+            style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
+        </div>
       </div>
-      <div class="col-5">
-        <img class="img-fluid mx-auto d-block" alt="500x500" src="img/comida.jpg" style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
-      </div>
+    </section>
+
+    <!-- SEPARADOR -->
+    <!-- Limpié los div mal cerrados y los puntos y comas sueltos -->
+    <div class="col-4 mx-auto my-4">
+
     </div>
-  </section>
 
-  <!-- SEPARADOR -->
-  <!-- Limpié los div mal cerrados y los puntos y comas sueltos -->
-  <div class="col-4 mx-auto my-4">
-    
-  </div>
+    <!-- SECCIÓN 2: VETERINARIOS Y TALENTO -->
+    <section class="container py-5 seccion-cards border border-1 border-light-subtle"
+      style="border-radius: 10px; background-color: #F2EFE7">
+      <div class="row px-5">
 
-  <!-- SECCIÓN 2: VETERINARIOS Y TALENTO -->
-  <section class="container py-5 seccion-cards border border-1 border-light-subtle" style="border-radius: 10px; background-color: #F2EFE7">
-    <div class="row px-5">
+        <div class="col-5">
+          <img class="img-fluid mx-auto d-block" alt="500x500" src="img/doctor.jpg"
+            style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
+        </div>
 
-      <div class="col-5">
-        <img class="img-fluid mx-auto d-block" alt="500x500" src="img/doctor.jpg" style="min-width: 250px; min-height: 250px; border-radius: 5%; width: 350px; height: 300px;">
-      </div>
-      
-      <div class="col-7">
-        <h2 class="texto-fuerte display-6 text-center">Talento médico y calidad de atención</h2>
-        
-        <p class="texto-normal mt-3" style="letter-spacing: 2px;">
-          Nuestro mayor orgullo en Clínica J-Kiltro es el increíble talento humano que nos respalda. Contamos con un equipo de médicos veterinarios apasionados y altamente capacitados, cuya vocación principal es el amor y respeto por cada animal que cruza nuestras puertas.
-        </p>
+        <div class="col-7">
+          <h2 class="texto-fuerte display-6 text-center">Talento médico y calidad de atención</h2>
 
-        <!-- AGREGADO: Nuevo contenedor oculto, esta vez con id="articuloVeterinarios" -->
-        <div class="collapse" id="articuloVeterinarios">
-          <p class="texto-normal mt-2" style="letter-spacing: 2px;">
-            Entendemos que traer a tu mascota a la clínica puede generar estrés, por lo que nuestros doctores se esfuerzan en brindar una atención empática, paciente y cercana. Se toman el tiempo necesario para escuchar tus dudas y examinar a tu compañero con la mayor delicadeza. Además, nuestro equipo está en constante actualización médica para ofrecer diagnósticos precisos y tratamientos de vanguardia. Desde chequeos preventivos hasta casos más complejos, trabajamos en conjunto para garantizar la mejor calidad de vida para tu mascota.
+          <p class="texto-normal mt-3" style="letter-spacing: 2px;">
+            Nuestro mayor orgullo en Clínica J-Kiltro es el increíble talento humano que nos respalda. Contamos con un
+            equipo de médicos veterinarios apasionados y altamente capacitados, cuya vocación principal es el amor y
+            respeto por cada animal que cruza nuestras puertas.
           </p>
-        </div>
 
-        <div class="d-grid gap-2 col-6 mx-auto mt-4">
-          <!-- AGREGADO: El botón ahora apunta al id "articuloVeterinarios" -->
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#articuloVeterinarios" aria-expanded="false" aria-controls="articuloVeterinarios">
-            Ver más
-          </button>
-        </div>
+          <!-- AGREGADO: Nuevo contenedor oculto, esta vez con id="articuloVeterinarios" -->
+          <div class="collapse" id="articuloVeterinarios">
+            <p class="texto-normal mt-2" style="letter-spacing: 2px;">
+              Entendemos que traer a tu mascota a la clínica puede generar estrés, por lo que nuestros doctores se
+              esfuerzan en brindar una atención empática, paciente y cercana. Se toman el tiempo necesario para escuchar
+              tus dudas y examinar a tu compañero con la mayor delicadeza. Además, nuestro equipo está en constante
+              actualización médica para ofrecer diagnósticos precisos y tratamientos de vanguardia. Desde chequeos
+              preventivos hasta casos más complejos, trabajamos en conjunto para garantizar la mejor calidad de vida
+              para tu mascota.
+            </p>
+          </div>
 
+          <div class="d-grid gap-2 col-6 mx-auto mt-4">
+            <!-- AGREGADO: El botón ahora apunta al id "articuloVeterinarios" -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+              data-bs-target="#articuloVeterinarios" aria-expanded="false" aria-controls="articuloVeterinarios">
+              Ver más
+            </button>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SEPARADOR -->
-  <div class="col-4 mx-auto my-4">
-    <hr>
-  </div>
+    <!-- SEPARADOR -->
+    <div class="col-4 mx-auto my-4">
+      <hr>
+    </div>
 
 
   </main>
@@ -235,16 +255,16 @@
 
   <div class="container ">
     <footer class=" py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Veterinaria</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Tienda</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contactanos</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Historia</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">servicios</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Quienes Somos</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2026 J-Kiltro</p>
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Veterinaria</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Tienda</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contactanos</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Historia</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">servicios</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Quienes Somos</a></li>
+      </ul>
+      <p class="text-center text-body-secondary">© 2026 J-Kiltro</p>
     </footer>
   </div>
 
