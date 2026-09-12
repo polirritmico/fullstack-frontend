@@ -1,5 +1,6 @@
 /* ==========================================
     CORRECCIÓN TÉCNICA DE CSS:
+    
    Los @import no deben ir dentro de :root. 
    Hacerlo rompe la sintaxis del archivo, hace que el navegador ignore 
    las reglas siguientes y por eso la imagen de fondo (.fondo-completo) 
