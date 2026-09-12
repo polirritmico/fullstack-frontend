@@ -1,88 +1,65 @@
-/* ==========================================
-    CORRECCIÓN TÉCNICA DE CSS:
-    
-   Los @import no deben ir dentro de :root. 
-   Hacerlo rompe la sintaxis del archivo, hace que el navegador ignore 
-   las reglas siguientes y por eso la imagen de fondo (.fondo-completo) 
-   nunca se cargaba. Se dejan siempre arriba y fuera de cualquier bloque.
-   ========================================== */
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
 :root {
-
-    /*color palette */
-    /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
-    --kiltro-color-one: #3368A0;
-    --kiltro-color-two: #66A3BF;
-    --kiltro-color-three: #C8DFDB;
-    --kiltro-color-four: #F2EFE7;
+  /*color palette */
+  /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
+  --kiltro-color-one: #3368a0;
+  --kiltro-color-two: #66a3bf;
+  --kiltro-color-three: #c8dfdb;
+  --kiltro-color-four: #f2efe7;
 }
-
-
-
 
 .card-img-top-css {
   height: 250px;
   object-fit: cover;
 }
 
-
 .texto-normal {
-    font-family: "PT Sans", sans-serif;
-    font-weight: 400;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
 }
 
 .texto-fuerte {
-    font-family: "PT Sans", sans-serif;
-    font-weight: 700;
-    
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
 }
-
-
 
 header {
-    font-family: "PT Sans", sans-serif;
+  font-family: "PT Sans", sans-serif;
 }
-
-
-
-
 
 body {
-    margin: 0;
-    background-color: var(--kiltro-color-four);
+  margin: 0;
+  background-color: var(--kiltro-color-four);
 }
 
-
-
 .seccion-cards {
-    background-color: var(--kiltro-color-four);
+  background-color: var(--kiltro-color-four);
 }
 
 .confi-footer {
-    background-color: var(--kiltro-color-three);
-    color: black;
-    padding: 20px;
-    text-align: center;
-    font-family: "PT Sans", sans-serif;
-    
+  background-color: var(--kiltro-color-three);
+  color: black;
+  padding: 20px;
+  text-align: center;
+  font-family: "PT Sans", sans-serif;
 }
 
 .fondo-completo {
-    background-image: url('../img/fondo-historia.jpg'); /* Cambia 'ruta-de-la-imagen.jpg' por la ruta de tu imagen */
-    background-size: cover;       /* Cubre todo el espacio disponible sin deformar la imagen */
-    background-position: center;  /* Centra la imagen para que el punto clave no se corte */
-    background-repeat: no-repeat; /* Evita que la foto se repita en mosaico */
-    min-height: 100vh;
+  background-image: url("../img/fondo-historia.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .fondo-para-citas {
-    /* la tecnica que use para dejarlo transparente  */
-    background-image: linear-gradient(rgba(242, 239, 231, 0.7), rgba(242, 239, 231, 0.7)), url('../img/fondo-historia.jpg');
-    background-size: cover;       
-    background-position: center;  
-    background-repeat: no-repeat; 
-    min-height: 100vh;
-    
+  background-image:
+    linear-gradient(rgba(242, 239, 231, 0.7), rgba(242, 239, 231, 0.7)),
+    url("../img/fondo-historia.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
