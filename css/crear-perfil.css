@@ -1,32 +1,32 @@
 .formulario-perfil {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .formulario {
-    width: 100%;
-    padding: 2rem;
-    border-radius: 20px;
-    background-color: var(--kiltro-color-four);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 2rem;
+  border-radius: 20px;
+  background-color: var(--kiltro-color-four);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .formulario label {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .formulario .form-control {
-    padding: 10px;
-    border-radius: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 @media (max-width: 575.98px) {
-    .formulario-perfil {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-    }
+  .formulario-perfil {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 
-    .formulario {
-        padding: 1.5rem;
-        border-radius: 14px;
-    }
+  .formulario {
+    padding: 1.5rem;
+    border-radius: 14px;
+  }
 }
