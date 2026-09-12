@@ -97,3 +97,7 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+
+.rounded-10p {
+  border-radius: 10% !important;
+}
