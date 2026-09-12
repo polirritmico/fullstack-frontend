@@ -1,0 +1,50 @@
+@import url("style.css");
+
+.jk-color-primary {
+  color: var(--kiltro-color-one);
+}
+.jk-color-secondary {
+  color: var(--kiltro-color-two);
+}
+.jk-color-ternary {
+  color: var(--kiltro-color-three);
+}
+.jk-color-ternary {
+  color: var(--kiltro-color-three);
+}
+
+.jk-background {
+  background-color: var(--kiltro-color-three);
+}
+
+.header-title {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.avatar-circle {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.min-width-0 {
+  min-width: 0;
+}
+
+.nav-underline .nav-link {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.nav-underline .nav-link:hover {
+  color: rgba(--kiltro-color-three);
+}
+
+.nav-underline .nav-link.active {
+  color: var(--kiltro-color-one);
+}
+
+.jk-footer {
+  color: white;
+  background-color: var(--kiltro-color-one);
+}

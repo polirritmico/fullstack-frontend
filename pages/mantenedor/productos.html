@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JKiltro Mantenedor Prod</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/mantenedor.css" />
+  </head>
+  <body class="d-flex min-vh-100 flex-column">
+    <header
+      class="d-flex align-items-center justify-content-between w-100 p-2 bg-white"
+    >
+      <div class="d-flex align-items-center gap-3">
+        <a class="navbar-brand" href="/index.html">
+          <img
+            src="../../img/logo-mark.svg"
+            alt="Logo JKiltro"
+            width="48"
+            height="48"
+            class="rounded-circle"
+          />
+        </a>
+        <span class="fw-bold fs-4">JKiltro</span>
+      </div>
+      <div>
+        <h1 class="fs-3 header-title">Mantenedor | Productos</h1>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <div class="text-end">
+          <p class="fs-7 fw-semibold mb-0">Alan Brito</p>
+          <p class="fs-8 text-body-secondary fw-medium mt-0 mb-0">
+            Administrador
+          </p>
+        </div>
+        <div
+          class="bg-white rounded-circle shadow d-flex align-items-center justify-content-center avatar-circle"
+        >
+          <i class="bi bi-person-fill jk-color-secondary fs-2 lh-1"></i>
+        </div>
+      </div>
+    </header>
+
+    <nav class="navbar bg-white border">
+      <div class="container-fluid">
+        <ul class="nav nav-underline align-items-center w-100 gap-2">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              data-bs-toggle="tab"
+              aria-current="page"
+              aria-current="page"
+              href="#"
+              >Productos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link fc-black"
+              data-bs-toggle="tab"
+              aria-current="page"
+              aria-current="page"
+              href="#"
+              >Categorías</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              aria-current="page"
+              aria-current="page"
+              href="#"
+              >Análisis</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              aria-current="page"
+              aria-current="page"
+              href="#"
+              >Configuración</a
+            >
+          </li>
+          <li class="nav-item ms-auto">
+            <p class="mb-0 px-3 text-muted" id="id-date">date</p>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <content class="container-fluid">
+      <div class="row">
+        <div class="col-3 bg-white">Panel de categorías</div>
+        <div class="col-9">Detalles tabla</div>
+      </div>
+    </content>
+
+    <footer class="mt-auto bg-body-tertiary jk-footer">
+      <p class="px-3 py-1 mb-0 small text-body-secondary">
+        @2026 JKiltro. Todos los derecho reservados.
+      </p>
+    </footer>
+  </body>
+  <script src="../../js/productos.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"
+  ></script>
+</html>
