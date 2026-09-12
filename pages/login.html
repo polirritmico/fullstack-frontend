@@ -12,7 +12,6 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <script src="../js/login.js"></script>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
@@ -33,28 +32,32 @@
 
               <p>Por favor ingrese a su cuenta</p>
 
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="id-login-mail"
-                  placeholder="Correo"
-                />
-                <label for="id-login-mail">Dirección de correo</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="id-login-password"
-                  placeholder="Contraseña"
-                />
-                <label for="id-login-password">Contraseña</label>
-              </div>
+              <form action="submit" id="id-login-form">
+                <div class="form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="id-login-email"
+                    placeholder="Correo"
+                  />
+                  <label for="id-login-email">Dirección de correo</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="id-login-password"
+                    placeholder="Contraseña"
+                  />
+                  <label for="id-login-password">Contraseña</label>
+                </div>
 
-              <div class="d-grid mb-4">
-                <button class="btn btn-primary" type="submit">Ingresar</button>
-              </div>
+                <div class="d-grid mb-4">
+                  <button class="btn btn-primary" type="submit">
+                    Ingresar
+                  </button>
+                </div>
+              </form>
 
               <div class="text-center mb-2">
                 <a href="#" class="text-secondary text-decoration-none small"
@@ -80,5 +83,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="../js/login.js"></script>
   </body>
 </html>
