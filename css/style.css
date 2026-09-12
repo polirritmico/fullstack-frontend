@@ -1,14 +1,53 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap");
+@import url("botones-override.css");
 
 :root {
   /*color palette */
   /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
-  --kiltro-color-one: #3368a0;
-  --kiltro-color-two: #66a3bf;
-  --kiltro-color-three: #c8dfdb;
-  --kiltro-color-four: #f2efe7;
+  --jk-color-primary: #3368a0;
+  --jk-color-secondary: #c8dfdb;
+  --jk-color-success: #4a8c72;
+  --jk-color-info: #66a3bf;
+  /* --jk-color-warning: #d9a05b; */
+  --jk-color-warning: #db8b42;
+  --jk-color-danger: #e45339;
+  --jk-color-light: #f2efe7;
+  --jk-color-dark: #1d2d3d;
+
+  --bs-primary: var(--jk-color-primary);
+  --bs-secondary: var(--jk-color-secondary);
+  --bs-success: var(--jk-color-success);
+  --bs-info: var(--jk-color-info);
+  --bs-warning: var(--jk-color-warning);
+  --bs-danger: var(--jk-color-danger);
+  --bs-light: var(--jk-color-light);
+  --bs-dark: var(--jk-color-dark);
+  --bs-primary-rgb: 51, 104, 160;
+  --bs-secondary-rgb: 200, 223, 219;
+  --bs-success-rgb: 74, 140, 114;
+  --bs-info-rgb: 102, 163, 191;
+  --bs-warning-rgb: 219, 139, 66;
+  --bs-danger-rgb: 228, 83, 57;
+  --bs-light-rgb: 242, 239, 231;
+  --bs-dark-rgb: 29, 45, 61;
+
+  /* --- TIPOGRAFÍAS --- */
+  --jk-font-body: "PT Sans", sans-serif;
+  --jk-font-heading: "Montserrat", sans-serif;
+
+  --bs-body-font-family: var(--jk-font-body);
+  --bs-heading-font-family: var(--jk-font-heading);
+  --bs-heading-font-weight: 700;
+
+  /* FIX: Estilos deprecados. Cambiarlos */
+  --kiltro-color-one: var(--jk-color-primary);
+  --kiltro-color-two: var(--jk-color-info);
+  --kiltro-color-three: var(--jk-color-secondary);
+  --kiltro-color-four: var(--jk-color-light);
 }
+
+/* -------------------------------------------------------------------------- */
 
 .card-img-top-css {
   height: 250px;
@@ -16,34 +55,26 @@
 }
 
 .texto-normal {
-  font-family: "PT Sans", sans-serif;
   font-weight: 400;
 }
 
 .texto-fuerte {
-  font-family: "PT Sans", sans-serif;
   font-weight: 700;
 }
 
-header {
-  font-family: "PT Sans", sans-serif;
-}
-
 body {
-  margin: 0;
-  background-color: var(--kiltro-color-four);
+  background-color: var(--jk-color-light);
 }
 
 .seccion-cards {
-  background-color: var(--kiltro-color-four);
+  background-color: var(--jk-color-light);
 }
 
 .confi-footer {
-  background-color: var(--kiltro-color-three);
-  color: black;
+  background-color: var(--kiltro-color-secondary);
+  color: var(--jk-color-dark);
   padding: 20px;
   text-align: center;
-  font-family: "PT Sans", sans-serif;
 }
 
 .fondo-completo {
@@ -56,7 +87,10 @@ body {
 
 .fondo-para-citas {
   background-image:
-    linear-gradient(rgba(242, 239, 231, 0.7), rgba(242, 239, 231, 0.7)),
+    linear-gradient(
+      color-mix(in srgb, var(--jk-color-light) 70%, transparent),
+      color-mix(in srgb, var(--jk-color-light) 70%, transparent)
+    ),
     url("../img/fondo-historia.jpg");
   background-size: cover;
   background-position: center;
