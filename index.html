@@ -25,10 +25,10 @@
 
   <body>
     <header>
-      <section>
-        <nav class="navbar navbar-expand-md bg-secondary">
-          <div class="container">
-            <a class="navbar-brand" href="index.html">
+      <nav class="navbar navbar-expand-md bg-secondary">
+        <div class="container">
+          <div class="col-md-2 d-flex px-0">
+            <a class="navbar-brand m-0" href="index.html">
               <img
                 src="img/logo-mark.svg"
                 alt="Logo de la empresa"
@@ -36,47 +36,50 @@
                 height="75"
                 class="me-3"
               />
-              J-Kiltro
+              JKiltro
             </a>
-
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#banners">Contactanos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/nosotros/historia.html"
-                    >Historia</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#banners">Servicios</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#banners">Quienes Somos</a>
-                </li>
-              </ul>
-            </div>
           </div>
-        </nav>
-      </section>
 
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse col-md-8" id="navbarNav">
+            <ul class="navbar-nav w-100 justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Contáctanos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/nosotros/historia.html"
+                  >Historia</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Quiénes somos</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2 d-none d-md-block"></div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="bg-secondary">
       <section class="seccion-cards py-5">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-xl-4 mb-4">
+            <div class="col-12 col-lg-5 col-xl-4 mb-4">
               <div class="card shadow h-100 rounded-10p">
                 <img
                   src="img/pexels-helenalopes-7980680.jpg"
@@ -100,7 +103,7 @@
               </div>
             </div>
 
-            <div class="col-xl-4 mb-4">
+            <div class="col-12 col-lg-6 col-xl-4 mb-4">
               <div class="card shadow h-100 rounded-10p">
                 <img
                   src="img/pexels-1433506698-34667593.jpg"
@@ -127,9 +130,7 @@
           </div>
         </div>
       </section>
-    </header>
 
-    <main class="pt-5 bg-secondary">
       <div class="container fondo-para-citas rounded-4">
         <div class="row pt-5">
           <div class="col-12 mb-3 mt-5">
