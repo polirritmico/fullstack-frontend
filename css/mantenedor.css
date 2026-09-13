@@ -9,16 +9,16 @@
 }
 
 .nav-underline .nav-link:hover {
-  color: rgba(--kiltro-color-three);
+  color: rgba(--jk-color-secondary);
 }
 
 .nav-underline .nav-link.active {
-  color: var(--kiltro-color-one);
+  color: var(--jk-color-primary);
 }
 
 .jk-footer {
   color: white;
-  background-color: var(--kiltro-color-one);
+  background-color: var(--jk-color-primary);
 }
 
 .panel-categorias {
