@@ -1,8 +1,10 @@
-const formulario = document.querySelector(".formulario");
-const mensaje = document.getElementById("mensaje-exito");
+const password = document.getElementById("password");
+  const confirmarPassword = document.getElementById("confirmar-password");
 
-formulario.addEventListener("submit", function (event) {
-  event.preventDefault();
-  mensaje.classList.remove("d-none");
-  formulario.reset();
-});
+  confirmarPassword.addEventListener("input", function () {
+    if (confirmarPassword.value !== password.value) {
+      confirmarPassword.setCustomValidity("Las contraseñas no coinciden.");
+    } else {
+      confirmarPassword.setCustomValidity("");
+    }
+  });

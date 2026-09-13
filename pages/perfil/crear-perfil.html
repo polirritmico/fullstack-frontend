@@ -149,8 +149,7 @@
     <section class="formulario-perfil py-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5"></div>
+          <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
             <div
               id="mensaje-exito"
               class="alert alert-success d-none"
@@ -162,55 +161,161 @@
             <form class="formulario" action="#" method="POST">
               <h1 class="h2 text-center mb-4">Crear perfil</h1>
 
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  name="nombre"
-                  required
-                />
-              </div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    autocomplete="given-name"
+                    required
+                  />
+                </div>
 
-              <div class="mb-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="apellido"
-                  name="apellido"
-                  required
-                />
-              </div>
+                <div class="col-12 col-md-6">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellido"
+                    name="apellido"
+                    autocomplete="family-name"
+                    required
+                  />
+                </div>
 
-              <div class="mb-3">
-                <label for="correo" class="form-label"
-                  >Correo electrónico</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="correo"
-                  name="correo"
-                  required
-                />
-              </div>
+                <div class="col-12 col-md-6">
+                  <label for="rut" class="form-label">RUT</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="rut"
+                    name="rut"
+                    placeholder="12.345.678-9"
+                    required
+                  />
+                </div>
 
-              <div class="mb-4">
-                <label for="password" class="form-label">Contraseña</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  required
-                />
-              </div>
+                <div class="col-12 col-md-6">
+                  <label for="telefono" class="form-label">Teléfono</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="telefono"
+                    name="telefono"
+                    placeholder="+56 9 1234 5678"
+                    autocomplete="tel"
+                    required
+                  />
+                </div>
 
-              <button class="btn btn-primary w-100" type="submit">
-                Registrar
-              </button>
+                <div class="col-12">
+                  <label for="correo" class="form-label"
+                    >Correo electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="correo"
+                    name="correo"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label for="direccion" class="form-label">Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccion"
+                    name="direccion"
+                    autocomplete="street-address"
+                    required
+                  />
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="comuna" class="form-label">Comuna</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="comuna"
+                    name="comuna"
+                    required
+                  />
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="region" class="form-label">Región</label>
+                  <select
+                    class="form-select"
+                    id="region"
+                    name="region"
+                    required
+                  >
+                    <option value="">Selecciona una región</option>
+                    <option value="metropolitana">Región Metropolitana</option>
+                    <option value="valparaiso">Valparaíso</option>
+                    <option value="biobio">Biobío</option>
+                    <option value="araucania">La Araucanía</option>
+                    <option value="los-lagos">Los Lagos</option>
+                    <option value="otra">Otra</option>
+                  </select>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                  />
+                  <div class="form-text">Mínimo 8 caracteres.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="confirmar-password" class="form-label">
+                    Confirmar contraseña
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmar-password"
+                    name="confirmar-password"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                  />
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="terminos"
+                      name="terminos"
+                      required
+                    />
+                    <label class="form-check-label" for="terminos">
+                      Acepto los términos y condiciones.
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">
+                    Registrar
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
