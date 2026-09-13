@@ -107,11 +107,24 @@
   white-space: nowrap;
 }
 /* Acciones */
-.tabla-productos th:nth-child(7),
-.tabla-productos td:nth-child(7) {
+.tabla-productos th:last-child,
+.tabla-productos td:last-child {
   text-align: center;
   width: 9rem;
   min-width: 9rem;
   max-width: 9rem;
   white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .tabla-productos tbody tr td:last-child button {
+    opacity: 0;
+  }
+  .tabla-productos tbody tr:hover td:last-child button {
+    opacity: 1;
+  }
+  /* Tecla tab */
+  .tabla-productos tbody tr:focus-within td:last-child button {
+    opacity: 1;
+  }
 }
