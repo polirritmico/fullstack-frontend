@@ -141,7 +141,15 @@
       </div>
 
       <div class="offcanvas-body">
-        <p>Tu carrito está vacío.</p>
+        <div id="carrito-lista">
+          <p class="text-body-secondary">Tu carrito está vacío.</p>
+        </div>
+
+        <hr />
+
+        <p class="fw-bold">
+          Total: <span id="carrito-total">$0</span>
+        </p>
       </div>
     </div>
 
@@ -348,9 +356,14 @@
 
                   <p class="fw-bold text-primary mb-3">$29.990</p>
 
-                  <a href="#" class="btn btn-primary mt-auto">
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Alimento Perro Adulto"
+                    data-precio="29990"
+                  >
                     Agregar al carro
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -382,7 +395,14 @@
 
                   <p class="fw-bold text-primary mb-3">$24.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Alimento Gato Adulto"
+                    data-precio="24990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -414,7 +434,14 @@
 
                   <p class="fw-bold text-primary mb-3">$8.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Snacks Naturales"
+                    data-precio="8990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -446,7 +473,14 @@
 
                   <p class="fw-bold text-primary mb-3">$6.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Juguete de Cuerda"
+                    data-precio="6990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -478,7 +512,14 @@
 
                   <p class="fw-bold text-primary mb-3">$5.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Pelota Mordedora"
+                    data-precio="5990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -510,7 +551,14 @@
 
                   <p class="fw-bold text-primary mb-3">$4.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Ratón de Peluche"
+                    data-precio="4990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -542,7 +590,14 @@
 
                   <p class="fw-bold text-primary mb-3">$12.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Collar con Correa"
+                    data-precio="12990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -574,7 +629,14 @@
 
                   <p class="fw-bold text-primary mb-3">$34.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Cama para Mascota"
+                    data-precio="34990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -606,7 +668,14 @@
 
                   <p class="fw-bold text-primary mb-3">$7.990</p>
 
-                  <a href="#" class="btn btn-primary"> Agregar al carro </a>
+                  <button
+                    class="btn btn-primary agregar-carrito"
+                    type="button"
+                    data-nombre="Shampoo Mascotas"
+                    data-precio="7990"
+                  >
+                    Agregar al carro
+                  </button>
                 </div>
               </div>
             </div>
@@ -655,5 +724,8 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    
+    <script src="../../js/carrito.js"></script>
   </body>
 </html>
+
