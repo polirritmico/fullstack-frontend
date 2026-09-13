@@ -1,10 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap");
-@import url("botones-override.css");
+@import url("override-colores.css");
 
 :root {
-  /*color palette */
-  /*reference: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
+  /* Referencia paleta base: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
   --jk-color-primary: #3368a0;
   --jk-color-secondary: #c8dfdb;
   --jk-color-success: #4a8c72;
@@ -40,12 +39,6 @@
   --bs-body-font-family: var(--jk-font-body);
   --bs-heading-font-family: var(--jk-font-heading);
   --bs-heading-font-weight: 700;
-
-  /* FIX: Estilos deprecados. Cambiarlos */
-  --kiltro-color-one: var(--jk-color-primary);
-  --kiltro-color-two: var(--jk-color-info);
-  --kiltro-color-three: var(--jk-color-secondary);
-  --kiltro-color-four: var(--jk-color-light);
 }
 
 /* -------------------------------------------------------------------------- */

@@ -93,3 +93,23 @@
     var(--bs-bg-opacity, 1)
   ) !important;
 }
+
+.table-primary {
+  --bs-table-bg: var(--jk-color-primary);
+  --bs-table-color: #fff;
+  --bs-table-border-color: color-mix(
+    in srgb,
+    var(--jk-color-primary),
+    black 20%
+  );
+}
+
+.table-secondary {
+  --bs-table-bg: var(--jk-color-secondary);
+  --bs-table-color: var(--jk-color-dark);
+  --bs-table-border-color: color-mix(
+    in srgb,
+    var(--jk-color-secondary),
+    black 20%
+  );
+}
