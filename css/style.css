@@ -95,3 +95,7 @@ body {
 .rounded-10p {
   border-radius: 10% !important;
 }
+
+.jk-font-heading {
+  font-family: "Montserrat", sans-serif;
+}
