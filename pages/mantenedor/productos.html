@@ -115,7 +115,13 @@
             id="id-cat-panel-header"
           >
             <h2 class="text-muted my-0 fs-6">Categorías</h2>
-            <button class="btn btn-primary btn-sm">+ Nueva</button>
+            <button
+              class="btn btn-primary btn-sm"
+              data-bs-target="#modal-agregar-categoria"
+              data-bs-toggle="modal"
+            >
+              + Nueva
+            </button>
           </div>
 
           <div class="border-top d-flex flex-column py-2">
@@ -754,13 +760,334 @@
       </div>
     </main>
 
+    <!------------------------------------------------------------------------>
     <!-- Modales -->
-    <div>
-      <!-- Agregar categoría -->
+    <!------------------------------------------------------------------------>
+
+    <!-- Agregar categoría -->
+    <div
+      class="modal fade"
+      id="modal-agregar-categoria"
+      tabindex="-1"
+      aria-labelledby="modal-agregar-categoria-titulo"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-secondary">
+            <h2 class="modal-title fs-5" id="modal-agregar-categoria-titulo">
+              Nueva Categoría
+            </h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+              id="boton-cerrar-nueva-categoria"
+            ></button>
+          </div>
+
+          <div class="modal-body p-4">
+            <form id="form-agregar-categoria">
+              <div class="mb-3">
+                <label for="input-cat-nombre" class="form-label">Nombre:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="input-cat-nombre"
+                  placeholder="Ej: Accesorios, Juguetes, etc."
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold mb-3"
+                  >Selecciona un ícono</label
+                >
+
+                <div class="row row-cols-6 g-2">
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-pata"
+                      value="🐾"
+                      checked
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-pata"
+                      >🐾</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-perro"
+                      value="🐕"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-perro"
+                      >🐕</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-gato"
+                      value="🐈"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-gato"
+                      >🐈</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-pajaro"
+                      value="🐦"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-pajaro"
+                      >🐦</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-pez"
+                      value="🐟"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-pez"
+                      >🐟</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-hamster"
+                      value="🐹"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-hamster"
+                      >🐹</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-hueso"
+                      value="🦴"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-hueso"
+                      >🦴</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-plato"
+                      value="🥣"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-plato"
+                      >🥣</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-juguete"
+                      value="🧸"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-juguete"
+                      >🧸</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-lana"
+                      value="🧶"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-lana"
+                      >🧶</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-cama"
+                      value="🛏️"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-cama"
+                      >🛏️</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-casa"
+                      value="🏠"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-casa"
+                      >🏠</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-correa"
+                      value="🦮"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-correa"
+                      >🦮</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-bolso"
+                      value="🎒"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-bolso"
+                      >🎒</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-salud"
+                      value="🩺"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-salud"
+                      >🩺</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-higiene"
+                      value="✂️"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-higiene"
+                      >✂️</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-ropa"
+                      value="👕"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-ropa"
+                      >👕</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="icono-categoria"
+                      id="ico-caja"
+                      value="📦"
+                    />
+                    <label
+                      class="btn btn-outline fs-4 p-2 w-100 lh-1 text-center"
+                      for="ico-caja"
+                      >📦</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer justify-content-center">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary px-4"
+                  id="btn-guardar-categoria"
+                  form="form-agregar-categoria"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div>
       <!-- Editar/Agregar Producto-->
     </div>
+
     <!-- Borrar Producto -->
     <div
       class="modal fade"
@@ -822,7 +1149,7 @@
         @2026 jKiltro. Todos los derecho reservados.
       </p>
     </footer>
-    <script src="../../js/productos.js"></script>
+    <script src="../../js/mantenedor-productos.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
