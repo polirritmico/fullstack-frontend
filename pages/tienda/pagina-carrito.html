@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/logo-mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>Carrito</title>
+  </head>
+  <body>
+    <header>
+      <section>
+        <nav class="navbar navbar-expand-lg bg-secondary">
+          <div class="container">
+            <a
+              class="navbar-brand d-flex align-items-center"
+              href="../../index.html"
+            >
+              <img
+                src="../../img/logo-mark.svg"
+                alt="Logo de la empresa"
+                width="60"
+                height="60"
+                class="me-2"
+              />
+              jKiltro
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="../../index.html"
+                  >
+                    Inicio
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contáctanos</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../nosotros/historia.html"
+                    >Historia</a
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Servicios</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../../pages/nosotros/index.html">
+                    Quiénes Somos
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../tienda/index.html">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../perfil/crear-perfil.html">
+                    Crear Perfil
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../perfil/mi-perfil.html">
+                    Mi Perfil
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../perfil/historial-compras.html">
+                    Mis Compras
+                  </a>
+                </li>
+              </ul>
+
+              <button
+                class="btn btn-outline-dark ms-lg-3 mt-3 mt-lg-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                <i class="bi bi-cart3"></i>
+                Carrito
+              </button>
+            </div>
+          </div>
+        </nav>
+      </section>
+    </header>
+
+    <!-- OFFCANVAS DEL CARRITO -->
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+          <i class="bi bi-cart3"></i>
+          Mi carrito
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <div id="carrito-lista">
+          <p class="text-body-secondary">Tu carrito está vacío.</p>
+        </div>
+
+        <hr />
+
+        <p class="fw-bold">Total: <span id="carrito-total">$0</span></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Veterinaria</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Tienda</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Contáctanos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Historia</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">servicios</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Quiénes Somos</a
+            >
+          </li>
+        </ul>
+        <p class="text-center text-body-secondary">© 2026 jKiltro</p>
+      </footer>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
