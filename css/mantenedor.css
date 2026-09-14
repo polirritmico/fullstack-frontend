@@ -21,6 +21,7 @@
   background-color: var(--jk-color-primary);
 }
 
+.panel-roles,
 .panel-categorias {
   display: grid;
   grid-template-rows: auto auto;
@@ -29,6 +30,7 @@
   padding-bottom: 1rem;
 }
 
+.panel-roles button,
 .panel-categorias button {
   align-items: center;
   background-color: transparent;
@@ -37,18 +39,21 @@
   display: flex;
   padding: 0.5rem 1.5rem;
 }
+.panel-roles button span:nth-child(1),
 .panel-categorias button span:nth-child(1) {
   display: inline-block;
   margin-right: 0.33rem;
   text-align: center;
   width: 1.5rem;
 }
+.panel-roles button span:nth-child(2),
 .panel-categorias button span:nth-child(2) {
   color: var(--bs-body-color);
   white-space: nowrap;
   text-align: left;
   font-weight: 600;
 }
+.panel-roles button span:nth-child(3),
 .panel-categorias button span:nth-child(3) {
   color: var(--bs-body-color);
   font-size: 0.75rem;
@@ -56,10 +61,14 @@
   padding: 0.25em 0.56em;
 }
 
+.panel-roles .btn:hover,
 .panel-categorias .btn:hover {
   background-color: var(--bs-light) !important;
 }
 
+.panel-roles button:focus,
+.panel-roles button:active,
+.panel-roles button.active,
 .panel-categorias button:focus,
 .panel-categorias button:active,
 .panel-categorias button.active {
@@ -67,6 +76,56 @@
   color: var(--bs-dark) !important;
 }
 
+/* Tabla usuarios */
+/* Usuario */
+.tabla-usuarios th:nth-child(1),
+.tabla-usuarios td:nth-child(1) {
+  text-align: left;
+}
+/* Rol */
+.tabla-usuarios th:nth-child(2),
+.tabla-usuarios td:nth-child(2) {
+  text-align: left;
+  width: 14ch;
+  white-space: nowrap;
+}
+/* Departamento */
+.tabla-usuarios th:nth-child(3),
+.tabla-usuarios td:nth-child(3) {
+  text-align: left;
+  white-space: nowrap;
+}
+/* Correo */
+.tabla-usuarios th:nth-child(4),
+.tabla-usuarios td:nth-child(4) {
+  text-align: left;
+  white-space: nowrap;
+}
+/* Último login */
+.tabla-usuarios th:nth-child(5),
+.tabla-usuarios td:nth-child(5) {
+  text-align: center;
+  width: 8ch;
+  white-space: nowrap;
+}
+/* Estado */
+.tabla-usuarios th:nth-child(6),
+.tabla-usuarios td:nth-child(6) {
+  text-align: center;
+  width: 14ch;
+  white-space: nowrap;
+}
+/* Acciones */
+.tabla-usuarios th:last-child,
+.tabla-usuarios td:last-child {
+  text-align: center;
+  width: 9rem;
+  min-width: 9rem;
+  max-width: 9rem;
+  white-space: nowrap;
+}
+
+/* Tabla productos */
 /* Producto */
 .tabla-productos th:nth-child(1),
 .tabla-productos td:nth-child(1) {
@@ -117,13 +176,16 @@
 }
 
 @media (hover: hover) {
+  .tabla-usuarios tbody tr td:last-child button,
   .tabla-productos tbody tr td:last-child button {
     opacity: 0;
   }
+  .tabla-usuarios tbody tr:hover td:last-child button,
   .tabla-productos tbody tr:hover td:last-child button {
     opacity: 1;
   }
   /* Tecla tab */
+  .tabla-usuarios tbody tr:focus-within td:last-child button,
   .tabla-productos tbody tr:focus-within td:last-child button {
     opacity: 1;
   }
