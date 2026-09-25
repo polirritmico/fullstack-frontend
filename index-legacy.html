@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jKiltro</title>
+
+    <!-- CSS de Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <!--Bootstrap Icons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md bg-secondary">
+        <div class="container">
+          <div class="col-md-2 d-flex px-0">
+            <a class="navbar-brand m-0" href="index.html">
+              <img
+                src="img/logo-mark.svg"
+                alt="Logo de la empresa"
+                width="75"
+                height="75"
+                class="me-3"
+              />
+              JKiltro
+            </a>
+          </div>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse col-md-8" id="navbarNav">
+            <ul class="navbar-nav w-100 justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Contáctanos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/nosotros/historia.html"
+                  >Historia</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#banners">Quiénes somos</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2 d-none d-md-block"></div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="bg-secondary">
+      <section class="seccion-cards py-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-5 col-xl-4 mb-4">
+              <div class="card shadow h-100 rounded-10p">
+                <img
+                  src="img/pexels-helenalopes-7980680.jpg"
+                  class="card-img-top card-img-top-css"
+                  alt="Veterinarios atendiendo a un perro"
+                />
+
+                <!-- no se centraba boton tuve que usar flexbox-->
+                <div class="card-body d-flex flex-column align-items-center">
+                  <h1 class="card-title texto-fuerte">Veterinaria</h1>
+                  <p class="card-text opacity-75 text-center">
+                    Agenda tu hora con nuestros veterinarios y conoce nuestros
+                    servicios de salud animal.
+                  </p>
+
+                  <!-- Botón centrado -->
+                  <a href="pages/login.html" class="btn btn-primary"
+                    >Ingresar</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+              <div class="card shadow h-100 rounded-10p">
+                <img
+                  src="img/pexels-1433506698-34667593.jpg"
+                  class="card-img-top card-img-top-css"
+                  alt="Varios gatos comiendo juntos"
+                />
+
+                <!-- tambien aca-->
+                <div class="card-body d-flex flex-column align-items-center">
+                  <h1 class="card-title texto-fuerte">Tienda</h1>
+                  <p class="card-text opacity-75 text-center">
+                    Conoce nuestras tiendas a lo largo de Chile
+                  </p>
+
+                  <!-- lo mismo aca -->
+                  <a
+                    href="pages/login.html?redirect=tienda/index.html"
+                    class="btn btn-primary"
+                    >Ingresar</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container fondo-para-citas rounded-4">
+        <div class="row pt-5">
+          <div class="col-12 mb-3 mt-5">
+            <figure class="text-center">
+              <blockquote class="blockquote mt-5">
+                <p class="texto-normal text-dark text-center fs-5 fst-italic">
+                  “Contamos con un equipo de profesionales comprometidos <br />
+                  con entregar una atención cercana y de calidad.”
+                </p>
+              </blockquote>
+
+              <figcaption
+                class="blockquote texto-fuerte text-black fs-4 text-center mx-auto p-2"
+              >
+                — Dr. Nicolás Herrera,
+                <cite title="Source Title"> Veterinario —</cite>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mb-3">
+            <figure class="text-center">
+              <blockquote class="blockquote mt-5">
+                <p class="texto-normal text-dark text-center fs-5 fst-italic">
+                  “He encontrado productos de muy buena calidad <br />
+                  y una atención excelente. La tienda tiene variedad <br />
+                  para mis mascotas.”
+                </p>
+              </blockquote>
+
+              <figcaption
+                class="blockquote texto-fuerte text-black fs-4 text-center mx-auto p-2"
+              >
+                — Carolina Martínez,
+                <cite title="Source Title"> Cliente —</cite>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: TIENDA Y ALIMENTOS -->
+
+      <section
+        class="container py-5 seccion-cards border border-1 border-light-subtle bg-light rounded-3"
+      >
+        <div class="row px-5">
+          <div class="col-7">
+            <!-- use dipslay 6 para tamaño-->
+
+            <h2 class="texto-fuerte display-6 text-center">
+              La mejor nutrición y accesorios para tu animal
+            </h2>
+
+            <!-- articulo 1 -->
+            <p class="texto-normal mt-3">
+              En nuestra Clínica jKiltro, estamos convencidos de que la salud de
+              tu compañero de cuatro patas comienza por su plato. Por eso, hemos
+              seleccionado cuidadosamente una tienda con los mejores alimentos y
+              artículos del mercado, pensando siempre en sus necesidades
+              específicas.
+            </p>
+
+            <!-- me faltaba el colapse para poder hacerlo como foro, averiguando pude hacerlo bien y el id-->
+            <div class="collapse" id="articuloTienda">
+              <p class="texto-normal mt-2">
+                Trabajamos con marcas de nutrición premium que garantizan un
+                aporte equilibrado, mejorando su pelaje, su digestión y su
+                energía diaria. Además, sabemos que el bienestar no es solo
+                salud física, sino también mental. En nuestra sección de
+                accesorios, encontrarás desde juguetes interactivos que
+                estimulan su inteligencia, hasta camas ergonómicas para un
+                descanso reparador y accesorios de paseo seguros. Cada producto
+                que ofrecemos ha sido revisado y aprobado por nuestros
+                especialistas, asegurando que te lleves a casa solo lo mejor.
+                ¡Ven a descubrir todo lo que tenemos para mimar a tu animal!
+              </p>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto mt-4">
+              <!-- AGREGADO: Los atributos data-bs-toggle y data-bs-target conectan el botón con el id "articuloTienda" -->
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#articuloTienda"
+                aria-expanded="false"
+                aria-controls="articuloTienda"
+              >
+                Ver más
+              </button>
+            </div>
+          </div>
+          <div class="col-5">
+            <img
+              class="img-fluid mx-auto d-block rounded-4"
+              alt="500x500"
+              src="img/comida.jpg"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- SEPARADOR -->
+      <!-- Limpié los div mal cerrados y los puntos y comas sueltos -->
+      <div class="col-4 mx-auto my-4"></div>
+
+      <!-- SECCIÓN 2: VETERINARIOS Y TALENTO -->
+      <section
+        class="container py-5 seccion-cards border border-1 border-light-subtle"
+      >
+        <div class="row px-5">
+          <div class="col-5">
+            <img
+              class="img-fluid mx-auto d-block rounded-4"
+              alt="500x500"
+              src="img/doctor.jpg"
+            />
+          </div>
+
+          <div class="col-7">
+            <h2 class="texto-fuerte display-6 text-center">
+              Talento médico y calidad de atención
+            </h2>
+
+            <p class="texto-normal mt-3">
+              Nuestro mayor orgullo en Clínica jKiltro es el increíble talento
+              humano que nos respalda. Contamos con un equipo de médicos
+              veterinarios apasionados y altamente capacitados, cuya vocación
+              principal es el amor y respeto por cada animal que cruza nuestras
+              puertas.
+            </p>
+
+            <!-- AGREGADO: Nuevo contenedor oculto, esta vez con id="articuloVeterinarios" -->
+            <div class="collapse" id="articuloVeterinarios">
+              <p class="texto-normal mt-2">
+                Entendemos que traer a tu mascota a la clínica puede generar
+                estrés, por lo que nuestros doctores se esfuerzan en brindar una
+                atención empática, paciente y cercana. Se toman el tiempo
+                necesario para escuchar tus dudas y examinar a tu compañero con
+                la mayor delicadeza. Además, nuestro equipo está en constante
+                actualización médica para ofrecer diagnósticos precisos y
+                tratamientos de vanguardia. Desde chequeos preventivos hasta
+                casos más complejos, trabajamos en conjunto para garantizar la
+                mejor calidad de vida para tu mascota.
+              </p>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto mt-4">
+              <!-- AGREGADO: El botón ahora apunta al id "articuloVeterinarios" -->
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#articuloVeterinarios"
+                aria-expanded="false"
+                aria-controls="articuloVeterinarios"
+              >
+                Ver más
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEPARADOR -->
+      <div class="col-4 mx-auto my-5"></div>
+
+      <section class="container" id="banners">
+        <div class="row justify-content-center p-5">
+          <div class="col-10">
+            <div
+              id="carouselExampleAutoplaying"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="img/bannerUno.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="img/bannerDos.png"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="img/bannerTres.png"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="container" id="final">
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Veterinaria</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Tienda</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Contactanos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">Historia</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary">servicios</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-body-secondary"
+              >Quienes Somos</a
+            >
+          </li>
+        </ul>
+        <p class="text-center text-body-secondary">© 2026 jKiltro</p>
+      </footer>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
