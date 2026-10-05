@@ -1,16 +1,34 @@
 import { useState } from "react";
-import heroImg from "./assets/hero.png";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
+import { Routes, Route, Navigate } from "react-router";
 import "./App.css";
+import Navbar from "./components/navbar.jsx";
 
-const title = 'react';
+const title = "react";
 
-function App() {
-  return (
-    <div>
-      <h1>Testing</h1>
-    </div>
-  )
+export default function App() {
+  return (Navbar());
 }
-export default App;
+
+
+
+
+// export default function App() {
+//   return (
+//     <div className="d-flex flex-column min-vh-100">
+//       {/* Se mantiene visible al cambiar de ruta. */}
+//       <Navbar />
+
+//       {/* Solo cambia el contenido de este main. */}
+//       <main className="container py-4 flex-grow-1">
+//         <Routes>
+//           <Route path="/" element={<Inicio />} />
+//           <Route path="/productos" element={<Productos />} />
+//           <Route path="/contacto" element={<Contacto />} />
+//         </Routes>
+//       </main>
+
+//       {/* También se mantiene visible. */}
+//       <Footer />
+//     </div>
+//   );
+// }

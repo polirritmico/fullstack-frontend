@@ -1,1 +1,3 @@
-//para empeazar
+function Navbar() {
+  return null;
+}
