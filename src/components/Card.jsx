@@ -8,7 +8,7 @@ function Card() {
           alt="Producto 1"
         />
         <div className="card-body">
-          <p>algo mientras tanto</p>
+            <CardBody />
         </div>
       </div>
     </div>
