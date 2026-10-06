@@ -11,7 +11,7 @@ export default function App() {
 
 
 
-
+//ESTE SERIA EL NAVBAR QUE APARECE EN OTRAS SECCIONES PARA TENERLO EN CUENTA POR FAVOR COMO EN HISTORIAS Y QUIENES SOMOS, PERO NO SE USA EN ESTE MOMENTO, SOLO PARA TENERLO EN CUENTA.
 // export default function App() {
 //   return (
 //     <div className="d-flex flex-column min-vh-100">
