@@ -1,19 +1,25 @@
 import { StrictMode } from "react";
 import { Routes, Route, BrowserRouter } from "react-router";
-import "./App.css";
-import { Home } from "./pages/Home";
+import Home from "@/pages/Home";
+import Login from "@/pages/Login";
+import Layout from "@/components/Layout";
 
 function App() {
   return (
     <StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/tienda" element={<Tienda />} /> */}
-          {/* <Route path="/contacto" element={<Contacto />} /> */}
-          {/* <Route path="/me" element={<Perfil />} /> */}
-          {/* <Route path="/mantenedor" element={<Mantenedor />} /> */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/tienda" element={<Tienda />} /> */}
+            {/* <Route path="/contacto" element={<Contacto />} /> */}
+            {/* <Route path="/me" element={<Perfil />} /> */}
+            {/* <Route path="/mantenedor" element={<Mantenedor />} /> */}
+          </Route>
+
+          <Route>
+            <Route path="/login" element={<Login />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </StrictMode>
@@ -28,7 +34,7 @@ export default App;
 //     <div className="d-flex flex-column min-vh-100">
 //       {/* Se mantiene visible al cambiar de ruta. */}
 //       <Navbar />
-
+//
 //       {/* Solo cambia el contenido de este main. */}
 //       <main className="container py-4 flex-grow-1">
 //         <Routes>
@@ -37,7 +43,7 @@ export default App;
 //           <Route path="/contacto" element={<Contacto />} />
 //         </Routes>
 //       </main>
-
+//
 //       {/* También se mantiene visible. */}
 //       <Footer />
 //     </div>
