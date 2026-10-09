@@ -1,3 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap");
+
+:root {
+  /* Referencia paleta base: https://colorhunt.co/palette/3368a066a3bfc8dfdbf2efe7 */
+  --jk-color-primary: #3368a0;
+  --jk-color-secondary: #c8dfdb;
+  --jk-color-success: #4a8c72;
+  --jk-color-info: #66a3bf;
+  --jk-color-warning: #db8b42;
+  --jk-color-danger: #fa580f;
+  --jk-color-light: #f2efe7;
+  --jk-color-dark: #1d2d3d;
+  --jk-color-border: #d0cdc6;
+
+  --bs-primary: var(--jk-color-primary);
+  --bs-secondary: var(--jk-color-secondary);
+  --bs-success: var(--jk-color-success);
+  --bs-info: var(--jk-color-info);
+  --bs-warning: var(--jk-color-warning);
+  --bs-danger: var(--jk-color-danger);
+  --bs-light: var(--jk-color-light);
+  --bs-dark: var(--jk-color-dark);
+  --bs-border-color: var(--jk-color-border);
+  --bs-primary-rgb: 51, 104, 160;
+  --bs-secondary-rgb: 200, 223, 219;
+  --bs-success-rgb: 74, 140, 114;
+  --bs-info-rgb: 102, 163, 191;
+  --bs-warning-rgb: 219, 139, 66;
+  --bs-danger-rgb: 228, 83, 57;
+  --bs-light-rgb: 242, 239, 231;
+  --bs-dark-rgb: 29, 45, 61;
+  --bs-border-rgb: 208, 205, 198;
+  --bs-border-color-translucent: rgba(var(--bs-border-color-rgb), 0.175);
+
+  --jk-font-body: "PT Sans", sans;
+  --jk-font-heading: "Montserrat", sans-serif;
+  --bs-body-font-family: var(--jk-font-body);
+  --bs-heading-font-family: var(--jk-font-heading);
+  --bs-heading-font-weight: 700;
+}
+
 .btn-primary {
   --bs-btn-bg: var(--jk-color-primary);
   --bs-btn-border-color: var(--jk-color-primary);
