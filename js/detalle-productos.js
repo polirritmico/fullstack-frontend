@@ -3,7 +3,7 @@ const productos = {
     nombre: "Alimento Perro Adulto",
     precio: "$29.990",
     categoria: "Alimentos",
-    imagen: "../../img/comida-perro.png",
+    imagen: "/img/comida-perro.png",
     descripcion:
       "Alimento seco balanceado para perros adultos, ideal para mantener energia y digestion saludable.",
     caracteristicas:
@@ -13,7 +13,7 @@ const productos = {
     nombre: "Alimento Gato Adulto",
     precio: "$24.990",
     categoria: "Alimentos",
-    imagen: "../../img/comida-gato.png",
+    imagen: "/img/comida-gato.png",
     descripcion:
       "Croquetas para gatos adultos con nutrientes esenciales para pelaje brillante y vitalidad diaria.",
     caracteristicas:
@@ -23,7 +23,7 @@ const productos = {
     nombre: "Snacks Naturales",
     precio: "$8.990",
     categoria: "Alimentos",
-    imagen: "../../img/snacks-naturales.png",
+    imagen: "/img/snacks-naturales.png",
     descripcion:
       "Premios saludables para perros y gatos, perfectos para entrenamiento o regalonear a tu mascota.",
     caracteristicas:
@@ -33,7 +33,7 @@ const productos = {
     nombre: "Juguete de Cuerda",
     precio: "$6.990",
     categoria: "Juguetes",
-    imagen: "../../img/juguete-cuerda.png",
+    imagen: "/img/juguete-cuerda.png",
     descripcion:
       "Cuerda resistente para juegos de fuerza, ayuda a entretener y ejercitar a tu perro.",
     caracteristicas:
@@ -43,7 +43,7 @@ const productos = {
     nombre: "Pelota Mordedora",
     precio: "$5.990",
     categoria: "Juguetes",
-    imagen: "../../img/pelota.png",
+    imagen: "/img/pelota.png",
     descripcion:
       "Pelota texturizada para morder y jugar, disenada para estimular la actividad fisica.",
     caracteristicas:
@@ -53,7 +53,7 @@ const productos = {
     nombre: "Raton de Peluche",
     precio: "$4.990",
     categoria: "Juguetes",
-    imagen: "../../img/juguete-raton.png",
+    imagen: "/img/juguete-raton.png",
     descripcion:
       "Juguete suave para gatos, liviano y entretenido para estimular su instinto de juego.",
     caracteristicas:
@@ -63,7 +63,7 @@ const productos = {
     nombre: "Collar con Correa",
     precio: "$12.990",
     categoria: "Accesorios y cuidado",
-    imagen: "../../img/collar-correa.png",
+    imagen: "/img/collar-correa.png",
     descripcion:
       "Set ajustable de collar y correa, comodo y seguro para paseos diarios con tu mascota.",
     caracteristicas:
@@ -73,7 +73,7 @@ const productos = {
     nombre: "Cama para Mascota",
     precio: "$34.990",
     categoria: "Accesorios y cuidado",
-    imagen: "../../img/cama-mascota.png",
+    imagen: "/img/cama-mascota.png",
     descripcion:
       "Cama acolchada y comoda para perros o gatos pequenos, ideal para un descanso tranquilo.",
     caracteristicas:
@@ -83,7 +83,7 @@ const productos = {
     nombre: "Shampoo Mascotas",
     precio: "$7.990",
     categoria: "Accesorios y cuidado",
-    imagen: "../../img/shampoo.png",
+    imagen: "/img/shampoo.png",
     descripcion:
       "Shampoo suave para perros y gatos, ayuda a mantener el pelaje limpio y con buen aroma.",
     caracteristicas:
