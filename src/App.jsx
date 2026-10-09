@@ -1,15 +1,26 @@
-import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router";
+import { StrictMode } from "react";
+import { Routes, Route, BrowserRouter } from "react-router";
 import "./App.css";
-import Navbar from "./components/navbar.jsx";
+import { Home } from "./components/";
 
-const title = "react";
-
-export default function App() {
-  return (Navbar());
+function App() {
+  return (
+    <StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/login" element={<Login />} /> */}
+          {/* <Route path="/tienda" element={<Tienda />} /> */}
+          {/* <Route path="/contacto" element={<Contacto />} /> */}
+          {/* <Route path="/me" element={<Perfil />} /> */}
+          {/* <Route path="/mantenedor" element={<Mantenedor />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </StrictMode>
+  );
 }
 
-
+export default App;
 
 //ESTE SERIA EL NAVBAR QUE APARECE EN OTRAS SECCIONES PARA TENERLO EN CUENTA POR FAVOR COMO EN HISTORIAS Y QUIENES SOMOS, PERO NO SE USA EN ESTE MOMENTO, SOLO PARA TENERLO EN CUENTA.
 // export default function App() {
