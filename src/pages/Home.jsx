@@ -1,5 +1,5 @@
 // Home
-export default function Home() {
+export function Home() {
   return (
     <>
       <h1>jKiltro</h1>

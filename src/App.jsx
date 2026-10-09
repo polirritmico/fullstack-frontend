@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { Routes, Route, BrowserRouter } from "react-router";
 import "./App.css";
-import { Home } from "./components/";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
