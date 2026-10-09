@@ -1,3 +1,5 @@
+import logoMark from "@/assets/logo-mark.svg";
+
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
@@ -7,7 +9,7 @@ function Navbar() {
           href="../../index.html"
         >
           <img
-            src="../../img/logo-mark.svg"
+            src={logoMark}
             alt="Logo de la empresa"
             width="60"
             height="60"
@@ -26,7 +28,7 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div classNameName="NavbarEnlaces">
+        <div className="NavbarEnlaces">
           <NavbarEnlaces />
         </div>
       </div>

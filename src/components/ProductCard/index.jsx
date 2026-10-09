@@ -3,12 +3,12 @@ function Card() {
     <div className="col-12 col-md-6 col-lg-4">
       <div className="card h-100 rounded-5 text-center producto-card position-relative">
         <img
-          src="../../img/comida-perro.png"
+          src="/img/comida-perro.png"
           className="card-img-top producto-card__imagen"
           alt="Producto 1"
         />
         <div className="card-body">
-            <CardBody />
+          <CardBody />
         </div>
       </div>
     </div>
