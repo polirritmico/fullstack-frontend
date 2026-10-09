@@ -3,6 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Layout from "@/components/Layout";
+import LayoutAdmin from "@/components/Mantenedor/Layout";
+import Usuarios from "@/pages/Mantenedor/Usuarios";
 
 function App() {
   return (
@@ -14,11 +16,15 @@ function App() {
             {/* <Route path="/tienda" element={<Tienda />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}
-            {/* <Route path="/mantenedor" element={<Mantenedor />} /> */}
           </Route>
 
           <Route>
             <Route path="/login" element={<Login />} />
+          </Route>
+
+          <Route element={<LayoutAdmin />}>
+            <Route path="/mantenedor/usuarios" element={<Usuarios />} />
+            {/* <Route path="/mantenedor/productos" element={<Productos />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
