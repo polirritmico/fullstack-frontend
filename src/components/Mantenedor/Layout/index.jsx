@@ -1,12 +1,10 @@
 import { Outlet } from "react-router";
-import Navbar from "@/components/Mantenedor/Navbar";
+import Header from "@/components/Mantenedor/Header";
 
 function MantenedorLayout() {
   return (
     <div className="d-flex flex-column">
-      <header>
-        <Navbar />
-      </header>
+      <Header />
       <main className="flex-grow container py-4">
         <Outlet />
       </main>
