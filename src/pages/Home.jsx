@@ -1,5 +1,4 @@
-// Home
-export function Home() {
+function Home() {
   return (
     <>
       <h1>jKiltro</h1>
@@ -8,3 +7,5 @@ export function Home() {
     </>
   );
 }
+
+export default Home;
