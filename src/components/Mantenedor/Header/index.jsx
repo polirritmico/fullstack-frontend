@@ -1,3 +1,11 @@
+import AdminNavbar from "@/components/Mantenedor/Navbar";
+import LogoMark from "@/assets/logo-mark.svg";
+
+const userData = {
+  username: "Alan Brito",
+  role: "Administrador",
+};
+
 function Header() {
   return (
     <header class="btm-margin bg-white w-100">
@@ -5,7 +13,7 @@ function Header() {
         <div class="d-flex align-items-center gap-3">
           <a class="navbar-brand" href="/">
             <img
-              src="../../src/assets/logo-mark.svg"
+              src={LogoMark}
               alt="Logo jKiltro"
               width="48"
               height="48"
@@ -24,9 +32,9 @@ function Header() {
 
         <div class="d-flex align-items-center gap-3">
           <div class="text-end">
-            <p class="fs-7 fw-semibold mb-0">Alan Brito</p>
+            <p class="fs-7 fw-semibold mb-0">{userData.username}</p>
             <p class="fs-8 text-body-secondary fw-medium mt-0 mb-0">
-              Administrador
+              {userData.role}
             </p>
           </div>
           <div class="bg-white rounded-circle shadow d-flex align-items-center justify-content-center avatar-circle">
@@ -34,6 +42,8 @@ function Header() {
           </div>
         </div>
       </div>
+
+      <AdminNavbar />
     </header>
   );
 }
