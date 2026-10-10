@@ -1,26 +1,22 @@
-function Table({ usersData }) {
+function Table({ data, metadata }) {
   return (
     <div className="table-responsive">
       <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
         <caption>
-          <span id="id-tabla-cant-usuarios">25</span>
-          usuarios
+          {/* TODO: evaluar en el front o back? */}
+          <span id="id-tabla-cant-usuarios">25</span> usuarios
         </caption>
 
         <thead className="table-secondary">
           <tr>
-            <th scope="col">Usuario</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Departamento</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Último ingreso</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
+            {metadata.categories.map((entry) => (
+              <th scope="col">{entry}</th>
+            ))}
           </tr>
         </thead>
 
         <tbody>
-          {usersData.map((user) => (
+          {data.map((user) => (
             <tr>
               <td className="fw-medium">{user.name}</td>
               <td>{user.role}</td>
@@ -28,7 +24,11 @@ function Table({ usersData }) {
               <td>{user.email}</td>
               <td>{user.lastLogin}</td>
               <td>
-                <span className="badge text-bg-success">{user.state}</span>
+                <span
+                  className={`badge text-bg-${user.state === "Activo" ? "success" : "secondary"}`}
+                >
+                  {user.state}
+                </span>
               </td>
               <td>
                 <button className="btn btn-sm">

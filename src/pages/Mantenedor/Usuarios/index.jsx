@@ -2,7 +2,7 @@ import Sidebar from "@/components/Mantenedor/Sidebar";
 import Table from "@/components/Mantenedor/Table";
 import TableToolbar from "@/components/Mantenedor/TableToolbar";
 
-const roles = [
+const rolesData = [
   {
     icon: "👥",
     name: "Todos los usuarios",
@@ -45,8 +45,8 @@ const usersData = [
     id: "usuario-101",
     name: "Ana Rojas",
     role: "Administrador",
-    deptartment: "Operaciones",
-    mail: "ana.rojas@empresa.cl",
+    department: "Operaciones",
+    email: "ana.rojas@empresa.cl",
     lastLogin: "13 Sept 2026",
     state: "Activo",
   },
@@ -54,8 +54,8 @@ const usersData = [
     id: "usuario-102",
     name: "Carlos Pinto",
     role: "Gerente",
-    deptartment: "Comercial",
-    mail: "cpinto@empresa.cl",
+    department: "Comercial",
+    email: "cpinto@empresa.cl",
     lastLogin: "12 Sept 2026",
     state: "Activo",
   },
@@ -63,8 +63,8 @@ const usersData = [
     id: "usuario-103",
     name: "Fernando Villalobos",
     role: "Desarrollador",
-    deptartment: "Tecnología",
-    mail: "fvillalobos@empresa.cl",
+    department: "Tecnología",
+    email: "fvillalobos@empresa.cl",
     lastLogin: "13 Sept 2026",
     state: "Activo",
   },
@@ -72,8 +72,8 @@ const usersData = [
     id: "usuario-104",
     name: "Rodrigo Callealta",
     role: "Desarrollador",
-    deptartment: "Tecnología",
-    mail: "rcallealta@empresa.cl",
+    department: "Tecnología",
+    email: "rcallealta@empresa.cl",
     lastLogin: "11 Sept 2026",
     state: "Inactivo",
   },
@@ -81,8 +81,8 @@ const usersData = [
     id: "usuario-105",
     name: "Camila Soto",
     role: "Vendedor",
-    deptartment: "Ventas",
-    mail: "csoto@empresa.cl",
+    department: "Ventas",
+    email: "csoto@empresa.cl",
     lastLogin: "13 Sept 2026",
     state: "Activo",
   },
@@ -90,8 +90,8 @@ const usersData = [
     id: "usuario-106",
     name: "Diego Tapia",
     role: "Vendedor",
-    deptartment: "Ventas",
-    mail: "dtapia@empresa.cl",
+    department: "Ventas",
+    email: "dtapia@empresa.cl",
     lastLogin: "09 Sept 2026",
     state: "Activo",
   },
@@ -99,8 +99,8 @@ const usersData = [
     id: "usuario-107",
     name: "Luis Martínez",
     role: "Transportista",
-    deptartment: "Logística",
-    mail: "lmartinez@empresa.cl",
+    department: "Logística",
+    email: "lmartinez@empresa.cl",
     lastLogin: "13 Sept 2026",
     state: "Activo",
   },
@@ -108,8 +108,8 @@ const usersData = [
     id: "usuario-108",
     name: "Javiera Silva",
     role: "Cliente",
-    deptartment: "N/A",
-    mail: "javi.silva@gmail.com",
+    department: "N/A",
+    email: "javi.silva@gmail.com",
     lastLogin: "01 Sept 2026",
     state: "Activo",
   },
@@ -117,8 +117,8 @@ const usersData = [
     id: "usuario-109",
     name: "Matías Muñoz",
     role: "Cliente",
-    deptartment: "N/A",
-    mail: "matias.munoz@yahoo.es",
+    department: "N/A",
+    email: "matias.munoz@yahoo.es",
     lastLogin: "28 Ago 2026",
     state: "Inactivo",
   },
@@ -126,22 +126,34 @@ const usersData = [
     id: "usuario-110",
     name: "Valentina Parra",
     role: "Cliente",
-    deptartment: "N/A",
-    mail: "vparra99@hotmail.com",
+    department: "N/A",
+    email: "vparra99@hotmail.com",
     lastLogin: "12 Sept 2026",
     state: "Activo",
   },
 ];
 
+const usersMetadata = {
+  categories: [
+    "Usuario",
+    "Rol",
+    "Departamento",
+    "Correo",
+    "Último ingreso",
+    "Estado",
+    "Acciones",
+  ],
+};
+
 function Usuarios() {
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
-      <Sidebar title="Roles" data={roles} />
+      <Sidebar title="Roles" data={rolesData} />
 
       <div className="col-12 col-md-8 col-lg-9 col-xl-9 col-xxl-10 p-3">
         <TableToolbar />
 
-        <Table usersData={usersData} />
+        <Table data={usersData} metadata={usersMetadata} />
       </div>
     </div>
   );
