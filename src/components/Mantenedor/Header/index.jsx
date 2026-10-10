@@ -9,24 +9,24 @@ const userData = {
 
 function Header() {
   return (
-    <header class="btm-margin bg-white w-100">
-      <div class="d-flex align-items-center justify-content-between p-2">
-        <div class="d-flex align-items-center gap-3">
-          <a class="navbar-brand" href="/">
+    <header className="btm-margin bg-white w-100">
+      <div className="d-flex align-items-center justify-content-between p-2">
+        <div className="d-flex align-items-center gap-3">
+          <a className="navbar-brand" href="/">
             <img
               src={LogoMark}
               alt="Logo jKiltro"
               width="48"
               height="48"
-              class="rounded-circle"
+              className="rounded-circle"
             />
           </a>
 
-          <span class="fw-bold fs-4">jKiltro</span>
+          <span className="fw-bold fs-4">jKiltro</span>
         </div>
 
         <div>
-          <h1 class="fs-3 fw-semibold text-dark mb-0 jk-font-heading">
+          <h1 className="fs-3 fw-semibold text-dark mb-0 jk-font-heading">
             Mantenedor • Usuarios
           </h1>
         </div>
