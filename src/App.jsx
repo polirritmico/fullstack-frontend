@@ -3,8 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Layout from "@/components/Layout";
-import LayoutAdmin from "@/components/Mantenedor/Layout";
-import Usuarios from "@/pages/Mantenedor/Usuarios";
+import AdminLayout from "@/components/Mantenedor/Layout";
+import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Route>
 
-          <Route element={<LayoutAdmin />}>
-            <Route path="/mantenedor/usuarios" element={<Usuarios />} />
+          <Route element={<AdminLayout />}>
+            <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
             {/* <Route path="/mantenedor/productos" element={<Productos />} /> */}
           </Route>
         </Routes>
