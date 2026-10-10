@@ -5,6 +5,7 @@ import Login from "@/pages/Login";
 import Layout from "@/components/Layout";
 import AdminLayout from "@/components/Mantenedor/Layout";
 import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
+import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             {/* <Route path="/tienda" element={<Tienda />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}
+            <Route path="*" element={<NoEncontrado />} />
           </Route>
 
           <Route>
