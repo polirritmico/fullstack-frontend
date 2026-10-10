@@ -4,8 +4,8 @@ function CurrentDateTime() {
   const currentDateTime = useCurrentDateTime();
 
   return (
-    <li class="nav-item ms-auto">
-      <p class="mb-0 px-3 text-muted">{currentDateTime}</p>
+    <li className="nav-item ms-auto">
+      <p className="mb-0 px-3 text-muted">{currentDateTime}</p>
     </li>
   );
 }

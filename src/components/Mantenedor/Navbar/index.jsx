@@ -20,11 +20,11 @@ function Navbar() {
             const isCurrent = pathname === path;
 
             return (
-              <li className="nav-item">
+              <li key={path} className="nav-item">
                 <a
                   className={`nav-link px-3 ${isCurrent ? "active" : ""}`}
                   data-bs-toggle="tab"
-                  aria-current="page"
+                  aria-current={isCurrent ? "page" : undefined}
                   href={path}
                 >
                   {section}
