@@ -1,22 +1,11 @@
-import logoMark from "@/assets/logo-mark.svg";
+import JKiltroBrand from "../JKiltroBrand";
 
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container">
-        <a
-          className="navbar-brand d-flex align-items-center"
-          href="../../index.html"
-        >
-          <img
-            src={logoMark}
-            alt="Logo de la empresa"
-            width="60"
-            height="60"
-            className="me-2"
-          />
-          jKiltro
-        </a>
+        <JKiltroBrand targetUrl="/" />
+
         <button
           className="navbar-toggler"
           type="button"
@@ -28,6 +17,7 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="NavbarEnlaces">
           <NavbarEnlaces />
         </div>
