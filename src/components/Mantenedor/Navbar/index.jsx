@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "@/styles/shared/mantenedor.css";
+import CurrentDateTime from "@/components/CurrentDateTime";
 
 const sections = {
   Usuarios: "/mantenedor/usuarios",
@@ -31,6 +32,7 @@ function Navbar() {
               </li>
             );
           })}
+          <CurrentDateTime />
         </ul>
       </div>
     </nav>
