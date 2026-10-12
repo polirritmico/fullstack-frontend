@@ -7,6 +7,8 @@ import AdminLayout from "@/components/Mantenedor/Layout";
 import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
 import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
+import Tienda from "@/pages/Tienda";
+
 function App() {
   return (
     <StrictMode>
@@ -14,7 +16,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/tienda" element={<Tienda />} /> */}
+            <Route path="/tienda" element={<Tienda />} />
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}
             <Route path="*" element={<NoEncontrado />} />

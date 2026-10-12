@@ -1,44 +1,56 @@
-function Card() {
+import { Link } from "react-router-dom";
+import styles from "./ProductCard.module.css";
+
+function ProductCard({ producto, onAgregar }) {
+  const precioFormateado = producto.precio.toLocaleString("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    maximumFractionDigits: 0,
+  });
+
+  function manejarAgregar() {
+    onAgregar(producto);
+  }
+
   return (
     <div className="col-12 col-md-6 col-lg-4">
-      <div className="card h-100 rounded-5 text-center producto-card position-relative">
+      <article
+        className={`card h-100 text-center position-relative ${styles["producto-card"]}`}
+      >
         <img
-          src="/img/comida-perro.png"
-          className="card-img-top producto-card__imagen"
-          alt="Producto 1"
+          src={producto.imagen}
+          className={`card-img-top ${styles["producto-card__imagen"]}`}
+          alt={producto.nombre}
         />
-        <div className="card-body">
-          <CardBody />
+
+        <div className="card-body d-flex flex-column">
+          <h2 className="card-title h5">
+            <Link
+              to={`/tienda/productos/${producto.id}`}
+              className="stretched-link text-decoration-none text-dark"
+            >
+              {producto.nombre}
+            </Link>
+          </h2>
+
+          <p className="card-text">{producto.descripcion}</p>
+
+          <p className="fw-bold text-primary fs-5 mt-auto mb-3">
+            {precioFormateado}
+          </p>
+
+          <button
+            className="btn btn-primary position-relative"
+            type="button"
+            onClick={manejarAgregar}
+          >
+            <i className="bi bi-cart-plus me-2" aria-hidden="true"></i>
+            Agregar al carro
+          </button>
         </div>
-      </div>
+      </article>
     </div>
   );
 }
 
-function CardBody() {
-  return (
-    <>
-      <h5 className="card-title">
-        <a
-          href="./detalle-productos.html?id=1"
-          className="stretched-link text-decoration-none text-dark"
-        >
-          Alimento Perro Adulto
-        </a>
-      </h5>
-      <p className="card-text">
-        Alimento seco balanceado para perros adultos, ideal para mantener
-        energía y digestión saludable.
-      </p>
-      <p className="fw-bold text-primary mb-3">$29.990</p>
-      <button
-        className="btn btn-primary agregar-carrito"
-        type="button"
-        data-nombre="Alimento Perro Adulto"
-        data-precio="29990"
-      >
-        Agregar al carro
-      </button>
-    </>
-  );
-}
+export default ProductCard;
