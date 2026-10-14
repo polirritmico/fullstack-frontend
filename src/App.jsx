@@ -8,6 +8,7 @@ import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
 import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
 import Tienda from "@/pages/Tienda";
+import DetalleProducto from "@/pages/DetalleProducto";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/tienda" element={<Tienda />} />
+            <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
+            {/* <Route path="/productos" element={<Productos />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}
             <Route path="*" element={<NoEncontrado />} />
