@@ -11,6 +11,7 @@ import Tienda from "@/pages/Tienda";
 import DetalleProducto from "@/pages/DetalleProducto";
 import Carrito from "@/pages/Carrito";
 import CrearPerfil from "@/pages/CrearPerfil";
+import MiPerfil from "@/pages/MiPerfil";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/crear-perfil" element={<CrearPerfil />} />
+            <Route path="/mi-perfil" element={<MiPerfil />} />
             {/* <Route path="/productos" element={<Productos />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}

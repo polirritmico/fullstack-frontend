@@ -72,9 +72,9 @@ function NavbarEnlaces() {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="../perfil/mi-perfil.html">
+            <Link className="nav-link" to="/mi-perfil">
               Mi Perfil
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="../perfil/historial-compras.html">
