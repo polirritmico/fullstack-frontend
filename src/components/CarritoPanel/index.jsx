@@ -64,3 +64,5 @@ function CarritoPanel() {
     </div>
   );
 }
+
+export default CarritoPanel;
