@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./MiPerfil.css";
 
 const usuario = {
@@ -57,14 +58,13 @@ function MiPerfil() {
                 Datos personales
               </a>
 
-              <button
+              <Link
+                to="/mis-compras"
                 className="list-group-item list-group-item-action"
-                type="button"
-                disabled
               >
                 <i className="bi bi-box-seam me-2" aria-hidden="true"></i>
-                Mis pedidos
-              </button>
+                Mis compras
+              </Link>
 
               <button
                 className="list-group-item list-group-item-action"
