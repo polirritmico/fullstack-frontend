@@ -1,4 +1,5 @@
 import JKiltroBrand from "../JKiltroBrand";
+import { Link } from "react-router";
 
 function Navbar() {
   return (
@@ -66,9 +67,9 @@ function NavbarEnlaces() {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="../perfil/crear-perfil.html">
+            <Link className="nav-link" to="/crear-perfil">
               Crear Perfil
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="../perfil/mi-perfil.html">
