@@ -148,6 +148,19 @@ function Carrito() {
                 <strong>{formatearPrecio(total)}</strong>
               </div>
 
+              <button
+                className="btn btn-primary w-100 mt-4"
+                type="button"
+                disabled={carrito.length === 0}
+              >
+                Finalizar compra
+              </button>
+
+              <p className="small text-body-secondary mt-3 mb-0">
+                Compra referencial. El pago real se implementará en una próxima
+                versión.
+              </p>
+
               <p className="small text-body-secondary mt-3 mb-0">
                 Despacho gratis desde $30.000.
               </p>
