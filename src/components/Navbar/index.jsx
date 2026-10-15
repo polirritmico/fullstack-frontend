@@ -62,9 +62,9 @@ function NavbarEnlaces() {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="../tienda/index.html">
+            <Link className="nav-link" to="/tienda">
               Productos
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/crear-perfil">
