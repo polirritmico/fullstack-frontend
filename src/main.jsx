@@ -8,6 +8,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/styles/globals.css";
 import "@/styles/theme.css";
 
+import CarritoProvider from "@/components/CarritoProvider/Index.jsx";
 import App from "./App.jsx";
 
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(
+  <CarritoProvider>
+    <App />
+  </CarritoProvider>
+);

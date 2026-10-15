@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CarritoContext from "./CarritoContext";
+import { CarritoContext } from "@/Context/CarritoContext";
 
 function CarritoProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
