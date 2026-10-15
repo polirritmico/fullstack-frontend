@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router";
-import { CarritoContext } from "@/Context/CarritoContext";
+import { CarritoContext } from "@/context/CarritoContext";
 
 function Carrito() {
   const { carrito, quitarProducto, cambiarCantidad, vaciarCarrito } =

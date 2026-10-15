@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CarritoContext } from "@/Context/CarritoContext";
+import { CarritoContext } from "@/context/CarritoContext";
 
 function cargarCarrito() {
   try {
@@ -59,7 +59,13 @@ function CarritoProvider({ children }) {
 
   return (
     <CarritoContext.Provider
-      value={{ carrito, agregarProducto, quitarProducto, cambiarCantidad, vaciarCarrito }}
+      value={{
+        carrito,
+        agregarProducto,
+        quitarProducto,
+        cambiarCantidad,
+        vaciarCarrito,
+      }}
     >
       {children}
     </CarritoContext.Provider>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useParams } from "react-router";
 import { productos } from "@/data/productos";
-import { CarritoContext } from "@/Context/CarritoContext";
+import { CarritoContext } from "@/context/CarritoContext";
 
 import "../../../css/detalle-producto.css";
 
