@@ -1,9 +1,30 @@
-import React from 'react'
+import { useState } from "react";
+import CarritoContext from "./CarritoContext";
 
-function CarritoProvider() {
+function CarritoProvider({ children }) {
+  const [carrito, setCarrito] = useState([]);
+
+  function agregarProducto(producto, cantidad = 1) {
+    setCarrito((actual) => {
+      const existe = actual.some((item) => item.id === producto.id);
+
+      if (existe) {
+        return actual.map((item) =>
+          item.id === producto.id
+            ? { ...item, cantidad: item.cantidad + cantidad }
+            : item,
+        );
+      }
+
+      return [...actual, { ...producto, cantidad }];
+    });
+  }
+
   return (
-    <div>CarritoProvider</div>
-  )
+    <CarritoContext.Provider value={{ carrito, agregarProducto }}>
+      {children}
+    </CarritoContext.Provider>
+  );
 }
 
-export default CarritoProvider
+export default CarritoProvider;
