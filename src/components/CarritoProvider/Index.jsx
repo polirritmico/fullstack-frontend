@@ -20,8 +20,14 @@ function CarritoProvider({ children }) {
     });
   }
 
+  function quitarProducto(id) {
+    setCarrito((actual) => actual.filter((producto) => producto.id !== id));
+  }
+
   return (
-    <CarritoContext.Provider value={{ carrito, agregarProducto }}>
+    <CarritoContext.Provider
+      value={{ carrito, agregarProducto, quitarProducto }}
+    >
       {children}
     </CarritoContext.Provider>
   );

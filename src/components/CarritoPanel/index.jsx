@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import { CarritoContext } from "@/Context/CarritoContext";
 
-
 function CarritoPanel() {
-  const { carrito } = useContext(CarritoContext);
+  const { carrito, quitarProducto } = useContext(CarritoContext);
 
   const subtotal = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.cantidad,
@@ -52,6 +51,14 @@ function CarritoPanel() {
                 <p className="mb-0 fw-bold">
                   {formatearPrecio(producto.precio * producto.cantidad)}
                 </p>
+
+                <button
+                  className="btn btn-sm btn-outline-danger mt-2"
+                  type="button"
+                  onClick={() => quitarProducto(producto.id)}
+                >
+                  Quitar
+                </button>
               </div>
             ))}
 
