@@ -53,9 +53,13 @@ function CarritoProvider({ children }) {
     );
   }
 
+  function vaciarCarrito() {
+    setCarrito([]);
+  }
+
   return (
     <CarritoContext.Provider
-      value={{ carrito, agregarProducto, quitarProducto, cambiarCantidad }}
+      value={{ carrito, agregarProducto, quitarProducto, cambiarCantidad, vaciarCarrito }}
     >
       {children}
     </CarritoContext.Provider>

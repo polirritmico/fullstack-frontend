@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { CarritoContext } from "@/Context/CarritoContext";
 
 function Carrito() {
-  const { carrito, quitarProducto, cambiarCantidad } =
+  const { carrito, quitarProducto, cambiarCantidad, vaciarCarrito } =
     useContext(CarritoContext);
 
   const subtotal = carrito.reduce(
@@ -97,9 +97,21 @@ function Carrito() {
             </div>
           </div>
 
-          <Link to="/tienda" className="btn btn-outline-primary mt-4">
-            Seguir comprando
-          </Link>
+          <div className="d-flex flex-column flex-sm-row gap-2 mt-4">
+            <Link to="/tienda" className="btn btn-outline-primary">
+              Seguir comprando
+            </Link>
+
+            <button
+              className="btn btn-outline-danger"
+              type="button"
+              disabled={carrito.length === 0}
+              onClick={vaciarCarrito}
+            >
+              <i className="bi bi-trash3 me-2" aria-hidden="true"></i>
+              Vaciar carrito
+            </button>
+          </div>
         </div>
 
         {/* RESUMEN */}
