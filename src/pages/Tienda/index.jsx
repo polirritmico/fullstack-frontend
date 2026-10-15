@@ -8,14 +8,28 @@ import { CarritoContext } from "@/Context/CarritoContext";
 function Tienda() {
   const { agregarProducto } = useContext(CarritoContext);
   const [categoria, setCategoria] = useState("Todas");
+  const [precio, setPrecio] = useState("Todos");
 
   function agregarAlCarrito(producto) {
     agregarProducto(producto);
   }
 
-  const productosFiltrados = productos.filter(
-    (producto) => categoria === "Todas" || producto.categoria === categoria,
-  );
+  const productosFiltrados = productos.filter((producto) => {
+    const cumpleCategoria =
+      categoria === "Todas" || producto.categoria === categoria;
+
+    let cumplePrecio = true;
+
+    if (precio === "menos-20000") {
+      cumplePrecio = producto.precio < 20000;
+    } else if (precio === "20000-50000") {
+      cumplePrecio = producto.precio >= 20000 && producto.precio <= 50000;
+    } else if (precio === "mas-50000") {
+      cumplePrecio = producto.precio > 50000;
+    }
+
+    return cumpleCategoria && cumplePrecio;
+  });
 
   return (
     <section className="container py-5">
@@ -34,6 +48,8 @@ function Tienda() {
           <FiltrosTienda
             categoria={categoria}
             onCambiarCategoria={setCategoria}
+            precio={precio}
+            onCambiarPrecio={setPrecio}
           />
         </aside>
 
@@ -42,15 +58,19 @@ function Tienda() {
             Productos encontrados: {productosFiltrados.length}
           </p>
 
-          <div className="row g-4">
-            {productosFiltrados.map((producto) => (
-              <ProductCard
-                key={producto.id}
-                producto={producto}
-                onAgregar={agregarAlCarrito}
-              />
-            ))}
-          </div>
+          {productosFiltrados.length === 0 ? (
+            <p>No hay productos que coincidan con los filtros.</p>
+          ) : (
+            <div className="row g-4">
+              {productosFiltrados.map((producto) => (
+                <ProductCard
+                  key={producto.id}
+                  producto={producto}
+                  onAgregar={agregarAlCarrito}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
