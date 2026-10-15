@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import { CarritoContext } from "@/Context/CarritoContext";
 
-
 function Carrito() {
-  const { carrito, quitarProducto } = useContext(CarritoContext);
+  const { carrito, quitarProducto, cambiarCantidad } =
+    useContext(CarritoContext);
 
   const subtotal = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.cantidad,
@@ -53,7 +53,32 @@ function Carrito() {
                       Precio unitario: {formatearPrecio(producto.precio)}
                     </p>
 
-                    <p className="mb-1">Cantidad: {producto.cantidad}</p>
+                    <div className="d-flex align-items-center gap-2 mb-3">
+                      <span>Cantidad:</span>
+
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        type="button"
+                        disabled={producto.cantidad <= 1}
+                        onClick={() =>
+                          cambiarCantidad(producto.id, producto.cantidad - 1)
+                        }
+                      >
+                        −
+                      </button>
+
+                      <span>{producto.cantidad}</span>
+
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        type="button"
+                        onClick={() =>
+                          cambiarCantidad(producto.id, producto.cantidad + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
 
                     <p className="fw-bold">
                       {formatearPrecio(producto.precio * producto.cantidad)}

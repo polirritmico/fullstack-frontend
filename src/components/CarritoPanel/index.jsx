@@ -3,7 +3,7 @@ import { CarritoContext } from "@/Context/CarritoContext";
 import { useNavigate } from "react-router";
 
 function CarritoPanel() {
-  const { carrito, quitarProducto } = useContext(CarritoContext);
+  const { carrito, quitarProducto, cambiarCantidad } = useContext(CarritoContext);
 
   const navigate = useNavigate();
 
@@ -49,7 +49,34 @@ function CarritoPanel() {
               <div key={producto.id} className="border-bottom pb-3 mb-3">
                 <h3 className="h6">{producto.nombre}</h3>
 
-                <p className="mb-1">Cantidad: {producto.cantidad}</p>
+                <div className="d-flex align-items-center gap-2 mb-3">
+                  <span>Cantidad:</span>
+
+                  <button
+                    className="btn btn-sm btn-outline-secondary"
+                    type="button"
+                    disabled={producto.cantidad <= 1}
+                    aria-label={`Disminuir cantidad de ${producto.nombre}`}
+                    onClick={() =>
+                      cambiarCantidad(producto.id, producto.cantidad - 1)
+                    }
+                  >
+                    −
+                  </button>
+
+                  <span>{producto.cantidad}</span>
+
+                  <button
+                    className="btn btn-sm btn-outline-secondary"
+                    type="button"
+                    aria-label={`Aumentar cantidad de ${producto.nombre}`}
+                    onClick={() =>
+                      cambiarCantidad(producto.id, producto.cantidad + 1)
+                    }
+                  >
+                    +
+                  </button>
+                </div>
 
                 <p className="mb-0 fw-bold">
                   {formatearPrecio(producto.precio * producto.cantidad)}

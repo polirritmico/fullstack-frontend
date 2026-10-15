@@ -43,9 +43,19 @@ function CarritoProvider({ children }) {
     setCarrito((actual) => actual.filter((producto) => producto.id !== id));
   }
 
+  function cambiarCantidad(id, cantidad) {
+    if (!Number.isInteger(cantidad) || cantidad < 1) return;
+
+    setCarrito((actual) =>
+      actual.map((producto) =>
+        producto.id === id ? { ...producto, cantidad } : producto,
+      ),
+    );
+  }
+
   return (
     <CarritoContext.Provider
-      value={{ carrito, agregarProducto, quitarProducto }}
+      value={{ carrito, agregarProducto, quitarProducto, cambiarCantidad }}
     >
       {children}
     </CarritoContext.Provider>
