@@ -152,7 +152,8 @@ const users = [
 
 const usuarioService = {
   async getAll() {
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    // return Promise.resolve(users);
+    await new Promise((resolve) => setTimeout(resolve, 2500));
     return users;
   },
 
