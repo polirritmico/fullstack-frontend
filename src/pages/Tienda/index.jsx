@@ -2,6 +2,7 @@ import ProductCard from "@/components/ProductCard";
 import { productos } from "@/data/productos";
 import { useContext } from "react";
 import { CarritoContext } from "@/Context/CarritoContext";
+import Carrusel from "@/components/Carrusel";
 
 function Tienda() {
   const { agregarProducto } = useContext(CarritoContext);
@@ -12,6 +13,7 @@ function Tienda() {
 
   return (
     <section className="container py-5">
+      <Carrusel />
       <div className="mb-4">
         <h1 className="fw-bold">Productos</h1>
         <p className="text-body-secondary">
