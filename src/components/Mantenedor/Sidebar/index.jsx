@@ -8,7 +8,7 @@ function Sidebar({ title, data }) {
       <div className="border-top d-flex flex-column py-2">
         <div className="panel-roles pt-2 d-md-flex flex-md-column gap-2 gap-md-0">
           {data.map((entity) => (
-            <button type="button" className="btn rounded-0">
+            <button type="button" className="btn rounded-0" key={entity.id}>
               <span>{entity.icon}</span>
               <span>{entity.name}</span>
               <span>{entity.amount}</span>
