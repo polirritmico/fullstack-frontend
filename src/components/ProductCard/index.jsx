@@ -43,6 +43,9 @@ function ProductCard({ producto, onAgregar }) {
             className="btn btn-primary position-relative z-2"
             type="button"
             onClick={manejarAgregar}
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
           >
             <i className="bi bi-cart-plus me-2" aria-hidden="true"></i>
             Agregar al carro

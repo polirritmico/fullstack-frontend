@@ -117,6 +117,9 @@ function ContenidoProducto({ producto }) {
                 type="button"
                 disabled={!cantidadValida}
                 onClick={manejarAgregar}
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
               >
                 <i className="bi bi-cart-plus me-2" aria-hidden="true"></i>
                 Agregar al carrito
