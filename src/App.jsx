@@ -9,6 +9,7 @@ import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
 import Tienda from "@/pages/Tienda";
 import DetalleProducto from "@/pages/DetalleProducto";
+import Carrito from "@/pages/Carrito";
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
+            
             <Route path="/" element={<Home />} />
             <Route path="/tienda" element={<Tienda />} />
             <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
+            <Route path="/carrito" element={<Carrito />} />
             {/* <Route path="/productos" element={<Productos />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}

@@ -1,0 +1,116 @@
+import { useContext } from "react";
+import { Link } from "react-router";
+import { CarritoContext } from "@/Context/CarritoContext";
+
+
+function Carrito() {
+  const { carrito, quitarProducto } = useContext(CarritoContext);
+
+  const subtotal = carrito.reduce(
+    (suma, producto) => suma + producto.precio * producto.cantidad,
+    0,
+  );
+
+  const despacho = carrito.length === 0 || subtotal >= 30000 ? 0 : 2990;
+
+  const total = subtotal + despacho;
+
+  function formatearPrecio(precio) {
+    return precio.toLocaleString("es-CL", {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0,
+    });
+  }
+
+  return (
+    <section className="container my-5">
+      <div className="mb-4">
+        <h1 className="fw-bold">Carrito de compras</h1>
+
+        <p className="text-body-secondary">
+          Revisa los productos que agregaste.
+        </p>
+      </div>
+
+      <div className="row g-4">
+        {/* PRODUCTOS */}
+        <div className="col-12 col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-header bg-white">
+              <h2 className="h5 mb-0">Productos agregados</h2>
+            </div>
+
+            <div className="card-body">
+              {carrito.length === 0 ? (
+                <p className="mb-0">Tu carrito está vacío.</p>
+              ) : (
+                carrito.map((producto) => (
+                  <div key={producto.id} className="border-bottom py-3">
+                    <h3 className="h6">{producto.nombre}</h3>
+
+                    <p className="mb-1">
+                      Precio unitario: {formatearPrecio(producto.precio)}
+                    </p>
+
+                    <p className="mb-1">Cantidad: {producto.cantidad}</p>
+
+                    <p className="fw-bold">
+                      {formatearPrecio(producto.precio * producto.cantidad)}
+                    </p>
+
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      type="button"
+                      onClick={() => quitarProducto(producto.id)}
+                    >
+                      Quitar
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          <Link to="/tienda" className="btn btn-outline-primary mt-4">
+            Seguir comprando
+          </Link>
+        </div>
+
+        {/* RESUMEN */}
+        <div className="col-12 col-lg-4">
+          <div className="card shadow-sm">
+            <div className="card-header bg-white">
+              <h2 className="h5 mb-0">Resumen de compra</h2>
+            </div>
+
+            <div className="card-body">
+              <div className="d-flex justify-content-between mb-2">
+                <span>Subtotal</span>
+                <strong>{formatearPrecio(subtotal)}</strong>
+              </div>
+
+              <div className="d-flex justify-content-between mb-2">
+                <span>Despacho</span>
+                <strong>{formatearPrecio(despacho)}</strong>
+              </div>
+
+              <hr />
+
+              <div className="d-flex justify-content-between fs-5">
+                <strong>Total</strong>
+                <strong>{formatearPrecio(total)}</strong>
+              </div>
+
+              <p className="small text-body-secondary mt-3 mb-0">
+                Despacho gratis desde $30.000.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Carrito;

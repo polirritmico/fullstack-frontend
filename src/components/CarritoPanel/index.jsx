@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { CarritoContext } from "@/Context/CarritoContext";
+import { useNavigate } from "react-router";
 
 function CarritoPanel() {
   const { carrito, quitarProducto } = useContext(CarritoContext);
+
+  const navigate = useNavigate();
 
   const subtotal = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.cantidad,
@@ -65,6 +68,15 @@ function CarritoPanel() {
             <p className="fs-5 fw-bold">
               Subtotal: {formatearPrecio(subtotal)}
             </p>
+
+            <button
+              type="button"
+              className="btn btn-primary w-100"
+              data-bs-dismiss="offcanvas"
+              onClick={() => navigate("/carrito")}
+            >
+              Ver carrito
+            </button>
           </>
         )}
       </div>
