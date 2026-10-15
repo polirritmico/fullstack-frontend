@@ -1,9 +1,3 @@
-import React from 'react'
+import { CreateContext } from "react";
 
-function CarritoContext() {
-  return (
-    <div>CarritoContext</div>
-  )
-}
-
-export default CarritoContext
+export const CarritoContext = createContext(null);
