@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useParams } from "react-router";
 import { productos } from "@/data/productos";
+import { CarritoContext } from "@/Context/CarritoContext";
 
 import "../../../css/detalle-producto.css";
 
@@ -28,6 +29,7 @@ function DetalleProducto() {
 
 function ContenidoProducto({ producto }) {
   const [cantidad, setCantidad] = useState("1");
+  const { agregarProducto } = useContext(CarritoContext);
 
   const precioFormateado = producto.precio.toLocaleString("es-CL", {
     style: "currency",
@@ -43,10 +45,7 @@ function ContenidoProducto({ producto }) {
   function manejarAgregar() {
     if (!cantidadValida) return;
 
-    console.log("Producto agregado:", {
-      ...producto,
-      cantidad: cantidadNumerica,
-    });
+    agregarProducto(producto, cantidadNumerica);
   }
 
   return (
