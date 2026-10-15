@@ -3,7 +3,8 @@ import { CarritoContext } from "@/Context/CarritoContext";
 import { useNavigate } from "react-router";
 
 function CarritoPanel() {
-  const { carrito, quitarProducto, cambiarCantidad } = useContext(CarritoContext);
+  const { carrito, quitarProducto, cambiarCantidad } =
+    useContext(CarritoContext);
 
   const navigate = useNavigate();
 
@@ -47,7 +48,16 @@ function CarritoPanel() {
           <>
             {carrito.map((producto) => (
               <div key={producto.id} className="border-bottom pb-3 mb-3">
-                <h3 className="h6">{producto.nombre}</h3>
+                <div className="d-flex align-items-center gap-3 mb-3">
+                  <img
+                    src={producto.imagen}
+                    alt={producto.nombre}
+                    className="rounded flex-shrink-0 object-fit-contain"
+                    style={{ width: "70px", height: "70px" }}
+                  />
+
+                  <h3 className="h6 mb-0">{producto.nombre}</h3>
+                </div>
 
                 <div className="d-flex align-items-center gap-2 mb-3">
                   <span>Cantidad:</span>

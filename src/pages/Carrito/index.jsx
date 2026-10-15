@@ -47,7 +47,16 @@ function Carrito() {
               ) : (
                 carrito.map((producto) => (
                   <div key={producto.id} className="border-bottom py-3">
-                    <h3 className="h6">{producto.nombre}</h3>
+                    <div className="d-flex align-items-center gap-3 mb-3">
+                      <img
+                        src={producto.imagen}
+                        alt={producto.nombre}
+                        className="rounded flex-shrink-0 object-fit-contain"
+                        style={{ width: "90px", height: "90px" }}
+                      />
+
+                      <h3 className="h6 mb-0">{producto.nombre}</h3>
+                    </div>
 
                     <p className="mb-1">
                       Precio unitario: {formatearPrecio(producto.precio)}
