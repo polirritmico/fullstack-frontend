@@ -77,9 +77,9 @@ function NavbarEnlaces() {
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="../perfil/historial-compras.html">
+            <Link className="nav-link" to="/mis-compras">
               Mis Compras
-            </a>
+            </Link>
           </li>
         </ul>
         <button

@@ -12,6 +12,7 @@ import DetalleProducto from "@/pages/DetalleProducto";
 import Carrito from "@/pages/Carrito";
 import CrearPerfil from "@/pages/CrearPerfil";
 import MiPerfil from "@/pages/MiPerfil";
+import MisCompras from "@/pages/MisCompras";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/crear-perfil" element={<CrearPerfil />} />
             <Route path="/mi-perfil" element={<MiPerfil />} />
+            <Route path="/mis-compras" element={<MisCompras />} />
             {/* <Route path="/productos" element={<Productos />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
             {/* <Route path="/me" element={<Perfil />} /> */}
