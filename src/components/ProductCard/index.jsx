@@ -40,7 +40,7 @@ function ProductCard({ producto, onAgregar }) {
           </p>
 
           <button
-            className="btn btn-primary position-relative"
+            className="btn btn-primary position-relative z-2"
             type="button"
             onClick={manejarAgregar}
           >

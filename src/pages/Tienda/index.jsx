@@ -1,10 +1,13 @@
 import ProductCard from "@/components/ProductCard";
-import {productos} from "@/data/productos";
-
+import { productos } from "@/data/productos";
+import { useContext } from "react";
+import { CarritoContext } from "@/Context/CarritoContext";
 
 function Tienda() {
+  const { agregarProducto } = useContext(CarritoContext);
+
   function agregarAlCarrito(producto) {
-    console.log("Producto agregado:", producto);
+    agregarProducto(producto);
   }
 
   return (
