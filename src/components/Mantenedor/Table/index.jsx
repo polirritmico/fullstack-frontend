@@ -1,23 +1,24 @@
-function Table({ data, metadata }) {
+function Table({ data, metadata, summaryLabel }) {
   return (
     <div className="table-responsive">
       <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
         <caption>
-          {/* TODO: evaluar en el front o back? */}
-          <span id="id-tabla-cant-usuarios">25</span> usuarios
+          <span id="id-tabla-principal">{data.length}</span> {summaryLabel}
         </caption>
 
         <thead className="table-secondary">
           <tr>
-            {metadata.categories.map((entry) => (
-              <th scope="col">{entry}</th>
+            {metadata.map((entry, index) => (
+              <th key={index} scope="col">
+                {entry}
+              </th>
             ))}
           </tr>
         </thead>
 
         <tbody>
           {data.map((user) => (
-            <tr>
+            <tr key={user.id}>
               <td className="fw-medium">{user.name}</td>
               <td>{user.role}</td>
               <td>{user.department}</td>
