@@ -1,15 +1,34 @@
 const metadata = {
-  categories: [
+  etiquetas: {
+    accion: "Acciones",
+    estado: "Estado",
+    categoria: "Roles",
+    objeto: "Usuario",
+    objetos: "Usuarios",
+    contador: "usuarios",
+  },
+  categoriasTabla: [
     "Usuario",
     "Rol",
     "Departamento",
     "Correo",
     "Último ingreso",
-    "Estado",
-    "Acciones",
   ],
-  states: ["Todos", "Activos", "Inactivos", "En contratación"],
-  summaryLabel: "usuarios",
+  estados: {
+    todos: "Todos los estados",
+    activo: "Activo",
+    inactivo: "Inactivo",
+    pendiente: "En contratación",
+  },
+  campos: {
+    id: "string",
+    nombre: "string",
+    rol: "string",
+    departamento: "string",
+    email: "string",
+    ultimoLogin: "string", // datetime
+    estado: "string",
+  },
 };
 
 const roles = [

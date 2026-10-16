@@ -9,7 +9,7 @@ import TableToolbar from "@/components/Mantenedor/TableToolbar";
 
 function Usuarios() {
   const [roles, setRoles] = useState();
-  const [users, setUsers] = useState();
+  const [usuarios, setUsuarios] = useState();
   const [metadata, setMetadata] = useState();
 
   useEffect(() => {
@@ -21,28 +21,30 @@ function Usuarios() {
   }, []);
 
   useEffect(() => {
-    usuarioService.getAll().then(setUsers);
+    usuarioService.getAll().then(setUsuarios);
   }, []);
 
-  if (!metadata || !roles || !users) {
+  if (!metadata || !roles || !usuarios) {
     return <Loading />;
   }
 
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
-      <Sidebar title="Roles" data={roles} />
+      <Sidebar title={metadata.etiquetas.categoria} data={roles} />
 
       <div className="col-12 col-md-8 col-lg-9 col-xl-9 col-xxl-10 p-3">
         <TableToolbar
           placeholder="Búsqueda por nombre, correo o rol…"
-          states={metadata.states}
-          buttonText="+ Agregar Usuario"
+          estados={metadata.estados}
+          textoBoton="+ Agregar Usuario"
         />
 
         <Table
-          data={users}
-          metadata={metadata.categories}
-          summaryLabel="usuarios"
+          data={usuarios}
+          columnas={metadata.categoriasTabla}
+          campos={metadata.campos}
+          etiquetas={metadata.etiquetas}
+          estados={metadata.estados}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-function TableToolbar({ placeholder, states, buttonText }) {
+function TableToolbar({ placeholder, estados, textoBoton }) {
   return (
     <div className="d-flex justify-content-between gap-3 mb-1">
       <form className="d-flex flex-grow-1" role="search" id="id-form-busqueda">
@@ -16,14 +16,11 @@ function TableToolbar({ placeholder, states, buttonText }) {
           className="form-select"
           aria-label="Selector de estados"
           id="id-selector-estados"
-          defaultValue={states[0]}
+          defaultValue="todos"
         >
-          {states.map((state) => (
-            <option
-              value={state.toLowerCase().replaceAll(" ", "-")}
-              key={state.toLowerCase().replaceAll(" ", "-")}
-            >
-              {state}
+          {Object.entries(estados).map(([key, value]) => (
+            <option value={key} key={key}>
+              {value}
             </option>
           ))}
         </select>
@@ -32,7 +29,7 @@ function TableToolbar({ placeholder, states, buttonText }) {
           className="btn btn-primary text-nowrap"
           id="boton-agregar"
         >
-          {buttonText}
+          {textoBoton}
         </button>
       </div>
     </div>

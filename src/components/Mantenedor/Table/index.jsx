@@ -1,34 +1,43 @@
-function Table({ data, metadata, summaryLabel }) {
+function Table({ data, columnas, campos, etiquetas, estados }) {
   return (
     <div className="table-responsive">
       <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
         <caption>
-          <span id="id-tabla-principal">{data.length}</span> {summaryLabel}
+          <span id="id-tabla-principal">{data.length}</span>{" "}
+          {etiquetas.contador}
         </caption>
 
         <thead className="table-secondary">
           <tr>
-            {metadata.map((entry, index) => (
+            {columnas.map((entry, index) => (
               <th key={index} scope="col">
                 {entry}
               </th>
             ))}
+            <th key="estado">{etiquetas.estado}</th>
+            <th key="accion">{etiquetas.accion}</th>
           </tr>
         </thead>
 
         <tbody>
-          {data.map((user) => (
-            <tr key={user.id}>
-              <td className="fw-medium">{user.name}</td>
-              <td>{user.role}</td>
-              <td>{user.department}</td>
-              <td>{user.email}</td>
-              <td>{user.lastLogin}</td>
+          {data.map((entry) => (
+            <tr key={entry.id}>
+              {Object.entries(campos).map(([key]) => {
+                if (key === "id" || key === "estado") return;
+                if (key === etiquetas.objeto) {
+                  return (
+                    <td key={key} className="fw-medium">
+                      {entry[key]}
+                    </td>
+                  );
+                }
+                return <td key={key}>{entry[key]}</td>;
+              })}
               <td>
                 <span
-                  className={`badge text-bg-${user.state === "Activo" ? "success" : "secondary"}`}
+                  className={`badge text-bg-${entry.estado === estados.activo ? "success" : "secondary"}`}
                 >
-                  {user.state}
+                  {entry.estado}
                 </span>
               </td>
               <td>
@@ -42,10 +51,15 @@ function Table({ data, metadata, summaryLabel }) {
                   className="btn btn-sm"
                   data-bs-toggle="modal"
                   data-bs-target="#modal-eliminar-usuario"
-                  data-jk-id={user.id}
-                  data-jk-nombre={user.name}
-                  data-jk-rol={user.role}
-                  data-jk-correo={user.mail}
+
+                  {...Object.fromEntries(
+                    Object.entries(campos).map(([campo, campoType]) => [
+                      `data-jk-${campo}`,
+                      campoType === "string"
+                        ? entry[campo]
+                        : entry[campo]?.toString(),
+                    ]),
+                  )}
                 >
                   <i className="bi bi-x-circle"></i>
                 </button>
