@@ -19,7 +19,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <NavbarBody />
+        <NavbarBody principal={"Inicio"} carrito = {"Carrito"} />
       </div>
     </nav>
   );

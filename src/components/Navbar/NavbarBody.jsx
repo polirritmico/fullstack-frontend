@@ -1,4 +1,4 @@
-export default function NavbarBody() {
+export default function NavbarBody({principal}, {carrito}) {
   const pages = [
     { nombre: "Contáctanos", link: "#" },
     { nombre: "Historia", link: "../nosotros/historia.html" },
@@ -19,7 +19,7 @@ export default function NavbarBody() {
             aria-current="page"
             href="../../index.html"
           >
-            Inicio
+            {principal}
           </a>
         </li>
 
@@ -39,8 +39,10 @@ export default function NavbarBody() {
         aria-controls="offcanvasRight"
       >
         <i className="bi bi-cart3"></i>
-        Carrito
+        {carrito} 
       </button>
     </div>
   );
 }
+//Carrito = carrito
+//Principal = Inicio
