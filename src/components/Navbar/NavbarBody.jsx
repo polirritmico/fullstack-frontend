@@ -1,5 +1,4 @@
 export default function NavbarBody() {
-    
   const pages = [
     { nombre: "Contáctanos", link: "#" },
     { nombre: "Historia", link: "../nosotros/historia.html" },
@@ -12,7 +11,7 @@ export default function NavbarBody() {
   ];
 
   return (
-    <>
+    <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav mx-auto">
         <li className="nav-item">
           <a
@@ -42,6 +41,6 @@ export default function NavbarBody() {
         <i className="bi bi-cart3"></i>
         Carrito
       </button>
-    </>
+    </div>
   );
 }
