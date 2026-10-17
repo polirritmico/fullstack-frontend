@@ -1,5 +1,4 @@
-import { StrictMode } from "react";
-import { Routes, Route, BrowserRouter, Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
@@ -20,38 +19,34 @@ import AdminConfig from "./pages/Mantenedor/Configuracion";
 
 function App() {
   return (
-    <StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+    <Routes>
+      <Route path="/login" element={<Login />} />
 
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/tienda" element={<Tienda />} />
-            <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
-            <Route path="/tienda/carrito" element={<Carrito />} />
-            <Route path="/tienda/mis-compras" element={<MisCompras />} />
-            <Route path="/mi-perfil" element={<MiPerfil />} />
-            <Route path="/crear-perfil" element={<CrearPerfil />} />
-            {/* <Route path="/productos" element={<Productos />} /> */}
-            {/* <Route path="/contacto" element={<Contacto />} /> */}
-            <Route path="*" element={<NoEncontrado />} />
-          </Route>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/tienda" element={<Tienda />} />
+        <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
+        <Route path="/tienda/carrito" element={<Carrito />} />
+        <Route path="/tienda/mis-compras" element={<MisCompras />} />
+        <Route path="/mi-perfil" element={<MiPerfil />} />
+        <Route path="/crear-perfil" element={<CrearPerfil />} />
+        {/* <Route path="/productos" element={<Productos />} /> */}
+        {/* <Route path="/contacto" element={<Contacto />} /> */}
+        <Route path="*" element={<NoEncontrado />} />
+      </Route>
 
-          <Route element={<AdminLayout />}>
-            <Route path="/mantenedor/productos" element={<AdminProductos />} />
-            <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
-            <Route path="/mantenedor/configuracion" element={<AdminConfig />} />
-            <Route path="/mantenedor/*" element={<NoEncontrado />} />
+      <Route element={<AdminLayout />}>
+        <Route path="/mantenedor/productos" element={<AdminProductos />} />
+        <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
+        <Route path="/mantenedor/configuracion" element={<AdminConfig />} />
+        <Route path="/mantenedor/*" element={<NoEncontrado />} />
 
-            <Route
-              path="/mantenedor"
-              element={<Navigate to="/mantenedor/productos" replace />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </StrictMode>
+        <Route
+          path="/mantenedor"
+          element={<Navigate to="/mantenedor/productos" replace />}
+        />
+      </Route>
+    </Routes>
   );
 }
 
