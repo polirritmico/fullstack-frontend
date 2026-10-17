@@ -26,13 +26,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/tienda" element={<Tienda />} />
             <Route path="/tienda/productos/:id" element={<DetalleProducto />} />
-            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/tienda/carrito" element={<Carrito />} />
+            <Route path="/tienda/mis-compras" element={<MisCompras />} />
+            <Route path="/me" element={<MiPerfil />} />
             <Route path="/crear-perfil" element={<CrearPerfil />} />
-            <Route path="/mi-perfil" element={<MiPerfil />} />
-            <Route path="/mis-compras" element={<MisCompras />} />
             {/* <Route path="/productos" element={<Productos />} /> */}
             {/* <Route path="/contacto" element={<Contacto />} /> */}
-            {/* <Route path="/me" element={<Perfil />} /> */}
             <Route path="*" element={<NoEncontrado />} />
           </Route>
 
