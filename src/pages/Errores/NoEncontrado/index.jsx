@@ -4,12 +4,17 @@ function NoEncontrado() {
   const handleBack = useHandleBack();
 
   return (
-    <div>
-      <i className="bi bi-file-earmark-x display-1 text-secondary"></i>
+    <div className="flex-grow-1 d-flex flex-column text-center align-items-center p-5">
+      <i className="bi bi-window-x display-1 text-danger mb-4"></i>
+
       <h2>404 - Página no encontrada</h2>
-      <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
-      <button className="btn btn-primary" onClick={handleBack}>
-        <i className="bi bi-arrow-left"></i>
+
+      <p className="text-muted lead">
+        Lo sentimos, la página que buscas no existe o ha sido movida.
+      </p>
+
+      <button className="btn btn-primary mt-2 fs-5" onClick={handleBack}>
+        <i className="bi bi-arrow-left me-2"></i>
         Volver
       </button>
     </div>
