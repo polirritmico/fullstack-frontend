@@ -1,7 +1,16 @@
-import JKiltroBrand from "../JKiltroBrand";
-import { Link } from "react-router";
+import JKiltroBrand from "@/components/JKiltroBrand";
+import NavbarBody from "./NavbarBody";
 
 function Navbar() {
+  const pages = [
+    { nombre: "Inicio", link: "/", style: "active" },
+    { nombre: "Contáctanos", link: "#" },
+    // { nombre: "Servicios", link: "#" },
+    { nombre: "Quiénes Somos", link: "/nosotros" },
+    { nombre: "Tienda", link: "/tienda" },
+    { nombre: "Mis Compras", link: "/perfil" },
+  ];
+
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container">
@@ -19,143 +28,10 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="NavbarEnlaces">
-          <NavbarEnlaces />
-        </div>
+        <NavbarBody paginas={pages} carrito={"Carrito"} />
       </div>
     </nav>
   );
 }
 
-function NavbarEnlaces() {
-  return (
-    <>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav mx-auto">
-          <li className="nav-item">
-            <a
-              className="nav-link active"
-              aria-current="page"
-              href="../../index.html"
-            >
-              Inicio
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Contáctanos
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="../nosotros/historia.html">
-              Historia
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Servicios
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="../../pages/nosotros/index.html">
-              Quiénes Somos
-            </a>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/tienda">
-              Productos
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/crear-perfil">
-              Crear Perfil
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/mi-perfil">
-              Mi Perfil
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/mis-compras">
-              Mis Compras
-            </Link>
-          </li>
-        </ul>
-        <button
-          className="btn btn-outline-dark ms-lg-3 mt-3 mt-lg-0"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          <i className="bi bi-cart3"></i>
-          Carrito
-        </button>
-      </div>
-    </>
-  );
-}
-
 export default Navbar;
-
-// function Navbar2() {
-//   return (
-//     <nav classNameName="navbar navbar-expand-md bg-light">
-//       <div classNameName="container">
-//         <a classNameName="navbar-brand" href="#">
-//           <img
-//             src="../../img/logo-mark.svg"
-//             alt="Logo de la empresa"
-//             width="75"
-//             height="75"
-//             classNameName="me-3"
-//           />
-//           jKiltro
-//         </a>
-
-//         <button
-//           classNameName="navbar-toggler"
-//           type="button"
-//           data-bs-toggle="collapse"
-//           data-bs-target="#navbarNav"
-//           aria-controls="navbarNav"
-//           aria-expanded="false"
-//           aria-label="Toggle navigation"
-//         >
-//           <span classNameName="navbar-toggler-icon"></span>
-//         </button>
-
-//         <div classNameName="collapse navbar-collapse" id="navbarNav">
-//           <ul classNameName="navbar-nav mx-auto">
-//             <li classNameName="nav-item">
-//               <a classNameName="nav-link active" aria-current="page" href="#">
-//                 Inicio
-//               </a>
-//             </li>
-//             <li classNameName="nav-item">
-//               <a classNameName="nav-link" href="#">
-//                 Contactanos
-//               </a>
-//             </li>
-//             <li classNameName="nav-item">
-//               <a classNameName="nav-link" href="#">
-//                 Historia
-//               </a>
-//             </li>
-//             <li classNameName="nav-item">
-//               <a classNameName="nav-link" href="#">
-//                 Servicios
-//               </a>
-//             </li>
-//             <li classNameName="nav-item">
-//               <a classNameName="nav-link" href="#">
-//                 Quienes Somos
-//               </a>
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// }

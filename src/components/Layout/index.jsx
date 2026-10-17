@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Navbar from "@/components/Navbar";
-import CarritoPanel from "@/components/CarritoPanel";
+import Footer from "@/components/Footer";
 
 function Layout() {
   return (
@@ -9,7 +9,7 @@ function Layout() {
       <main className="flex-grow container py-4">
         <Outlet />
       </main>
-      <CarritoPanel />
+      <Footer />
     </div>
   );
 }
