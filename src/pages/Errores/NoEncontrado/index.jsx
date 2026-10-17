@@ -1,11 +1,18 @@
+import useHandleBack from "./useHandleBack.js";
+
 function NoEncontrado() {
-  console.log("error 404");
+  const handleBack = useHandleBack();
 
   return (
     <div>
-      <p>Lo sentimos, la página no existe.</p>
+      <i className="bi bi-file-earmark-x display-1 text-secondary"></i>
+      <h2>404 - Página no encontrada</h2>
+      <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
+      <button className="btn btn-primary" onClick={handleBack}>
+        <i className="bi bi-arrow-left"></i>
+        Volver
+      </button>
     </div>
   );
 }
-
 export default NoEncontrado;
