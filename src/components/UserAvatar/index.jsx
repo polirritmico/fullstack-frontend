@@ -2,7 +2,7 @@ import UserAvatarMenu from "./UserAvatarMenu";
 
 function UserAvatar({ userData, showRole = false }) {
   return (
-    <div className="dropdown ms-3 mt-3">
+    <div className="dropdown ms-3">
       <button
         className="btn p-0 border-0 bg-transparent"
         type="button"
