@@ -1,6 +1,6 @@
 function TableRow({ entry, estados, campos, etiquetas }) {
   return (
-    <tr key={entry.id}>
+    <tr>
       {Object.entries(campos).map(([key]) => {
         if (key === "id" || key === "estado") return;
         if (key === etiquetas.objeto) {

@@ -16,6 +16,7 @@ function Table({ data, columnas, campos, etiquetas, estados }) {
           {data.map((entry) => {
             return (
               <TableRow
+                key={entry.id}
                 entry={entry}
                 estados={estados}
                 campos={campos}
