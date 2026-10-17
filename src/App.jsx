@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { Routes, Route, BrowserRouter } from "react-router";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router";
 
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
@@ -39,10 +39,15 @@ function App() {
           </Route>
 
           <Route element={<AdminLayout />}>
-            <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
             <Route path="/mantenedor/productos" element={<AdminProductos />} />
+            <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
             <Route path="/mantenedor/configuracion" element={<AdminConfig />} />
             <Route path="/mantenedor/*" element={<NoEncontrado />} />
+
+            <Route
+              path="/mantenedor"
+              element={<Navigate to="/mantenedor/productos" replace />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
