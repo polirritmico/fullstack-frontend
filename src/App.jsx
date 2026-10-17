@@ -16,12 +16,15 @@ import MisCompras from "@/pages/MisCompras";
 import AdminLayout from "@/components/Mantenedor/Layout";
 import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
 import AdminProductos from "@/pages/Mantenedor/Productos";
+import AdminConfig from "./pages/Mantenedor/Configuracion";
 
 function App() {
   return (
     <StrictMode>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
+
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/tienda" element={<Tienda />} />
@@ -35,13 +38,11 @@ function App() {
             <Route path="*" element={<NoEncontrado />} />
           </Route>
 
-          <Route>
-            <Route path="/login" element={<Login />} />
-          </Route>
-
           <Route element={<AdminLayout />}>
             <Route path="/mantenedor/usuarios" element={<AdminUsuarios />} />
             <Route path="/mantenedor/productos" element={<AdminProductos />} />
+            <Route path="/mantenedor/configuracion" element={<AdminConfig />} />
+            <Route path="/mantenedor/*" element={<NoEncontrado />} />
           </Route>
         </Routes>
       </BrowserRouter>
