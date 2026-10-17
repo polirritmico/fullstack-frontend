@@ -5,8 +5,8 @@ import CurrentDateTime from "@/components/CurrentDateTime";
 import "@/styles/shared/mantenedor.css";
 
 const sections = {
-  Usuarios: "/mantenedor/usuarios",
   Productos: "/mantenedor/productos",
+  Usuarios: "/mantenedor/usuarios",
   // Roles: "/mantenedor/roles",
   // Correos: "/mantenedor/correos",
   Configuración: "/mantenedor/configuracion",
