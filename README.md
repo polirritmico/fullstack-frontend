@@ -66,15 +66,15 @@ export default Foo;
   `src/styles/shared/`. Los estilos específicos de los componentes o páginas,
   deben ir en la carpeta de ese elemento.
 
-  > [!IMPORTANT]
-  >
-  > Evitar duplicar estilos y abusar de estilos específicos para mantener la
-  > coherencia y consistencia visual del sitio. Las reglas CSS que deban
-  > compartirse entre múltiples componentes _y que no pertenezcan a un
-  > componente reutilizable_ deben centralizarse en `src/styles/shared`.
-  >
-  > Por ejemplo, si distintas tablas necesitan compartir reglas visuales, se
-  > deberían definir en `src/styles/shared/tables.css`, pero si comparten
-  > estructura o comportamiento se debe preferir crear y utilizar un componente
-  > reutilizable como `Table` cuyos estilos específicos deberían ir en
-  > `src/components/Table/Table.module.css`.
+> [!IMPORTANT]
+>
+> Evitar duplicar estilos y abusar de estilos específicos para mantener la
+> coherencia y consistencia visual del sitio. Las reglas CSS que deban
+> compartirse entre múltiples componentes _y que no pertenezcan a un componente
+> reutilizable_ deben centralizarse en `src/styles/shared`.
+>
+> Por ejemplo, si distintas tablas necesitan compartir reglas visuales, se
+> deberían definir en `src/styles/shared/tables.css`, pero si comparten
+> estructura o comportamiento se debe preferir crear y utilizar un componente
+> reutilizable como `Table` cuyos estilos específicos deberían ir en
+> `src/components/Table/Table.module.css`.
