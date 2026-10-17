@@ -1,20 +1,21 @@
 import logoMark from "@/assets/logo-mark.svg";
+import { Link } from "react-router";
 
-function JKiltroBrand({ targetUrl }) {
+function JKiltroBrand({ targetUrl = "/" }) {
   return (
-    <a
-      className="navbar-brand d-flex align-items-center"
-      href={targetUrl || "/"}
+    <Link
+      className="navbar-brand d-flex align-items-center text-decoration-none"
+      to={targetUrl}
     >
       <img
         src={logoMark}
-        alt="Logo de la empresa"
+        alt="jKiltro"
         width="60"
         height="60"
         className="me-2"
       />
       jKiltro
-    </a>
+    </Link>
   );
 }
 
