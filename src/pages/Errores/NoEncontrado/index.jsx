@@ -1,8 +1,6 @@
-import useHandleBack from "./useHandleBack.js";
+import BackButton from "@/components/BackButton";
 
-function NoEncontrado() {
-  const handleBack = useHandleBack();
-
+function NoEncontrado({ fallbackPath }) {
   return (
     <div className="flex-grow-1 d-flex flex-column text-center align-items-center p-5">
       <i className="bi bi-window-x display-1 text-danger mb-4"></i>
@@ -13,10 +11,7 @@ function NoEncontrado() {
         Lo sentimos, la página que buscas no existe o ha sido movida.
       </p>
 
-      <button className="btn btn-primary mt-2 fs-5" onClick={handleBack}>
-        <i className="bi bi-arrow-left me-2"></i>
-        Volver
-      </button>
+      <BackButton fallbackPath={fallbackPath} />
     </div>
   );
 }
