@@ -1,8 +1,9 @@
-import JKiltroLogo from "@/components/JKiltroLogo";
-import AdminNavbar from "@/components/Mantenedor/Navbar";
-import UserAvatar from "@/components/Mantenedor/UserAvatar";
 import { useEffect } from "react";
 import { useLocation } from "react-router";
+
+import JKiltroLogo from "@/components/JKiltroLogo";
+import AdminNavbar from "@/components/Mantenedor/Navbar";
+import UserAvatar from "@/components/UserAvatar";
 
 const userData = {
   username: "Alan Brito",
