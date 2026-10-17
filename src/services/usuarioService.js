@@ -172,7 +172,7 @@ const users = [
 const usuarioService = {
   async getAll() {
     // return Promise.resolve(users);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 200));
     return users;
   },
 

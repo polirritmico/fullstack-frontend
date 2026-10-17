@@ -10,8 +10,8 @@ const metadata = {
   categoriasTabla: ["Producto", "SKU", "Categoría", "Precio", "Stock"],
   estados: {
     todos: "Todos los estados",
-    activo: "Activos",
-    inactivo: "Inactivos",
+    activo: "Activo",
+    inactivo: "Inactivo",
     pendiente: "En preparación",
   },
   campos: {
@@ -237,7 +237,7 @@ const categorias = [
 
 const productoService = {
   async getAll() {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 200));
     return productos;
   },
 
