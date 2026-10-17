@@ -64,7 +64,7 @@ function MisCompras() {
               </Link>
 
               <Link
-                to="/mis-compras"
+                to="/tienda/mis-compras"
                 className="list-group-item list-group-item-action active"
                 aria-current="page"
               >

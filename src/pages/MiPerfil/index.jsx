@@ -59,7 +59,7 @@ function MiPerfil() {
               </a>
 
               <Link
-                to="/mis-compras"
+                to="/tienda/mis-compras"
                 className="list-group-item list-group-item-action"
               >
                 <i className="bi bi-box-seam me-2" aria-hidden="true"></i>
