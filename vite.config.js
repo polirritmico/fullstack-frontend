@@ -4,8 +4,11 @@ import { defineConfig } from "vite";
 import path from "path";
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    ...(mode === "test" ? [] : [babel({ presets: [reactCompilerPreset()] })]),
+  ],
 
   resolve: {
     alias: {
@@ -21,4 +24,4 @@ export default defineConfig({
       include: ["src/**/*.{js,jsx}"],
     },
   },
-});
+}));
