@@ -1,6 +1,7 @@
-import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+
+import { useAuth } from "@/contexts/Auth/AuthContext";
 
 function useLogin() {
   const { login } = useAuth();

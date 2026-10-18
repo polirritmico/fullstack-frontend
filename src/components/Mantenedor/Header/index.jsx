@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 
+import { useAuth } from "@/contexts/Auth/AuthContext";
+
 import JKiltroLogo from "@/components/JKiltroLogo";
 import AdminNavbar from "@/components/Mantenedor/Navbar";
 import UserAvatar from "@/components/UserAvatar";
-import { useAuth } from "@/contexts/AuthContext";
 
 function Header() {
   const { user } = useAuth();

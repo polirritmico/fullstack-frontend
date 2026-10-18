@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import { GuardTestWrapper } from "@/test/utils";
 
-import { AuthContext } from "@/contexts/AuthContext";
+import { AuthContext } from "@/contexts/Auth/AuthContext";
 import ProtectedAdminRoute from ".";
 
 describe("ProtectedAdminRoute tests", () => {
