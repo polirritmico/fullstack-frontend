@@ -72,12 +72,12 @@ function NavbarEnlaces() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/mi-perfil">
+            <Link className="nav-link" to="/perfil">
               Mi Perfil
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/mis-compras">
+            <Link className="nav-link" to="/tienda/mis-compras">
               Mis Compras
             </Link>
           </li>
