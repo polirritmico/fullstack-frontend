@@ -10,6 +10,7 @@
 
 .nav-underline .nav-link:hover {
   color: rgba(--jk-color-secondary);
+  text-decoration: none;
 }
 
 .nav-underline .nav-link.active {

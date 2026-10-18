@@ -1,6 +1,17 @@
+import { Link } from "react-router";
 import UserAvatarMenu from "./UserAvatarMenu";
 
 function UserAvatar({ userData, showRole = false }) {
+  if (!userData) {
+    return (
+      <Link
+        className="ms-3 bg-primary text-light rounded-pill shadow px-3 py-2 fw-semibold"
+        to="/login"
+      >
+        Iniciar sesión
+      </Link>
+    );
+  }
   return (
     <div className="dropdown ms-3">
       <button
@@ -12,25 +23,17 @@ function UserAvatar({ userData, showRole = false }) {
       >
         <div className="d-flex align-items-center gap-3">
           <div className="text-end">
-            {userData && (
-              <>
-                <p className="fs-7 fw-semibold mb-0">{userData.username}</p>
+            <p className="fs-7 fw-semibold mb-0">{userData.username}</p>
 
-                {showRole && (
-                  <p className="fs-8 text-body-secondary fw-medium mb-0">
-                    {userData.role}
-                  </p>
-                )}
-              </>
+            {showRole && (
+              <p className="fs-8 text-body-secondary fw-medium mb-0">
+                {userData.role}
+              </p>
             )}
           </div>
 
           <div className="bg-white rounded-circle shadow d-flex align-items-center justify-content-center avatar-circle">
-            <i
-              className={`bi ${
-                userData ? "bi-person-fill text-info" : "bi-box-arrow-in-right"
-              } fs-2 lh-1`}
-            ></i>
+            <i className="bi bi-person-fill text-info fs-2 lh-1"></i>
           </div>
         </div>
       </button>
