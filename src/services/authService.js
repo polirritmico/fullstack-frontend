@@ -8,8 +8,8 @@ const mockAdminUser = {
 };
 
 const mockClientUser = {
-  id: 1,
-  username: "Alan Brito",
+  id: 2,
+  username: "Susana Oria",
   role: "Cliente",
   token: "fake-jwt-client-token",
 };
