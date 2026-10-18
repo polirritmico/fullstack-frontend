@@ -110,7 +110,7 @@ function CarritoPanel() {
               type="button"
               className="btn btn-primary w-100"
               data-bs-dismiss="offcanvas"
-              onClick={() => navigate("/carrito")}
+              onClick={() => navigate("/tienda/carrito")}
             >
               Ver carrito
             </button>
