@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 /**
  * Returns an onClick handler that returns to the previous page in history or
@@ -6,9 +6,10 @@ import { useNavigate } from "react-router";
  */
 function useHandleBack(fallbackPath = "/") {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return () => {
-    if (window.history.state && window.history.state.idx > 0) {
+    if (location.key !== "default") {
       navigate(-1);
     } else {
       navigate(fallbackPath);
