@@ -1,5 +1,4 @@
 // based on: https://fireship.dev/react-router-protected-routes-authentication
-
 import { useState } from "react";
 
 import authService from "@/services/authService";
