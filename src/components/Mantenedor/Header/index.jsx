@@ -4,16 +4,15 @@ import { useLocation } from "react-router";
 import JKiltroLogo from "@/components/JKiltroLogo";
 import AdminNavbar from "@/components/Mantenedor/Navbar";
 import UserAvatar from "@/components/UserAvatar";
-
-const userData = {
-  username: "Alan Brito",
-  role: "Administrador",
-};
+import { useAuth } from "@/contexts/AuthContext";
 
 function Header() {
+  const { user } = useAuth();
   const location = useLocation();
+
   const segment = location.pathname.split("/")[2];
   const maintainerName = segment?.charAt(0).toUpperCase() + segment?.slice(1);
+
   const title = `jKiltro • ${maintainerName}`;
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function Header() {
           </h1>
         </div>
 
-        <UserAvatar userData={userData} />
+        <UserAvatar userData={user} />
       </div>
       <AdminNavbar />
     </header>
