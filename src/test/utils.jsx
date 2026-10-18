@@ -28,3 +28,33 @@ export const RouterTestWrapper = ({ Component, testRoutes, spyMarker }) => (
     </Routes>
   </MemoryRouter>
 );
+
+export const GuardTestWrapper = ({
+  GuardComponent,
+  protectedRoutes,
+  unprotectedRoutes,
+  initialPath,
+  spyMarker,
+}) => (
+  <MemoryRouter initialEntries={[initialPath]}>
+    <Routes>
+      <Route element={<GuardComponent />}>
+        {protectedRoutes.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={<LocationSpy marker={spyMarker} />}
+          />
+        ))}
+      </Route>
+
+      {unprotectedRoutes.map((path) => (
+        <Route
+          key={path}
+          path={path}
+          element={<LocationSpy marker={spyMarker} />}
+        />
+      ))}
+    </Routes>
+  </MemoryRouter>
+);
