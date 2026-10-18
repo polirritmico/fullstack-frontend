@@ -1,17 +1,17 @@
 import { MemoryRouter, Route, Routes, useLocation } from "react-router";
 
-export const LocationSpy = () => {
+export const LocationSpy = ({ marker = "aqui" }) => {
   const location = useLocation();
-  return <div data-testid="aqui">{location.pathname}</div>;
+  return <div data-testid={marker}>{location.pathname}</div>;
 };
 
-export const RouterTestWrapper = ({ Component, testRoutes }) => (
+export const RouterTestWrapper = ({ Component, testRoutes, spyMarker }) => (
   <MemoryRouter
     initialEntries={testRoutes}
     initialIndex={testRoutes.length - 1}
   >
     <Routes>
-      <Route path="/" element={<LocationSpy />} />
+      <Route path="/" element={<LocationSpy marker={spyMarker} />} />
 
       {testRoutes.map((page) => (
         <Route
@@ -20,7 +20,7 @@ export const RouterTestWrapper = ({ Component, testRoutes }) => (
           element={
             <>
               <Component />
-              <LocationSpy />
+              <LocationSpy marker={spyMarker} />
             </>
           }
         />
