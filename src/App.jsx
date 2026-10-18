@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router";
 import Home from "@/pages/Home";
 import Layout from "@/components/Layout";
 import Login from "@/pages/Login";
+import Logout from "@/pages/Logout";
 import NoAutorizado from "@/pages/Errores/NoAutorizado";
 import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={<Logout />} />
 
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
