@@ -58,45 +58,51 @@ describe("UserAvatar tests", () => {
     expect(screen.queryByText(expected)).toBeDefined();
   });
 
-  it("debería mostrar el rol cuando showRole es true", () => {
-    const testCaseCliente = { username: "Usuario Test1", role: "Cliente" };
-    const testCaseAdmin = { username: "Usuario Test2", role: "Administrador" };
-    const expectedCaseCliente = testCaseCliente.role;
-    const expectedCaseAdmin = testCaseAdmin.role;
-
+  it.each([
+    { username: "Usuario Test", role: "Cliente" },
+    { username: "Usuario Test", role: "Administrador" },
+  ])("debería mostrar el rol cuando showRole es true", (testCase) => {
     render(
       <MemoryRouter>
-        <UserAvatar userData={testCaseCliente} showRole={true} />
+        <UserAvatar userData={testCase} showRole={true} />
       </MemoryRouter>,
     );
-    expect(screen.getByText(expectedCaseCliente)).toBeDefined();
 
-    render(
-      <MemoryRouter>
-        <UserAvatar userData={testCaseAdmin} showRole={true} />
-      </MemoryRouter>,
-    );
-    expect(screen.getByText(expectedCaseAdmin)).toBeDefined();
+    expect(screen.getByText(testCase.role)).toBeDefined();
   });
 
-  it("no debería mostrar el rol cuando showRole es no es true", () => {
-    const testCaseCliente = { username: "Usuario Test1", role: "Cliente" };
-    const testCaseAdmin = { username: "Usuario Test2", role: "Administrador" };
-    const forbiddenCaseCliente = testCaseCliente.role;
-    const forbiddenCaseAdmin = testCaseAdmin.role;
+  it.each([
+    {
+      scenario: "es false (rol Cliente)",
+      testCase: { username: "Usuario Test", role: "Cliente" },
+      props: { showRole: false },
+    },
+    {
+      scenario: "no está definido (rol Cliente)",
+      testCase: { username: "Usuario Test", role: "Cliente" },
+      props: {},
+    },
+    {
+      scenario: "es false (rol Administrador)",
+      testCase: { username: "Usuario Test", role: "Administrador" },
+      props: { showRole: false },
+    },
+    {
+      scenario: "no está definido (rol Adminsitrador)",
+      testCase: { username: "Usuario Test", role: "Administrador" },
+      props: {},
+    },
+  ])(
+    "no debería mostrar el rol cuando showRole $scenario",
+    ({ testCase, props }) => {
+      render(
+        <MemoryRouter>
+          <UserAvatar userData={testCase} {...props} />
+        </MemoryRouter>,
+      );
 
-    render(
-      <MemoryRouter>
-        <UserAvatar userData={testCaseCliente} showRole={false} />
-      </MemoryRouter>,
-    );
-    expect(screen.queryByText(forbiddenCaseCliente)).toBeNull();
-
-    render(
-      <MemoryRouter>
-        <UserAvatar userData={testCaseAdmin} />
-      </MemoryRouter>,
-    );
-    expect(screen.queryByText(forbiddenCaseAdmin)).toBeNull();
-  });
+      // usar queryByText cuando el objeto no debería existir
+      expect(screen.queryByText(testCase.role)).toBeNull();
+    },
+  );
 });
