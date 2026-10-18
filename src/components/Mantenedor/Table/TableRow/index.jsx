@@ -33,7 +33,7 @@ function TableRow({ entry, estados, campos, etiquetas }) {
 
           {...Object.fromEntries(
             Object.entries(campos).map(([campo, campoType]) => [
-              `data-jk-${campo}`,
+              `data-jk-${campo.toLowerCase()}`,
               campoType === "string" ? entry[campo] : entry[campo]?.toString(),
             ]),
           )}
