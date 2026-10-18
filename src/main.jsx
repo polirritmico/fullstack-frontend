@@ -12,13 +12,16 @@ import "@/styles/theme.css";
 
 import CarritoProvider from "@/components/CarritoProvider";
 import App from "./App.jsx";
+import { AuthProvider } from "./contexts/AuthProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <StrictMode>
-      <CarritoProvider>
-        <App />
-      </CarritoProvider>
+      <AuthProvider>
+        <CarritoProvider>
+          <App />
+        </CarritoProvider>
+      </AuthProvider>
     </StrictMode>
   </BrowserRouter>,
 );
