@@ -56,7 +56,7 @@ function MisCompras() {
               aria-label="Secciones del perfil"
             >
               <Link
-                to="/mi-perfil"
+                to="/perfil"
                 className="list-group-item list-group-item-action"
               >
                 <i className="bi bi-person me-2" aria-hidden="true"></i>
