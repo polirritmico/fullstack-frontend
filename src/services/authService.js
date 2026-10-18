@@ -1,3 +1,5 @@
+const LOCAL_STORAGE_KEY = "jKiltro-user";
+
 const mockAdminUser = {
   id: 1,
   username: "Alan Brito",
@@ -41,16 +43,16 @@ const authService = {
       throw errorPayload;
     }
 
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(user));
     return user;
   },
 
-  async logout() {
-    localStorage.removeItem("user");
+  logout() {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
   },
 
-  async getCurrentUser() {
-    const user = localStorage.getItem("user");
+  getCurrentUser() {
+    const user = localStorage.getItem(LOCAL_STORAGE_KEY);
     return user ? JSON.parse(user) : null;
   },
 };
