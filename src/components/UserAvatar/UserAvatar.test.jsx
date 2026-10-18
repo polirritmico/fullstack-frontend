@@ -57,4 +57,46 @@ describe("UserAvatar tests", () => {
 
     expect(screen.queryByText(expected)).toBeDefined();
   });
+
+  it("debería mostrar el rol cuando showRole es true", () => {
+    const testCaseCliente = { username: "Usuario Test1", role: "Cliente" };
+    const testCaseAdmin = { username: "Usuario Test2", role: "Administrador" };
+    const expectedCaseCliente = testCaseCliente.role;
+    const expectedCaseAdmin = testCaseAdmin.role;
+
+    render(
+      <MemoryRouter>
+        <UserAvatar userData={testCaseCliente} showRole={true} />
+      </MemoryRouter>,
+    );
+    expect(screen.getByText(expectedCaseCliente)).toBeDefined();
+
+    render(
+      <MemoryRouter>
+        <UserAvatar userData={testCaseAdmin} showRole={true} />
+      </MemoryRouter>,
+    );
+    expect(screen.getByText(expectedCaseAdmin)).toBeDefined();
+  });
+
+  it("no debería mostrar el rol cuando showRole es no es true", () => {
+    const testCaseCliente = { username: "Usuario Test1", role: "Cliente" };
+    const testCaseAdmin = { username: "Usuario Test2", role: "Administrador" };
+    const forbiddenCaseCliente = testCaseCliente.role;
+    const forbiddenCaseAdmin = testCaseAdmin.role;
+
+    render(
+      <MemoryRouter>
+        <UserAvatar userData={testCaseCliente} showRole={false} />
+      </MemoryRouter>,
+    );
+    expect(screen.queryByText(forbiddenCaseCliente)).toBeNull();
+
+    render(
+      <MemoryRouter>
+        <UserAvatar userData={testCaseAdmin} />
+      </MemoryRouter>,
+    );
+    expect(screen.queryByText(forbiddenCaseAdmin)).toBeNull();
+  });
 });
