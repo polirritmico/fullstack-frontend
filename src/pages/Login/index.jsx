@@ -24,8 +24,8 @@ function Login() {
 
               <div className="text-center mb-2">
                 <Link
-                  to="recuperar-clave"
-                  className="text-body-secondary text-decoration-none small"
+                  to="/recuperar-cuenta"
+                  className="text-primary text-decoration-none small"
                 >
                   ¿Olvidaste la contraseña?
                 </Link>

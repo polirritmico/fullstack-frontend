@@ -12,6 +12,7 @@ import CrearPerfil from "@/pages/CrearPerfil";
 import DetalleProducto from "@/pages/DetalleProducto";
 import MiPerfil from "@/pages/MiPerfil";
 import MisCompras from "@/pages/MisCompras";
+import RecuperarCuenta from "@/pages/RecuperarCuenta";
 import Tienda from "@/pages/Tienda";
 
 import ProtectedAdminRoute from "./components/Mantenedor/ProtectedAdminRoute";
@@ -37,6 +38,7 @@ function App() {
 
         <Route path="/perfil" element={<MiPerfil />} />
         <Route path="/crear-perfil" element={<CrearPerfil />} />
+        <Route path="/recuperar-cuenta" element={<RecuperarCuenta />} />
         {/* <Route path="/contacto" element={<Contacto />} /> */}
 
         <Route path="/no-autorizado" element={<NoAutorizado />} />
