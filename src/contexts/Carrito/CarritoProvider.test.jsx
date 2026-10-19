@@ -128,4 +128,40 @@ describe("CarritoProvider", () => {
 
     expect(result.current.carrito).toEqual([]);
   });
+
+  it("guarda el carrito en localStorage después de agregar un producto", () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    act(() => {
+      result.current.agregarProducto(producto);
+    });
+
+    const carritoGuardado = JSON.parse(localStorage.getItem("jk-carrito"));
+
+    expect(carritoGuardado).toEqual([{ ...producto, cantidad: 1 }]);
+  });
+
+  it("recupera el carrito guardado al iniciar", () => {
+    const carritoGuardado = [{ ...producto, cantidad: 3 }];
+
+    localStorage.setItem("jk-carrito", JSON.stringify(carritoGuardado));
+
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    expect(result.current.carrito).toEqual(carritoGuardado);
+  });
+
+  it("inicia vacío si el contenido guardado no es un JSON válido", () => {
+    localStorage.setItem("jk-carrito", "contenido dañado");
+
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    expect(result.current.carrito).toEqual([]);
+  });
 });
