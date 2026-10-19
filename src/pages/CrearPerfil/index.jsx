@@ -1,5 +1,25 @@
 import { useState } from "react";
 
+function validarRun(run) {
+  if (!/^[1-9][0-9]{5,7}[0-9K]$/.test(run)) return false;
+
+  const cuerpo = run.slice(0, -1);
+  const digito = run.slice(-1);
+  let suma = 0;
+  let multiplicador = 2;
+
+  for (let i = cuerpo.length - 1; i >= 0; i--) {
+    suma += Number(cuerpo[i]) * multiplicador;
+    multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+  }
+
+  const resultado = 11 - (suma % 11);
+  const esperado =
+    resultado === 11 ? "0" : resultado === 10 ? "K" : String(resultado);
+
+  return digito === esperado;
+}
+
 function CrearPerfil() {
   const [password, setPassword] = useState("");
   const [confirmarPassword, setConfirmarPassword] = useState("");
@@ -8,12 +28,48 @@ function CrearPerfil() {
 
   function manejarEnvio(event) {
     event.preventDefault();
-
     setError("");
     setExito(false);
 
-    if (password !== confirmarPassword) {
-      setError("Las contraseñas no coinciden.");
+    const datos = new FormData(event.currentTarget);
+    const nombre = datos.get("nombre").trim();
+    const apellido = datos.get("apellido").trim();
+    const run = datos.get("rut").trim().toUpperCase();
+    const correo = datos.get("correo").trim().toLowerCase();
+    const direccion = datos.get("direccion").trim();
+
+    if (!nombre || nombre.length > 50) {
+      setError("Ingresa tu nombre, con un máximo de 50 caracteres.");
+      return;
+    }
+
+    if (!apellido || apellido.length > 100) {
+      setError("Ingresa tus apellidos, con un máximo de 100 caracteres.");
+      return;
+    }
+
+    if (!validarRun(run)) {
+      setError("Ingresa un RUN válido, sin puntos ni guion.");
+      return;
+    }
+
+    if (
+      correo.length > 100 ||
+      !/^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/.test(correo)
+    ) {
+      setError("Usa un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+      return;
+    }
+
+    if (!direccion || direccion.length > 300) {
+      setError("Ingresa una dirección, con un máximo de 300 caracteres.");
+      return;
+    }
+
+    if (password.length < 8 || password !== confirmarPassword) {
+      setError(
+        "Las contraseñas deben coincidir y tener al menos 8 caracteres.",
+      );
       return;
     }
 
@@ -58,6 +114,7 @@ function CrearPerfil() {
                     className="form-control"
                     id="nombre"
                     name="nombre"
+                    maxLength={50}
                     autoComplete="given-name"
                     required
                   />
@@ -73,6 +130,7 @@ function CrearPerfil() {
                     className="form-control"
                     id="apellido"
                     name="apellido"
+                    maxLength={100}
                     autoComplete="family-name"
                     required
                   />
@@ -80,7 +138,7 @@ function CrearPerfil() {
 
                 <div className="col-12 col-md-6">
                   <label htmlFor="rut" className="form-label">
-                    RUT
+                    RUN
                   </label>
 
                   <input
@@ -88,11 +146,15 @@ function CrearPerfil() {
                     className="form-control"
                     id="rut"
                     name="rut"
-                    placeholder="12.345.678-9"
-                    pattern="[0-9]{1,2}\.?[0-9]{3}\.?[0-9]{3}-[0-9kK]"
-                    title="Ejemplo: 12.345.678-9 o 12345678-9"
+                    placeholder="123456785"
+                    minLength={7}
+                    maxLength={9}
+                    aria-describedby="ayuda-run"
                     required
                   />
+                  <div id="ayuda-run" className="form-text">
+                    Sin puntos ni guion. Incluye el dígito verificador.
+                  </div>
                 </div>
 
                 <div className="col-12 col-md-6">
@@ -123,6 +185,7 @@ function CrearPerfil() {
                     className="form-control"
                     id="correo"
                     name="correo"
+                    maxLength={100}
                     autoComplete="email"
                     required
                   />
@@ -138,6 +201,7 @@ function CrearPerfil() {
                     className="form-control"
                     id="direccion"
                     name="direccion"
+                    maxLength={300}
                     autoComplete="street-address"
                     required
                   />
