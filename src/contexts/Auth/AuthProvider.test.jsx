@@ -98,4 +98,32 @@ describe("AuthProvider tests", () => {
     expect(outputAfter).toBe(expectedAfter);
     expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
   });
+
+  it("debería propagar excepciones y setear a null si hay un error de logeo", async () => {
+    const testCaseCredentials = { email: "falso@correo.cl", password: "mock" };
+    const testCaseError = { status: 401, error: "Unauthorized" };
+    const expected = testCaseError.status;
+    const expectedUser = null;
+    const expectedLoginCalls = 1;
+
+    vi.mocked(authService.getCurrentUser).mockReturnValue(null);
+    vi.mocked(authService.login).mockRejectedValue(testCaseError);
+
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+    const outputBefore = result.current.user;
+
+    let output = null;
+    try {
+      await act(async () => await result.current.login(testCaseCredentials));
+    } catch (err) {
+      output = err;
+    }
+    const outputUser = result.current.user;
+
+    expect(outputBefore).toBeNull();
+    expect(output).not.toBeNull();
+    expect(output.status).toEqual(expected);
+    expect(outputUser).toBe(expectedUser);
+    expect(authService.login).toHaveBeenCalledTimes(expectedLoginCalls);
+  });
 });
