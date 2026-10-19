@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/contexts/Auth/AuthContext";
 import { CarritoContext } from "./CarritoContext";
 
-function cargarCarrito() {
+function cargarCarrito(claveStorage) {
   try {
-    const guardado = localStorage.getItem("jk-carrito");
+    const guardado = localStorage.getItem(claveStorage);
     const datos = guardado ? JSON.parse(guardado) : [];
 
     return Array.isArray(datos) ? datos : [];
@@ -13,15 +14,28 @@ function cargarCarrito() {
 }
 
 function CarritoProvider({ children }) {
-  const [carrito, setCarrito] = useState(cargarCarrito);
+  const sesion = useContext(AuthContext);
+  const usuario = sesion?.user;
+
+  const claveStorage = usuario ? `jk-carrito-${usuario.id}` : "jk-carrito";
+
+  return (
+    <EstadoCarrito key={claveStorage} claveStorage={claveStorage}>
+      {children}
+    </EstadoCarrito>
+  );
+}
+
+function EstadoCarrito({ children, claveStorage }) {
+  const [carrito, setCarrito] = useState(() => cargarCarrito(claveStorage));
 
   useEffect(() => {
     try {
-      localStorage.setItem("jk-carrito", JSON.stringify(carrito));
+      localStorage.setItem(claveStorage, JSON.stringify(carrito));
     } catch {
       console.warn("No se pudo guardar el carrito.");
     }
-  }, [carrito]);
+  }, [carrito, claveStorage]);
 
   function agregarProducto(producto, cantidad = 1) {
     setCarrito((actual) => {
