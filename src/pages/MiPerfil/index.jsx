@@ -1,16 +1,57 @@
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
+import { useAuth } from "@/contexts/Auth/AuthContext";
 import "./MiPerfil.css";
 
-const usuario = {
-  nombre: "Armando",
-  apellido: "Mesas Quito",
-  correo: "armando.mesas@email.com",
-  telefono: "+56 9 1234 5678",
-  direccion: "Av. Los Pinos 123, Santiago",
-};
-
 function MiPerfil() {
-  const iniciales = usuario.nombre.charAt(0) + usuario.apellido.charAt(0);
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/login" state={{ from: "/perfil" }} replace />;
+  }
+
+  const nombreCompleto =
+    [user.nombre, user.apellido].filter(Boolean).join(" ") || user.username;
+
+  const iniciales = nombreCompleto
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((palabra) => palabra.charAt(0))
+    .join("")
+    .toUpperCase();
+
+  const campos = [
+    {
+      id: "perfil-nombre",
+      etiqueta: "Nombre",
+      valor: user.nombre || user.username,
+      tipo: "text",
+    },
+    {
+      id: "perfil-apellido",
+      etiqueta: "Apellido",
+      valor: user.apellido,
+      tipo: "text",
+    },
+    {
+      id: "perfil-correo",
+      etiqueta: "Correo electrónico",
+      valor: user.email,
+      tipo: "email",
+    },
+    {
+      id: "perfil-telefono",
+      etiqueta: "Teléfono",
+      valor: user.telefono,
+      tipo: "tel",
+    },
+    {
+      id: "perfil-direccion",
+      etiqueta: "Dirección",
+      valor: user.direccion,
+      tipo: "text",
+    },
+  ];
 
   return (
     <section className="perfil-page py-5">
@@ -22,17 +63,15 @@ function MiPerfil() {
             <div className="card border-0 shadow-sm text-center p-4 mb-4">
               <div className="avatar-perfil mx-auto mb-3">{iniciales}</div>
 
-              <h2 className="h4 mb-1">
-                {usuario.nombre} {usuario.apellido}
-              </h2>
+              <h2 className="h4 mb-1">{nombreCompleto}</h2>
 
               <p className="text-body-secondary mb-2 text-break">
-                {usuario.correo}
+                {user.email || "Correo no registrado"}
               </p>
 
               <div className="mb-3">
                 <span className="badge rounded-pill text-bg-primary">
-                  Cliente jKiltro
+                  {user.role}
                 </span>
               </div>
 
@@ -75,17 +114,16 @@ function MiPerfil() {
                 Direcciones
               </button>
 
-              <button
+              <Link
+                to="/logout"
                 className="list-group-item list-group-item-action"
-                type="button"
-                disabled
               >
                 <i
                   className="bi bi-box-arrow-right me-2"
                   aria-hidden="true"
                 ></i>
                 Cerrar sesión
-              </button>
+              </Link>
             </nav>
           </aside>
 
@@ -103,75 +141,29 @@ function MiPerfil() {
 
               <div className="card-body p-4">
                 <div className="row g-3">
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="perfil-nombre" className="form-label">
-                      Nombre
-                    </label>
+                  {campos.map((campo) => (
+                    <div
+                      key={campo.id}
+                      className={
+                        campo.id === "perfil-direccion"
+                          ? "col-12"
+                          : "col-12 col-md-6"
+                      }
+                    >
+                      <label htmlFor={campo.id} className="form-label">
+                        {campo.etiqueta}
+                      </label>
 
-                    <input
-                      id="perfil-nombre"
-                      className="form-control"
-                      type="text"
-                      value={usuario.nombre}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="perfil-apellido" className="form-label">
-                      Apellido
-                    </label>
-
-                    <input
-                      id="perfil-apellido"
-                      className="form-control"
-                      type="text"
-                      value={usuario.apellido}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="perfil-correo" className="form-label">
-                      Correo electrónico
-                    </label>
-
-                    <input
-                      id="perfil-correo"
-                      className="form-control"
-                      type="email"
-                      value={usuario.correo}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="perfil-telefono" className="form-label">
-                      Teléfono
-                    </label>
-
-                    <input
-                      id="perfil-telefono"
-                      className="form-control"
-                      type="tel"
-                      value={usuario.telefono}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-12">
-                    <label htmlFor="perfil-direccion" className="form-label">
-                      Dirección
-                    </label>
-
-                    <input
-                      id="perfil-direccion"
-                      className="form-control"
-                      type="text"
-                      value={usuario.direccion}
-                      readOnly
-                    />
-                  </div>
+                      <input
+                        id={campo.id}
+                        className="form-control"
+                        type={campo.tipo}
+                        value={campo.valor || ""}
+                        placeholder="No registrado"
+                        readOnly
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <hr className="my-4" />
@@ -182,57 +174,6 @@ function MiPerfil() {
                 </button>
               </div>
             </section>
-
-            <p className="small text-body-secondary">
-              Datos y resumen de demostración.
-            </p>
-
-            <div className="row g-3">
-              <div className="col-12 col-md-4">
-                <div className="card border-0 shadow-sm h-100">
-                  <div className="card-body d-flex align-items-center gap-3">
-                    <div className="icono-resumen">
-                      <i className="bi bi-box-seam" aria-hidden="true"></i>
-                    </div>
-
-                    <div>
-                      <p className="mb-1">Pedidos realizados</p>
-                      <strong className="fs-3">5</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-12 col-md-4">
-                <div className="card border-0 shadow-sm h-100">
-                  <div className="card-body d-flex align-items-center gap-3">
-                    <div className="icono-resumen">
-                      <i className="bi bi-truck" aria-hidden="true"></i>
-                    </div>
-
-                    <div>
-                      <p className="mb-1">Pedido en camino</p>
-                      <strong className="fs-3">1</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-12 col-md-4">
-                <div className="card border-0 shadow-sm h-100">
-                  <div className="card-body d-flex align-items-center gap-3">
-                    <div className="icono-resumen">
-                      <i className="bi bi-geo-alt" aria-hidden="true"></i>
-                    </div>
-
-                    <div>
-                      <p className="mb-1">Dirección guardada</p>
-                      <strong className="fs-3">1</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
