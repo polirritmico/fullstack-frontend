@@ -3,7 +3,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { AuthProvider } from "@/contexts/Auth/AuthProvider";
-import CarritoProvider from "@/components/CarritoProvider";
+import CarritoProvider from "@/contexts/Carrito/CarritoProvider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";

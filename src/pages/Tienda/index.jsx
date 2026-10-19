@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import Carrusel from "@/components/Carrusel";
 import FiltrosTienda from "@/components/FiltrosTienda";
 import { productos } from "@/data/productos";
-import { CarritoContext } from "@/contexts/CarritoContext";
+import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 
 function Tienda() {
   const { agregarProducto } = useContext(CarritoContext);

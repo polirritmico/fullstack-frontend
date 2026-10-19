@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CarritoContext } from "@/contexts/CarritoContext";
+import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 import { useNavigate } from "react-router";
 
 function CarritoPanel() {

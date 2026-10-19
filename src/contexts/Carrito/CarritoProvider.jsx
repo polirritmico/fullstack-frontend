@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CarritoContext } from "@/contexts/CarritoContext";
+import { CarritoContext } from "./CarritoContext";
 
 function cargarCarrito() {
   try {
