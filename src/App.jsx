@@ -15,7 +15,7 @@ import MisCompras from "@/pages/MisCompras";
 import RecuperarCuenta from "@/pages/RecuperarCuenta";
 import Tienda from "@/pages/Tienda";
 
-import ProtectedAdminRoute from "./components/Mantenedor/ProtectedAdminRoute";
+import ProtectedAdminRoute from "@/components/Mantenedor/ProtectedAdminRoute";
 import AdminConfig from "@/pages/Mantenedor/Configuracion";
 import AdminLayout from "@/components/Mantenedor/Layout";
 import AdminProductos from "@/pages/Mantenedor/Productos";

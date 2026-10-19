@@ -1,4 +1,4 @@
-import JKiltroLogo from "../JKiltroLogo";
+import JKiltroLogo from "@/components/JKiltroLogo";
 
 function Footer() {
   return (
