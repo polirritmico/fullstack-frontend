@@ -36,7 +36,7 @@ function Login() {
                   ¿No tienes cuenta?{" "}
                   <Link
                     className="text-primary text-decoration-none"
-                    to="/crear-perfil.html"
+                    to="/crear-perfil"
                   >
                     Regístrate aquí
                   </Link>
