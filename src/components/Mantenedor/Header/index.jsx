@@ -24,7 +24,7 @@ function Header() {
   return (
     <header className="btm-margin bg-white w-100">
       <div className="d-flex align-items-center justify-content-between p-2">
-        <JKiltroLogo />
+        <JKiltroLogo textStyle="fw-bold text-black ms-2 fs-5" />
 
         <div>
           <h1 className="fs-3 fw-semibold text-dark mb-0 jk-font-heading">

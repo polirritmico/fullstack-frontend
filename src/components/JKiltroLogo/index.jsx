@@ -1,20 +1,28 @@
 import LogoMark from "@/assets/logo-mark.svg";
+import Logo from "@/assets/logo.svg";
 import { Link } from "react-router";
 
-function JKiltroLogo() {
+function JKiltroLogo({
+  size = 48,
+  showText = true,
+  textStyle = null,
+  fullLogo = false,
+}) {
   return (
-    <div className="d-flex align-items-center gap-3">
+    <div className="d-flex align-items-center gap-1">
       <Link className="navbar-brand" to="/">
         <img
-          src={LogoMark}
+          src={fullLogo ? Logo : LogoMark}
           alt="Logo jKiltro"
-          width="48"
-          height="48"
-          className="rounded-circle"
+          width={size}
+          height={size}
+          className="logo"
         />
       </Link>
 
-      <span className="fw-bold fs-4">jKiltro</span>
+      {showText && (
+        <span className={textStyle ?? "fw-bold text-dark fs-4 "}>jKiltro</span>
+      )}
     </div>
   );
 }

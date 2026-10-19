@@ -5,7 +5,7 @@ function Footer() {
     <footer className="bg-secondary bottom-0">
       <div className="container row my-4 align-items-start">
         <div className="col-12 col-md-3 d-none d-md-flex align-items-center justify-content-center align-self-center">
-          <JKiltroLogo fullLogo={true} showText={false} size={110} />
+          <JKiltroLogo fullLogo={true} showText={false} size={150} />
         </div>
         <div className="col-12 col-sm-6 col-md-3">
           <h3>Ayuda</h3>
