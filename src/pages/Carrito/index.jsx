@@ -1,10 +1,17 @@
-import { useContext } from "react";
-import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
+import { useAuth } from "@/contexts/Auth/AuthContext";
+import compraService from "@/services/compraService";
 
 function Carrito() {
   const { carrito, quitarProducto, cambiarCantidad, vaciarCarrito } =
     useContext(CarritoContext);
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [error, setError] = useState("");
 
   const subtotal = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.cantidad,
@@ -12,7 +19,6 @@ function Carrito() {
   );
 
   const despacho = carrito.length === 0 || subtotal >= 30000 ? 0 : 2990;
-
   const total = subtotal + despacho;
 
   function formatearPrecio(precio) {
@@ -20,6 +26,36 @@ function Carrito() {
       style: "currency",
       currency: "CLP",
       maximumFractionDigits: 0,
+    });
+  }
+
+  function finalizarCompra() {
+    setError("");
+
+    if (carrito.length === 0) return;
+
+    if (!user) {
+      navigate("/login", {
+        state: { from: "/tienda/carrito" },
+      });
+      return;
+    }
+
+    try {
+      compraService.registrarCompra(user.id, carrito);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "No se pudo guardar la compra. Inténtalo nuevamente.",
+      );
+      return;
+    }
+
+    vaciarCarrito();
+
+    navigate("/tienda/mis-compras", {
+      state: { compraCreada: true },
     });
   }
 
@@ -33,8 +69,20 @@ function Carrito() {
         </p>
       </div>
 
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
+
+      {!user && carrito.length > 0 && (
+        <div className="alert alert-info" role="status">
+          Debes iniciar sesión para finalizar la compra. El carrito de visitante
+          se guarda por separado y no se transfiere automáticamente a tu cuenta.
+        </div>
+      )}
+
       <div className="row g-4">
-        {/* PRODUCTOS */}
         <div className="col-12 col-lg-8">
           <div className="card shadow-sm">
             <div className="card-header bg-white">
@@ -69,6 +117,7 @@ function Carrito() {
                         className="btn btn-sm btn-outline-secondary"
                         type="button"
                         disabled={producto.cantidad <= 1}
+                        aria-label={`Disminuir cantidad de ${producto.nombre}`}
                         onClick={() =>
                           cambiarCantidad(producto.id, producto.cantidad - 1)
                         }
@@ -81,6 +130,7 @@ function Carrito() {
                       <button
                         className="btn btn-sm btn-outline-secondary"
                         type="button"
+                        aria-label={`Aumentar cantidad de ${producto.nombre}`}
                         onClick={() =>
                           cambiarCantidad(producto.id, producto.cantidad + 1)
                         }
@@ -123,7 +173,6 @@ function Carrito() {
           </div>
         </div>
 
-        {/* RESUMEN */}
         <div className="col-12 col-lg-4">
           <div className="card shadow-sm">
             <div className="card-header bg-white">
@@ -152,13 +201,14 @@ function Carrito() {
                 className="btn btn-primary w-100 mt-4"
                 type="button"
                 disabled={carrito.length === 0}
+                onClick={finalizarCompra}
               >
                 Finalizar compra
               </button>
 
               <p className="small text-body-secondary mt-3 mb-0">
-                Compra referencial. El pago real se implementará en una próxima
-                versión.
+                Compra simulada: se guardará un pedido en este navegador. No se
+                realizará ningún cobro.
               </p>
 
               <p className="small text-body-secondary mt-3 mb-0">
