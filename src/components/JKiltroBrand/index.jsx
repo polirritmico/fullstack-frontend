@@ -14,7 +14,12 @@ function JKiltroBrand({
         className="navbar-brand d-flex align-items-center text-decoration-none"
         to={targetUrl}
       >
-        <JKiltroLogo size={size} showText={showText} textStyle={textStyle} />
+        <JKiltroLogo
+          size={size}
+          showText={showText}
+          textStyle={textStyle}
+          withLink={false}
+        />
       </Link>
     </div>
   );

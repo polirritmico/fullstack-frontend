@@ -7,18 +7,26 @@ function JKiltroLogo({
   showText = true,
   textStyle = null,
   fullLogo = false,
+  withLink = true,
 }) {
+  const logoImage = (
+    <img
+      src={fullLogo ? Logo : LogoMark}
+      alt="Logo jKiltro"
+      width={size}
+      height={size}
+      className="logo"
+    />
+  );
   return (
     <div className="d-flex align-items-center gap-1">
-      <Link className="navbar-brand" to="/">
-        <img
-          src={fullLogo ? Logo : LogoMark}
-          alt="Logo jKiltro"
-          width={size}
-          height={size}
-          className="logo"
-        />
-      </Link>
+      {withLink ? (
+        <Link className="navbar-brand" to="/">
+          {logoImage}
+        </Link>
+      ) : (
+        <>{logoImage}</>
+      )}
 
       {showText && (
         <span className={textStyle ?? "fw-bold text-dark fs-4 "}>jKiltro</span>
