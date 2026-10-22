@@ -1,9 +1,8 @@
-import "../../styles/legacy.css";;
-
+import "../../styles/legacy.css";
+import { Link } from "react-router";
 
 function Home() {
   return (
-    
     <main className="bg-secondary">
       <section className="seccion-cards py-5">
         <div className="container">
@@ -25,9 +24,11 @@ function Home() {
                   </p>
 
                   {/*<!-- Botón centrado -->*/}
-                  <a href="pages/login.html" className="btn btn-primary">
+
+                  
+                  <Link to="/crear-perfil" className="btn btn-primary">
                     Ingresar
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -48,12 +49,15 @@ function Home() {
                   </p>
 
                   {/* <!-- lo mismo aca -->*/}
-                  <a
+{/*                   <a
                     href="pages/login.html?redirect=tienda/index.html"
                     className="btn btn-primary"
                   >
                     Ingresar
-                  </a>
+                  </a> */}
+                  <Link to= "/tienda" className="btn btn-primary">
+                    Ingresar
+                  </Link>
                 </div>
               </div>
             </div>
