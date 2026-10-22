@@ -4,8 +4,7 @@ import productoService from "@/services/productoService";
 
 import Loading from "@/components/Loading";
 import Sidebar from "@/components/Mantenedor/Sidebar";
-import Table from "@/components/Mantenedor/Table";
-import TableToolbar from "@/components/Mantenedor/TableToolbar";
+import TableView from "@/components/Mantenedor/TableView";
 
 function Productos() {
   const [productos, setProductos] = useState();
@@ -33,18 +32,16 @@ function Productos() {
       <Sidebar title={metadata.etiquetas.categoria} data={categorias} />
 
       <div className="col-12 col-md-8 col-lg-9 col-xl-9 col-xxl-10 p-3">
-        <TableToolbar
-          placeholder="Búsqueda por producto o SKU…"
-          estados={metadata.estados}
-          textoBoton="+ Agregar Productos"
-        />
-
-        <Table
+        <TableView
           data={productos}
-          columnas={metadata.categoriasTabla}
-          campos={metadata.campos}
-          etiquetas={metadata.etiquetas}
-          estados={metadata.estados}
+          tableColumnas={metadata.categoriasTabla}
+          tableCampos={metadata.campos}
+          tableEtiquetas={metadata.etiquetas}
+          tableEstados={metadata.estados}
+          toolbarPlaceholder="Búsqueda por producto o SKU…"
+          toolbarTextoBoton="+ Agregar Productos"
+          // filterSearchFields={metadata.buscarEn}
+          filterSearchFields={["nombre", "sku"]}
         />
       </div>
     </div>
