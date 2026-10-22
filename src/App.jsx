@@ -12,6 +12,7 @@ import CrearPerfil from "@/pages/CrearPerfil";
 import DetalleProducto from "@/pages/DetalleProducto";
 import MiPerfil from "@/pages/MiPerfil";
 import MisCompras from "@/pages/MisCompras";
+import Nosotros from "@/pages/Nosotros";
 import RecuperarCuenta from "@/pages/RecuperarCuenta";
 import Tienda from "@/pages/Tienda";
 
@@ -29,7 +30,8 @@ function App() {
 
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/nosotros" element={<Nosotros />} /> */}
+
+        <Route path="/nosotros" element={<Nosotros />} />
 
         <Route path="/tienda" element={<Tienda />} />
         <Route path="/tienda/productos/:id" element={<DetalleProducto />} />

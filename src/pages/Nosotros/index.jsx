@@ -1,6 +1,6 @@
-import "../../styles/legacy.css";
+import "@/styles/legacy.css";
 
-export default function Historia() {
+function Nosotros() {
   const titulo = [
     "Estamos para ayudar",
     "Estamos contigo",
@@ -54,13 +54,11 @@ export default function Historia() {
   const historia = [parrafaUno, parrafaDos, parrafoTres];
   return (
     <main className="pt-5 fondo-completo">
-      {/*d-flex, justify-content-center y align-items-center para centrar todo
-        en la pantalla --*/}
       <section className="container d-flex">
         <div className="row justify-content-between">
           <div className="col-5" style={{ marginTop: "250px" }}>
             <img
-              src="../../img/pexels-helenalopes-7980680.jpg"
+              src="/img/pexels-helenalopes-7980680.jpg"
               className="img-fluid img-thumbnail shadow w-100"
               alt="..."
               style={{ maxWidth: "500px" }}
@@ -82,3 +80,5 @@ export default function Historia() {
     </main>
   );
 }
+
+export default Nosotros;
