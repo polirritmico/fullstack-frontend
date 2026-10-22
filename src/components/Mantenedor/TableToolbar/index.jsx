@@ -1,22 +1,28 @@
-function TableToolbar({ placeholder, estados, textoBoton }) {
+import SearchBar from "./SearchBar";
+
+function TableToolbar({
+  placeholder,
+  estados,
+  textoBoton,
+  search,
+  onSearchChange,
+  selectedStatus,
+  onStatusChange,
+}) {
   return (
     <div className="d-flex justify-content-between gap-3 mb-1">
-      <form className="d-flex flex-grow-1" role="search" id="id-form-busqueda">
-        <input
-          className="form-control"
-          type="search"
-          placeholder={placeholder}
-          aria-label={placeholder}
-          id="id-input-busqueda"
-        />
-      </form>
-
+      <SearchBar
+        search={search}
+        onSearchChange={onSearchChange}
+        placeholder={placeholder}
+      />
       <div className="d-flex gap-2">
         <select
           className="form-select"
           aria-label="Selector de estados"
           id="id-selector-estados"
-          defaultValue="todos"
+          value={selectedStatus}
+          onChange={(ev) => onStatusChange(ev.target.value)}
         >
           {Object.entries(estados).map(([key, value]) => (
             <option value={key} key={key}>
