@@ -12,7 +12,7 @@ const metadata = {
     todos: "Todos los estados",
     activo: "Activo",
     inactivo: "Inactivo",
-    pendiente: "En preparación",
+    preparando: "Preparando",
   },
   campos: {
     id: "string",
