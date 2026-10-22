@@ -1,4 +1,4 @@
-import "../../styles/legacy.css";;
+import "../../styles/legacy.css";
 
 export default function Historia() {
   const titulo = [
@@ -53,83 +53,32 @@ export default function Historia() {
 
   const historia = [parrafaUno, parrafaDos, parrafoTres];
   return (
-    <>
-      {/*
-        <head>
-        //hay que importar el css para este
-          <link rel="stylesheet" href="../../css/style.css" />
-        </head>*/}
-
-      <main className="pt-5 fondo-completo">
-        {/*d-flex, justify-content-center y align-items-center para centrar todo
+    <main className="pt-5 fondo-completo">
+      {/*d-flex, justify-content-center y align-items-center para centrar todo
         en la pantalla --*/}
-        <section className="container d-flex">
-          <div className="row justify-content-between">
-            <div className="col-5" style={{ marginTop: "250px" }}>
-              <img
-                src="../../img/pexels-helenalopes-7980680.jpg"
-                className="img-fluid img-thumbnail shadow w-100"
-                alt="..."
-                style={{ maxWidth: "500px" }}
-              />
-            </div>
+      <section className="container d-flex">
+        <div className="row justify-content-between">
+          <div className="col-5" style={{ marginTop: "250px" }}>
+            <img
+              src="../../img/pexels-helenalopes-7980680.jpg"
+              className="img-fluid img-thumbnail shadow w-100"
+              alt="..."
+              style={{ maxWidth: "500px" }}
+            />
+          </div>
 
-            <div className="col-7">
-              <h1 className="display-1 texto-fuerte mb-5 text-light">
-                {titulo[1]}
-              </h1>
-              <div className="bg-danger bg-opacity-75 text-light fw-light fst-italic fs-5 p-4 mb-4">
-                {historia.map((parrafo, index) => (
-                  <p key={index}>{parrafo}</p>
-                ))}
-              </div>
+          <div className="col-7">
+            <h1 className="display-1 texto-fuerte mb-5 text-light">
+              {titulo[1]}
+            </h1>
+            <div className="bg-danger bg-opacity-75 text-light fw-light fst-italic fs-5 p-4 mb-4">
+              {historia.map((parrafo, index) => (
+                <p key={index}>{parrafo}</p>
+              ))}
             </div>
           </div>
-        </section>
-      </main>
-
-      {/*<div className="container"> // AQUI DEBERIA IR UN FOOTER
-        <footer className="py-3 my-4">
-          <ul className="nav justify-content-center border-bottom pb-3 mb-3">
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Veterinaria
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Tienda
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Contactanos
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Historia
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                servicios
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link px-2 text-body-secondary">
-                Quienes Somos
-              </a>
-            </li>
-          </ul>
-          <p className="text-center text-body-secondary">© 2026 jKiltro</p>
-        </footer>
-      </div>*/}
-    </>
+        </div>
+      </section>
+    </main>
   );
 }
