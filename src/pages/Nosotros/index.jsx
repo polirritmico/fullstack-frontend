@@ -1,3 +1,5 @@
+import "../../styles/legacy.css";;
+
 export default function Historia() {
   const titulo = [
     "Estamos para ayudar",
