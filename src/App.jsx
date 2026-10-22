@@ -8,6 +8,7 @@ import NoAutorizado from "@/pages/Errores/NoAutorizado";
 import NoEncontrado from "@/pages/Errores/NoEncontrado";
 
 import Carrito from "@/pages/Carrito";
+import Clinica from "@/pages/Clinica";
 import CrearPerfil from "@/pages/CrearPerfil";
 import DetalleProducto from "@/pages/DetalleProducto";
 import MiPerfil from "@/pages/MiPerfil";
@@ -32,6 +33,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/nosotros" element={<Nosotros />} />
+
+        <Route path="/clinica" element={<Clinica />} />
 
         <Route path="/tienda" element={<Tienda />} />
         <Route path="/tienda/productos/:id" element={<DetalleProducto />} />

@@ -25,8 +25,7 @@ function Home() {
 
                   {/*<!-- Botón centrado -->*/}
 
-                  
-                  <Link to="/crear-perfil" className="btn btn-primary">
+                  <Link to="/clinica" className="btn btn-primary">
                     Ingresar
                   </Link>
                 </div>
@@ -49,13 +48,13 @@ function Home() {
                   </p>
 
                   {/* <!-- lo mismo aca -->*/}
-{/*                   <a
+                  {/*                   <a
                     href="pages/login.html?redirect=tienda/index.html"
                     className="btn btn-primary"
                   >
                     Ingresar
                   </a> */}
-                  <Link to= "/tienda" className="btn btn-primary">
+                  <Link to="/tienda" className="btn btn-primary">
                     Ingresar
                   </Link>
                 </div>
