@@ -30,16 +30,10 @@ function Productos() {
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
         data={productos}
-        tableColumnas={metadata.categoriasTabla}
-        tableCampos={metadata.campos}
-        tableEtiquetas={metadata.etiquetas}
-        tableEstados={metadata.estados}
-        toolbarPlaceholder="Búsqueda por producto o SKU…"
-        toolbarTextoBoton="+ Agregar Productos"
-        // filterSearchFields={metadata.buscarEn}
-        filterSearchFields={["nombre", "sku"]}
+        metadata={metadata}
         sidebarCategories={categorias}
-        sidebarCategoriesTitle={metadata.etiquetas.categoria}
+        toolbarPlaceholder="Búsqueda por producto o SKU..."
+        toolbarTextoBoton="+ Agregar Productos"
       />
     </div>
   );
