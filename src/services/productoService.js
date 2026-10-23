@@ -1,28 +1,62 @@
+// import { metadata, productos, categorias } from "@/data/productos";
+
 const metadata = {
-  etiquetas: {
-    accion: "Acciones",
-    estado: "Estado",
-    categoria: "Categoría",
-    objeto: "Producto",
-    objetos: "Productos",
-    contador: "productos",
+  entity: {
+    key: "producto",
+    singleLabel: "Producto",
+    pluralLabel: "Productos",
   },
-  categoriasTabla: ["Producto", "SKU", "Categoría", "Precio", "Stock"],
-  estados: {
-    todos: "Todos los estados",
-    activo: "Activo",
-    inactivo: "Inactivo",
-    preparando: "Preparando",
-  },
-  campos: {
-    id: "string",
-    nombre: "string",
-    sku: "string",
-    categoria: "string",
-    precio: "numeric",
-    stock: "numeric",
-    estado: "string",
-  },
+  category: { field: "categoria", label: "Categoría" },
+  action: { key: "accion", label: "Acciones" },
+  states: [
+    { key: "todos", label: "Todos los estados", isDefault: true },
+    { key: "activo", label: "Activo" },
+    { key: "inactivo", label: "Inactivo" },
+    { key: "preparando", label: "Preparando" },
+  ],
+  columns: [
+    {
+      key: "id",
+      label: "ID",
+      type: "string",
+      isHidden: true,
+    },
+    {
+      key: "nombre",
+      label: "Producto",
+      type: "string",
+      isSearchable: true,
+      highlight: true,
+    },
+    {
+      key: "sku",
+      label: "SKU",
+      type: "string",
+      isSearchable: true,
+    },
+    {
+      key: "categoria",
+      label: "Categoría",
+      type: "string",
+      isSearchable: true,
+    },
+    {
+      key: "precio",
+      label: "Precio",
+      type: "numeric",
+    },
+    {
+      key: "stock",
+      label: "Stock",
+      type: "numeric",
+    },
+    {
+      key: "estado",
+      label: "Estado",
+      type: "string",
+      isState: true,
+    },
+  ],
 };
 
 const productos = [

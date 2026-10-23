@@ -1,79 +1,57 @@
-const metadata7 = {
-  tableColumns: {
-    id: {
-      label: null,
-      type: "string",
-      isSearchable: false,
-    },
-    nombre: {
-      label: "Usuario",
-      type: "string",
-      isSearchable: true,
-    },
-    rol: {
-      label: "Rol",
-      type: "string",
-      isSearchable: false,
-    },
-    departamento: {
-      label: "Departamento",
-      type: "string",
-      isSearchable: true,
-    },
-    email: {
-      label: "Correo",
-      type: "string",
-      isSearchable: true,
-    },
-    ultimoLogin: {
-      label: "Último ingreso",
-      type: "string",
-      isSearchable: false,
-    },
-  },
+const metadata = {
+  entity: { key: "user", singleLabel: "Usuario", pluralLabel: "Usuarios" },
+  category: { field: "rol", label: "Roles" },
+  action: { key: "accion", label: "Acciones" },
   states: [
-    { key: "todos", label: "Todos los estados" },
+    { key: "todos", label: "Todos los estados", isDefault: true },
     { key: "activo", label: "Activo" },
     { key: "inactivo", label: "Inactivo" },
     { key: "pendiente", label: "En contratación" },
   ],
-  model: { key: "user", singleLabel: "Usuario", pluralLabel: "Usuarios" },
-  action: { key: "accion", label: "Acciones" },
-  state: { key: "estado", label: "Estado" },
-  category: { key: "rol", label: "Roles" },
-};
-
-const metadata = {
-  etiquetas: {
-    accion: "Acciones",
-    estado: "Estado",
-    categoria: "Roles",
-    objeto: "Usuario",
-    objetos: "Usuarios",
-    contador: "usuarios",
-  },
-  categoriasTabla: [
-    "Usuario",
-    "Rol",
-    "Departamento",
-    "Correo",
-    "Último ingreso",
+  columns: [
+    {
+      key: "id",
+      label: "ID",
+      type: "string",
+      isSearchable: false,
+      isHidden: true,
+    },
+    {
+      key: "nombre",
+      label: "Usuario",
+      type: "string",
+      isSearchable: true,
+      highlight: true,
+    },
+    {
+      key: "rol",
+      label: "Rol",
+      type: "string",
+      isSearchable: true,
+    },
+    {
+      key: "departamento",
+      label: "Departamento",
+      type: "string",
+    },
+    {
+      key: "email",
+      label: "Correo",
+      type: "string",
+      isSearchable: true,
+    },
+    {
+      key: "ultimoLogin",
+      label: "Último ingreso",
+      type: "string",
+    },
+    {
+      key: "estado",
+      label: "Estado",
+      type: "string",
+      isState: true,
+    },
   ],
-  estados: {
-    todos: "Todos los estados",
-    activo: "Activo",
-    inactivo: "Inactivo",
-    pendiente: "En contratación",
-  },
-  campos: {
-    id: "string",
-    nombre: "string",
-    rol: "string",
-    departamento: "string",
-    email: "string",
-    ultimoLogin: "string", // datetime
-    estado: "string",
-  },
 };
 
 const roles = [
