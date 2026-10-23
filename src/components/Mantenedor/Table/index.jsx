@@ -1,16 +1,16 @@
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-function Table({ data, columnas, campos, etiquetas, estados }) {
+function Table({ data, metadata }) {
   return (
     <div className="table-responsive">
       <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
         <caption>
           <span id="id-tabla-principal">{data.length}</span>{" "}
-          {etiquetas.contador}
+          {metadata.entity.pluralLabel.toLowerCase()}
         </caption>
 
-        <TableHeader columnas={columnas} etiquetas={etiquetas} />
+        <TableHeader columns={metadata.columns} action={metadata.action} />
 
         <tbody>
           {data.map((entry) => {
@@ -18,9 +18,7 @@ function Table({ data, columnas, campos, etiquetas, estados }) {
               <TableRow
                 key={entry.id}
                 entry={entry}
-                estados={estados}
-                campos={campos}
-                etiquetas={etiquetas}
+                columns={metadata.columns}
               />
             );
           })}
