@@ -1,3 +1,48 @@
+const metadata7 = {
+  tableColumns: {
+    id: {
+      label: null,
+      type: "string",
+      isSearchable: false,
+    },
+    nombre: {
+      label: "Usuario",
+      type: "string",
+      isSearchable: true,
+    },
+    rol: {
+      label: "Rol",
+      type: "string",
+      isSearchable: false,
+    },
+    departamento: {
+      label: "Departamento",
+      type: "string",
+      isSearchable: true,
+    },
+    email: {
+      label: "Correo",
+      type: "string",
+      isSearchable: true,
+    },
+    ultimoLogin: {
+      label: "Último ingreso",
+      type: "string",
+      isSearchable: false,
+    },
+  },
+  states: [
+    { key: "todos", label: "Todos los estados" },
+    { key: "activo", label: "Activo" },
+    { key: "inactivo", label: "Inactivo" },
+    { key: "pendiente", label: "En contratación" },
+  ],
+  model: { key: "user", singleLabel: "Usuario", pluralLabel: "Usuarios" },
+  action: { key: "accion", label: "Acciones" },
+  state: { key: "estado", label: "Estado" },
+  category: { key: "rol", label: "Roles" },
+};
+
 const metadata = {
   etiquetas: {
     accion: "Acciones",
