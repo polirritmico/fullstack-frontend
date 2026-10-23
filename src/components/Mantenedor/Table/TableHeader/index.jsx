@@ -1,14 +1,18 @@
-function TableHeader({ columnas, etiquetas }) {
+function TableHeader({ columns, action }) {
   return (
     <thead className="table-secondary">
       <tr>
-        {columnas.map((entry, index) => (
-          <th key={index} scope="col">
-            {entry}
-          </th>
-        ))}
-        <th key="estado">{etiquetas.estado}</th>
-        <th key="accion">{etiquetas.accion}</th>
+        {columns.map(
+          (column) =>
+            !column.isHidden && (
+              <th key={column.key} scope="col">
+                {column.label}
+              </th>
+            ),
+        )}
+        <th key={action.key} scope="col">
+          {action.label}
+        </th>
       </tr>
     </thead>
   );
