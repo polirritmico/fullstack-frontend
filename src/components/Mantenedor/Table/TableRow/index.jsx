@@ -1,24 +1,27 @@
-function TableRow({ entry, estados, campos, etiquetas }) {
+function TableRow({ entry, columns }) {
   return (
     <tr>
-      {Object.entries(campos).map(([key]) => {
-        if (key === "id" || key === "estado") return;
-        if (key === etiquetas.objeto) {
+      {columns.map((column) => {
+        if (column.isHidden) return null;
+
+        if (column.isState) {
           return (
-            <td key={key} className="fw-medium">
-              {entry[key]}
+            <td key={column.key}>
+              <span
+                className={`badge text-bg-${entry[column.key] === "Activo" ? "success" : "secondary"}`}
+              >
+                {entry[column.key]}
+              </span>
             </td>
           );
         }
-        return <td key={key}>{entry[key]}</td>;
+
+        return (
+          <td key={column.key} className={column.highlight ? "fw-medium" : ""}>
+            {entry[column.key]}
+          </td>
+        );
       })}
-      <td>
-        <span
-          className={`badge text-bg-${entry.estado === estados.activo ? "success" : "secondary"}`}
-        >
-          {entry.estado}
-        </span>
-      </td>
       <td>
         <button className="btn btn-sm">
           <i className="bi bi-eye"></i>
@@ -32,9 +35,11 @@ function TableRow({ entry, estados, campos, etiquetas }) {
           data-bs-target="#modal-eliminar-usuario"
 
           {...Object.fromEntries(
-            Object.entries(campos).map(([campo, campoType]) => [
-              `data-jk-${campo.toLowerCase()}`,
-              campoType === "string" ? entry[campo] : entry[campo]?.toString(),
+            columns.map((column) => [
+              `data-jk-${column.key.toLowerCase()}`,
+              column.type === "string"
+                ? entry[column.key]
+                : entry[column.key]?.toString(),
             ]),
           )}
         >
