@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import usuarioService from "@/services/usuarioService";
 
 import Loading from "@/components/Loading";
-import Sidebar from "@/components/Mantenedor/Sidebar";
 import TableView from "@/components/Mantenedor/TableView";
 
 function Usuarios() {
@@ -31,16 +30,10 @@ function Usuarios() {
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
         data={usuarios}
-        tableColumnas={metadata.categoriasTabla}
-        tableCampos={metadata.campos}
-        tableEtiquetas={metadata.etiquetas}
-        tableEstados={metadata.estados}
+        metadata={metadata}
+        sidebarCategories={roles}
         toolbarPlaceholder="Búsqueda por nombre, correo o rol…"
         toolbarTextoBoton="+ Agregar Usuario"
-        // filterSearchFields={metadata.buscarEn}
-        filterSearchFields={["nombre", "email", "rol"]}
-        sidebarCategories={roles}
-        sidebarCategoriesTitle={metadata.etiquetas.categoria}
       />
     </div>
   );
