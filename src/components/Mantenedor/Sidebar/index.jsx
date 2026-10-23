@@ -12,7 +12,7 @@ function Sidebar({ title, data, selectedCategory, onCategoryChange }) {
               type="button"
               className={`btn rounded-0 ${selectedCategory === entity.name ? "active" : ""}`}
               key={entity.id}
-              onClick={(ev) => onCategoryChange(ev.target.value)}
+              onClick={() => onCategoryChange(entity.name)}
             >
               <span>{entity.icon}</span>
               <span>{entity.name}</span>
