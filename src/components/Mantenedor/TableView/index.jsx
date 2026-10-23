@@ -7,12 +7,12 @@ import Sidebar from "@/components/Mantenedor/Sidebar";
 function TableView({
   data,
   metadata,
-  toolbarTextoBoton,
-  toolbarPlaceholder,
   sidebarCategories,
+  toolbarPlaceholder,
+  toolbarTextoBoton,
 }) {
   const defaultState = metadata.states.find((state) => state.isDefault);
-  const defaultCategory = sidebarCategories[0].name;
+  const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).value;
 
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState(defaultState.key);
