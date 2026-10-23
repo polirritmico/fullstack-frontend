@@ -119,14 +119,14 @@ function MisCompras() {
                 Mis compras
               </Link>
 
-              <button
+              <Link
+                to="/direccion"
                 className="list-group-item list-group-item-action"
-                type="button"
-                disabled
+                aria-current="page"
               >
                 <i className="bi bi-geo-alt me-2" aria-hidden="true"></i>
                 Direcciones
-              </button>
+              </Link>
 
               <Link
                 to="/logout"

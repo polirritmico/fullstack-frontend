@@ -11,6 +11,7 @@ import Carrito from "@/pages/Carrito";
 import Clinica from "@/pages/Clinica";
 import CrearPerfil from "@/pages/CrearPerfil";
 import DetalleProducto from "@/pages/DetalleProducto";
+import Direccion from "@/pages/Direccion";
 import MiPerfil from "@/pages/MiPerfil";
 import MisCompras from "@/pages/MisCompras";
 import Nosotros from "@/pages/Nosotros";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/perfil" element={<MiPerfil />} />
         <Route path="/crear-perfil" element={<CrearPerfil />} />
         <Route path="/recuperar-cuenta" element={<RecuperarCuenta />} />
+        <Route path="/direccion" element={<Direccion />} />
         {/* <Route path="/contacto" element={<Contacto />} /> */}
 
         <Route path="/no-autorizado" element={<NoAutorizado />} />
