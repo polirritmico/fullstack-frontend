@@ -8,6 +8,7 @@ function TableToolbar({
   onSearchChange,
   selectedStatus,
   onStatusChange,
+  onAddClick,
 }) {
   return (
     <div className="d-flex justify-content-between gap-3 mb-1">
@@ -34,6 +35,7 @@ function TableToolbar({
           type="button"
           className="btn btn-primary text-nowrap"
           id="boton-agregar"
+          onClick={onAddClick}
         >
           {textoBoton}
         </button>

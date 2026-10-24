@@ -3,6 +3,7 @@ import { useState } from "react";
 import Table from "@/components/Mantenedor/Table";
 import TableToolbar from "@/components/Mantenedor/TableToolbar";
 import Sidebar from "@/components/Mantenedor/Sidebar";
+import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
 
 function TableView({
   data,
@@ -17,6 +18,8 @@ function TableView({
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState(defaultState.key);
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -66,9 +69,17 @@ function TableView({
           onSearchChange={setSearch}
           selectedStatus={selectedStatus}
           onStatusChange={setSelectedStatus}
+          onAddClick={() => setShowAddModal(true)}
         />
         <Table data={filteredData} metadata={metadata} />
       </div>
+
+      <TableAdd
+        entityName={metadata.entity.singleLabel}
+        fields={metadata.columns}
+        show={showAddModal}
+        handleClose={() => setShowAddModal(false)}
+      />
     </>
   );
 }
