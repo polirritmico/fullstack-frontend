@@ -191,3 +191,11 @@
     opacity: 1;
   }
 }
+
+/* Modal styles */
+.modal-header .btn-close {
+  background-color: white;
+  border-radius: 50%;
+  opacity: 1;
+  filter: none;
+}
