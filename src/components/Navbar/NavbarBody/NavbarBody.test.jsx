@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 
 import { useAuth } from "@/contexts/Auth/AuthContext";
-import NavbarBody, { PAGES } from ".";
+import NavbarBody from ".";
 
 vi.mock("@/contexts/Auth/AuthContext", () => ({
   useAuth: vi.fn(),
