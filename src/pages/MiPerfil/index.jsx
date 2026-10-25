@@ -1,6 +1,51 @@
+import { useState } from "react";
 import { Link, Navigate } from "react-router";
 import { useAuth } from "@/contexts/Auth/AuthContext";
 import "./MiPerfil.css";
+
+function cargarPerfil(usuario) {
+  const perfilInicial = {
+    nombre: usuario.nombre || usuario.username || "",
+    apellido: usuario.apellido || "",
+    email: usuario.email || "",
+    telefono: usuario.telefono || "",
+  };
+
+  try {
+    const guardado = localStorage.getItem(`jk-perfil-${usuario.id}`);
+    const perfil = guardado ? JSON.parse(guardado) : perfilInicial;
+
+    const valido = ["nombre", "apellido", "email", "telefono"].every(
+      (campo) => typeof perfil?.[campo] === "string",
+    );
+
+    if (!valido) {
+      throw new Error("Perfil inválido");
+    }
+
+    const direccionGuardada = localStorage.getItem(
+      `jk-direccion-${usuario.id}`,
+    );
+
+    const direccion = direccionGuardada ? JSON.parse(direccionGuardada) : null;
+
+    if (direccion && typeof direccion.direccion !== "string") {
+      throw new Error("Dirección inválida");
+    }
+
+    return {
+      perfil,
+      direccion: direccion?.direccion || "",
+      error: "",
+    };
+  } catch {
+    return {
+      perfil: perfilInicial,
+      direccion: "",
+      error: "No se pudieron leer tus datos guardados. No se han eliminado.",
+    };
+  }
+}
 
 function MiPerfil() {
   const { user } = useAuth();
@@ -9,8 +54,20 @@ function MiPerfil() {
     return <Navigate to="/login" state={{ from: "/perfil" }} replace />;
   }
 
+  return <ContenidoPerfil key={user.id} user={user} />;
+}
+
+function ContenidoPerfil({ user }) {
+  const [carga] = useState(() => cargarPerfil(user));
+  const [guardado, setGuardado] = useState(carga.perfil);
+  const [datos, setDatos] = useState(carga.perfil);
+  const [editando, setEditando] = useState(false);
+  const [error, setError] = useState(carga.error);
+  const [mensaje, setMensaje] = useState("");
+
   const nombreCompleto =
-    [user.nombre, user.apellido].filter(Boolean).join(" ") || user.username;
+    [guardado.nombre, guardado.apellido].filter(Boolean).join(" ") ||
+    user.username;
 
   const iniciales = nombreCompleto
     .split(" ")
@@ -22,36 +79,107 @@ function MiPerfil() {
 
   const campos = [
     {
-      id: "perfil-nombre",
+      nombre: "nombre",
       etiqueta: "Nombre",
-      valor: user.nombre || user.username,
       tipo: "text",
+      maximo: 50,
+      autoComplete: "given-name",
     },
     {
-      id: "perfil-apellido",
+      nombre: "apellido",
       etiqueta: "Apellido",
-      valor: user.apellido,
       tipo: "text",
+      maximo: 100,
+      autoComplete: "family-name",
     },
     {
-      id: "perfil-correo",
+      nombre: "email",
       etiqueta: "Correo electrónico",
-      valor: user.email,
       tipo: "email",
+      maximo: 100,
+      autoComplete: "email",
     },
     {
-      id: "perfil-telefono",
+      nombre: "telefono",
       etiqueta: "Teléfono",
-      valor: user.telefono,
       tipo: "tel",
-    },
-    {
-      id: "perfil-direccion",
-      etiqueta: "Dirección",
-      valor: user.direccion,
-      tipo: "text",
+      maximo: 20,
+      autoComplete: "tel",
     },
   ];
+
+  function iniciarEdicion() {
+    setDatos({ ...guardado });
+    setEditando(true);
+    setError("");
+    setMensaje("");
+  }
+
+  function cambiarCampo(event) {
+    const { name, value } = event.target;
+
+    setDatos((actual) => ({
+      ...actual,
+      [name]: value,
+    }));
+
+    setError("");
+    setMensaje("");
+  }
+
+  function cancelar() {
+    setDatos({ ...guardado });
+    setEditando(false);
+    setError("");
+    setMensaje("");
+  }
+
+  function guardar(event) {
+    event.preventDefault();
+    setError("");
+    setMensaje("");
+
+    const perfil = {
+      nombre: datos.nombre.trim(),
+      apellido: datos.apellido.trim(),
+      email: datos.email.trim().toLowerCase(),
+      telefono: datos.telefono.trim(),
+    };
+
+    if (!perfil.nombre || perfil.nombre.length > 50) {
+      setError("Ingresa tu nombre, con un máximo de 50 caracteres.");
+      return;
+    }
+
+    if (!perfil.apellido || perfil.apellido.length > 100) {
+      setError("Ingresa tus apellidos, con un máximo de 100 caracteres.");
+      return;
+    }
+
+    if (
+      perfil.email.length > 100 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(perfil.email)
+    ) {
+      setError("Ingresa un correo válido, de hasta 100 caracteres.");
+      return;
+    }
+
+    if (!/^(\+56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/.test(perfil.telefono)) {
+      setError("Ingresa un teléfono válido. Ejemplo: +56 9 1234 5678.");
+      return;
+    }
+
+    try {
+      localStorage.setItem(`jk-perfil-${user.id}`, JSON.stringify(perfil));
+
+      setGuardado(perfil);
+      setDatos(perfil);
+      setEditando(false);
+      setMensaje("Perfil actualizado correctamente.");
+    } catch {
+      setError("No se pudieron guardar los cambios. Inténtalo nuevamente.");
+    }
+  }
 
   return (
     <section className="perfil-page py-5">
@@ -66,7 +194,7 @@ function MiPerfil() {
               <h2 className="h4 mb-1">{nombreCompleto}</h2>
 
               <p className="text-body-secondary mb-2 text-break">
-                {user.email || "Correo no registrado"}
+                {guardado.email || "Correo no registrado"}
               </p>
 
               <div className="mb-3">
@@ -78,7 +206,8 @@ function MiPerfil() {
               <button
                 className="btn btn-outline-primary w-100"
                 type="button"
-                disabled
+                onClick={iniciarEdicion}
+                disabled={editando || Boolean(carga.error)}
               >
                 Editar perfil
               </button>
@@ -138,40 +267,94 @@ function MiPerfil() {
                 </h2>
               </div>
 
-              <div className="card-body p-4">
+              <form className="card-body p-4" onSubmit={guardar}>
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
+
+                {mensaje && (
+                  <div className="alert alert-success" role="status">
+                    {mensaje}
+                  </div>
+                )}
+
                 <div className="row g-3">
                   {campos.map((campo) => (
-                    <div
-                      key={campo.id}
-                      className={
-                        campo.id === "perfil-direccion"
-                          ? "col-12"
-                          : "col-12 col-md-6"
-                      }
-                    >
-                      <label htmlFor={campo.id} className="form-label">
+                    <div key={campo.nombre} className="col-12 col-md-6">
+                      <label
+                        htmlFor={`perfil-${campo.nombre}`}
+                        className="form-label"
+                      >
                         {campo.etiqueta}
                       </label>
 
                       <input
-                        id={campo.id}
+                        id={`perfil-${campo.nombre}`}
+                        name={campo.nombre}
                         className="form-control"
                         type={campo.tipo}
-                        value={campo.valor || ""}
+                        value={datos[campo.nombre]}
+                        onChange={cambiarCampo}
+                        maxLength={campo.maximo}
+                        autoComplete={campo.autoComplete}
                         placeholder="No registrado"
-                        readOnly
+                        readOnly={!editando}
+                        required
                       />
                     </div>
                   ))}
+
+                  <div className="col-12">
+                    <label htmlFor="perfil-direccion" className="form-label">
+                      Dirección de entrega
+                    </label>
+
+                    <input
+                      id="perfil-direccion"
+                      className="form-control"
+                      type="text"
+                      value={carga.direccion}
+                      placeholder="No registrada"
+                      readOnly
+                    />
+
+                    <Link to="/direccion" className="d-inline-block mt-2">
+                      Administrar dirección
+                    </Link>
+                  </div>
                 </div>
 
                 <hr className="my-4" />
 
-                <button className="btn btn-primary" type="button" disabled>
-                  <i className="bi bi-pencil me-2" aria-hidden="true"></i>
-                  Editar información
-                </button>
-              </div>
+                {editando ? (
+                  <div className="d-flex flex-wrap gap-2">
+                    <button className="btn btn-primary" type="submit">
+                      <i className="bi bi-save me-2" aria-hidden="true"></i>
+                      Guardar cambios
+                    </button>
+
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={cancelar}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={iniciarEdicion}
+                    disabled={Boolean(carga.error)}
+                  >
+                    <i className="bi bi-pencil me-2" aria-hidden="true"></i>
+                    Editar información
+                  </button>
+                )}
+              </form>
             </section>
           </div>
         </div>
