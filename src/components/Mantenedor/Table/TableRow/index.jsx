@@ -1,4 +1,10 @@
 function TableRow({ entry, columns }) {
+  const clpFormatter = new Intl.NumberFormat("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    maximumFractionDigits: 0,
+  });
+
   return (
     <tr>
       {columns.map((column) => {
@@ -12,6 +18,17 @@ function TableRow({ entry, columns }) {
               >
                 {entry[column.key]}
               </span>
+            </td>
+          );
+        }
+
+        if (column.type === "money") {
+          return (
+            <td
+              key={column.key}
+              className={column.highlight ? "fw-medium" : ""}
+            >
+              {clpFormatter.format(entry[column.key])}
             </td>
           );
         }
