@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import TableView from ".";
@@ -8,12 +8,17 @@ const SEARCH_PLACEHOLDER = "Buscar...";
 const STATUS_SELECT_LABEL = "Selector de estados";
 
 const mockMetadata = {
-  entity: { pluralLabel: "usuarios" },
+  entity: { singleLabel: "Usuario", pluralLabel: "usuarios" },
   category: {
     field: "rol",
     label: "Roles",
     addTitle: "Nueva Categoría",
     icons: ["A", "B"],
+  },
+  delete: {
+    nameKey: "nombre",
+    detailKey: "email",
+    detailLabel: "Correo",
   },
   action: { key: "accion", label: "Acciones" },
   states: [
@@ -236,12 +241,30 @@ describe("TableView filters", () => {
   });
 });
 
-describe("Modal de categoría", () => {
-  it("debería abrir el modal al hacer clic en + Nuevo", async () => {
-    render(<TableView {...defaultProps} />);
+describe("TableView modales", () => {
+  describe("Modal de categoría", () => {
+    it("debería abrir el modal al hacer clic en + Nuevo", async () => {
+      render(<TableView {...defaultProps} />);
 
-    await userEvent.click(screen.getByRole("button", { name: "+ Nuevo" }));
+      await userEvent.click(screen.getByRole("button", { name: "+ Nuevo" }));
 
-    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+      expect(await screen.findByRole("dialog")).toBeInTheDocument();
+    });
+  });
+
+  describe("Modal de eliminación", () => {
+    it("debería abrir el modal con el registro seleccionado", async () => {
+      const testCase = { ...defaultProps };
+      const expected = "Ana Rojas";
+
+      render(<TableView {...testCase} />);
+      await userEvent.click(
+        screen.getAllByRole("button", { name: "Eliminar" })[0],
+      );
+      const dialog = await screen.findByRole("dialog");
+
+      const output = within(dialog).getByText(expected);
+      expect(output).toBeInTheDocument();
+    });
   });
 });
