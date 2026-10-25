@@ -15,6 +15,7 @@ const metadata = {
       type: "string",
       isSearchable: false,
       isHidden: true,
+      isReadOnly: true,
     },
     {
       key: "nombre",
@@ -37,13 +38,14 @@ const metadata = {
     {
       key: "email",
       label: "Correo",
-      type: "string",
+      type: "email",
       isSearchable: true,
     },
     {
       key: "ultimoLogin",
       label: "Último ingreso",
       type: "string",
+      isReadOnly: true,
     },
     {
       key: "estado",
@@ -109,7 +111,7 @@ const roles = [
 
 const users = [
   {
-    id: "usuario-101",
+    id: "101",
     nombre: "Ana Rojas",
     rol: "Administrador",
     departamento: "Operaciones",
@@ -118,7 +120,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-102",
+    id: "102",
     nombre: "Carlos Pinto",
     rol: "Gerente",
     departamento: "Comercial",
@@ -127,7 +129,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-103",
+    id: "103",
     nombre: "Fernando Villalobos",
     rol: "Desarrollador",
     departamento: "Tecnología",
@@ -136,7 +138,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-104",
+    id: "104",
     nombre: "Rodrigo Callealta",
     rol: "Desarrollador",
     departamento: "Tecnología",
@@ -145,7 +147,7 @@ const users = [
     estado: "Inactivo",
   },
   {
-    id: "usuario-105",
+    id: "105",
     nombre: "Camila Soto",
     rol: "Vendedor",
     departamento: "Ventas",
@@ -154,7 +156,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-106",
+    id: "106",
     nombre: "Diego Tapia",
     rol: "Vendedor",
     departamento: "Ventas",
@@ -163,7 +165,7 @@ const users = [
     estado: "En contratación",
   },
   {
-    id: "usuario-107",
+    id: "107",
     nombre: "Luis Martínez",
     rol: "Transportista",
     departamento: "Logística",
@@ -172,7 +174,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-108",
+    id: "108",
     nombre: "Javiera Silva",
     rol: "Cliente",
     departamento: "N/A",
@@ -181,7 +183,7 @@ const users = [
     estado: "Activo",
   },
   {
-    id: "usuario-109",
+    id: "109",
     nombre: "Matías Muñoz",
     rol: "Cliente",
     departamento: "N/A",
@@ -190,7 +192,7 @@ const users = [
     estado: "Inactivo",
   },
   {
-    id: "usuario-110",
+    id: "110",
     nombre: "Valentina Parra",
     rol: "Cliente",
     departamento: "N/A",
@@ -202,31 +204,32 @@ const users = [
 
 const usuarioService = {
   async getAll() {
-    // return Promise.resolve(users);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return users;
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return [...users];
   },
 
   async getById(id) {
     const user = users.find((usr) => usr.id == id);
-    return Promise.resolve(user ?? null);
+    return Promise.resolve(user ? { ...user } : null);
   },
 
   async getCategories() {
-    return Promise.resolve(roles);
+    return Promise.resolve([...roles]);
   },
 
   async getMetadata() {
-    return Promise.resolve(metadata);
+    return Promise.resolve({ ...metadata });
   },
 
   async create(newUser) {
-    // TODO: implement
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
-    const created = { ...newUser, id: String(Date.now()) };
+    const nextId = String(Number(users[users.length - 1].id) + 1);
+    const created = { ...newUser, id: nextId };
+
     users.push(created);
-    return created;
+
+    return { ...created };
   },
 };
 
