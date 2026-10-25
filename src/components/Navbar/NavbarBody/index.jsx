@@ -24,6 +24,14 @@ export default function NavbarBody() {
             </li>
           ))}
 
+          {!user && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/crear-perfil">
+                Crear perfil
+              </NavLink>
+            </li>
+          )}
+
           {user?.role == ADMIN_ROLE && (
             <li className="nav-item" key="mantenedor">
               <NavLink className="nav-link" to="/mantenedor">
