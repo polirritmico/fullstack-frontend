@@ -5,6 +5,7 @@ import TableToolbar from "@/components/Mantenedor/TableToolbar";
 import Sidebar from "@/components/Mantenedor/Sidebar";
 import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
 import CategoryAdd from "@/components/Mantenedor/Modal/CategoryAdd";
+import TableDelete from "@/components/Mantenedor/Modal/TableDelete";
 
 function TableView({
   data,
@@ -14,6 +15,7 @@ function TableView({
   toolbarTextoBoton,
   onAdd,
   onCategoryAdd,
+  onDelete,
 }) {
   const defaultState = metadata.states.find((state) => state.isDefault);
   const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).value;
@@ -24,6 +26,7 @@ function TableView({
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [entryToDelete, setEntryToDelete] = useState(null);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -69,6 +72,13 @@ function TableView({
     setShowCategoryModal(false);
   }
 
+  async function handleDelete() {
+    if (onDelete && entryToDelete) {
+      await onDelete(entryToDelete.id);
+    }
+    setEntryToDelete(null);
+  }
+
   const singleLabel = metadata.entity.singleLabel;
 
   const formFields = metadata.columns.map((col) => {
@@ -108,7 +118,11 @@ function TableView({
           onStatusChange={setSelectedStatus}
           onAddClick={() => setShowAddModal(true)}
         />
-        <Table data={filteredData} metadata={metadata} />
+        <Table
+          data={filteredData}
+          metadata={metadata}
+          onDeleteClick={setEntryToDelete}
+        />
       </div>
 
       <TableAdd
@@ -125,6 +139,14 @@ function TableView({
         onSave={handleCategorySave}
         title={metadata.category.addTitle}
         icons={metadata.category.icons}
+      />
+
+      <TableDelete
+        show={Boolean(entryToDelete)}
+        entry={entryToDelete}
+        metadata={metadata}
+        onHide={() => setEntryToDelete(null)}
+        onConfirm={handleDelete}
       />
     </>
   );

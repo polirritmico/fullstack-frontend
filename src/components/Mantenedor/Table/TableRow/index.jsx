@@ -4,7 +4,7 @@ const clpFormatter = new Intl.NumberFormat("es-CL", {
   maximumFractionDigits: 0,
 });
 
-function TableRow({ entry, columns }) {
+function TableRow({ entry, columns, onDeleteClick }) {
   return (
     <tr>
       {columns.map((column) => {
@@ -47,18 +47,10 @@ function TableRow({ entry, columns }) {
           <i className="bi bi-pencil"></i>
         </button>
         <button
+          type="button"
           className="btn btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#modal-eliminar-usuario"
-
-          {...Object.fromEntries(
-            columns.map((column) => [
-              `data-jk-${column.key.toLowerCase()}`,
-              column.type === "string"
-                ? entry[column.key]
-                : entry[column.key]?.toString(),
-            ]),
-          )}
+          aria-label="Eliminar"
+          onClick={() => onDeleteClick(entry)}
         >
           <i className="bi bi-x-circle"></i>
         </button>
