@@ -33,6 +33,12 @@ function Usuarios() {
     setUsuarios(updatedUsers);
   };
 
+  const handleCreateRole = async (newRole) => {
+    await usuarioService.createCategory(newRole);
+    const updatedRoles = await usuarioService.getCategories();
+    setRoles(updatedRoles);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
@@ -44,6 +50,7 @@ function Usuarios() {
         toolbarTextoBoton="+ Agregar Usuario"
 
         onAdd={handleCreateUser}
+        onCategoryAdd={handleCreateRole}
         // onDelete={handleDeleteUser}
         // onEdit={handleEditUser}
       />

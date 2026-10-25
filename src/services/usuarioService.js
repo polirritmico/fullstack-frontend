@@ -1,6 +1,11 @@
 const metadata = {
   entity: { key: "user", singleLabel: "Usuario", pluralLabel: "Usuarios" },
-  category: { field: "rol", label: "Roles" },
+  category: {
+    field: "rol",
+    label: "Roles",
+    addTitle: "Nueva Categoría",
+    icons: ["🐾", "🐕", "🐈", "🐦", "🐹", "📦"],
+  },
   action: { key: "accion", label: "Acciones" },
   states: [
     { key: "todos", label: "Todos los estados", isDefault: true },
@@ -219,6 +224,23 @@ const usuarioService = {
 
   async getMetadata() {
     return Promise.resolve({ ...metadata });
+  },
+
+  async createCategory(newCategory) {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    const nextId = Math.max(...roles.map(({ id }) => Number(id))) + 1;
+    const created = {
+      ...newCategory,
+      id: nextId,
+      value: newCategory.name,
+      amount: 0,
+      isDefault: false,
+    };
+
+    roles.push(created);
+
+    return { ...created };
   },
 
   async create(newUser) {
