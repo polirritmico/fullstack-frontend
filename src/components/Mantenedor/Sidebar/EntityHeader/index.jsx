@@ -1,4 +1,4 @@
-function EntityHeader({ title }) {
+function EntityHeader({ title, onAddClick }) {
   return (
     <div
       className="d-flex py-2 px-3 justify-content-between align-items-center"
@@ -6,9 +6,9 @@ function EntityHeader({ title }) {
     >
       <h2 className="text-muted my-0 fs-6">{title}</h2>
       <button
+        type="button"
         className="btn btn-primary btn-sm"
-        data-bs-target="#modal-agregar-rol"
-        data-bs-toggle="modal"
+        onClick={onAddClick}
       >
         + Nuevo
       </button>

@@ -4,6 +4,7 @@ import Table from "@/components/Mantenedor/Table";
 import TableToolbar from "@/components/Mantenedor/TableToolbar";
 import Sidebar from "@/components/Mantenedor/Sidebar";
 import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
+import CategoryAdd from "@/components/Mantenedor/Modal/CategoryAdd";
 
 function TableView({
   data,
@@ -12,6 +13,7 @@ function TableView({
   toolbarPlaceholder,
   toolbarTextoBoton,
   onAdd,
+  onCategoryAdd,
 }) {
   const defaultState = metadata.states.find((state) => state.isDefault);
   const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).value;
@@ -21,6 +23,7 @@ function TableView({
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
 
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -59,6 +62,13 @@ function TableView({
     setShowAddModal(false);
   }
 
+  async function handleCategorySave(newData) {
+    if (onCategoryAdd) {
+      await onCategoryAdd(newData);
+    }
+    setShowCategoryModal(false);
+  }
+
   const singleLabel = metadata.entity.singleLabel;
 
   const formFields = metadata.columns.map((col) => {
@@ -84,6 +94,7 @@ function TableView({
         data={sidebarCategories}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
+        onAddClick={() => setShowCategoryModal(true)}
       />
 
       <div className="col-12 col-md-8 col-lg-9 col-xl-9 col-xxl-10 p-3">
@@ -106,6 +117,14 @@ function TableView({
         show={showAddModal}
         onHide={() => setShowAddModal(false)}
         onSave={handleSave}
+      />
+
+      <CategoryAdd
+        show={showCategoryModal}
+        onHide={() => setShowCategoryModal(false)}
+        onSave={handleCategorySave}
+        title={metadata.category.addTitle}
+        icons={metadata.category.icons}
       />
     </>
   );
