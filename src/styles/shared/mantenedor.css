@@ -199,3 +199,17 @@
   opacity: 1;
   filter: none;
 }
+
+.category-icons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+}
+
+.category-icons > .btn {
+  border-radius: var(--bs-border-radius) !important;
+}
+
+.category-icons .btn-check:checked + .btn {
+  background-color: var(--jk-color-secondary);
+}
