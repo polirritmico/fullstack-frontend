@@ -39,6 +39,12 @@ function Usuarios() {
     setRoles(updatedRoles);
   };
 
+  const handleDeleteUser = async (id) => {
+    await usuarioService.delete(id);
+    const updatedUsers = await usuarioService.getAll();
+    setUsuarios(updatedUsers);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
@@ -51,7 +57,7 @@ function Usuarios() {
 
         onAdd={handleCreateUser}
         onCategoryAdd={handleCreateRole}
-        // onDelete={handleDeleteUser}
+        onDelete={handleDeleteUser}
         // onEdit={handleEditUser}
       />
     </div>

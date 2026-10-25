@@ -6,6 +6,11 @@ const metadata = {
     addTitle: "Nueva Categoría",
     icons: ["🐾", "🐕", "🐈", "🐦", "🐹", "📦"],
   },
+  delete: {
+    nameKey: "nombre",
+    detailKey: "email",
+    detailLabel: "Correo",
+  },
   action: { key: "accion", label: "Acciones" },
   states: [
     { key: "todos", label: "Todos los estados", isDefault: true },
@@ -114,7 +119,7 @@ const roles = [
   },
 ];
 
-const users = [
+let users = [
   {
     id: "101",
     nombre: "Ana Rojas",
@@ -241,6 +246,16 @@ const usuarioService = {
     roles.push(created);
 
     return { ...created };
+  },
+
+  async delete(id) {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    const remainingUsers = users.filter((user) => user.id !== id);
+    const deleted = remainingUsers.length !== users.length;
+    users = remainingUsers;
+
+    return deleted;
   },
 
   async create(newUser) {
