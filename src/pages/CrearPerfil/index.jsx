@@ -66,9 +66,9 @@ function CrearPerfil() {
       return;
     }
 
-    if (password.length < 8 || password !== confirmarPassword) {
+    if (password.length < 8 || !password.trim() || password !== confirmarPassword) {
       setError(
-        "Las contraseñas deben coincidir y tener al menos 8 caracteres.",
+        "Las contraseñas deben coincidir, tener al menos 8 caracteres y no pueden estar vacías.",
       );
       return;
     }
