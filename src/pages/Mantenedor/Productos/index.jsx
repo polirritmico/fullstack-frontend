@@ -26,14 +26,24 @@ function Productos() {
     return <Loading />;
   }
 
+  const handleCreateProduct = async (newProduct) => {
+    console.log("Running handleCreateProduct");
+    await productoService.create(newProduct);
+    const updatedProducts = await productoService.getAll();
+    setProductos(updatedProducts);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
         data={productos}
         metadata={metadata}
+
         sidebarCategories={categorias}
         toolbarPlaceholder="Búsqueda por producto o SKU..."
         toolbarTextoBoton="+ Agregar Productos"
+
+        onAdd={handleCreateProduct}
       />
     </div>
   );

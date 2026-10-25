@@ -9,6 +9,8 @@ const getInType = (type) =>
     string: "text",
     email: "email",
     int: "number",
+    money: "number",
+    number: "number",
   })[type] ?? "text";
 
 function TableAdd({ entityName, fields, show, onHide, onSave }) {
@@ -51,6 +53,7 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
                 </Form.Group>
               );
             } else {
+              const fieldType = getInType(field.type);
               return (
                 <Form.Group
                   className="mb-3"
@@ -60,7 +63,8 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
                   <Form.Label>{field.label}</Form.Label>
                   <Form.Control
                     name={field.key}
-                    type={getInType(field.type)}
+                    type={fieldType}
+                    min={fieldType === "number" ? 0 : undefined}
                     required
                   />
                 </Form.Group>
