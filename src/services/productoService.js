@@ -6,7 +6,16 @@ const metadata = {
     singleLabel: "Producto",
     pluralLabel: "Productos",
   },
-  category: { field: "categoria", label: "Categoría" },
+  category: {
+    field: "categoria",
+    label: "Categoría",
+    addTitle: "Nueva Categoría",
+    // prettier-ignore
+    icons: [
+      "🐾", "🐕", "🐈", "🐦", "🐟", "🐹", "🦴", "🥣", "🧸",
+      "🧶", "🛏️", "🏠", "🦮", "🎒", "🩺", "✂️", "👕", "📦",
+    ],
+  },
   action: { key: "accion", label: "Acciones" },
   states: [
     { key: "todos", label: "Todos los estados", isDefault: true },
@@ -295,6 +304,23 @@ const productoService = {
 
   async getMetadata() {
     return Promise.resolve({ ...metadata });
+  },
+
+  async createCategory(newCategory) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    const nextId = Math.max(...categorias.map(({ id }) => Number(id))) + 1;
+    const created = {
+      ...newCategory,
+      id: nextId,
+      value: newCategory.name,
+      amount: 0,
+      isDefault: false,
+    };
+
+    categorias.push(created);
+
+    return { ...created };
   },
 
   async create(newProduct) {

@@ -33,6 +33,12 @@ function Productos() {
     setProductos(updatedProducts);
   };
 
+  const handleCreateCategory = async (newCategory) => {
+    await productoService.createCategory(newCategory);
+    const updatedCategories = await productoService.getCategories();
+    setCategorias(updatedCategories);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
@@ -44,6 +50,7 @@ function Productos() {
         toolbarTextoBoton="+ Agregar Productos"
 
         onAdd={handleCreateProduct}
+        onCategoryAdd={handleCreateCategory}
       />
     </div>
   );
