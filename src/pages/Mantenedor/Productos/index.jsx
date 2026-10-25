@@ -39,6 +39,12 @@ function Productos() {
     setCategorias(updatedCategories);
   };
 
+  const handleDeleteProduct = async (id) => {
+    await productoService.delete(id);
+    const updatedProducts = await productoService.getAll();
+    setProductos(updatedProducts);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
@@ -51,6 +57,7 @@ function Productos() {
 
         onAdd={handleCreateProduct}
         onCategoryAdd={handleCreateCategory}
+        onDelete={handleDeleteProduct}
       />
     </div>
   );

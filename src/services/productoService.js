@@ -16,6 +16,11 @@ const metadata = {
       "🧶", "🛏️", "🏠", "🦮", "🎒", "🩺", "✂️", "👕", "📦",
     ],
   },
+  delete: {
+    nameKey: "nombre",
+    detailKey: "sku",
+    detailLabel: "SKU",
+  },
   action: { key: "accion", label: "Acciones" },
   states: [
     { key: "todos", label: "Todos los estados", isDefault: true },
@@ -69,7 +74,7 @@ const metadata = {
   ],
 };
 
-const productos = [
+let productos = [
   {
     id: "123",
     nombre: "PelletMaster Adulto",
@@ -321,6 +326,18 @@ const productoService = {
     categorias.push(created);
 
     return { ...created };
+  },
+
+  async delete(id) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    const remainingProducts = productos.filter(
+      (producto) => producto.id !== id,
+    );
+    const deleted = remainingProducts.length !== productos.length;
+    productos = remainingProducts;
+
+    return deleted;
   },
 
   async create(newProduct) {
