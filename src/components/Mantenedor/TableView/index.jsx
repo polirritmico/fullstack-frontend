@@ -52,12 +52,30 @@ function TableView({
     metadata.states.map((state) => [state.key, state.label]),
   );
 
-  const handleSave = async (newData) => {
+  async function handleSave(newData) {
     if (onAdd) {
       await onAdd(newData);
     }
     setShowAddModal(false);
-  };
+  }
+
+  const singleLabel = metadata.entity.singleLabel;
+
+  const formFields = metadata.columns.map((col) => {
+    let options = null;
+
+    if (col.key === metadata.category.field) {
+      options = sidebarCategories
+        .filter((cat) => cat.value !== "todos")
+        .map((cat) => ({ value: cat.value, label: cat.name }));
+    } else if (col.isState) {
+      options = metadata.states
+        .filter((state) => state.key !== "todos")
+        .map((state) => ({ value: state.label, label: state.label }));
+    }
+
+    return { ...col, options };
+  });
 
   return (
     <>
@@ -83,8 +101,8 @@ function TableView({
       </div>
 
       <TableAdd
-        entityName={metadata.entity.singleLabel}
-        fields={metadata.columns}
+        entityName={singleLabel}
+        fields={formFields}
         show={showAddModal}
         onHide={() => setShowAddModal(false)}
         onSave={handleSave}
