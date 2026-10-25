@@ -28,8 +28,9 @@ function Usuarios() {
 
   const handleCreateUser = async (newUser) => {
     console.log("Running handleCreateUser");
-    const createdUser = await usuarioService.create(newUser);
-    setUsuarios((previousData) => [...previousData, createdUser]);
+    await usuarioService.create(newUser);
+    const updatedUsers = await usuarioService.getAll();
+    setUsuarios(updatedUsers);
   };
 
   return (
