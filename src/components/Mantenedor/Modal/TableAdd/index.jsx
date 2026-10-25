@@ -28,7 +28,29 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit} id={`add-${entityName}-form`}>
           {fields.map((field) => {
-            if (!field.isHidden) {
+            if (field.isHidden || field.isReadOnly) {
+              return null;
+            }
+
+            if (field.options) {
+              return (
+                <Form.Group
+                  className="mb-3"
+                  controlId={`add-${field.key}`}
+                  key={field.key}
+                >
+                  <Form.Label>{field.label}</Form.Label>
+                  <Form.Select name={field.key} required>
+                    <option value="">Seleccione...</option>
+                    {field.options.map((opt) => (
+                      <option value={opt.value} key={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              );
+            } else {
               return (
                 <Form.Group
                   className="mb-3"
@@ -46,6 +68,9 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
             }
           })}
         </Form>
+        <p className="text-warning fst-italic">
+          Nota: Este cambio no es persistente sin conectar al backend.
+        </p>
       </Modal.Body>
 
       <Modal.Footer className="justify-content-center">
