@@ -9,7 +9,12 @@ const STATUS_SELECT_LABEL = "Selector de estados";
 
 const mockMetadata = {
   entity: { pluralLabel: "usuarios" },
-  category: { field: "rol", label: "Roles" },
+  category: {
+    field: "rol",
+    label: "Roles",
+    addTitle: "Nueva Categoría",
+    icons: ["A", "B"],
+  },
   action: { key: "accion", label: "Acciones" },
   states: [
     { key: "todos", label: "Todos los estados", isDefault: true },
@@ -228,5 +233,15 @@ describe("TableView filters", () => {
       const output = screen.getAllByRole("row").length;
       expect(output).toBe(expected);
     });
+  });
+});
+
+describe("Modal de categoría", () => {
+  it("debería abrir el modal al hacer clic en + Nuevo", async () => {
+    render(<TableView {...defaultProps} />);
+
+    await userEvent.click(screen.getByRole("button", { name: "+ Nuevo" }));
+
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
   });
 });
