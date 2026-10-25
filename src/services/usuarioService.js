@@ -203,7 +203,7 @@ const users = [
 const usuarioService = {
   async getAll() {
     // return Promise.resolve(users);
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     return users;
   },
 
@@ -218,6 +218,15 @@ const usuarioService = {
 
   async getMetadata() {
     return Promise.resolve(metadata);
+  },
+
+  async create(newUser) {
+    // TODO: implement
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const created = { ...newUser, id: String(Date.now()) };
+    users.push(created);
+    return created;
   },
 };
 

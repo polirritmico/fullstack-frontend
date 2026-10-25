@@ -11,6 +11,7 @@ function TableView({
   sidebarCategories,
   toolbarPlaceholder,
   toolbarTextoBoton,
+  onAdd,
 }) {
   const defaultState = metadata.states.find((state) => state.isDefault);
   const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).value;
@@ -51,6 +52,13 @@ function TableView({
     metadata.states.map((state) => [state.key, state.label]),
   );
 
+  const handleSave = async (newData) => {
+    if (onAdd) {
+      await onAdd(newData);
+    }
+    setShowAddModal(false);
+  };
+
   return (
     <>
       <Sidebar
@@ -78,7 +86,8 @@ function TableView({
         entityName={metadata.entity.singleLabel}
         fields={metadata.columns}
         show={showAddModal}
-        handleClose={() => setShowAddModal(false)}
+        onHide={() => setShowAddModal(false)}
+        onSave={handleSave}
       />
     </>
   );

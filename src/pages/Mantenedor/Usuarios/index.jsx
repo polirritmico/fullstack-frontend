@@ -26,14 +26,25 @@ function Usuarios() {
     return <Loading />;
   }
 
+  const handleCreateUser = async (newUser) => {
+    console.log("Running handleCreateUser");
+    const createdUser = await usuarioService.create(newUser);
+    setUsuarios((previousData) => [...previousData, createdUser]);
+  };
+
   return (
     <div className="row flex-grow-1 justify-content-center align-content-start align-content-md-stretch">
       <TableView
         data={usuarios}
         metadata={metadata}
+
         sidebarCategories={roles}
         toolbarPlaceholder="Búsqueda por nombre, correo o rol…"
         toolbarTextoBoton="+ Agregar Usuario"
+
+        onAdd={handleCreateUser}
+        // onDelete={handleDeleteUser}
+        // onEdit={handleEditUser}
       />
     </div>
   );
