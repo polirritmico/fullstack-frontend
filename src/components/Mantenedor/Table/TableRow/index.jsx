@@ -1,10 +1,10 @@
-function TableRow({ entry, columns }) {
-  const clpFormatter = new Intl.NumberFormat("es-CL", {
-    style: "currency",
-    currency: "CLP",
-    maximumFractionDigits: 0,
-  });
+const clpFormatter = new Intl.NumberFormat("es-CL", {
+  style: "currency",
+  currency: "CLP",
+  maximumFractionDigits: 0,
+});
 
+function TableRow({ entry, columns }) {
   return (
     <tr>
       {columns.map((column) => {

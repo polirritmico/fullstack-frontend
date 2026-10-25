@@ -25,7 +25,7 @@ export default function NavbarBody() {
           ))}
 
           {!user && (
-            <li className="nav-item">
+            <li className="nav-item" key="crear-perfi">
               <NavLink className="nav-link" to="/crear-perfil">
                 Crear perfil
               </NavLink>
