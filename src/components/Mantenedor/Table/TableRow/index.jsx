@@ -4,7 +4,7 @@ const clpFormatter = new Intl.NumberFormat("es-CL", {
   maximumFractionDigits: 0,
 });
 
-function TableRow({ entry, columns, onDeleteClick }) {
+function TableRow({ entry, columns, onDeleteClick, onEditClick }) {
   return (
     <tr>
       {columns.map((column) => {
@@ -43,7 +43,7 @@ function TableRow({ entry, columns, onDeleteClick }) {
         <button className="btn btn-sm">
           <i className="bi bi-eye"></i>
         </button>
-        <button className="btn btn-sm">
+        <button className="btn btn-sm" onClick={() => onEditClick(entry)}>
           <i className="bi bi-pencil"></i>
         </button>
         <button

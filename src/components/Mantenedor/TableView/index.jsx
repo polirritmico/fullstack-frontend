@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-import Table from "@/components/Mantenedor/Table";
-import TableToolbar from "@/components/Mantenedor/TableToolbar";
-import Sidebar from "@/components/Mantenedor/Sidebar";
-import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
 import CategoryAdd from "@/components/Mantenedor/Modal/CategoryAdd";
+import Sidebar from "@/components/Mantenedor/Sidebar";
+import Table from "@/components/Mantenedor/Table";
+import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
 import TableDelete from "@/components/Mantenedor/Modal/TableDelete";
+import TableEdit from "@/components/Mantenedor/Modal/TableEdit";
+import TableToolbar from "@/components/Mantenedor/TableToolbar";
 
 function TableView({
   data,
@@ -14,6 +15,7 @@ function TableView({
   toolbarPlaceholder,
   toolbarTextoBoton,
   onAdd,
+  onEdit,
   onCategoryAdd,
   onDelete,
 }) {
@@ -27,6 +29,7 @@ function TableView({
   const [showAddModal, setShowAddModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
+  const [entryToEdit, setEntryToEdit] = useState(null);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -63,6 +66,13 @@ function TableView({
       await onAdd(newData);
     }
     setShowAddModal(false);
+  }
+
+  async function handleEditSave(updatedData) {
+    if (onEdit) {
+      await onEdit(updatedData);
+    }
+    setEntryToEdit(null);
   }
 
   async function handleCategorySave(newData) {
@@ -122,6 +132,7 @@ function TableView({
           data={filteredData}
           metadata={metadata}
           onDeleteClick={setEntryToDelete}
+          onEditClick={setEntryToEdit}
         />
       </div>
 
@@ -131,6 +142,15 @@ function TableView({
         show={showAddModal}
         onHide={() => setShowAddModal(false)}
         onSave={handleSave}
+      />
+
+      <TableEdit
+        entityName={singleLabel}
+        fields={formFields}
+        show={Boolean(entryToEdit)}
+        entry={entryToEdit}
+        onHide={() => setEntryToEdit(null)}
+        onSave={handleEditSave}
       />
 
       <CategoryAdd

@@ -1,7 +1,7 @@
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-function Table({ data, metadata, onDeleteClick }) {
+function Table({ data, metadata, onDeleteClick, onEditClick }) {
   return (
     <div className="table-responsive">
       <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
@@ -20,6 +20,7 @@ function Table({ data, metadata, onDeleteClick }) {
                 entry={entry}
                 columns={metadata.columns}
                 onDeleteClick={onDeleteClick}
+                onEditClick={onEditClick}
               />
             );
           })}
