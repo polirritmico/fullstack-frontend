@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router";
 import { productos } from "@/data/productos";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 
-import "../../../css/detalle-producto.css";
+import "@/styles/legacy.css";
 
 function DetalleProducto() {
   const { id } = useParams();
