@@ -232,8 +232,6 @@ const usuarioService = {
   },
 
   async createCategory(newCategory) {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
     const nextId = Math.max(...roles.map(({ id }) => Number(id))) + 1;
     const created = {
       ...newCategory,
@@ -249,8 +247,6 @@ const usuarioService = {
   },
 
   async delete(id) {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
     const remainingUsers = users.filter((user) => user.id !== id);
     const deleted = remainingUsers.length !== users.length;
     users = remainingUsers;
@@ -259,14 +255,22 @@ const usuarioService = {
   },
 
   async create(newUser) {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
     const nextId = String(Number(users[users.length - 1].id) + 1);
     const created = { ...newUser, id: nextId };
 
     users.push(created);
 
     return { ...created };
+  },
+
+  async update(updatedUser) {
+    const index = users.findIndex((user) => user.id === updatedUser.id);
+    if (index !== -1) {
+      users[index] = { ...users[index], ...updatedUser };
+      return { ...users[index] };
+    }
+
+    return null;
   },
 };
 

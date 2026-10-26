@@ -33,6 +33,13 @@ function Usuarios() {
     setUsuarios(updatedUsers);
   };
 
+  const handleEditUser = async (newUser) => {
+    console.log("Running handleEditUser");
+    await usuarioService.update(newUser);
+    const updatedUsers = await usuarioService.getAll();
+    setUsuarios(updatedUsers);
+  };
+
   const handleCreateRole = async (newRole) => {
     await usuarioService.createCategory(newRole);
     const updatedRoles = await usuarioService.getCategories();
@@ -58,7 +65,7 @@ function Usuarios() {
         onAdd={handleCreateUser}
         onCategoryAdd={handleCreateRole}
         onDelete={handleDeleteUser}
-        // onEdit={handleEditUser}
+        onEdit={handleEditUser}
       />
     </div>
   );
