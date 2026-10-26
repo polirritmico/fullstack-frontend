@@ -1,4 +1,4 @@
-import "../../styles/legacy.css";
+import "@/styles/legacy.css";
 import { Link } from "react-router";
 
 function Home() {
