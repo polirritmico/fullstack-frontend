@@ -33,6 +33,13 @@ function Productos() {
     setProductos(updatedProducts);
   };
 
+  const handleEditProduct = async (updatedProduct) => {
+    console.log("Running handleEditProduct");
+    await productoService.update(updatedProduct);
+    const updatedProducts = await productoService.getAll();
+    setProductos(updatedProducts);
+  };
+
   const handleCreateCategory = async (newCategory) => {
     await productoService.createCategory(newCategory);
     const updatedCategories = await productoService.getCategories();
@@ -58,6 +65,7 @@ function Productos() {
         onAdd={handleCreateProduct}
         onCategoryAdd={handleCreateCategory}
         onDelete={handleDeleteProduct}
+        onEdit={handleEditProduct}
       />
     </div>
   );

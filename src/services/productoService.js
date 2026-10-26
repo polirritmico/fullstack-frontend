@@ -312,8 +312,6 @@ const productoService = {
   },
 
   async createCategory(newCategory) {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
     const nextId = Math.max(...categorias.map(({ id }) => Number(id))) + 1;
     const created = {
       ...newCategory,
@@ -329,8 +327,6 @@ const productoService = {
   },
 
   async delete(id) {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
     const remainingProducts = productos.filter(
       (producto) => producto.id !== id,
     );
@@ -341,14 +337,22 @@ const productoService = {
   },
 
   async create(newProduct) {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
     const nextId = String(Number(productos[productos.length - 1].id) + 1);
     const created = { ...newProduct, id: nextId };
 
     productos.push(created);
 
     return { ...created };
+  },
+
+  async update(updatedProduct) {
+    const index = productos.findIndex((user) => user.id === updatedProduct.id);
+    if (index !== -1) {
+      productos[index] = { ...productos[index], ...updatedProduct };
+      return { ...productos[index] };
+    }
+
+    return null;
   },
 };
 
