@@ -33,9 +33,9 @@ function Usuarios() {
     setUsuarios(updatedUsers);
   };
 
-  const handleEditUser = async (newUser) => {
+  const handleEditUser = async (updatedUser) => {
     console.log("Running handleEditUser");
-    await usuarioService.update(newUser);
+    await usuarioService.update(updatedUser);
     const updatedUsers = await usuarioService.getAll();
     setUsuarios(updatedUsers);
   };
