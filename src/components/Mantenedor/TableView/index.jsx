@@ -5,6 +5,7 @@ import Sidebar from "@/components/Mantenedor/Sidebar";
 import Table from "@/components/Mantenedor/Table";
 import TableAdd from "@/components/Mantenedor/Modal/TableAdd";
 import TableDelete from "@/components/Mantenedor/Modal/TableDelete";
+import TableDetails from "@/components/Mantenedor/Modal/TableDetails";
 import TableEdit from "@/components/Mantenedor/Modal/TableEdit";
 import TableToolbar from "@/components/Mantenedor/TableToolbar";
 
@@ -30,6 +31,7 @@ function TableView({
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
   const [entryToEdit, setEntryToEdit] = useState(null);
+  const [entryToDetails, setEntryToDetails] = useState(null);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -133,8 +135,17 @@ function TableView({
           metadata={metadata}
           onDeleteClick={setEntryToDelete}
           onEditClick={setEntryToEdit}
+          onDetailsClick={setEntryToDetails}
         />
       </div>
+
+      <TableDetails
+        entityName={singleLabel}
+        fields={metadata.columns}
+        show={Boolean(entryToDetails)}
+        entry={entryToDetails}
+        onHide={() => setEntryToDetails(null)}
+      />
 
       <TableAdd
         entityName={singleLabel}
@@ -153,20 +164,20 @@ function TableView({
         onSave={handleEditSave}
       />
 
-      <CategoryAdd
-        show={showCategoryModal}
-        onHide={() => setShowCategoryModal(false)}
-        onSave={handleCategorySave}
-        title={metadata.category.addTitle}
-        icons={metadata.category.icons}
-      />
-
       <TableDelete
         show={Boolean(entryToDelete)}
         entry={entryToDelete}
         metadata={metadata}
         onHide={() => setEntryToDelete(null)}
         onConfirm={handleDelete}
+      />
+
+      <CategoryAdd
+        show={showCategoryModal}
+        onHide={() => setShowCategoryModal(false)}
+        onSave={handleCategorySave}
+        title={metadata.category.addTitle}
+        icons={metadata.category.icons}
       />
     </>
   );
