@@ -26,7 +26,7 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
             <Form.Label>Nombre:</Form.Label>
             <Form.Control
               name="name"
-              placeholder="Ej: Accesorios, Juguetes, etc."
+              placeholder="Nombre del nuevo elemento."
               required
             />
           </Form.Group>

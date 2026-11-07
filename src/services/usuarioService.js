@@ -3,7 +3,7 @@ const metadata = {
   category: {
     field: "rol",
     label: "Roles",
-    addTitle: "Nueva Categoría",
+    addTitle: "Nuevo Rol",
     icons: ["🐾", "🐕", "🐈", "🐦", "🐹", "📦"],
   },
   delete: {
