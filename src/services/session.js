@@ -29,15 +29,25 @@ export function readSession() {
 function isValidSession(session) {
   if (!session) {
     return false;
-  } else if (typeof session.token !== "string" || session.token.length === 0) {
+  }
+
+  if (typeof session.token !== "string" || session.token.length === 0) {
     return false;
-  } else if (!Number.isFinite(session.exp)) {
+  }
+
+  if (!Number.isFinite(session.exp)) {
     return false;
-  } else if (session.exp <= Date.now()) {
+  }
+
+  if (isExpired(session.exp)) {
     return false;
   }
 
   return true;
+}
+
+export function isExpired(exp) {
+  return exp <= Date.now();
 }
 
 export function storeSession(session) {
