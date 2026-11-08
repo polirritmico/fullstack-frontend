@@ -1,59 +1,114 @@
-const LOCAL_STORAGE_KEY = "jKiltro-user";
+import { jwtDecode } from "jwt-decode";
 
-const mockAdminUser = {
-  id: 1,
-  username: "Alan Brito",
-  role: "Administrador",
-  token: "fake-jwt-admin-token",
+import { authApi } from "@/services/api.js";
+import {
+  readSession,
+  storeSession,
+  closeStoredSession,
+  isExpired,
+} from "@/services/session.js";
+
+const EXPECTED_ISSUER = import.meta.env.VITE_JWT_ISSUER;
+if (!EXPECTED_ISSUER) throw new Error("VITE_JWT_ISSUER env is not set");
+
+const ROLE_MAP = {
+  admin: "Administrador",
+  user: "Cliente",
 };
 
-const mockClientUser = {
-  id: 2,
-  username: "Susana Oria",
-  role: "Cliente",
-  token: "fake-jwt-client-token",
-};
+function parseJWT(token) {
+  try {
+    const decoded = jwtDecode(token);
+    console.log("Raw decoded token:", decoded);
+    convertTimestampsToMilliseconds(decoded);
+    return decoded;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Token inválido o malformado");
+  }
+}
+
+function convertTimestampsToMilliseconds(payload) {
+  if (payload.iat) payload.iat *= 1000;
+  if (payload.exp) payload.exp *= 1000;
+}
+
+function validateTokenPayload(payload) {
+  if (!payload) {
+    throw new Error("Token vacío");
+  }
+
+  if (!payload.sub) {
+    throw new Error("El token no contiene subject");
+  }
+
+  if (payload.iss !== EXPECTED_ISSUER) {
+    throw new Error("El token no es de un issuer válido");
+  }
+
+  if (!Array.isArray(payload.roles) || payload.roles.length === 0) {
+    throw new Error("El token no contiene roles");
+  }
+
+  if (!Number.isFinite(payload.iat)) {
+    throw new Error("El token no contiene timestamp de creación");
+  }
+
+  if (!Number.isFinite(payload.exp)) {
+    throw new Error("El token no contiene timestamp de expiración");
+  }
+
+  if (isExpired(payload.exp)) {
+    throw new Error("Se recibió un token ya expirado");
+  }
+}
+
+function mapUser(session) {
+  const role = ROLE_MAP[session.roles[0]];
+  if (!role) {
+    throw new Error("Tipo de usuario desconocido");
+  }
+
+  return {
+    id: session.sub,
+    role: role,
+  };
+}
 
 const authService = {
   async login(credentials) {
-    // TODO: This should decode the jwt token
+    const res = await authApi.post("api/v1/auth", credentials);
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
-    let user = null;
-    if (
-      credentials.email === "alanbrito@duocuc.cl" &&
-      credentials.password == "test"
-    ) {
-      user = mockAdminUser;
-    } else if (
-      credentials.email === "susanaoria@duocuc.cl" &&
-      credentials.password == "test"
-    ) {
-      user = mockClientUser;
+    const token = typeof res.data === "string" ? res.data : res.data?.token;
+    if (!token) {
+      throw new Error("Respuesta inválida: Sin token");
     }
 
-    if (!user) {
-      const errorPayload = {
-        timestamp: new Date(),
-        status: 401,
-        error: "Unauthorized",
-        message: "Algún mensaje de error desde el backend",
-      };
-      throw errorPayload;
-    }
+    const payload = parseJWT(token);
+    validateTokenPayload(payload);
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(user));
+    const session = {
+      ...payload,
+      token,
+    };
+
+    const user = mapUser(session);
+    storeSession(session);
+
     return user;
   },
 
   logout() {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    closeStoredSession();
   },
 
   getCurrentUser() {
-    const user = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return user ? JSON.parse(user) : null;
+    const session = readSession();
+    return session ? mapUser(session) : null;
+  },
+
+  getSessionExp() {
+    return readSession()?.exp ?? null;
   },
 };
 
