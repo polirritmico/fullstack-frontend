@@ -137,6 +137,40 @@ describe("AuthProvider tests", () => {
     expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
   });
 
+  it("debería deslogear si la sesión expira al guardar el perfil", async () => {
+    const testCaseCredentials = { email: "test@correo.cl", password: "mock" };
+    const testCaseAuthData = { id: 1, role: "Administrador" };
+    const testCaseProfile = { username: "Test User", email: "test@correo.cl" };
+    const expectedMessage = "Sesión expirada";
+    const expectedUser = null;
+    const expectedLogoutCalls = 1;
+
+    vi.mocked(authService.getCurrentUser).mockReturnValue(null);
+    vi.mocked(authService.login).mockResolvedValue(testCaseAuthData);
+    vi.mocked(usuarioService.getById).mockResolvedValue(testCaseProfile);
+    vi.mocked(authService.addUserDataToSession).mockReturnValue(null);
+
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+    const outputBefore = result.current.user;
+
+    let output = null;
+    try {
+      await act(async () => await result.current.login(testCaseCredentials));
+    } catch (err) {
+      output = err;
+    }
+    const outputUser = result.current.user;
+
+    expect(outputBefore).toBeNull();
+    expect(output).not.toBeNull();
+    expect(output.message).toEqual(expectedMessage);
+    expect(outputUser).toBe(expectedUser);
+    expect(authService.addUserDataToSession).toHaveBeenCalledWith(
+      testCaseProfile,
+    );
+    expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
+  });
+
   it("debería propagar excepciones y setear a null si hay un error de logeo", async () => {
     const testCaseCredentials = { email: "falso@correo.cl", password: "mock" };
     const testCaseError = { status: 401, error: "Unauthorized" };
