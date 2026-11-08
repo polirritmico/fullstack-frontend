@@ -24,7 +24,7 @@ function parseJWT(token) {
     return decoded;
   } catch (err) {
     console.error(err);
-    throw new Error("Token inválido o malformado");
+    throw new Error("Token inválido o malformado", err);
   }
 }
 
@@ -70,6 +70,7 @@ function mapUser(session) {
   }
 
   return {
+    ...(session.user ?? {}),
     id: session.sub,
     role: role,
   };
@@ -90,12 +91,28 @@ const authService = {
     const session = {
       ...payload,
       token,
+      user: null,
     };
 
     const user = mapUser(session);
     storeSession(session);
 
     return user;
+  },
+
+  addUserDataToSession(userData) {
+    const session = readSession();
+    if (!session) {
+      return null;
+    }
+
+    const updatedSession = {
+      ...session,
+      user: userData,
+    };
+
+    storeSession(updatedSession);
+    return mapUser(updatedSession);
   },
 
   logout() {
