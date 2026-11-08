@@ -4,12 +4,21 @@ import { act, renderHook } from "@testing-library/react";
 import { AuthProvider } from "./AuthProvider";
 import { useAuth } from "./AuthContext";
 import authService from "@/services/authService";
+import usuarioService from "@/services/usuarioService";
+import { SESSION_EXPIRED_EVENT } from "@/services/session";
 
 vi.mock("@/services/authService", () => ({
   default: {
     login: vi.fn(),
     logout: vi.fn(),
     getCurrentUser: vi.fn(),
+    addUserDataToSession: vi.fn(),
+  },
+}));
+
+vi.mock("@/services/usuarioService", () => ({
+  default: {
+    getById: vi.fn(),
   },
 }));
 
@@ -61,11 +70,14 @@ describe("AuthProvider tests", () => {
 
   it("debería actualizar el contexto tras un login válido", async () => {
     const testCaseCredentials = { email: "test@correo.cl", password: "mock" };
-    const testCaseUser = mockAdminUser;
+    const testCaseAuthData = { id: 1, role: "Administrador" };
+    const testCaseProfile = { username: "Test User", email: "test@correo.cl" };
     const expectedAfter = mockAdminUser.username;
 
     vi.mocked(authService.getCurrentUser).mockReturnValue(null);
-    vi.mocked(authService.login).mockResolvedValue(testCaseUser);
+    vi.mocked(authService.login).mockResolvedValue(testCaseAuthData);
+    vi.mocked(usuarioService.getById).mockResolvedValue(testCaseProfile);
+    vi.mocked(authService.addUserDataToSession).mockReturnValue(mockAdminUser);
 
     const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
     const outputBefore = result.current.user;
@@ -77,6 +89,10 @@ describe("AuthProvider tests", () => {
     expect(outputAfter).not.toBeNull();
     expect(outputAfter.username).toEqual(expectedAfter);
     expect(authService.login).toHaveBeenCalledWith(testCaseCredentials);
+    expect(usuarioService.getById).toHaveBeenCalledWith(testCaseAuthData.id);
+    expect(authService.addUserDataToSession).toHaveBeenCalledWith(
+      testCaseProfile,
+    );
   });
 
   it("debería quitar del contexto al usuario al deslogearse", async () => {
@@ -91,6 +107,28 @@ describe("AuthProvider tests", () => {
     const outputBefore = result.current.user;
 
     await act(async () => await result.current.logout());
+    const outputAfter = result.current.user;
+
+    expect(outputBefore).not.toBeNull();
+    expect(outputBefore.username).toEqual(expectedBefore);
+    expect(outputAfter).toBe(expectedAfter);
+    expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
+  });
+
+  it("debería deslogear cuando se dispara SESSION_EXPIRED_EVENT", () => {
+    const testCaseUser = mockAdminUser;
+    const expectedBefore = mockAdminUser.username;
+    const expectedAfter = null;
+    const expectedLogoutCalls = 1;
+
+    vi.mocked(authService.getCurrentUser).mockReturnValue(testCaseUser);
+
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+    const outputBefore = result.current.user;
+
+    act(() => {
+      window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT));
+    });
     const outputAfter = result.current.user;
 
     expect(outputBefore).not.toBeNull();
