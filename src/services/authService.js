@@ -63,7 +63,7 @@ function validateTokenPayload(payload) {
   }
 }
 
-function mapUser(session) {
+function mapAuthSession(session) {
   const role = ROLE_MAP[session.roles[0]];
   if (!role) {
     throw new Error("Tipo de usuario desconocido");
@@ -94,7 +94,7 @@ const authService = {
       user: null,
     };
 
-    const user = mapUser(session);
+    const user = mapAuthSession(session);
     storeSession(session);
 
     return user;
@@ -112,7 +112,7 @@ const authService = {
     };
 
     storeSession(updatedSession);
-    return mapUser(updatedSession);
+    return mapAuthSession(updatedSession);
   },
 
   logout() {
@@ -121,7 +121,7 @@ const authService = {
 
   getCurrentUser() {
     const session = readSession();
-    return session ? mapUser(session) : null;
+    return session ? mapAuthSession(session) : null;
   },
 
   getSessionExp() {
