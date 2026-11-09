@@ -30,7 +30,7 @@ describe("ProtectedAdminRoute tests", () => {
   });
 
   it("ir a /mantenedor debería redirigir a /no-autorizado si el usuario tiene rol Cliente", () => {
-    const testCase = { username: "Usuario Cliente", role: "Cliente" };
+    const testCase = { nombre: "Usuario Cliente", role: "Cliente" };
     const expected = "/no-autorizado";
 
     render(
@@ -48,7 +48,7 @@ describe("ProtectedAdminRoute tests", () => {
   });
 
   it("ir a /mantenedor/productos debería permitir el acceso si el usuario tiene rol Administrador", () => {
-    const testCase = { username: "Usuario Jefe", role: "Administrador" };
+    const testCase = { nombre: "Usuario Jefe", role: "Administrador" };
     const expected = "/mantenedor/productos";
 
     render(

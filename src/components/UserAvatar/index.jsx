@@ -23,7 +23,7 @@ function UserAvatar({ userData, showRole = false }) {
       >
         <div className="d-flex align-items-center gap-3">
           <div className="text-end">
-            <p className="fs-7 fw-semibold mb-0">{userData.username}</p>
+            <p className="fs-7 fw-semibold mb-0">{userData.nombre}</p>
 
             {showRole && (
               <p className="fs-8 text-body-secondary fw-medium mb-0">

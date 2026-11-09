@@ -19,7 +19,7 @@ const perfil = {
 const usuario = {
   ...perfil,
   id: 2,
-  username: "Ana Rojas",
+  nombre: "Ana Rojas",
   role: "Cliente",
 };
 

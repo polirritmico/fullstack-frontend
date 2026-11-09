@@ -18,7 +18,7 @@ vi.mock("@/services/compraService", () => ({
 
 const usuario = {
   id: 2,
-  username: "Ana Rojas",
+  nombre: "Ana Rojas",
   email: "ana@gmail.com",
   role: "Cliente",
 };

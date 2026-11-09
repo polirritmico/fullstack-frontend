@@ -55,7 +55,7 @@ function FormularioDireccion({ usuario }) {
     carga.direccion || {
       destinatario:
         [usuario.nombre, usuario.apellido].filter(Boolean).join(" ") ||
-        usuario.username ||
+        usuario.nombre ||
         "",
       telefono: usuario.telefono || "",
       direccion: usuario.direccion || "",

@@ -5,7 +5,7 @@ import "./MiPerfil.css";
 
 function cargarPerfil(usuario) {
   const perfilInicial = {
-    nombre: usuario.nombre || usuario.username || "",
+    nombre: usuario.nombre || "",
     apellido: usuario.apellido || "",
     email: usuario.email || "",
     telefono: usuario.telefono || "",
@@ -67,7 +67,7 @@ function ContenidoPerfil({ user }) {
 
   const nombreCompleto =
     [guardado.nombre, guardado.apellido].filter(Boolean).join(" ") ||
-    user.username;
+    user.nombre;
 
   const iniciales = nombreCompleto
     .split(" ")

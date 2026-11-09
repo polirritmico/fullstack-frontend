@@ -11,7 +11,7 @@ vi.mock("@/contexts/Auth/AuthContext", () => ({
 
 const usuario = {
   id: 2,
-  username: "Ana Rojas",
+  nombre: "Ana Rojas",
   role: "Cliente",
 };
 

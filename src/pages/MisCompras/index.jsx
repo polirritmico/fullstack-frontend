@@ -33,7 +33,7 @@ function MisCompras() {
   );
 
   const nombreCompleto =
-    [user.nombre, user.apellido].filter(Boolean).join(" ") || user.username;
+    [user.nombre, user.apellido].filter(Boolean).join(" ") || user.nombre;
 
   function formatearPrecio(precio) {
     return precio.toLocaleString("es-CL", {

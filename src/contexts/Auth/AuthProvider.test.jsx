@@ -25,7 +25,7 @@ vi.mock("@/services/usuarioService", () => ({
 describe("AuthProvider tests", () => {
   const mockAdminUser = {
     id: 1,
-    username: "Test User",
+    nombre: "Test User",
     role: "Administrador",
     token: "fake-jwt-admin-token",
   };
@@ -57,7 +57,7 @@ describe("AuthProvider tests", () => {
 
   it("debería inicializar con el usuario que devuelva el authService", () => {
     const testCase = mockAdminUser;
-    const expected = mockAdminUser.username;
+    const expected = mockAdminUser.nombre;
 
     vi.mocked(authService.getCurrentUser).mockReturnValue(testCase);
 
@@ -65,7 +65,7 @@ describe("AuthProvider tests", () => {
     const output = result.current.user;
 
     expect(output).not.toBeNull();
-    expect(output.username).toEqual(expected);
+    expect(output.nombre).toEqual(expected);
   });
 
   it("debería actualizar el contexto tras un login válido", async () => {
@@ -87,7 +87,7 @@ describe("AuthProvider tests", () => {
 
     expect(outputBefore).toBeNull();
     expect(outputAfter).not.toBeNull();
-    expect(outputAfter.username).toEqual(expectedAfter);
+    expect(outputAfter.nombre).toEqual(expectedAfter);
     expect(authService.login).toHaveBeenCalledWith(testCaseCredentials);
     expect(usuarioService.getById).toHaveBeenCalledWith(testCaseAuthData.id);
     expect(authService.addUserDataToSession).toHaveBeenCalledWith(
@@ -97,7 +97,7 @@ describe("AuthProvider tests", () => {
 
   it("debería quitar del contexto al usuario al deslogearse", async () => {
     const testCaseUser = mockAdminUser;
-    const expectedBefore = mockAdminUser.username;
+    const expectedBefore = mockAdminUser.nombre;
     const expectedAfter = null;
     const expectedLogoutCalls = 1;
 
@@ -110,14 +110,14 @@ describe("AuthProvider tests", () => {
     const outputAfter = result.current.user;
 
     expect(outputBefore).not.toBeNull();
-    expect(outputBefore.username).toEqual(expectedBefore);
+    expect(outputBefore.nombre).toEqual(expectedBefore);
     expect(outputAfter).toBe(expectedAfter);
     expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
   });
 
   it("debería deslogear cuando se dispara SESSION_EXPIRED_EVENT", () => {
     const testCaseUser = mockAdminUser;
-    const expectedBefore = mockAdminUser.username;
+    const expectedBefore = mockAdminUser.nombre;
     const expectedAfter = null;
     const expectedLogoutCalls = 1;
 
@@ -132,7 +132,7 @@ describe("AuthProvider tests", () => {
     const outputAfter = result.current.user;
 
     expect(outputBefore).not.toBeNull();
-    expect(outputBefore.username).toEqual(expectedBefore);
+    expect(outputBefore.nombre).toEqual(expectedBefore);
     expect(outputAfter).toBe(expectedAfter);
     expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
   });
@@ -140,7 +140,7 @@ describe("AuthProvider tests", () => {
   it("debería deslogear si la sesión expira al guardar el perfil", async () => {
     const testCaseCredentials = { email: "test@correo.cl", password: "mock" };
     const testCaseAuthData = { id: 1, role: "Administrador" };
-    const testCaseProfile = { username: "Test User", email: "test@correo.cl" };
+    const testCaseProfile = { nombre: "Test User", email: "test@correo.cl" };
     const expectedMessage = "Sesión expirada";
     const expectedUser = null;
     const expectedLogoutCalls = 1;

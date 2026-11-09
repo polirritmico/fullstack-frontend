@@ -20,8 +20,8 @@ describe("UserAvatar tests", () => {
   });
 
   it("debería mostrar el nombre del usuario al estar logeado", () => {
-    const testCase = { username: "Usuario test", role: "Cliente" };
-    const expected = testCase.username;
+    const testCase = { nombre: "Usuario test", role: "Cliente" };
+    const expected = testCase.nombre;
 
     render(
       <MemoryRouter>
@@ -33,7 +33,7 @@ describe("UserAvatar tests", () => {
   });
 
   it("no debería mostrar el menú administración si el usuario no es administrador", () => {
-    const testCase = { username: "Usuario test", role: "Cliente" };
+    const testCase = { nombre: "Usuario test", role: "Cliente" };
     const forbidden = "Administración";
 
     render(
@@ -46,7 +46,7 @@ describe("UserAvatar tests", () => {
   });
 
   it("debería mostrar el botón de administración si el usuario es administrador", () => {
-    const testCase = { username: "Usuario test", role: "Administrador" };
+    const testCase = { nombre: "Usuario test", role: "Administrador" };
     const expected = "Administración";
 
     render(
@@ -59,8 +59,8 @@ describe("UserAvatar tests", () => {
   });
 
   it.each([
-    { username: "Usuario Test", role: "Cliente" },
-    { username: "Usuario Test", role: "Administrador" },
+    { nombre: "Usuario Test", role: "Cliente" },
+    { nombre: "Usuario Test", role: "Administrador" },
   ])("debería mostrar el rol cuando showRole es true", (testCase) => {
     render(
       <MemoryRouter>
@@ -74,22 +74,22 @@ describe("UserAvatar tests", () => {
   it.each([
     {
       scenario: "es false (rol Cliente)",
-      testCase: { username: "Usuario Test", role: "Cliente" },
+      testCase: { nombre: "Usuario Test", role: "Cliente" },
       props: { showRole: false },
     },
     {
       scenario: "no está definido (rol Cliente)",
-      testCase: { username: "Usuario Test", role: "Cliente" },
+      testCase: { nombre: "Usuario Test", role: "Cliente" },
       props: {},
     },
     {
       scenario: "es false (rol Administrador)",
-      testCase: { username: "Usuario Test", role: "Administrador" },
+      testCase: { nombre: "Usuario Test", role: "Administrador" },
       props: { showRole: false },
     },
     {
       scenario: "no está definido (rol Adminsitrador)",
-      testCase: { username: "Usuario Test", role: "Administrador" },
+      testCase: { nombre: "Usuario Test", role: "Administrador" },
       props: {},
     },
   ])(
