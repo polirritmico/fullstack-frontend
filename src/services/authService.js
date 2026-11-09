@@ -8,13 +8,13 @@ import {
   isExpired,
 } from "@/services/utils/session.js";
 
-const EXPECTED_ISSUER = import.meta.env.VITE_JWT_ISSUER;
-if (!EXPECTED_ISSUER) throw new Error("VITE_JWT_ISSUER env is not set");
-
+const AUTH_API = "api/v1/auth";
 const ROLE_MAP = {
   admin: "Administrador",
   user: "Cliente",
 };
+const EXPECTED_ISSUER = import.meta.env.VITE_JWT_ISSUER;
+if (!EXPECTED_ISSUER) throw new Error("VITE_JWT_ISSUER env is not set");
 
 function parseJWT(token) {
   try {
@@ -78,7 +78,7 @@ function mapAuthSession(session) {
 
 const authService = {
   async login({ email, password }) {
-    const res = await authApi.post("api/v1/auth", { user: email, password });
+    const res = await authApi.post(AUTH_API, { user: email, password });
 
     const token = typeof res.data === "string" ? res.data : res.data?.token;
     if (!token) {
@@ -122,10 +122,6 @@ const authService = {
   getCurrentUser() {
     const session = readSession();
     return session ? mapAuthSession(session) : null;
-  },
-
-  getSessionExp() {
-    return readSession()?.exp ?? null;
   },
 };
 
