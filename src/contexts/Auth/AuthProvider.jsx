@@ -13,10 +13,13 @@ export function AuthProvider({ children }) {
 
   async function login(credentials) {
     try {
-      const authData = await authService.login(credentials);
-      const userData = await usuarioService.getById(authData.id);
-      const userSessionData = authService.addUserDataToSession(userData);
+      await authService.login(credentials);
+      const userData = await usuarioService.getMyProfile();
+      if (!userData) {
+        throw new Error("No se encontró el perfil del usuario");
+      }
 
+      const userSessionData = authService.addUserDataToSession(userData);
       if (!userSessionData) {
         throw new Error("Sesión expirada");
       }

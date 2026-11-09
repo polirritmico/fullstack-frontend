@@ -17,9 +17,7 @@ vi.mock("@/services/authService", () => ({
 }));
 
 vi.mock("@/services/usuarioService", () => ({
-  default: {
-    getById: vi.fn(),
-  },
+  default: { getMyProfile: vi.fn() },
 }));
 
 describe("AuthProvider tests", () => {
@@ -71,12 +69,12 @@ describe("AuthProvider tests", () => {
   it("debería actualizar el contexto tras un login válido", async () => {
     const testCaseCredentials = { email: "test@correo.cl", password: "mock" };
     const testCaseAuthData = { id: 1, role: "Administrador" };
-    const testCaseProfile = { username: "Test User", email: "test@correo.cl" };
-    const expectedAfter = mockAdminUser.username;
+    const testCaseProfile = { nombre: "Test User", email: "test@correo.cl" };
+    const expectedAfter = mockAdminUser.nombre;
 
     vi.mocked(authService.getCurrentUser).mockReturnValue(null);
     vi.mocked(authService.login).mockResolvedValue(testCaseAuthData);
-    vi.mocked(usuarioService.getById).mockResolvedValue(testCaseProfile);
+    vi.mocked(usuarioService.getMyProfile).mockResolvedValue(testCaseProfile);
     vi.mocked(authService.addUserDataToSession).mockReturnValue(mockAdminUser);
 
     const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
@@ -89,7 +87,6 @@ describe("AuthProvider tests", () => {
     expect(outputAfter).not.toBeNull();
     expect(outputAfter.nombre).toEqual(expectedAfter);
     expect(authService.login).toHaveBeenCalledWith(testCaseCredentials);
-    expect(usuarioService.getById).toHaveBeenCalledWith(testCaseAuthData.id);
     expect(authService.addUserDataToSession).toHaveBeenCalledWith(
       testCaseProfile,
     );
@@ -147,7 +144,7 @@ describe("AuthProvider tests", () => {
 
     vi.mocked(authService.getCurrentUser).mockReturnValue(null);
     vi.mocked(authService.login).mockResolvedValue(testCaseAuthData);
-    vi.mocked(usuarioService.getById).mockResolvedValue(testCaseProfile);
+    vi.mocked(usuarioService.getMyProfile).mockResolvedValue(testCaseProfile);
     vi.mocked(authService.addUserDataToSession).mockReturnValue(null);
 
     const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
