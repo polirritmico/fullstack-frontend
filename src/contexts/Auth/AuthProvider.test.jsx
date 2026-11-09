@@ -195,4 +195,31 @@ describe("AuthProvider tests", () => {
     expect(outputUser).toBe(expectedUser);
     expect(authService.login).toHaveBeenCalledTimes(expectedLoginCalls);
   });
+
+  it("debería fallar si no se encuentra el perfil del usuario", async () => {
+    const testCaseCredentials = { email: "test@correo.cl", password: "mock" };
+    const expectedMessage = "No se encontró el perfil del usuario";
+    const expectedLogoutCalls = 1;
+
+    vi.mocked(authService.getCurrentUser).mockReturnValue(null);
+    vi.mocked(authService.login).mockResolvedValue({
+      id: "test@correo.cl",
+      role: "Administrador",
+    });
+    vi.mocked(usuarioService.getMyProfile).mockResolvedValue(null);
+
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+
+    let output = null;
+    try {
+      await act(async () => await result.current.login(testCaseCredentials));
+    } catch (err) {
+      output = err;
+    }
+
+    expect(output.message).toEqual(expectedMessage);
+    expect(result.current.user).toBeNull();
+    expect(authService.addUserDataToSession).not.toHaveBeenCalled();
+    expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
+  });
 });
