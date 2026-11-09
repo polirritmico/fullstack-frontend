@@ -71,8 +71,8 @@ function mapAuthSession(session) {
 
   return {
     ...(session.user ?? {}),
-    id: session.sub,
-    role: role,
+    id: session.user?.id,
+    role,
   };
 }
 
