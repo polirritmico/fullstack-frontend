@@ -1,3 +1,5 @@
+import { jkiltroApi } from "@/services/api";
+
 const metadata = {
   entity: { key: "user", singleLabel: "Usuario", pluralLabel: "Usuarios" },
   category: {
@@ -212,15 +214,34 @@ let users = [
   },
 ];
 
+function mapUsuario(usuario) {
+  if (!usuario) {
+    return null;
+  }
+
+  return {
+    id: usuario.id,
+    email: usuario.email,
+    nombre: usuario.nombreCompleto,
+    telefono: usuario.telefonoCelular,
+    userData: usuario,
+  };
+}
+
 const usuarioService = {
   async getAll() {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return [...users];
   },
 
+  async getMyProfile() {
+    const res = await jkiltroApi.get("/api/v1/users/me");
+    return mapUsuario(res.data);
+  },
+
   async getById(id) {
-    const user = users.find((usr) => usr.id == id);
-    return Promise.resolve(user ? { ...user } : null);
+    const res = await jkiltroApi.get(`/api/v1/users/${id}`);
+    return mapUsuario(res.data);
   },
 
   async getCategories() {
