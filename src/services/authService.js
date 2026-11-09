@@ -6,7 +6,7 @@ import {
   storeSession,
   closeStoredSession,
   isExpired,
-} from "@/services/session.js";
+} from "@/services/utils/session.js";
 
 const EXPECTED_ISSUER = import.meta.env.VITE_JWT_ISSUER;
 if (!EXPECTED_ISSUER) throw new Error("VITE_JWT_ISSUER env is not set");

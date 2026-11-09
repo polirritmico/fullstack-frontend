@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { readSession, storeSession } from "@/services/session";
+import { readSession, storeSession } from "@/services/utils/session";
 
 const STORAGE_KEY = "jKiltro-session";
 

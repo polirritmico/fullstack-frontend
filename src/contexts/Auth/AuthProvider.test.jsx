@@ -5,7 +5,7 @@ import { AuthProvider } from "./AuthProvider";
 import { useAuth } from "./AuthContext";
 import authService from "@/services/authService";
 import usuarioService from "@/services/usuarioService";
-import { SESSION_EXPIRED_EVENT } from "@/services/session";
+import { SESSION_EXPIRED_EVENT } from "@/services/utils/session";
 
 vi.mock("@/services/authService", () => ({
   default: {

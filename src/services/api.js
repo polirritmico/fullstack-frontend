@@ -4,7 +4,7 @@ import {
   closeStoredSession,
   readSession,
   SESSION_EXPIRED_EVENT,
-} from "@/services/session.js";
+} from "@/services/utils/session.js";
 
 function createGatewayClient() {
   return axios.create({

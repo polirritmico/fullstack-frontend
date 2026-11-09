@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import authService from "@/services/authService";
 import usuarioService from "@/services/usuarioService";
-import { SESSION_EXPIRED_EVENT } from "@/services/session";
+import { SESSION_EXPIRED_EVENT } from "@/services/utils/session";
 import { AuthContext } from "./AuthContext";
 
 export function AuthProvider({ children }) {
