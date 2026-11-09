@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import { useAuth } from "@/contexts/Auth/AuthContext";
+import { getApiErrorMessage } from "@/services/utils/apiError";
 
 function useLogin() {
   const { login } = useAuth();
@@ -37,7 +38,7 @@ function useLogin() {
       navigate(targetUrl, { replace: true });
     } catch (err) {
       console.log(err);
-      setError(err.message);
+      setError(getApiErrorMessage(err));
     } finally {
       setIsSubmitting(false);
     }
