@@ -77,8 +77,8 @@ function mapUser(session) {
 }
 
 const authService = {
-  async login(credentials) {
-    const res = await authApi.post("api/v1/auth", credentials);
+  async login({ email, password }) {
+    const res = await authApi.post("api/v1/auth", { user: email, password });
 
     const token = typeof res.data === "string" ? res.data : res.data?.token;
     if (!token) {
