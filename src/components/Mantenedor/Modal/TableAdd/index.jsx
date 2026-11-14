@@ -4,20 +4,18 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-const getInType = (type) =>
-  ({
-    string: "text",
-    email: "email",
-    int: "number",
-    money: "number",
-    number: "number",
-  })[type] ?? "text";
+import { getInType, parseValue } from "@/components/Mantenedor/Modal/utils";
 
 function TableAdd({ entityName, fields, show, onHide, onSave }) {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const formData = new FormData(ev.target);
-    const newData = Object.fromEntries(formData.entries());
+    const newData = Object.fromEntries(
+      [...formData.entries()].map(([key, value]) => {
+        const field = fields.find((item) => item.key === key);
+        return [key, parseValue(field, value)];
+      }),
+    );
 
     onSave(newData);
   };
@@ -72,9 +70,6 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
             }
           })}
         </Form>
-        <p className="text-warning fst-italic">
-          Nota: Este cambio no es persistente sin conectar al backend.
-        </p>
       </Modal.Body>
 
       <Modal.Footer className="justify-content-center">
