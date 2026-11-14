@@ -1,3 +1,4 @@
+import SubmitButton from "@/components/SubmitButton";
 import useLogin from "./useLogin";
 
 function LoginForm() {
@@ -36,13 +37,12 @@ function LoginForm() {
       </div>
 
       <div className="d-grid mb-4">
-        <button
-          className="btn btn-primary"
+        <SubmitButton
           type="submit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Ingresando…" : "Ingresar"}
-        </button>
+          isLoading={isSubmitting}
+          defaultText="Ingresar"
+          workingText="Ingresando…"
+        />
       </div>
     </form>
   );
