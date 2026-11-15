@@ -1,19 +1,24 @@
 import axios from "axios";
 
+function add_period_if_missing(msg) {
+  const ADD_PERIOD_PATTERN = /([^.])$/;
+  return msg.replace(ADD_PERIOD_PATTERN, "$1.");
+}
+
 export function getApiErrorMessage(error) {
   const data = error.response?.data;
   const metaKeys = ["timestamp", "status", "path", "kind"];
 
   if (typeof data === "string" && data) {
-    return data;
+    return add_period_if_missing(data);
   }
 
   if (typeof data?.message === "string" && data.message) {
-    return data.message;
+    return add_period_if_missing(data.message);
   }
 
   if (typeof data?.error === "string" && data.error) {
-    return data.error;
+    return add_period_if_missing(data.error);
   }
 
   if (data && typeof data === "object") {
@@ -23,7 +28,7 @@ export function getApiErrorMessage(error) {
     )?.[1];
 
     if (validationMessage) {
-      return validationMessage;
+      return add_period_if_missing(validationMessage);
     }
   }
 
