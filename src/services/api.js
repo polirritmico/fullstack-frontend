@@ -6,6 +6,9 @@ import {
   SESSION_EXPIRED_EVENT,
 } from "@/services/utils/session.js";
 
+const GATEWAY_ERRORS = [502, 503, 504];
+export const CONNECTION_ERROR_EVENT = "jkiltro:connection-error";
+
 function createGatewayClient() {
   return axios.create({
     baseURL: import.meta.env.VITE_JKILTRO_API,
@@ -34,6 +37,16 @@ jkiltroApi.interceptors.response.use(
     if (sentToken && err.response?.status === 401) {
       closeStoredSession();
       window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT));
+      return Promise.reject(err);
+    }
+
+    const isTimeout = err.code === "ECONNABORTED";
+    const isNetworkError = !err.response;
+    const isGatewayDown = GATEWAY_ERRORS.includes(err.response?.status);
+
+    if (isTimeout || isNetworkError || isGatewayDown) {
+      err.isConnectionError = true;
+      window.dispatchEvent(new Event(CONNECTION_ERROR_EVENT));
     }
 
     return Promise.reject(err);
