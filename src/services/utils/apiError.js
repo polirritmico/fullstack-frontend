@@ -28,12 +28,12 @@ export function getApiErrorMessage(error) {
   }
 
   if (error.response) {
-    return "Error del servidor";
+    return "Error en el servidor.";
   }
 
   if (axios.isAxiosError(error)) {
-    return "Error de conexión";
+    return "Error de conexión con el servidor.";
   }
 
-  return "Error inesperado";
+  return "Error inesperado.";
 }

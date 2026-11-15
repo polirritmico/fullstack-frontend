@@ -33,7 +33,9 @@ function LoginForm() {
         />
         <label htmlFor="id-login-password">Contraseña</label>
 
-        <div className="invalid-feedback text-center fs-6">{error}</div>
+        <div className="invalid-feedback alert alert-danger text-center fs-6 mt-3">
+          {error}
+        </div>
       </div>
 
       <div className="d-grid mb-4">
