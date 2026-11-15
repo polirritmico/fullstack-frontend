@@ -58,7 +58,7 @@ function Productos() {
         data={productos}
         metadata={metadata}
 
-        TableCustomClass="tabla-productos"
+        tableCustomClass="tabla-productos"
         sidebarCategories={categorias}
         toolbarPlaceholder="Búsqueda por producto o SKU..."
         toolbarTextoBoton="+ Agregar Productos"
