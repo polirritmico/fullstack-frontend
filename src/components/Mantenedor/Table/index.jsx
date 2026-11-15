@@ -11,7 +11,6 @@ function Table({ data, metadata, onDeleteClick, onEditClick, onDetailsClick }) {
         </caption>
 
         <TableHeader columns={metadata.columns} action={metadata.action} />
-
         <tbody>
           {data.map((entry) => {
             return (
