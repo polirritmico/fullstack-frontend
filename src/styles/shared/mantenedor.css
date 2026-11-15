@@ -78,40 +78,45 @@
 }
 
 /* Tabla usuarios */
-/* Usuario */
+/* Nombre */
 .tabla-usuarios th:nth-child(1),
 .tabla-usuarios td:nth-child(1) {
   text-align: left;
 }
-/* Rol */
+/* Apellido */
 .tabla-usuarios th:nth-child(2),
 .tabla-usuarios td:nth-child(2) {
+  text-align: left;
+}
+/* Rol */
+.tabla-usuarios th:nth-child(3),
+.tabla-usuarios td:nth-child(3) {
   text-align: left;
   width: 14ch;
   white-space: nowrap;
 }
 /* Departamento */
-.tabla-usuarios th:nth-child(3),
-.tabla-usuarios td:nth-child(3) {
-  text-align: left;
-  white-space: nowrap;
-}
-/* Correo */
 .tabla-usuarios th:nth-child(4),
 .tabla-usuarios td:nth-child(4) {
   text-align: left;
   white-space: nowrap;
 }
-/* Último login */
+/* Correo */
 .tabla-usuarios th:nth-child(5),
 .tabla-usuarios td:nth-child(5) {
+  text-align: left;
+  white-space: nowrap;
+}
+/* Último login */
+.tabla-usuarios th:nth-child(6),
+.tabla-usuarios td:nth-child(6) {
   text-align: center;
   width: 8ch;
   white-space: nowrap;
 }
 /* Estado */
-.tabla-usuarios th:nth-child(6),
-.tabla-usuarios td:nth-child(6) {
+.tabla-usuarios th:nth-child(7),
+.tabla-usuarios td:nth-child(7) {
   text-align: center;
   width: 14ch;
   white-space: nowrap;
