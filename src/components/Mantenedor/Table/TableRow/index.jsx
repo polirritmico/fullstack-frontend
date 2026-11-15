@@ -4,6 +4,11 @@ const clpFormatter = new Intl.NumberFormat("es-CL", {
   maximumFractionDigits: 0,
 });
 
+function capitalizeFirstLetter(val) {
+  // From: https://stackoverflow.com/questions/1026069
+  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 function TableRow({
   entry,
   columns,
@@ -17,12 +22,14 @@ function TableRow({
         if (column.isHidden) return null;
 
         if (column.isState) {
+          const value = capitalizeFirstLetter(entry[column.key]);
+
           return (
             <td key={column.key}>
               <span
-                className={`badge text-bg-${entry[column.key] === "Activo" ? "success" : "secondary"}`}
+                className={`badge text-bg-${value === "Activo" ? "success" : "secondary"}`}
               >
-                {entry[column.key]}
+                {value}
               </span>
             </td>
           );
