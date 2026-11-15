@@ -1,10 +1,19 @@
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-function Table({ data, metadata, onDeleteClick, onEditClick, onDetailsClick }) {
+function Table({
+  data,
+  metadata,
+  customClass,
+  onDeleteClick,
+  onEditClick,
+  onDetailsClick,
+}) {
   return (
     <div className="table-responsive">
-      <table className="tabla-usuarios table table-striped table-hover caption-top align-middle border">
+      <table
+        className={`${customClass} table table-striped table-hover caption-top align-middle border`}
+      >
         <caption>
           <span id="id-tabla-principal">{data.length}</span>{" "}
           {metadata.entity.pluralLabel.toLowerCase()}

@@ -58,6 +58,7 @@ function Usuarios() {
         data={usuarios}
         metadata={metadata}
 
+        tableCustomClass="tabla-usuarios"
         sidebarCategories={roles}
         toolbarPlaceholder="Búsqueda por nombre, correo o rol…"
         toolbarTextoBoton="+ Agregar Usuario"

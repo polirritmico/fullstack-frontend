@@ -13,6 +13,7 @@ function TableView({
   data,
   metadata,
   sidebarCategories,
+  tableCustomClass,
   toolbarPlaceholder,
   toolbarTextoBoton,
   onAdd,
@@ -133,6 +134,7 @@ function TableView({
         <Table
           data={filteredData}
           metadata={metadata}
+          customClass={tableCustomClass}
           onDeleteClick={setEntryToDelete}
           onEditClick={setEntryToEdit}
           onDetailsClick={setEntryToDetails}
