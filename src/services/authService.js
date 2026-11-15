@@ -19,7 +19,6 @@ const ROLE_MAP = {
 function parseJWT(token) {
   try {
     const decoded = jwtDecode(token);
-    console.log("Raw decoded token:", decoded);
     convertTimestampsToMilliseconds(decoded);
     return decoded;
   } catch (err) {
@@ -78,7 +77,7 @@ function mapAuthSession(session) {
 
 const authService = {
   async login({ email, password }) {
-    const res = await authApi.post("api/v1/auth", { user: email, password });
+    const res = await authApi.post("/api/v1/auth", { user: email, password });
 
     const token = typeof res.data === "string" ? res.data : res.data?.token;
     if (!token) {
