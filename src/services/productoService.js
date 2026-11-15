@@ -1,4 +1,4 @@
-// import { metadata, productos, categorias } from "@/data/productos";
+// TODO: implement or align with backend api
 
 const metadata = {
   entity: {

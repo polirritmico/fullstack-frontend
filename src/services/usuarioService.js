@@ -41,6 +41,7 @@ const usuarioService = {
   },
 
   async createCategory(newCategory) {
+    // TODO: implement or align with backend api
     const res = await jkiltroApi.get("/api/v1/users/roles");
     const roles = res.data;
 
@@ -59,16 +60,19 @@ const usuarioService = {
   },
 
   async delete(id) {
+    // TODO: implement or align with backend api
     await jkiltroApi.delete(`/api/v1/users/${id}`);
     return true;
   },
 
   async create(newUser) {
+    // TODO: implement or align with backend api
     const res = await jkiltroApi.post("/api/v1/users", newUser);
     return res.data;
   },
 
   async update(updatedUser) {
+    // TODO: implement or align with backend api
     const { id, ...payload } = updatedUser;
     const res = await jkiltroApi.put(`/api/v1/users/${id}`, payload);
     return res.data;
