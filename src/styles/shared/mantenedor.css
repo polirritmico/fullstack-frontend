@@ -1,3 +1,14 @@
+/* PT Sans solo tiene weights de 400 y 700 por lo que se añade "artificalmente" */
+.fw-medium {
+  font-weight: 400 !important;
+  -webkit-text-stroke: 0.32px currentColor;
+}
+
+.fw-semibold {
+  font-weight: 400 !important;
+  -webkit-text-stroke: 0.55px currentColor;
+}
+
 .avatar-circle {
   width: 48px;
   height: 48px;
