@@ -10,7 +10,8 @@ function SinConexion({ onRetry }) {
 
       <p className="text-muted lead">
         Lo sentimos, estamos teniendo dificultades técnicas para procesar tu
-        solicitud. Por favor, intenta de nuevo en unos minutos.
+        solicitud. <br />
+        Por favor, intenta de nuevo en unos minutos.
       </p>
 
       <div className="d-flex flex-wrap gap-2 justify-content-center mt-2">
