@@ -4,11 +4,13 @@ import usuarioService from "@/services/usuarioService";
 
 import Loading from "@/components/Loading";
 import TableView from "@/components/Mantenedor/TableView";
+import SinConexion from "@/pages/Errores/SinConexion";
 
 function Usuarios() {
   const [roles, setRoles] = useState();
   const [usuarios, setUsuarios] = useState();
   const [metadata, setMetadata] = useState();
+  const [connectionError, setConnectionError] = useState(false);
 
   const fetchInitialData = useCallback(() => {
     return Promise.all([
@@ -19,12 +21,37 @@ function Usuarios() {
   }, []);
 
   useEffect(() => {
-    fetchInitialData().then(([metadataRes, rolesRes, usuariosRes]) => {
+    fetchInitialData()
+      .then(([metadataRes, rolesRes, usuariosRes]) => {
+        setMetadata(metadataRes);
+        setRoles(rolesRes);
+        setUsuarios(usuariosRes);
+      })
+      .catch((err) => {
+        if (err.isConnectionError) {
+          setConnectionError(true);
+        }
+      });
+  }, [fetchInitialData]);
+
+  const handleRetry = async () => {
+    setConnectionError(false);
+
+    try {
+      const [metadataRes, rolesRes, usuariosRes] = await fetchInitialData();
       setMetadata(metadataRes);
       setRoles(rolesRes);
       setUsuarios(usuariosRes);
-    });
-  }, [fetchInitialData]);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
+  };
+
+  if (connectionError) {
+    return <SinConexion onRetry={handleRetry} />;
+  }
 
   if (!metadata || !roles || !usuarios) {
     return <Loading />;
@@ -32,28 +59,52 @@ function Usuarios() {
 
   const handleCreateUser = async (newUser) => {
     console.log("Running handleCreateUser");
-    await usuarioService.create(newUser);
-    const updatedUsers = await usuarioService.getAll();
-    setUsuarios(updatedUsers);
+    try {
+      await usuarioService.create(newUser);
+      const updatedUsers = await usuarioService.getAll();
+      setUsuarios(updatedUsers);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleEditUser = async (updatedUser) => {
     console.log("Running handleEditUser");
-    await usuarioService.update(updatedUser);
-    const updatedUsers = await usuarioService.getAll();
-    setUsuarios(updatedUsers);
+    try {
+      await usuarioService.update(updatedUser);
+      const updatedUsers = await usuarioService.getAll();
+      setUsuarios(updatedUsers);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleCreateRole = async (newRole) => {
-    await usuarioService.createCategory(newRole);
-    const updatedRoles = await usuarioService.getCategories();
-    setRoles(updatedRoles);
+    try {
+      await usuarioService.createCategory(newRole);
+      const updatedRoles = await usuarioService.getCategories();
+      setRoles(updatedRoles);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleDeleteUser = async (id) => {
-    await usuarioService.delete(id);
-    const updatedUsers = await usuarioService.getAll();
-    setUsuarios(updatedUsers);
+    try {
+      await usuarioService.delete(id);
+      const updatedUsers = await usuarioService.getAll();
+      setUsuarios(updatedUsers);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   return (
