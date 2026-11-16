@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import usuarioService from "@/services/usuarioService";
 
@@ -10,17 +10,21 @@ function Usuarios() {
   const [usuarios, setUsuarios] = useState();
   const [metadata, setMetadata] = useState();
 
-  useEffect(() => {
-    usuarioService.getMetadata().then(setMetadata);
+  const fetchInitialData = useCallback(() => {
+    return Promise.all([
+      usuarioService.getMetadata(),
+      usuarioService.getCategories(),
+      usuarioService.getAll(),
+    ]);
   }, []);
 
   useEffect(() => {
-    usuarioService.getCategories().then(setRoles);
-  }, []);
-
-  useEffect(() => {
-    usuarioService.getAll().then(setUsuarios);
-  }, []);
+    fetchInitialData().then(([metadataRes, rolesRes, usuariosRes]) => {
+      setMetadata(metadataRes);
+      setRoles(rolesRes);
+      setUsuarios(usuariosRes);
+    });
+  }, [fetchInitialData]);
 
   if (!metadata || !roles || !usuarios) {
     return <Loading />;
