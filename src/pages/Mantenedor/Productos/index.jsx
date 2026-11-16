@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import productoService from "@/services/productoService";
 
@@ -10,17 +10,21 @@ function Productos() {
   const [categorias, setCategorias] = useState();
   const [metadata, setMetadata] = useState();
 
-  useEffect(() => {
-    productoService.getMetadata().then(setMetadata);
+  const fetchInitialData = useCallback(() => {
+    return Promise.all([
+      productoService.getMetadata(),
+      productoService.getCategories(),
+      productoService.getAll(),
+    ]);
   }, []);
 
   useEffect(() => {
-    productoService.getCategories().then(setCategorias);
-  }, []);
-
-  useEffect(() => {
-    productoService.getAll().then(setProductos);
-  }, []);
+    fetchInitialData().then(([metadataRes, categoriasRes, productosRes]) => {
+      setMetadata(metadataRes);
+      setCategorias(categoriasRes);
+      setProductos(productosRes);
+    });
+  }, [fetchInitialData]);
 
   if (!metadata || !categorias || !productos) {
     return <Loading />;
