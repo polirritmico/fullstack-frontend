@@ -4,11 +4,13 @@ import productoService from "@/services/productoService";
 
 import Loading from "@/components/Loading";
 import TableView from "@/components/Mantenedor/TableView";
+import SinConexion from "@/pages/Errores/SinConexion";
 
 function Productos() {
   const [productos, setProductos] = useState();
   const [categorias, setCategorias] = useState();
   const [metadata, setMetadata] = useState();
+  const [connectionError, setConnectionError] = useState(false);
 
   const fetchInitialData = useCallback(() => {
     return Promise.all([
@@ -19,41 +21,89 @@ function Productos() {
   }, []);
 
   useEffect(() => {
-    fetchInitialData().then(([metadataRes, categoriasRes, productosRes]) => {
+    fetchInitialData()
+      .then(([metadataRes, categoriasRes, productosRes]) => {
+        setMetadata(metadataRes);
+        setCategorias(categoriasRes);
+        setProductos(productosRes);
+      })
+      .catch((err) => {
+        if (err.isConnectionError) {
+          setConnectionError(true);
+        }
+      });
+  }, [fetchInitialData]);
+
+  const handleRetry = async () => {
+    setConnectionError(false);
+
+    try {
+      const [metadataRes, categoriasRes, productosRes] =
+        await fetchInitialData();
       setMetadata(metadataRes);
       setCategorias(categoriasRes);
       setProductos(productosRes);
-    });
-  }, [fetchInitialData]);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
+  };
+
+  if (connectionError) {
+    return <SinConexion onRetry={handleRetry} />;
+  }
 
   if (!metadata || !categorias || !productos) {
     return <Loading />;
   }
 
   const handleCreateProduct = async (newProduct) => {
-    console.log("Running handleCreateProduct");
-    await productoService.create(newProduct);
-    const updatedProducts = await productoService.getAll();
-    setProductos(updatedProducts);
+    try {
+      await productoService.create(newProduct);
+      const updatedProducts = await productoService.getAll();
+      setProductos(updatedProducts);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleEditProduct = async (updatedProduct) => {
-    console.log("Running handleEditProduct");
-    await productoService.update(updatedProduct);
-    const updatedProducts = await productoService.getAll();
-    setProductos(updatedProducts);
+    try {
+      await productoService.update(updatedProduct);
+      const updatedProducts = await productoService.getAll();
+      setProductos(updatedProducts);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleCreateCategory = async (newCategory) => {
-    await productoService.createCategory(newCategory);
-    const updatedCategories = await productoService.getCategories();
-    setCategorias(updatedCategories);
+    try {
+      await productoService.createCategory(newCategory);
+      const updatedCategories = await productoService.getCategories();
+      setCategorias(updatedCategories);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   const handleDeleteProduct = async (id) => {
-    await productoService.delete(id);
-    const updatedProducts = await productoService.getAll();
-    setProductos(updatedProducts);
+    try {
+      await productoService.delete(id);
+      const updatedProducts = await productoService.getAll();
+      setProductos(updatedProducts);
+    } catch (err) {
+      if (err.isConnectionError) {
+        setConnectionError(true);
+      }
+    }
   };
 
   return (
