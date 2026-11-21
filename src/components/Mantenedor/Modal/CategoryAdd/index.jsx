@@ -26,7 +26,26 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
             <Form.Label>Nombre:</Form.Label>
             <Form.Control
               name="name"
-              placeholder="Nombre del nuevo elemento."
+              placeholder="Nombre de la nuevo elemento o categoría."
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="add-category-name">
+            <Form.Label>Nombre en plural:</Form.Label>
+            <Form.Control
+              name="nameShow"
+              placeholder="Nombre en plural del nuevo elemento o categoría."
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="add-category-name">
+            <Form.Label>Descripción:</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="text"
+              placeholder="Descripción del nuevo elemento o categoría"
               required
             />
           </Form.Group>
