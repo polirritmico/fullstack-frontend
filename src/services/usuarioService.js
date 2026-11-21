@@ -14,6 +14,19 @@ function mapUsuario(usuario) {
   };
 }
 
+function mapNewCategoryRequest(newCategory) {
+  if (!newCategory) {
+    return null;
+  }
+
+  return {
+    nombreRol: newCategory.name,
+    nombreMostrar: newCategory.nameShow,
+    icon: newCategory.icon,
+    descripcion: newCategory.text,
+  };
+}
+
 const usuarioService = {
   async getMetadata() {
     const res = await jkiltroApi.get("/api/v1/users/metadata");
@@ -41,22 +54,9 @@ const usuarioService = {
   },
 
   async createCategory(newCategory) {
-    // TODO: implement or align with backend api
-    const res = await jkiltroApi.get("/api/v1/users/roles");
-    const roles = res.data;
-
-    const nextId = Math.max(...roles.map(({ id }) => Number(id))) + 1;
-    const created = {
-      ...newCategory,
-      id: nextId,
-      value: newCategory.name,
-      amount: 0,
-      isDefault: false,
-    };
-
-    roles.push(created);
-
-    return { ...created };
+    const body = mapNewCategoryRequest(newCategory);
+    const res = await jkiltroApi.post("/api/v1/users/roles", body);
+    return res.data;
   },
 
   async delete(id) {
