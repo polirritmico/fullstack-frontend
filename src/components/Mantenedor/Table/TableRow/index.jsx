@@ -1,5 +1,5 @@
 import { findCategory, findState } from "../../utils/displayValue";
-import TableRowActionButtons from "./TableRowActionButtons";
+import TableRowActionButtons from "./ActionButtons";
 
 const clpFormatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
