@@ -91,9 +91,8 @@ const usuarioService = {
   },
 
   async update(updatedUser) {
-    // TODO: implement or align with backend api
-    const { id, ...payload } = updatedUser;
-    const res = await jkiltroApi.put(`/api/v1/users/${id}`, payload);
+    const req = mapUsuarioToRequest(updatedUser);
+    const res = await jkiltroApi.put(`/api/v1/users/${updatedUser.id}`, req);
     return res.data;
   },
 };
