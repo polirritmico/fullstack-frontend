@@ -7,17 +7,15 @@ const clpFormatter = new Intl.NumberFormat("es-CL", {
   maximumFractionDigits: 0,
 });
 
-function capitalizeFirstLetter(val) {
-  // From: https://stackoverflow.com/questions/1026069
-  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
-}
-
 function TableRow({
   entry,
   columns,
   onDeleteClick,
   onEditClick,
   onDetailsClick,
+  categories,
+  states,
+  categoryField,
 }) {
   return (
     <tr>
@@ -25,15 +23,28 @@ function TableRow({
         if (column.isHidden) return null;
 
         if (column.isState) {
-          const value = capitalizeFirstLetter(entry[column.key]);
+          const value = entry[column.key];
+          const label = findState(states, value)?.label ?? value;
 
           return (
             <td key={column.key}>
               <span
-                className={`badge text-bg-${value === "Activo" ? "success" : "secondary"}`}
+                className={`badge text-bg-${label === "Activo" ? "success" : "secondary"}`}
               >
-                {value}
+                {label}
               </span>
+            </td>
+          );
+        }
+
+        if (column.key === categoryField) {
+          const value = entry[column.key];
+          return (
+            <td
+              key={column.key}
+              className={column.highlight ? "fw-medium" : ""}
+            >
+              {findCategory(categories, value)?.value ?? value}
             </td>
           );
         }

@@ -8,6 +8,9 @@ function Table({
   onDeleteClick,
   onEditClick,
   onDetailsClick,
+  categories,
+  states,
+  categoryField,
 }) {
   return (
     <div className="table-responsive">
@@ -30,6 +33,9 @@ function Table({
                 onDeleteClick={onDeleteClick}
                 onEditClick={onEditClick}
                 onDetailsClick={onDetailsClick}
+                categories={categories}
+                states={states}
+                categoryField={categoryField}
               />
             );
           })}
