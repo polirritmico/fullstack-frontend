@@ -31,7 +31,7 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="add-category-name">
+          <Form.Group className="mb-3" controlId="add-category-plural">
             <Form.Label>Nombre en plural:</Form.Label>
             <Form.Control
               name="nameShow"
@@ -40,7 +40,7 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="add-category-name">
+          <Form.Group className="mb-3" controlId="add-category-descripcion">
             <Form.Label>Descripción:</Form.Label>
             <Form.Control
               as="textarea"
