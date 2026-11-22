@@ -85,8 +85,8 @@ const usuarioService = {
   },
 
   async create(newUser) {
-    // TODO: implement or align with backend api
-    const res = await jkiltroApi.post("/api/v1/users", newUser);
+    const req = mapUsuarioToRequest(newUser);
+    const res = await jkiltroApi.post("/api/v1/users", req);
     return res.data;
   },
 
