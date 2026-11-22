@@ -56,7 +56,7 @@ function TableEdit({
                       <Form.Select
                         name={field.key}
                         defaultValue={entry?.[field.key] ?? ""}
-                        required={!isReadOnly}
+                        required={field.required === true && !isReadOnly}
                         disabled={isReadOnly}
                       >
                         <option value="">Seleccione...</option>
@@ -80,7 +80,7 @@ function TableEdit({
                         type={fieldType}
                         defaultValue={entry?.[field.key] ?? ""}
                         min={fieldType === "number" ? 0 : undefined}
-                        required={!isReadOnly}
+                        required={field.required === true && !isReadOnly}
                         disabled={isReadOnly}
                       />
                     </Form.Group>
