@@ -2,7 +2,15 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
 import { getInType, parseValue } from "@/components/Mantenedor/Modal/utils";
 
-function TableEdit({ entityName, fields, show, entry, onHide, onSave }) {
+function TableEdit({
+  entityName,
+  fields,
+  show,
+  entry,
+  onHide,
+  onSave,
+  onExited,
+}) {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const formData = new FormData(ev.target);
@@ -16,10 +24,15 @@ function TableEdit({ entityName, fields, show, entry, onHide, onSave }) {
     onSave({ ...entry, ...updatedData });
   };
 
-  if (!entry) return null;
-
   return (
-    <Modal show={show} onHide={onHide} size="lg" centered backdrop="static">
+    <Modal
+      show={show}
+      onHide={onHide}
+      onExited={onExited}
+      size="lg"
+      centered
+      backdrop="static"
+    >
       <Modal.Header closeButton closeVariant="white" className="bg-secondary">
         <Modal.Title>Editar {entityName}</Modal.Title>
       </Modal.Header>
@@ -35,16 +48,12 @@ function TableEdit({ entityName, fields, show, entry, onHide, onSave }) {
               if (field.options) {
                 return (
                   <Col md={6} key={field.key}>
-                    <Form.Group
-                      className="mb-3"
-                      controlId={`add-${field.key}`}
-                      key={field.key}
-                    >
+                    <Form.Group className="mb-3" controlId={`add-${field.key}`}>
                       <Form.Label>{field.label}</Form.Label>
 
                       <Form.Select
                         name={field.key}
-                        defaultValue={entry[field.key]}
+                        defaultValue={entry?.[field.key] ?? ""}
                         required
                       >
                         <option value="">Seleccione...</option>
@@ -61,16 +70,12 @@ function TableEdit({ entityName, fields, show, entry, onHide, onSave }) {
                 const fieldType = getInType(field.type);
                 return (
                   <Col md={6} key={field.key}>
-                    <Form.Group
-                      className="mb-3"
-                      controlId={`add-${field.key}`}
-                      key={field.key}
-                    >
+                    <Form.Group className="mb-3" controlId={`add-${field.key}`}>
                       <Form.Label>{field.label}</Form.Label>
                       <Form.Control
                         name={field.key}
                         type={fieldType}
-                        defaultValue={entry[field.key]}
+                        defaultValue={entry?.[field.key] ?? ""}
                         min={fieldType === "number" ? 0 : undefined}
                         required
                       />
