@@ -25,12 +25,22 @@ function renderCategoryAdd(props = {}) {
 }
 
 describe("CategoryAdd", () => {
-  it("debería enviar el nombre y el ícono por defecto", async () => {
-    const testCase = { name: "Juguetes", icon: "A" };
+  it("debería enviar el nombre, plural, descripción y el ícono por defecto", async () => {
+    const testCase = {
+      name: "Juguete",
+      nameShow: "Juguetes",
+      text: "Juguetes para mascotas",
+      icon: "A",
+    };
     const expected = testCase;
 
     const { onSave } = renderCategoryAdd();
     await userEvent.type(screen.getByLabelText("Nombre:"), testCase.name);
+    await userEvent.type(
+      screen.getByLabelText("Nombre en plural:"),
+      testCase.nameShow,
+    );
+    await userEvent.type(screen.getByLabelText("Descripción:"), testCase.text);
     await userEvent.click(screen.getByRole("button", { name: "Guardar" }));
 
     const output = onSave.mock.calls[0][0];
@@ -38,11 +48,21 @@ describe("CategoryAdd", () => {
   });
 
   it("debería enviar el ícono seleccionado", async () => {
-    const testCase = { name: "Accesorios", icon: "B" };
+    const testCase = {
+      name: "Accesorio",
+      nameShow: "Accesorios",
+      text: "Juguetes para mascotas",
+      icon: "B",
+    };
     const expected = testCase;
 
     const { onSave } = renderCategoryAdd();
     await userEvent.type(screen.getByLabelText("Nombre:"), testCase.name);
+    await userEvent.type(
+      screen.getByLabelText("Nombre en plural:"),
+      testCase.nameShow,
+    );
+    await userEvent.type(screen.getByLabelText("Descripción:"), testCase.text);
     await userEvent.click(screen.getByRole("radio", { name: testCase.icon }));
     await userEvent.click(screen.getByRole("button", { name: "Guardar" }));
 

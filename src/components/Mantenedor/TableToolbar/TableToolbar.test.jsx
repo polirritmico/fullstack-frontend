@@ -5,9 +5,9 @@ import userEvent from "@testing-library/user-event";
 import TableToolbar from ".";
 
 const mockEstados = {
-  todos: "Todos los estados",
-  activo: "Activo",
-  inactivo: "Inactivo",
+  0: "Todos los estados",
+  1: "Activo",
+  2: "Inactivo",
 };
 
 describe("TableToolbar", () => {
@@ -17,41 +17,51 @@ describe("TableToolbar", () => {
     textoBoton: "+ Agregar",
     search: "",
     onSearchChange: vi.fn(),
-    selectedStatus: "todos",
+    selectedStatus: 0, // "todos"
     onStatusChange: vi.fn(),
   };
 
-  it("renders search input and dropdown", () => {
+  it("debería renderizar barra de búsqueda y selector de estados", () => {
+    const expectedSearchBar = "Buscar...";
+    const expectedStateSelector = "Selector de estados";
+
     render(<TableToolbar {...defaultProps} />);
-    expect(screen.getByPlaceholderText("Buscar...")).toBeInTheDocument();
-    expect(screen.getByLabelText("Selector de estados")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(expectedSearchBar)).toBeInTheDocument();
+    expect(screen.getByLabelText(expectedStateSelector)).toBeInTheDocument();
   });
 
-  it("search input calls onSearchChange", () => {
+  it("campo de búsqueda debería llamar a onSearchChange", () => {
+    const testCase = "test";
+    const expected = "test";
+
     render(<TableToolbar {...defaultProps} />);
 
     fireEvent.change(screen.getByPlaceholderText("Buscar..."), {
-      target: { value: "test" },
+      target: { value: testCase },
     });
 
-    expect(defaultProps.onSearchChange).toHaveBeenCalledWith("test");
+    expect(defaultProps.onSearchChange).toHaveBeenCalledWith(expected);
   });
 
-  it("dropdown calls onStatusChange with key", async () => {
+  it("seleccionar estado debería lanzar onStatusChange con la llave del estado", async () => {
+    const testCase = "1"; // "activo"
+    const expected = 1;
+
     render(<TableToolbar {...defaultProps} />);
     await userEvent.selectOptions(
       screen.getByLabelText("Selector de estados"),
-      "activo",
+      testCase,
     );
-    expect(defaultProps.onStatusChange).toHaveBeenCalledWith("activo");
+
+    expect(defaultProps.onStatusChange).toHaveBeenCalledWith(expected);
   });
 
-  it("dropdown options show labels, values are keys", () => {
+  it("debería mostrar etiquetas", () => {
     render(<TableToolbar {...defaultProps} />);
     const options = screen.getByLabelText("Selector de estados").options;
-    expect(options[0]).toHaveValue("todos");
+    expect(options[0]).toHaveValue("0");
     expect(options[0]).toHaveTextContent("Todos los estados");
-    expect(options[1]).toHaveValue("activo");
+    expect(options[1]).toHaveValue("1");
     expect(options[1]).toHaveTextContent("Activo");
   });
 });

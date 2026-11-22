@@ -7,10 +7,13 @@ import TableView from ".";
 const SEARCH_PLACEHOLDER = "Buscar...";
 const STATUS_SELECT_LABEL = "Selector de estados";
 
+const STATUS_SELECT_ACTIVO = "1";
+const STATUS_SELECT_INACTIVO = "2";
+
 const mockMetadata = {
   entity: { singleLabel: "Usuario", pluralLabel: "usuarios" },
   category: {
-    field: "rol",
+    field: "rolId",
     label: "Roles",
     addTitle: "Nueva Categoría",
     icons: ["A", "B"],
@@ -22,30 +25,30 @@ const mockMetadata = {
   },
   action: { key: "accion", label: "Acciones" },
   states: [
-    { key: "todos", label: "Todos los estados", isDefault: true },
-    { key: "activo", label: "Activo" },
-    { key: "inactivo", label: "Inactivo" },
+    { id: 0, key: "todos", label: "Todos los estados", isDefault: true },
+    { id: 1, key: "activo", label: "Activo" },
+    { id: 2, key: "inactivo", label: "Inactivo" },
   ],
   columns: [
     { key: "nombre", label: "Usuario", isSearchable: true },
-    { key: "rol", label: "Rol", isSearchable: true },
+    { key: "rolId", label: "Rol", isSearchable: true },
     { key: "email", label: "Correo", isSearchable: true },
-    { key: "estado", label: "Estado", isState: true },
+    { key: "estadoId", label: "Estado", isState: true },
   ],
 };
 
 // prettier-ignore
 const mockSidebarCategories = [
-  { id: "1", value: "todos", name: "Todos", icon: "", amount: 3, isDefault: true },
-  { id: "2", value: "activo", name: "Activo", icon: "", amount: 1 },
-  { id: "3", value: "inactivo", name: "Inactivo", icon: "", amount: 2 },
+  { id: 0, value: "todos", name: "Todos", icon: "", amount: 3, isDefault: true },
+  { id: 1, value: "Administrador", name: "Administradores", icon: "", amount: 2 },
+  { id: 2, value: "Gerente", name: "Gerentes", icon: "", amount: 1 },
 ];
 
 // prettier-ignore
 const mockData = [
-  { id: "1", nombre: "Ana Rojas", email: "ana@test.com", rol: "Administrador", estado: "Activo" },
-  { id: "2", nombre: "Carlos Pinto", email: "carlos@test.com", rol: "Gerente", estado: "Activo" },
-  { id: "3", nombre: "Alan Brito", email: "alan.brito@test.com", rol: "Desarrollador", estado: "Inactivo" },
+  { id: 1, nombre: "Ana Rojas", email: "ana@test.com", rolId: 1, estadoId: 1 },
+  { id: 2, nombre: "Carlos Pinto", email: "carlos@test.com", rolId: 2, estadoId: 1 },
+  { id: 3, nombre: "Alan Brito", email: "alan.brito@test.com", rolId: 1, estadoId: 2 },
 ];
 
 const defaultProps = {
@@ -59,7 +62,7 @@ const defaultProps = {
 describe("TableView filters", () => {
   describe("Filtros por defecto", () => {
     it("debería mostrar todas las filas por defecto", () => {
-      const expected = mockMetadata.columns.length;
+      const expected = mockData.length + 1;
 
       render(<TableView {...defaultProps} />);
 
@@ -159,6 +162,29 @@ describe("TableView filters", () => {
       const output = screen.getAllByRole("row").length;
       expect(output).toBe(expected);
     });
+
+    it("debería filtrar por value de la categoría", async () => {
+      const testCase = "Administra";
+      const expected = 2 + 1; // matches + header
+
+      render(<TableView {...defaultProps} />);
+      await userEvent.type(
+        screen.getByPlaceholderText(SEARCH_PLACEHOLDER),
+        testCase,
+      );
+
+      expect(screen.getAllByRole("row")).toHaveLength(expected);
+    });
+
+    it("debería filtrar por la categoría del sidebar", async () => {
+      const testCase = /Administra/;
+      const expected = 2 + 1; // matches + header
+
+      render(<TableView {...defaultProps} />);
+      await userEvent.click(screen.getByRole("button", { name: testCase }));
+
+      expect(screen.getAllByRole("row")).toHaveLength(expected);
+    });
   });
 
   describe("Filtro de estado", () => {
@@ -172,9 +198,9 @@ describe("TableView filters", () => {
     });
 
     it("debería mostrar solo las filas 'Activo' con 'activo' seleccionado", async () => {
-      const testCase = "activo";
+      const testCase = STATUS_SELECT_ACTIVO;
       const expected = 2 + 1; // matches + header
-      //
+
       render(<TableView {...defaultProps} />);
       await userEvent.selectOptions(
         screen.getByLabelText(STATUS_SELECT_LABEL),
@@ -186,9 +212,9 @@ describe("TableView filters", () => {
     });
 
     it("debería mostrar solo las filas 'Inactivo' con 'inactivo' seleccionado", async () => {
-      const testCase = "inactivo";
+      const testCase = STATUS_SELECT_INACTIVO;
       const expected = 1 + 1; // match + header
-      //
+
       render(<TableView {...defaultProps} />);
       await userEvent.selectOptions(
         screen.getByLabelText(STATUS_SELECT_LABEL),
@@ -203,7 +229,7 @@ describe("TableView filters", () => {
   describe("Filtro combinado (AND)", () => {
     it("debería filtrar correctamente cuando la búsqueda y estado coinciden", async () => {
       const testCaseSearch = "Ana";
-      const testCaseFilter = "activo";
+      const testCaseFilter = STATUS_SELECT_ACTIVO;
       const expected = 1 + 1; // match + header
 
       render(<TableView {...defaultProps} />);
@@ -222,9 +248,9 @@ describe("TableView filters", () => {
 
     it("debería mostrar la tabla vacía cuando la búsqueda coincide pero no el estado ", async () => {
       const testCaseSearch = "Alan";
-      const testCaseFilter = "activo";
+      const testCaseFilter = STATUS_SELECT_ACTIVO;
       const expected = 1; // solo el header
-      //
+
       render(<TableView {...defaultProps} />);
       await userEvent.type(
         screen.getByPlaceholderText(SEARCH_PLACEHOLDER),

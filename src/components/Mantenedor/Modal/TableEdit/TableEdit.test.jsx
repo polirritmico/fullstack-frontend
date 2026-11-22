@@ -9,12 +9,12 @@ const mockFields = [
   { key: "nombre", label: "Usuario", type: "string" },
   { key: "email", label: "Correo", type: "email" },
   {
-    key: "rol",
+    key: "rolId",
     label: "Rol",
-    type: "string",
+    type: "int",
     options: [
-      { value: "Administrador", label: "Administrador" },
-      { value: "Gerente", label: "Gerente" },
+      { value: 1, label: "Administrador" },
+      { value: 2, label: "Gerente" },
     ],
   },
 ];
@@ -23,7 +23,7 @@ const mockEntry = {
   id: "101",
   nombre: "Ana Rojas",
   email: "ana.rojas@empresa.cl",
-  rol: "Administrador",
+  rolId: 1,
 };
 
 function renderTableEdit(props = {}) {
@@ -51,7 +51,7 @@ describe("TableEdit", () => {
     const expected = {
       nombre: testCase.nombre,
       email: testCase.email,
-      rol: testCase.rol,
+      rolId: String(testCase.rolId), // (en el SUT se hace este cast en el handler)
     };
     const expectedHidden = null;
 
@@ -60,7 +60,7 @@ describe("TableEdit", () => {
     const output = {
       nombre: screen.getByLabelText("Usuario").value,
       email: screen.getByLabelText("Correo").value,
-      rol: screen.getByLabelText("Rol").value,
+      rolId: screen.getByLabelText("Rol").value,
     };
     const outputHidden = screen.queryByLabelText("ID");
 
@@ -69,7 +69,7 @@ describe("TableEdit", () => {
   });
 
   it("debería enviar los datos actualizados combinados con los originales", async () => {
-    const testCase = { nombre: "Ana Maria Rojas", rol: "Gerente" };
+    const testCase = { nombre: "Ana Maria Rojas", rolId: 2 };
     const expected = { ...mockEntry, ...testCase };
 
     const { onSave } = renderTableEdit();
@@ -80,7 +80,7 @@ describe("TableEdit", () => {
     });
     await userEvent.clear(nameInput);
     await userEvent.type(nameInput, testCase.nombre);
-    await userEvent.selectOptions(roleSelect, testCase.rol);
+    await userEvent.selectOptions(roleSelect, String(testCase.rolId));
     await userEvent.click(saveButton);
 
     const output = onSave.mock.calls[0][0];

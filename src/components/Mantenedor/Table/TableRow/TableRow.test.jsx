@@ -3,11 +3,11 @@ import { render, screen } from "@testing-library/react";
 
 import TableRow from "./index";
 
-function renderRow(entry, columns) {
+function renderRow(entry, columns, props = {}) {
   return render(
     <table>
       <tbody>
-        <TableRow entry={entry} columns={columns} />
+        <TableRow entry={entry} columns={columns} {...props} />
       </tbody>
     </table>,
   );
@@ -59,6 +59,39 @@ describe("TableRow", () => {
       renderRow(testCase, columns);
 
       expect(screen.getByText("$0")).toBeInTheDocument();
+    });
+  });
+  describe("Categoría y estado", () => {
+    const columns = [
+      { key: "rolId", label: "Rol" },
+      { key: "estadoId", label: "Estado", isState: true },
+    ];
+
+    const categories = [
+      { id: 0, value: "todos", name: "Todos", isDefault: true },
+      { id: 1, value: "Administrador", name: "Administradores" },
+    ];
+
+    const states = [
+      { id: 0, key: "todos", label: "Todos los estados", isDefault: true },
+      { id: 1, key: "activo", label: "Activo" },
+      { id: 2, key: "inactivo", label: "Inactivo" },
+    ];
+
+    it("debería mostrar value de la categoría y label del estado", () => {
+      const testCase = { id: 1, rolId: 1, estadoId: 1 };
+      const testCaseCategory = "rolId";
+      const expectedCategoria = "Administrador";
+      const expectedEstado = "Activo";
+
+      renderRow(testCase, columns, {
+        categories,
+        states,
+        categoryField: testCaseCategory,
+      });
+
+      expect(screen.getByText(expectedCategoria)).toBeInTheDocument();
+      expect(screen.getByText(expectedEstado)).toBeInTheDocument();
     });
   });
 });
