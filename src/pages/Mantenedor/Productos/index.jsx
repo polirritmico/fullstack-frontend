@@ -20,6 +20,16 @@ function Productos() {
     ]);
   }, []);
 
+  const refreshProductosAndCategorias = useCallback(async () => {
+    const [updatedProductos, updatedCategorias] = await Promise.all([
+      productoService.getAll(),
+      productoService.getCategories(),
+    ]);
+
+    setProductos(updatedProductos);
+    setCategorias(updatedCategorias);
+  }, []);
+
   useEffect(() => {
     fetchInitialData()
       .then(([metadataRes, categoriasRes, productosRes]) => {
@@ -61,8 +71,7 @@ function Productos() {
   const handleCreateProduct = async (newProduct) => {
     try {
       await productoService.create(newProduct);
-      const updatedProducts = await productoService.getAll();
-      setProductos(updatedProducts);
+      await refreshProductosAndCategorias();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
@@ -73,8 +82,7 @@ function Productos() {
   const handleEditProduct = async (updatedProduct) => {
     try {
       await productoService.update(updatedProduct);
-      const updatedProducts = await productoService.getAll();
-      setProductos(updatedProducts);
+      await refreshProductosAndCategorias();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
@@ -97,8 +105,7 @@ function Productos() {
   const handleDeleteProduct = async (id) => {
     try {
       await productoService.delete(id);
-      const updatedProducts = await productoService.getAll();
-      setProductos(updatedProducts);
+      await refreshProductosAndCategorias();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
