@@ -7,14 +7,13 @@ function TableDetails({
   show,
   entry,
   onHide,
+  onExited,
   categories,
   states,
   categoryField,
 }) {
-  if (!entry) return null;
-
   return (
-    <Modal show={show} onHide={onHide} size="lg" centered>
+    <Modal show={show} onHide={onHide} onExited={onExited} size="lg" centered>
       <Modal.Header closeButton closeVariant="white" className="bg-secondary">
         <Modal.Title>Detalles del {entityName.toLowerCase()}</Modal.Title>
       </Modal.Header>
@@ -28,13 +27,17 @@ function TableDetails({
                   <Form.Label className="fw-bold">{field.label}</Form.Label>
                   <Form.Control
                     type="text"
-                    value={getDisplayValue(
-                      field,
-                      entry,
-                      categories,
-                      states,
-                      categoryField,
-                    )}
+                    value={
+                      entry
+                        ? getDisplayValue(
+                            field,
+                            entry,
+                            categories,
+                            states,
+                            categoryField,
+                          )
+                        : ""
+                    }
                     readOnly
                     disabled
                   />
