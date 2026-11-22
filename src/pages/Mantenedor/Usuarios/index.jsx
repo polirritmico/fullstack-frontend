@@ -20,6 +20,16 @@ function Usuarios() {
     ]);
   }, []);
 
+  const refreshUsersAndCategories = useCallback(async () => {
+    const [updatedUsers, updatedRoles] = await Promise.all([
+      usuarioService.getAll(),
+      usuarioService.getCategories(),
+    ]);
+
+    setUsuarios(updatedUsers);
+    setRoles(updatedRoles);
+  }, []);
+
   useEffect(() => {
     fetchInitialData()
       .then(([metadataRes, rolesRes, usuariosRes]) => {
@@ -60,8 +70,7 @@ function Usuarios() {
   const handleCreateUser = async (newUser) => {
     try {
       await usuarioService.create(newUser);
-      const updatedUsers = await usuarioService.getAll();
-      setUsuarios(updatedUsers);
+      await refreshUsersAndCategories();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
@@ -72,8 +81,7 @@ function Usuarios() {
   const handleEditUser = async (updatedUser) => {
     try {
       await usuarioService.update(updatedUser);
-      const updatedUsers = await usuarioService.getAll();
-      setUsuarios(updatedUsers);
+      await refreshUsersAndCategories();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
@@ -96,8 +104,7 @@ function Usuarios() {
   const handleDeleteUser = async (id) => {
     try {
       await usuarioService.delete(id);
-      const updatedUsers = await usuarioService.getAll();
-      setUsuarios(updatedUsers);
+      await refreshUsersAndCategories();
     } catch (err) {
       if (err.isConnectionError) {
         setConnectionError(true);
