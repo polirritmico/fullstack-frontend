@@ -1,6 +1,16 @@
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { getDisplayValue } from "@/components/Mantenedor/utils/displayValue";
 
-function TableDetails({ entityName, fields, show, entry, onHide }) {
+function TableDetails({
+  entityName,
+  fields,
+  show,
+  entry,
+  onHide,
+  categories,
+  states,
+  categoryField,
+}) {
   if (!entry) return null;
 
   return (
@@ -18,7 +28,13 @@ function TableDetails({ entityName, fields, show, entry, onHide }) {
                   <Form.Label className="fw-bold">{field.label}</Form.Label>
                   <Form.Control
                     type="text"
-                    value={entry[field.key] ?? "N/A"}
+                    value={getDisplayValue(
+                      field,
+                      entry,
+                      categories,
+                      states,
+                      categoryField,
+                    )}
                     readOnly
                     disabled
                   />
