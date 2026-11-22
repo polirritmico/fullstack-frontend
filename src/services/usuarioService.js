@@ -52,6 +52,14 @@ const usuarioService = {
     return res.data;
   },
 
+  // ---------------------------------------------------------------------------
+  //
+  async create(newUser) {
+    const req = mapUsuarioToRequest(newUser);
+    const res = await jkiltroApi.post("/api/v1/users", req);
+    return res.data;
+  },
+
   async getAll() {
     const res = await jkiltroApi.get("/api/v1/users");
     return res.data;
@@ -67,6 +75,19 @@ const usuarioService = {
     return mapUsuarioResponseToUsuario(res.data);
   },
 
+  async update(updatedUser) {
+    const req = mapUsuarioToRequest(updatedUser);
+    const res = await jkiltroApi.put(`/api/v1/users/${updatedUser.id}`, req);
+    return res.data;
+  },
+
+  async delete(id) {
+    await jkiltroApi.delete(`/api/v1/users/${id}`);
+    return true;
+  },
+
+  // ---------------------------------------------------------------------------
+
   async getCategories() {
     const res = await jkiltroApi.get("/api/v1/users/roles");
     return res.data;
@@ -75,24 +96,6 @@ const usuarioService = {
   async createCategory(newRol) {
     const body = mapNewRolToNewRolRequest(newRol);
     const res = await jkiltroApi.post("/api/v1/users/roles", body);
-    return res.data;
-  },
-
-  async delete(id) {
-    // TODO: implement or align with backend api
-    await jkiltroApi.delete(`/api/v1/users/${id}`);
-    return true;
-  },
-
-  async create(newUser) {
-    const req = mapUsuarioToRequest(newUser);
-    const res = await jkiltroApi.post("/api/v1/users", req);
-    return res.data;
-  },
-
-  async update(updatedUser) {
-    const req = mapUsuarioToRequest(updatedUser);
-    const res = await jkiltroApi.put(`/api/v1/users/${updatedUser.id}`, req);
     return res.data;
   },
 };
