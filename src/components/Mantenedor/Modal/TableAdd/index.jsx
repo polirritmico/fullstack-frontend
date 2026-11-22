@@ -13,7 +13,10 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
     const newData = Object.fromEntries(
       [...formData.entries()].map(([key, value]) => {
         const field = fields.find((item) => item.key === key);
-        return [key, parseValue(field, value)];
+        const parsedValue = parseValue(field, value);
+        const finalValue =
+          value === "" && field?.required !== true ? null : parsedValue;
+        return [key, finalValue];
       }),
     );
 
@@ -28,9 +31,11 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit} id={`add-${entityName}-form`}>
           {fields.map((field) => {
-            if (field.isHidden || field.isReadOnly) {
+            if (!field.showInCreate) {
               return null;
             }
+
+            const isRequired = field.required === true;
 
             if (field.options) {
               return (
@@ -40,7 +45,7 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
                   key={field.key}
                 >
                   <Form.Label>{field.label}</Form.Label>
-                  <Form.Select name={field.key} required>
+                  <Form.Select name={field.key} required={isRequired}>
                     <option value="">Seleccione...</option>
                     {field.options.map((opt) => (
                       <option value={opt.value} key={opt.value}>
@@ -63,7 +68,7 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
                     name={field.key}
                     type={fieldType}
                     min={fieldType === "number" ? 0 : undefined}
-                    required
+                    required={isRequired}
                   />
                 </Form.Group>
               );
