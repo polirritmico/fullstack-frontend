@@ -28,7 +28,7 @@ const mockFields = [
 ];
 
 const mockEntry = {
-  id: "101",
+  id: 101,
   nombre: "Ana Rojas",
   email: "ana.rojas@empresa.cl",
   rolId: 1,
@@ -55,6 +55,16 @@ function renderTableEdit(props = {}) {
 }
 
 describe("TableEdit", () => {
+  it("debería mostrar read-only sin permitir edición", () => {
+    const expectedRutValue = "12345678";
+
+    renderTableEdit();
+
+    const rutInput = screen.getByLabelText("RUT");
+    expect(rutInput).toHaveValue(expectedRutValue);
+    expect(screen.queryByLabelText("ID")).not.toBeInTheDocument();
+  });
+
   it("debería renderizar los valores por defecto sin mostrar campos ocultos", () => {
     const testCase = mockEntry;
     const expected = {
