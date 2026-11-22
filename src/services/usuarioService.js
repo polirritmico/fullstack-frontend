@@ -1,29 +1,48 @@
 import { jkiltroApi } from "@/services/api";
 
-function mapUsuario(usuario) {
+function mapUsuarioResponseToUsuario(usuarioResponse) {
+  if (!usuarioResponse) {
+    return null;
+  }
+
+  return {
+    id: usuarioResponse.id,
+    email: usuarioResponse.email,
+    nombre: usuarioResponse.nombreCompleto,
+    telefono: usuarioResponse.telefonoCelular,
+    userData: usuarioResponse,
+  };
+}
+
+function mapNewRolToNewRolRequest(newRol) {
+  if (!newRol) {
+    return null;
+  }
+
+  return {
+    nombreRol: newRol.name,
+    nombreMostrar: newRol.nameShow,
+    icon: newRol.icon,
+    descripcion: newRol.text,
+  };
+}
+
+function mapUsuarioToRequest(usuario) {
   if (!usuario) {
     return null;
   }
 
   return {
-    id: usuario.id,
+    nombre: usuario.nombre,
+    apellido: usuario.apellido,
+    rut: usuario.rut,
+    dv: usuario.dv,
     email: usuario.email,
-    nombre: usuario.nombreCompleto,
-    telefono: usuario.telefonoCelular,
-    userData: usuario,
-  };
-}
-
-function mapNewCategoryRequest(newCategory) {
-  if (!newCategory) {
-    return null;
-  }
-
-  return {
-    nombreRol: newCategory.name,
-    nombreMostrar: newCategory.nameShow,
-    icon: newCategory.icon,
-    descripcion: newCategory.text,
+    telefonoCelular: usuario.telefonoCelular,
+    departamento: usuario.departamento,
+    fechaNacimiento: usuario.fechaNacimiento,
+    rolId: Number(usuario.rolId),
+    estadoId: Number(usuario.estadoId),
   };
 }
 
@@ -40,12 +59,12 @@ const usuarioService = {
 
   async getMyProfile() {
     const res = await jkiltroApi.get("/api/v1/users/me");
-    return mapUsuario(res.data);
+    return mapUsuarioResponseToUsuario(res.data);
   },
 
   async getById(id) {
     const res = await jkiltroApi.get(`/api/v1/users/${id}`);
-    return mapUsuario(res.data);
+    return mapUsuarioResponseToUsuario(res.data);
   },
 
   async getCategories() {
