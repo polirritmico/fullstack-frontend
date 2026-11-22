@@ -45,6 +45,8 @@ function TableEdit({
                 return null;
               }
 
+              const isReadOnly = field.isReadOnly === true;
+
               if (field.options) {
                 return (
                   <Col md={6} key={field.key}>
@@ -54,7 +56,8 @@ function TableEdit({
                       <Form.Select
                         name={field.key}
                         defaultValue={entry?.[field.key] ?? ""}
-                        required
+                        required={!isReadOnly}
+                        disabled={isReadOnly}
                       >
                         <option value="">Seleccione...</option>
                         {field.options.map((opt) => (
@@ -77,7 +80,8 @@ function TableEdit({
                         type={fieldType}
                         defaultValue={entry?.[field.key] ?? ""}
                         min={fieldType === "number" ? 0 : undefined}
-                        required
+                        required={!isReadOnly}
+                        disabled={isReadOnly}
                       />
                     </Form.Group>
                   </Col>

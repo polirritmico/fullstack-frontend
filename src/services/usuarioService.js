@@ -72,8 +72,8 @@ const usuarioService = {
     return res.data;
   },
 
-  async createCategory(newCategory) {
-    const body = mapNewCategoryRequest(newCategory);
+  async createCategory(newRol) {
+    const body = mapNewRolToNewRolRequest(newRol);
     const res = await jkiltroApi.post("/api/v1/users/roles", body);
     return res.data;
   },

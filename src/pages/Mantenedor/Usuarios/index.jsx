@@ -58,7 +58,6 @@ function Usuarios() {
   }
 
   const handleCreateUser = async (newUser) => {
-    console.log("Running handleCreateUser");
     try {
       await usuarioService.create(newUser);
       const updatedUsers = await usuarioService.getAll();
@@ -71,7 +70,6 @@ function Usuarios() {
   };
 
   const handleEditUser = async (updatedUser) => {
-    console.log("Running handleEditUser");
     try {
       await usuarioService.update(updatedUser);
       const updatedUsers = await usuarioService.getAll();
