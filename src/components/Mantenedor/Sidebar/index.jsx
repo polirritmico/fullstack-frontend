@@ -16,9 +16,9 @@ function Sidebar({
           {data.map((entity) => (
             <button
               type="button"
-              className={`btn rounded-0 ${selectedCategory === entity.value ? "active" : ""}`}
+              className={`btn rounded-0 ${selectedCategory === entity.id ? "active" : ""}`}
               key={entity.id}
-              onClick={() => onCategoryChange(entity.value)}
+              onClick={() => onCategoryChange(entity.id)}
             >
               <span>{entity.icon}</span>
               <span>{entity.name}</span>

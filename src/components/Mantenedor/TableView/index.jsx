@@ -22,10 +22,10 @@ function TableView({
   onDelete,
 }) {
   const defaultState = metadata.states.find((state) => state.isDefault);
-  const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).value;
+  const defaultCategory = sidebarCategories.find((cat) => cat.isDefault).id;
 
   const [search, setSearch] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState(defaultState.key);
+  const [selectedStatus, setSelectedStatus] = useState(defaultState.id);
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
 
   const [showAddModal, setShowAddModal] = useState(false);
@@ -41,17 +41,29 @@ function TableView({
   const filteredData = data.filter((itemRow) => {
     const matchesSearch =
       !search ||
-      searchFields.some((field) =>
-        String(itemRow[field] ?? "")
-          .toLowerCase()
-          .includes(search.toLowerCase()),
-      );
+      searchFields.some((field) => {
+        const rawValue = itemRow[field];
+        let values = [rawValue];
+
+        if (field === metadata.category.field) {
+          const category = sidebarCategories.find((cat) => cat.id === rawValue);
+          values = [category?.value, category?.name, rawValue];
+        }
+        return values.some((value) =>
+          String(value ?? "")
+            .toLowerCase()
+            .includes(search.toLowerCase()),
+        );
+      });
+
+    const stateField = metadata.columns.find((col) => col.isState)?.key;
 
     const activeState = metadata.states.find(
-      (state) => state.key === selectedStatus,
+      (state) => state.id === selectedStatus,
     );
+
     const matchesStatus =
-      activeState.isDefault || itemRow.estado === activeState.label;
+      activeState.isDefault || itemRow[stateField] === selectedStatus;
 
     const matchesCategory =
       selectedCategory === defaultCategory ||
@@ -61,7 +73,7 @@ function TableView({
   });
 
   const estadosToolbar = Object.fromEntries(
-    metadata.states.map((state) => [state.key, state.label]),
+    metadata.states.map((state) => [state.id, state.label]),
   );
 
   async function handleSave(newData) {
@@ -99,12 +111,12 @@ function TableView({
 
     if (col.key === metadata.category.field) {
       options = sidebarCategories
-        .filter((cat) => cat.value !== "todos")
-        .map((cat) => ({ value: cat.value, label: cat.name }));
+        .filter((cat) => !cat.isDefault)
+        .map((cat) => ({ value: cat.id, label: cat.name }));
     } else if (col.isState) {
       options = metadata.states
-        .filter((state) => state.key !== "todos")
-        .map((state) => ({ value: state.label, label: state.label }));
+        .filter((state) => !state.isDefault)
+        .map((state) => ({ value: state.id, label: state.label }));
     }
 
     return { ...col, options };
@@ -138,6 +150,10 @@ function TableView({
           onDeleteClick={setEntryToDelete}
           onEditClick={setEntryToEdit}
           onDetailsClick={setEntryToDetails}
+
+          categories={sidebarCategories}
+          states={metadata.states}
+          categoryField={metadata.category.field}
         />
       </div>
 
@@ -147,6 +163,10 @@ function TableView({
         show={Boolean(entryToDetails)}
         entry={entryToDetails}
         onHide={() => setEntryToDetails(null)}
+
+        categories={sidebarCategories}
+        states={metadata.states}
+        categoryField={metadata.category.field}
       />
 
       <TableAdd

@@ -23,7 +23,7 @@ function TableToolbar({
           aria-label="Selector de estados"
           id="id-selector-estados"
           value={selectedStatus}
-          onChange={(ev) => onStatusChange(ev.target.value)}
+          onChange={(ev) => onStatusChange(Number(ev.target.value))}
         >
           {Object.entries(estados).map(([key, value]) => (
             <option value={key} key={key}>
