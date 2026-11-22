@@ -20,10 +20,10 @@ function mapNewRolToNewRolRequest(newRol) {
   }
 
   return {
-    nombreRol: newRol.name,
-    nombreMostrar: newRol.nameShow,
+    nombreRol: newRol.nombre,
+    nombreMostrar: newRol.nombreMostrar,
     icon: newRol.icon,
-    descripcion: newRol.text,
+    descripcion: newRol.descripcion,
   };
 }
 
