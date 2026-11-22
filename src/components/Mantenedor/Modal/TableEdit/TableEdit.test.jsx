@@ -5,17 +5,25 @@ import userEvent from "@testing-library/user-event";
 import TableEdit from ".";
 
 const mockFields = [
-  { key: "id", label: "ID", type: "string", isHidden: true },
-  { key: "nombre", label: "Usuario", type: "string" },
-  { key: "email", label: "Correo", type: "email" },
+  { key: "id", label: "ID", type: "string", isHidden: true, showInEdit: false },
+  { key: "nombre", label: "Usuario", type: "string", showInEdit: true },
+  { key: "email", label: "Correo", type: "email", showInEdit: true },
   {
     key: "rolId",
     label: "Rol",
     type: "int",
+    showInEdit: true,
     options: [
       { value: 1, label: "Administrador" },
       { value: 2, label: "Gerente" },
     ],
+  },
+  {
+    key: "rut",
+    label: "RUT",
+    type: "string",
+    showInEdit: true,
+    isReadOnly: true,
   },
 ];
 
@@ -24,6 +32,7 @@ const mockEntry = {
   nombre: "Ana Rojas",
   email: "ana.rojas@empresa.cl",
   rolId: 1,
+  rut: "12345678",
 };
 
 function renderTableEdit(props = {}) {
