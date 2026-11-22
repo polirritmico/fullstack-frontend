@@ -7,6 +7,18 @@ const clpFormatter = new Intl.NumberFormat("es-CL", {
   maximumFractionDigits: 0,
 });
 
+function truncateText(value, maxLength = 60) {
+  if (value == null) {
+    return "";
+  }
+  const str = String(value).trim();
+
+  if (str.length > maxLength) {
+    return `${str.slice(0, maxLength).trimEnd()}…`;
+  }
+  return str.endsWith(".") ? str : `${str}.`;
+}
+
 function TableRow({
   entry,
   columns,
@@ -56,6 +68,17 @@ function TableRow({
               className={column.highlight ? "fw-medium" : ""}
             >
               {clpFormatter.format(entry[column.key])}
+            </td>
+          );
+        }
+
+        if (column.type === "text") {
+          return (
+            <td
+              key={column.key}
+              className={`w-30 text-wrap ${column.highlight ? "fw-medium" : ""}`}
+            >
+              {truncateText(entry[column.key])}
             </td>
           );
         }
