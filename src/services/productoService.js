@@ -10,10 +10,10 @@ function mapProductoResponseToProducto(productoResponse) {
     nombre: productoResponse.nombre,
     sku: productoResponse.sku,
     descripcion: productoResponse.descripcion,
-    id_categoria: productoResponse.id_categoria,
+    categoriaIdd: productoResponse.categoriaId,
     precio: productoResponse.precio,
     stock: productoResponse.stock,
-    id_estado: productoResponse.id_estado,
+    estadoId: productoResponse.estadoId,
   };
 }
 
@@ -41,9 +41,8 @@ function mapProductoToRequest(producto) {
     descripcion: producto.descripcion,
     precio: Number(producto.precio),
     stock: Number(producto.stock),
-    // TODO: limpiar esto. Alinear back con users-api
-    categoriaId: Number(producto.id_categoria ?? producto.categoriaId),
-    estadoId: Number(producto.id_estado ?? producto.estadoId),
+    categoriaId: Number(producto.categoriaId),
+    estadoId: Number(producto.estadoId),
   };
 }
 
