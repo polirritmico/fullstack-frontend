@@ -69,6 +69,25 @@ function TableEdit({
                     </Form.Group>
                   </Col>
                 );
+              } else if (field.type === "text") {
+                return (
+                  <Col md={12} key={field.key}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId={`edit-${field.key}`}
+                    >
+                      <Form.Label>{field.label}</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name={field.key}
+                        defaultValue={entry?.[field.key] ?? ""}
+                        required={field.required === true && !isReadOnly}
+                        disabled={isReadOnly}
+                      />
+                    </Form.Group>
+                  </Col>
+                );
               } else {
                 const fieldType = getInType(field.type);
                 return (
