@@ -1,6 +1,7 @@
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Form, Modal, Row } from "react-bootstrap";
 
-import { getInType, parseValue } from "@/components/Mantenedor/Modal/utils";
+import { parseValue } from "@/components/Mantenedor/utils/parseValue";
+import TableField from "../TableField";
 
 function TableEdit({
   entityName,
@@ -45,67 +46,14 @@ function TableEdit({
                 return null;
               }
 
-              const isReadOnly = field.isReadOnly === true;
-
-              if (field.options) {
-                return (
-                  <Col md={6} key={field.key}>
-                    <Form.Group className="mb-3" controlId={`add-${field.key}`}>
-                      <Form.Label>{field.label}</Form.Label>
-
-                      <Form.Select
-                        name={field.key}
-                        defaultValue={entry?.[field.key] ?? ""}
-                        required={field.required === true && !isReadOnly}
-                        disabled={isReadOnly}
-                      >
-                        <option value="">Seleccione...</option>
-                        {field.options.map((opt) => (
-                          <option value={opt.value} key={opt.value}>
-                            {opt.label}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                );
-              } else if (field.type === "text") {
-                return (
-                  <Col md={12} key={field.key}>
-                    <Form.Group
-                      className="mb-3"
-                      controlId={`edit-${field.key}`}
-                    >
-                      <Form.Label>{field.label}</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name={field.key}
-                        defaultValue={entry?.[field.key] ?? ""}
-                        required={field.required === true && !isReadOnly}
-                        disabled={isReadOnly}
-                      />
-                    </Form.Group>
-                  </Col>
-                );
-              } else {
-                const fieldType = getInType(field.type);
-                return (
-                  <Col md={6} key={field.key}>
-                    <Form.Group className="mb-3" controlId={`add-${field.key}`}>
-                      <Form.Label>{field.label}</Form.Label>
-                      <Form.Control
-                        name={field.key}
-                        type={fieldType}
-                        defaultValue={entry?.[field.key] ?? ""}
-                        min={fieldType === "number" ? 0 : undefined}
-                        required={field.required === true && !isReadOnly}
-                        disabled={isReadOnly}
-                      />
-                    </Form.Group>
-                  </Col>
-                );
-              }
+              return (
+                <TableField
+                  key={field.key}
+                  field={field}
+                  value={entry?.[field.key] ?? ""}
+                  mode="edit"
+                />
+              );
             })}
           </Row>
         </Form>

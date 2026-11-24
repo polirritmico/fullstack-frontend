@@ -1,4 +1,7 @@
-import { findCategory, findState } from "../../utils/displayValue";
+import {
+  findCategory,
+  findState,
+} from "@/components/Mantenedor/utils/displayValue";
 import TableRowActionButtons from "./ActionButtons";
 
 const clpFormatter = new Intl.NumberFormat("es-CL", {

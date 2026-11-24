@@ -1,4 +1,5 @@
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Form, Modal, Row } from "react-bootstrap";
+import TableField from "../TableField";
 import { getDisplayValue } from "@/components/Mantenedor/utils/displayValue";
 
 function TableDetails({
@@ -21,29 +22,22 @@ function TableDetails({
       <Modal.Body>
         <Form>
           <Row>
-            {fields.map((field) => (
-              <Col md={6} key={field.key}>
-                <Form.Group className="mb-3" controlId={`view-${field.key}`}>
-                  <Form.Label className="fw-bold">{field.label}</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={
-                      entry
-                        ? getDisplayValue(
-                            field,
-                            entry,
-                            categories,
-                            states,
-                            categoryField,
-                          )
-                        : ""
-                    }
-                    readOnly
-                    disabled
-                  />
-                </Form.Group>
-              </Col>
-            ))}
+            {fields.map((field) => {
+              return (
+                <TableField
+                  key={field.key}
+                  field={field}
+                  value={getDisplayValue(
+                    field,
+                    entry,
+                    categories,
+                    states,
+                    categoryField,
+                  )}
+                  mode="view"
+                />
+              );
+            })}
           </Row>
         </Form>
       </Modal.Body>

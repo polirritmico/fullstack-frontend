@@ -1,8 +1,9 @@
 // fuente: https://react-bootstrap.netlify.app/docs/components/modal/#focus-on-specific-element
 
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Form, Modal, Row } from "react-bootstrap";
 
-import { getInType, parseValue } from "@/components/Mantenedor/Modal/utils";
+import { parseValue } from "@/components/Mantenedor/utils/parseValue";
+import TableField from "../TableField";
 
 function TableAdd({ entityName, fields, show, onHide, onSave }) {
   const handleSubmit = (ev) => {
@@ -34,44 +35,9 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
                 return null;
               }
 
-              const isRequired = field.required === true;
-
-              if (field.options) {
-                return (
-                  <Col md={6} key={field.key}>
-                    <Form.Group className="mb-3" controlId={`add-${field.key}`}>
-                      <Form.Label>{field.label}</Form.Label>
-                      <Form.Select name={field.key} required={isRequired}>
-                        <option value="">Seleccione...</option>
-                        {field.options.map((opt) => (
-                          <option value={opt.value} key={opt.value}>
-                            {opt.label}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                );
-              } else {
-                const fieldType = getInType(field.type);
-                return (
-                  <Col md={6} key={field.key}>
-                    <Form.Group
-                      className="mb-3"
-                      controlId={`add-${field.key}`}
-                      key={field.key}
-                    >
-                      <Form.Label>{field.label}</Form.Label>
-                      <Form.Control
-                        name={field.key}
-                        type={fieldType}
-                        min={fieldType === "number" ? 0 : undefined}
-                        required={isRequired}
-                      />
-                    </Form.Group>
-                  </Col>
-                );
-              }
+              return (
+                <TableField key={field.key} field={field} value="" mode="add" />
+              );
             })}
           </Row>
         </Form>

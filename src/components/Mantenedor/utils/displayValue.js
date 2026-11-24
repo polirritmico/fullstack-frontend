@@ -13,6 +13,8 @@ export function getDisplayValue(
   states,
   categoryField,
 ) {
+  if (!entry) return "";
+
   const id = entry[field.key];
 
   if (field.key === categoryField) {
