@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/Auth/AuthContext";
+import storeManagerService from "@/services/storeManagerService";
+import { getApiErrorMessage } from "@/services/utils/apiError";
 import { CarritoContext } from "./CarritoContext";
 
 function cargarCarrito(claveStorage) {
@@ -20,14 +22,24 @@ function CarritoProvider({ children }) {
   const claveStorage = usuario ? `jk-carrito-${usuario.id}` : "jk-carrito";
 
   return (
-    <EstadoCarrito key={claveStorage} claveStorage={claveStorage}>
+    <EstadoCarrito
+      key={claveStorage}
+      claveStorage={claveStorage}
+      conSesion={Boolean(usuario)}
+    >
       {children}
     </EstadoCarrito>
   );
 }
 
-function EstadoCarrito({ children, claveStorage }) {
+function mensajeStockInsuficiente(producto, stock) {
+  const unidades = stock === 1 ? "queda 1 unidad" : `quedan ${stock} unidades`;
+  return `Solo ${unidades} de ${producto.nombre}.`;
+}
+
+function EstadoCarrito({ children, claveStorage, conSesion }) {
   const [carrito, setCarrito] = useState(() => cargarCarrito(claveStorage));
+  const [aviso, setAviso] = useState("");
 
   useEffect(() => {
     try {
@@ -37,7 +49,40 @@ function EstadoCarrito({ children, claveStorage }) {
     }
   }, [carrito, claveStorage]);
 
-  function agregarProducto(producto, cantidad = 1) {
+  async function agregarProducto(producto, cantidad = 1) {
+    setAviso("");
+
+    if (!conSesion) {
+      sumarAlCarrito(producto, cantidad);
+      return true;
+    }
+
+    const cantidadEnCarrito =
+      carrito.find((item) => item.id === producto.id)?.cantidad ?? 0;
+
+    try {
+      const validado = await storeManagerService.validarProducto(producto.id);
+
+      if (validado.stock < cantidadEnCarrito + cantidad) {
+        setAviso(mensajeStockInsuficiente(producto, validado.stock));
+        return false;
+      }
+    } catch (err) {
+      setAviso(
+        `No se pudo agregar ${producto.nombre}: ${getApiErrorMessage(err)}`,
+      );
+      return false;
+    }
+
+    sumarAlCarrito(producto, cantidad);
+    return true;
+  }
+
+  function limpiarAviso() {
+    setAviso("");
+  }
+
+  function sumarAlCarrito(producto, cantidad) {
     setCarrito((actual) => {
       const existe = actual.some((item) => item.id === producto.id);
 
@@ -75,6 +120,8 @@ function EstadoCarrito({ children, claveStorage }) {
     <CarritoContext.Provider
       value={{
         carrito,
+        aviso,
+        limpiarAviso,
         agregarProducto,
         quitarProducto,
         cambiarCantidad,

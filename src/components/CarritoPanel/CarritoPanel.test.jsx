@@ -1,8 +1,9 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router";
 import CarritoPanel from "./index";
 import CarritoProvider from "@/contexts/Carrito/CarritoProvider";
+import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 
 const producto = {
   id: 1,
@@ -85,5 +86,33 @@ describe("CarritoPanel", () => {
         name: "Carrito completo de prueba",
       }),
     ).toBeInTheDocument();
+  });
+
+  it("muestra el aviso del carrito y permite cerrarlo", () => {
+    const limpiarAviso = vi.fn();
+
+    render(
+      <MemoryRouter>
+        <CarritoContext
+          value={{
+            carrito: [],
+            aviso: "Solo queda 1 unidad de Pelota.",
+            limpiarAviso,
+            quitarProducto: vi.fn(),
+            cambiarCantidad: vi.fn(),
+          }}
+        >
+          <CarritoPanel />
+        </CarritoContext>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Solo queda 1 unidad de Pelota.",
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Cerrar aviso" }));
+
+    expect(limpiarAviso).toHaveBeenCalled();
   });
 });

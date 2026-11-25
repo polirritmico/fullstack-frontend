@@ -3,7 +3,7 @@ import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 import { useNavigate } from "react-router";
 
 function CarritoPanel() {
-  const { carrito, quitarProducto, cambiarCantidad } =
+  const { carrito, aviso, limpiarAviso, quitarProducto, cambiarCantidad } =
     useContext(CarritoContext);
 
   const navigate = useNavigate();
@@ -42,6 +42,18 @@ function CarritoPanel() {
       </div>
 
       <div className="offcanvas-body">
+        {aviso && (
+          <div className="alert alert-warning alert-dismissible" role="alert">
+            {aviso}
+            <button
+              type="button"
+              className="btn-close"
+              aria-label="Cerrar aviso"
+              onClick={limpiarAviso}
+            ></button>
+          </div>
+        )}
+
         {carrito.length === 0 ? (
           <p>Tu carrito está vacío.</p>
         ) : (
