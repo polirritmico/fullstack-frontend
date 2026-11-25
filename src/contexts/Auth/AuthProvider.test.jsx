@@ -222,4 +222,27 @@ describe("AuthProvider tests", () => {
     expect(authService.addUserDataToSession).not.toHaveBeenCalled();
     expect(authService.logout).toHaveBeenCalledTimes(expectedLogoutCalls);
   });
+
+  it("debería refrescar el usuario de la sesión con el perfil actualizado", async () => {
+    const usuarioActualizado = { ...mockAdminUser, nombre: "Nombre Nuevo" };
+
+    vi.mocked(authService.getCurrentUser).mockReturnValue(mockAdminUser);
+    vi.mocked(usuarioService.getMyProfile).mockResolvedValue({
+      id: 1,
+      nombre: "Nombre Nuevo",
+    });
+    vi.mocked(authService.addUserDataToSession).mockReturnValue(
+      usuarioActualizado,
+    );
+
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+
+    await act(async () => await result.current.refrescarUsuario());
+
+    expect(authService.addUserDataToSession).toHaveBeenCalledWith({
+      id: 1,
+      nombre: "Nombre Nuevo",
+    });
+    expect(result.current.user.nombre).toBe("Nombre Nuevo");
+  });
 });

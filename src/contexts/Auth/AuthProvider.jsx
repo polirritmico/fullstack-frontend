@@ -37,6 +37,17 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
+  const refrescarUsuario = useCallback(async function () {
+    const userData = await usuarioService.getMyProfile();
+    const userSessionData = authService.addUserDataToSession(userData);
+
+    if (userSessionData) {
+      setUser(userSessionData);
+    }
+
+    return userSessionData;
+  }, []);
+
   useEffect(() => {
     window.addEventListener(SESSION_EXPIRED_EVENT, logout);
 
@@ -45,5 +56,9 @@ export function AuthProvider({ children }) {
     };
   }, [logout]);
 
-  return <AuthContext value={{ user, login, logout }}>{children}</AuthContext>;
+  return (
+    <AuthContext value={{ user, login, logout, refrescarUsuario }}>
+      {children}
+    </AuthContext>
+  );
 }
