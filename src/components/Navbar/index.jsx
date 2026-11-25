@@ -8,7 +8,7 @@ export default function Navbar() {
   const { user } = useAuth();
 
   return (
-    <nav className="navbar navbar-expand-lg bg-secondary">
+    <nav className="navbar navbar-expand-lg bg-secondary sticky-top">
       <div className="container px-0">
         <JKiltroBrand />
 
