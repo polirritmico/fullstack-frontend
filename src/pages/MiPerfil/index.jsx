@@ -1,50 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router";
 import { useAuth } from "@/contexts/Auth/AuthContext";
+import Loading from "@/components/Loading";
+import usuarioService from "@/services/usuarioService";
+import { getApiErrorMessage } from "@/services/utils/apiError";
 import "./MiPerfil.css";
 
-function cargarPerfil(usuario) {
-  const perfilInicial = {
-    nombre: usuario.nombre || "",
-    apellido: usuario.apellido || "",
-    email: usuario.email || "",
-    telefono: usuario.telefono || "",
-  };
-
+function cargarDireccion(usuarioId) {
   try {
-    const guardado = localStorage.getItem(`jk-perfil-${usuario.id}`);
-    const perfil = guardado ? JSON.parse(guardado) : perfilInicial;
+    const guardada = localStorage.getItem(`jk-direccion-${usuarioId}`);
+    const direccion = guardada ? JSON.parse(guardada) : null;
 
-    const valido = ["nombre", "apellido", "email", "telefono"].every(
-      (campo) => typeof perfil?.[campo] === "string",
-    );
-
-    if (!valido) {
-      throw new Error("Perfil inválido");
-    }
-
-    const direccionGuardada = localStorage.getItem(
-      `jk-direccion-${usuario.id}`,
-    );
-
-    const direccion = direccionGuardada ? JSON.parse(direccionGuardada) : null;
-
-    if (direccion && typeof direccion.direccion !== "string") {
-      throw new Error("Dirección inválida");
-    }
-
-    return {
-      perfil,
-      direccion: direccion?.direccion || "",
-      error: "",
-    };
+    return typeof direccion?.direccion === "string" ? direccion.direccion : "";
   } catch {
-    return {
-      perfil: perfilInicial,
-      direccion: "",
-      error: "No se pudieron leer tus datos guardados. No se han eliminado.",
-    };
+    return "";
   }
+}
+
+function normalizarTelefono(telefono) {
+  const digitos = telefono.replace(/\D/g, "");
+  return digitos.startsWith("56") ? `+${digitos}` : `+56${digitos}`;
+}
+
+function aFormulario(perfil) {
+  return {
+    nombre: perfil.nombre || "",
+    apellido: perfil.apellido || "",
+    email: perfil.email || "",
+    telefono: perfil.telefonoCelular || "",
+  };
 }
 
 function MiPerfil() {
@@ -58,12 +42,46 @@ function MiPerfil() {
 }
 
 function ContenidoPerfil({ user }) {
-  const [carga] = useState(() => cargarPerfil(user));
-  const [guardado, setGuardado] = useState(carga.perfil);
-  const [datos, setDatos] = useState(carga.perfil);
+  const { refrescarUsuario } = useAuth();
+  const [direccion] = useState(() => cargarDireccion(user.id));
+  const [perfil, setPerfil] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [errorCarga, setErrorCarga] = useState("");
+  const [datos, setDatos] = useState(aFormulario({}));
   const [editando, setEditando] = useState(false);
-  const [error, setError] = useState(carga.error);
+  const [guardando, setGuardando] = useState(false);
+  const [error, setError] = useState("");
   const [mensaje, setMensaje] = useState("");
+
+  useEffect(() => {
+    usuarioService
+      .getMyProfile()
+      .then((respuesta) => {
+        setPerfil(respuesta.userData);
+        setDatos(aFormulario(respuesta.userData));
+      })
+      .catch((err) => setErrorCarga(getApiErrorMessage(err)))
+      .finally(() => setCargando(false));
+  }, []);
+
+  if (cargando) {
+    return <Loading />;
+  }
+
+  if (errorCarga) {
+    return (
+      <section className="perfil-page py-5">
+        <div className="container">
+          <h1 className="mb-4 fw-bold">Mi perfil</h1>
+          <div className="alert alert-danger" role="alert">
+            No se pudo cargar tu perfil: {errorCarga}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const guardado = aFormulario(perfil);
 
   const nombreCompleto =
     [guardado.nombre, guardado.apellido].filter(Boolean).join(" ") ||
@@ -98,6 +116,8 @@ function ContenidoPerfil({ user }) {
       tipo: "email",
       maximo: 100,
       autoComplete: "email",
+      soloLectura: true,
+      ayuda: "Es tu usuario de acceso y no se puede cambiar.",
     },
     {
       nombre: "telefono",
@@ -134,50 +154,61 @@ function ContenidoPerfil({ user }) {
     setMensaje("");
   }
 
-  function guardar(event) {
+  async function guardar(event) {
     event.preventDefault();
     setError("");
     setMensaje("");
 
-    const perfil = {
+    const cambios = {
       nombre: datos.nombre.trim(),
       apellido: datos.apellido.trim(),
-      email: datos.email.trim().toLowerCase(),
       telefono: datos.telefono.trim(),
     };
 
-    if (!perfil.nombre || perfil.nombre.length > 50) {
+    if (!cambios.nombre || cambios.nombre.length > 50) {
       setError("Ingresa tu nombre, con un máximo de 50 caracteres.");
       return;
     }
 
-    if (!perfil.apellido || perfil.apellido.length > 100) {
+    if (!cambios.apellido || cambios.apellido.length > 100) {
       setError("Ingresa tus apellidos, con un máximo de 100 caracteres.");
       return;
     }
 
-    if (
-      perfil.email.length > 100 ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(perfil.email)
-    ) {
-      setError("Ingresa un correo válido, de hasta 100 caracteres.");
-      return;
-    }
-
-    if (!/^(\+56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/.test(perfil.telefono)) {
+    if (!/^(\+56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/.test(cambios.telefono)) {
       setError("Ingresa un teléfono válido. Ejemplo: +56 9 1234 5678.");
       return;
     }
 
-    try {
-      localStorage.setItem(`jk-perfil-${user.id}`, JSON.stringify(perfil));
+    const telefonoCelular = normalizarTelefono(cambios.telefono);
+    setGuardando(true);
 
-      setGuardado(perfil);
-      setDatos(perfil);
+    try {
+      await usuarioService.update({
+        ...perfil,
+        nombre: cambios.nombre,
+        apellido: cambios.apellido,
+        telefonoCelular,
+      });
+
+      const actualizado = await refrescarUsuario();
+      const perfilActualizado = actualizado?.userData ?? {
+        ...perfil,
+        nombre: cambios.nombre,
+        apellido: cambios.apellido,
+        telefonoCelular,
+      };
+
+      setPerfil(perfilActualizado);
+      setDatos(aFormulario(perfilActualizado));
       setEditando(false);
       setMensaje("Perfil actualizado correctamente.");
-    } catch {
-      setError("No se pudieron guardar los cambios. Inténtalo nuevamente.");
+    } catch (err) {
+      setError(
+        `No se pudieron guardar los cambios: ${getApiErrorMessage(err)}`,
+      );
+    } finally {
+      setGuardando(false);
     }
   }
 
@@ -207,7 +238,7 @@ function ContenidoPerfil({ user }) {
                 className="btn btn-outline-primary w-100"
                 type="button"
                 onClick={iniciarEdicion}
-                disabled={editando || Boolean(carga.error)}
+                disabled={editando}
               >
                 Editar perfil
               </button>
@@ -300,9 +331,18 @@ function ContenidoPerfil({ user }) {
                         maxLength={campo.maximo}
                         autoComplete={campo.autoComplete}
                         placeholder="No registrado"
-                        readOnly={!editando}
+                        readOnly={!editando || campo.soloLectura}
+                        aria-describedby={
+                          campo.ayuda ? `ayuda-${campo.nombre}` : undefined
+                        }
                         required
                       />
+
+                      {campo.ayuda && (
+                        <div id={`ayuda-${campo.nombre}`} className="form-text">
+                          {campo.ayuda}
+                        </div>
+                      )}
                     </div>
                   ))}
 
@@ -315,7 +355,7 @@ function ContenidoPerfil({ user }) {
                       id="perfil-direccion"
                       className="form-control"
                       type="text"
-                      value={carga.direccion}
+                      value={direccion}
                       placeholder="No registrada"
                       readOnly
                     />
@@ -330,15 +370,20 @@ function ContenidoPerfil({ user }) {
 
                 {editando ? (
                   <div className="d-flex flex-wrap gap-2">
-                    <button className="btn btn-primary" type="submit">
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      disabled={guardando}
+                    >
                       <i className="bi bi-save me-2" aria-hidden="true"></i>
-                      Guardar cambios
+                      {guardando ? "Guardando..." : "Guardar cambios"}
                     </button>
 
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
                       onClick={cancelar}
+                      disabled={guardando}
                     >
                       Cancelar
                     </button>
@@ -348,7 +393,6 @@ function ContenidoPerfil({ user }) {
                     className="btn btn-primary"
                     type="button"
                     onClick={iniciarEdicion}
-                    disabled={Boolean(carga.error)}
                   >
                     <i className="bi bi-pencil me-2" aria-hidden="true"></i>
                     Editar información
