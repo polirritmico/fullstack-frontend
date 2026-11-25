@@ -1,5 +1,5 @@
 import { Col, Form } from "react-bootstrap";
-import { getInType } from "@/components/Mantenedor/utils/parseValue";
+import { getInType } from "@/components/Mantenedor/utils/parsers";
 
 function TableField({ field, value, mode }) {
   const isView = mode === "view";

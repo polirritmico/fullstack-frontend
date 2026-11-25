@@ -2,7 +2,7 @@
 
 import { Button, Form, Modal, Row } from "react-bootstrap";
 
-import { parseValue } from "@/components/Mantenedor/utils/parseValue";
+import { parseValue } from "@/components/Mantenedor/utils/parsers";
 import TableField from "../TableField";
 
 function TableAdd({ entityName, fields, show, onHide, onSave }) {
