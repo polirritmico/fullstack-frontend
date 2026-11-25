@@ -1,77 +1,37 @@
-import "@/styles/legacy.css";
+import FotoPolaroid from "@/components/FotoPolaroid";
+import JKiltroLogo from "@/components/JKiltroLogo";
+
+import "@/styles/shared/nosotros.css";
+import { contenido } from "./data";
 
 function Nosotros() {
-  const titulo = [
-    "Estamos para ayudar",
-    "Estamos contigo",
-    "En que podemos ayudarte",
-  ];
-
-  const parrafaUno = [
-    `Todo comenzó frente al resplandor de pantallas encendidas a
-                  deshora, entre tazas de café frío y la rabia compartida al ver
-                  a tantos animales abandonados a su suerte en las esquinas más
-                  heladas de la ciudad. Rodrigo, Eduardo y Fernando no tenían en
-                  mente una corporación tradicional; lo que tenían era la
-                  urgencia visceral de actuar y una combinación única de
-                  instinto técnico, visión de diseño y calle. Sin medir las
-                  dimensiones de lo que estaban por desatar, comenzaron a
-                  escribir código kilométrico, levantar bases de datos y
-                  estructurar plataformas con la precisión de quienes proyectan
-                  una multinacional, pero guiados únicamente por la promesa de
-                  que ningún animal volvería a tiritar bajo un cartón mojado.`,
-  ];
-
-  const parrafaDos = [
-    `         Aquellas madrugadas de commits interminables, prototipos de
-                  automatización y refugios construidos a pulso terminaron
-                  cobrando vida propia. Lo que nació como una trinchera de
-                  desarrollo entre amigos se transformó en los cimientos de una
-                  corporación real: hoy, con Rodrigo, Eduardo y Fernando
-                  consolidados como los accionistas mayoritarios, lideran un
-                  ecosistema integral que profesionalizó para siempre la ayuda
-                  comunitaria.`,
-  ];
-
-  const parrafoTres = [
-    `                 Esa arquitectura inicial creció hasta convertir a jKiltro en
-                  una empresa de vanguardia respaldada por un equipo de médicos
-                  veterinarios de primer nivel, garantizando diagnósticos
-                  certeros, cirugías complejas y una atención clínica de máxima
-                  calidad para cada paciente rescatado. Al mismo tiempo, la
-                  compañía dio el salto comercial levantando su propia red de
-                  tiendas de productos para mascotas, donde comercializan
-                  alimentos especializados, insumos médicos y accesorios de
-                  primera categoría. De este modo, cada compra en la tienda y
-                  cada servicio clínico prestado no es solo comercio, sino un
-                  motor financiero que sostiene los rescates y la rehabilitación
-                  de los animales más vulnerables. Lo que tres amigos
-                  programaron a oscuras sin pensarlo dos veces, es hoy una gran
-                  empresa que demuestra que el talento técnico y la salud animal
-                  pueden unirse para transformar una realidad entera.`,
-  ];
-
-  const historia = [parrafaUno, parrafaDos, parrafoTres];
   return (
-    <main className="pt-5 fondo-completo">
-      <section className="container d-flex">
-        <div className="row justify-content-between">
-          <div className="col-5" style={{ marginTop: "250px" }}>
-            <img
-              src="/img/pexels-helenalopes-7980680.jpg"
-              className="img-fluid img-thumbnail shadow w-100"
-              alt="..."
-              style={{ maxWidth: "500px" }}
-            />
-          </div>
+    <main className="py-4 nosotros-bg d-flex rounded-5">
+      <section className="container">
+        <div className="row align-items-center justify-content-center g-4 g-lg-5">
+          <FotoPolaroid
+            photo={contenido.foto.imagen}
+            caption={contenido.foto.caption}
+            alt="Equipo veterinario junto a gatitos comiendo."
+          />
 
-          <div className="col-7">
-            <h1 className="display-1 texto-fuerte mb-5 text-light">
-              {titulo[1]}
-            </h1>
-            <div className="bg-danger bg-opacity-75 text-light fw-light fst-italic fs-5 p-4 mb-4">
-              {historia.map((parrafo, index) => (
-                <p key={index}>{parrafo}</p>
+          <div className="col-12 col-lg-7 order-1 order-lg-2 px-3 px-lg-4 px-sm-5">
+            <div className="bg-danger text-light p-4 p-md-5 rounded-3 nosotros-card-shadow me-lg-4">
+              <div className="d-flex justify-content-between align-items-center gap-3 mb-3">
+                <h1 className="display-4 fw-bold mb-0 text-light font-handwritten">
+                  {contenido.titulo}
+                </h1>
+                <JKiltroLogo showText={false} withLink={false} size={87} />
+              </div>
+              {contenido.parrafos.map((parrafo, index) => (
+                <p
+                  key={index}
+                  className={`fw-light fs-5 ${
+                    index === contenido.parrafos.length - 1 ? "mb-0" : "mb-3"
+                  }`}
+                >
+                  {parrafo}
+                </p>
               ))}
             </div>
           </div>
