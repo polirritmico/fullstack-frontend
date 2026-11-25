@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Routes, Route, Navigate } from "react-router";
 
 import Home from "@/pages/Home";
@@ -6,23 +7,23 @@ import Login from "@/pages/Login";
 import Logout from "@/pages/Logout";
 import NoAutorizado from "@/pages/Errores/NoAutorizado";
 import NoEncontrado from "@/pages/Errores/NoEncontrado";
-
-import Carrito from "@/pages/Carrito";
-import Clinica from "@/pages/Clinica";
-import CrearPerfil from "@/pages/CrearPerfil";
-import DetalleProducto from "@/pages/DetalleProducto";
-import Direccion from "@/pages/Direccion";
-import MiPerfil from "@/pages/MiPerfil";
-import MisCompras from "@/pages/MisCompras";
-import Nosotros from "@/pages/Nosotros";
-import RecuperarCuenta from "@/pages/RecuperarCuenta";
-import Tienda from "@/pages/Tienda";
-
 import ProtectedAdminRoute from "@/components/Mantenedor/ProtectedAdminRoute";
-import AdminConfig from "@/pages/Mantenedor/Configuracion";
-import AdminLayout from "@/components/Mantenedor/Layout";
-import AdminProductos from "@/pages/Mantenedor/Productos";
-import AdminUsuarios from "@/pages/Mantenedor/Usuarios";
+
+const Carrito = lazy(() => import("@/pages/Carrito"));
+const Tienda = lazy(() => import("@/pages/Tienda"));
+const Clinica = lazy(() => import("@/pages/Clinica"));
+const CrearPerfil = lazy(() => import("@/pages/CrearPerfil"));
+const DetalleProducto = lazy(() => import("@/pages/DetalleProducto"));
+const Direccion = lazy(() => import("@/pages/Direccion"));
+const MiPerfil = lazy(() => import("@/pages/MiPerfil"));
+const MisCompras = lazy(() => import("@/pages/MisCompras"));
+const Nosotros = lazy(() => import("@/pages/Nosotros"));
+const RecuperarCuenta = lazy(() => import("@/pages/RecuperarCuenta"));
+
+const AdminConfig = lazy(() => import("@/pages/Mantenedor/Configuracion"));
+const AdminLayout = lazy(() => import("@/components/Mantenedor/Layout"));
+const AdminProductos = lazy(() => import("@/pages/Mantenedor/Productos"));
+const AdminUsuarios = lazy(() => import("@/pages/Mantenedor/Usuarios"));
 
 function App() {
   return (
