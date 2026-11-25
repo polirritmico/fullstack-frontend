@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
 import usuarioService from "@/services/usuarioService";
+import { resolveErrorType } from "@/components/Mantenedor/utils/errors";
 
 import Loading from "@/components/Loading";
 import TableView from "@/components/Mantenedor/TableView";
 import SinConexion from "@/pages/Errores/SinConexion";
+import ErrorInesperado from "@/pages/Errores/Inesperado";
 
 function Usuarios() {
   const [roles, setRoles] = useState();
   const [usuarios, setUsuarios] = useState();
   const [metadata, setMetadata] = useState();
-  const [connectionError, setConnectionError] = useState(false);
+  const [errorType, setErrorType] = useState(null);
 
   const fetchInitialData = useCallback(() => {
     return Promise.all([
@@ -38,14 +40,12 @@ function Usuarios() {
         setUsuarios(usuariosRes);
       })
       .catch((err) => {
-        if (err.isConnectionError) {
-          setConnectionError(true);
-        }
+        setErrorType(resolveErrorType(err));
       });
   }, [fetchInitialData]);
 
   const handleRetry = async () => {
-    setConnectionError(false);
+    setErrorType(null);
 
     try {
       const [metadataRes, rolesRes, usuariosRes] = await fetchInitialData();
@@ -53,14 +53,16 @@ function Usuarios() {
       setRoles(rolesRes);
       setUsuarios(usuariosRes);
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
-  if (connectionError) {
+  if (errorType === "connection") {
     return <SinConexion onRetry={handleRetry} />;
+  }
+
+  if (errorType === "unexpected") {
+    return <ErrorInesperado onRetry={handleRetry} />;
   }
 
   if (!metadata || !roles || !usuarios) {
@@ -72,9 +74,7 @@ function Usuarios() {
       await usuarioService.create(newUser);
       await refreshUsersAndCategories();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -83,9 +83,7 @@ function Usuarios() {
       await usuarioService.update(updatedUser);
       await refreshUsersAndCategories();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -95,9 +93,7 @@ function Usuarios() {
       const updatedRoles = await usuarioService.getCategories();
       setRoles(updatedRoles);
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -106,9 +102,7 @@ function Usuarios() {
       await usuarioService.delete(id);
       await refreshUsersAndCategories();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
