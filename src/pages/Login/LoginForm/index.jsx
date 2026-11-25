@@ -1,5 +1,7 @@
 import SubmitButton from "@/components/SubmitButton";
 import useLogin from "./useLogin";
+import { Button } from "react-bootstrap";
+import BackButton from "@/components/BackButton";
 
 function LoginForm() {
   const { error, emailError, isSubmitting, handleSubmit } = useLogin();
@@ -38,7 +40,12 @@ function LoginForm() {
         </div>
       </div>
 
-      <div className="d-grid mb-4">
+      <div className="d-grid my-4 gap-2">
+        {error ? (
+          <BackButton className="fs-6" variant="info">
+            <i className="bi bi-arrow-left-circle-fill "></i> Regresar
+          </BackButton>
+        ) : undefined}
         <SubmitButton
           type="submit"
           isLoading={isSubmitting}
