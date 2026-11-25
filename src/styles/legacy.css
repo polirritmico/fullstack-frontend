@@ -27,14 +27,6 @@
   text-align: center;
 }
 
-.fondo-completo {
-  background-image: url("/img/fondo-historia.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-}
-
 .fondo-para-citas {
   background-image:
     linear-gradient(

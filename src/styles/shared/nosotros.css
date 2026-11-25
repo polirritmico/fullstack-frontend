@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap");
+
+.nosotros-bg {
+  background-image: url("/img/fondo-historia.jpg");
+  background-size: cover;
+  background-position: center 33%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.font-handwritten {
+  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+
+.nosotros-card-shadow {
+  box-shadow:
+    12px 20px 25px rgba(0, 0, 0, 0.45),
+    4px 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+.foto-polaroid {
+  max-width: 430px;
+  transform: rotate(-2.5deg);
+}
