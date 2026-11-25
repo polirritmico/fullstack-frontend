@@ -75,7 +75,18 @@ function mapAuthSession(session) {
   };
 }
 
+const CUSTOMER_ROLE = "user";
+
 const authService = {
+  async register({ email, password }) {
+    const res = await authApi.post("/api/v1/auth/register", {
+      user: email,
+      role: CUSTOMER_ROLE,
+      password,
+    });
+    return res.data;
+  },
+
   async login({ email, password }) {
     const res = await authApi.post("/api/v1/auth", { user: email, password });
 
