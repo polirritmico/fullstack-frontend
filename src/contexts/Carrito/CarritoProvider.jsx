@@ -82,6 +82,26 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
     setAviso("");
   }
 
+  async function validarCarrito() {
+    const resultados = await Promise.all(
+      carrito.map(async (producto) => {
+        try {
+          const validado = await storeManagerService.validarProducto(
+            producto.id,
+          );
+
+          return validado.stock < producto.cantidad
+            ? mensajeStockInsuficiente(producto, validado.stock)
+            : null;
+        } catch (err) {
+          return `${producto.nombre}: ${getApiErrorMessage(err)}`;
+        }
+      }),
+    );
+
+    return resultados.filter(Boolean);
+  }
+
   function sumarAlCarrito(producto, cantidad) {
     setCarrito((actual) => {
       const existe = actual.some((item) => item.id === producto.id);
@@ -122,6 +142,7 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
         carrito,
         aviso,
         limpiarAviso,
+        validarCarrito,
         agregarProducto,
         quitarProducto,
         cambiarCantidad,

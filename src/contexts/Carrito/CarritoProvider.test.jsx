@@ -278,4 +278,55 @@ describe("CarritoProvider con sesión iniciada", () => {
 
     expect(result.current.aviso).toBe("");
   });
+
+  it("validarCarrito no informa problemas cuando todo está disponible", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 5,
+    });
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([{ ...producto, cantidad: 2 }]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    let problemas;
+    await act(async () => {
+      problemas = await result.current.validarCarrito();
+    });
+
+    expect(problemas).toEqual([]);
+  });
+
+  it("validarCarrito informa cada producto con problemas", async () => {
+    const pelota = { id: 2, nombre: "Pelota", precio: 4990 };
+    vi.mocked(storeManagerService.validarProducto).mockImplementation((id) =>
+      id === 1
+        ? Promise.resolve({ ...producto, stock: 1 })
+        : Promise.reject({
+            response: {
+              status: 409,
+              data: "El producto no tiene stock disponible",
+            },
+          }),
+    );
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([
+        { ...producto, cantidad: 3 },
+        { ...pelota, cantidad: 1 },
+      ]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    let problemas;
+    await act(async () => {
+      problemas = await result.current.validarCarrito();
+    });
+
+    expect(problemas).toEqual([
+      "Solo queda 1 unidad de Alimento Perro Adulto.",
+      "Pelota: El producto no tiene stock disponible.",
+    ]);
+  });
 });
