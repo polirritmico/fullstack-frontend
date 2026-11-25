@@ -2,12 +2,46 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="src/assets/logo-mark.svg" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/logo-mark.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>jKiltro</title>
+    <!-- prettier-ignore -->
+    <style>
+      body { margin: 0; }
+      .initial-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif; color: #3368a0;
+        opacity: 0;
+        animation: fadeInLoader 0.25s ease-out 0.5s forwards;
+      }
+      .initial-loader p {
+        margin-top: 0.75rem;
+        font-style: italic;
+        font-size: 1.25em;
+      }
+      .initial-spinner {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 0.33em solid currentColor;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.75s linear infinite;
+      }
+      @keyframes fadeInLoader { to { opacity: 1; } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-loader">
+        <div class="initial-spinner" role="status"></div>
+        <p>jKiltro - Cargando…</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
