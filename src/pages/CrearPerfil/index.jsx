@@ -1,4 +1,26 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "@/contexts/Auth/AuthContext";
+import authService from "@/services/authService";
+import usuarioService from "@/services/usuarioService";
+import { getApiErrorMessage } from "@/services/utils/apiError";
+
+const ROL_CLIENTE_ID = 5;
+const ESTADO_ACTIVO_ID = 1;
+
+function validarPassword(password) {
+  return (
+    password.length >= 8 &&
+    /[A-Za-zÁÉÍÓÚáéíóúÑñ]/.test(password) &&
+    /\d/.test(password) &&
+    /[^A-Za-zÁÉÍÓÚáéíóúÑñ\d\s]/.test(password)
+  );
+}
+
+function normalizarTelefono(telefono) {
+  const digitos = telefono.replace(/\D/g, "");
+  return digitos.startsWith("56") ? `+${digitos}` : `+56${digitos}`;
+}
 
 function validarRun(run) {
   if (!/^[1-9][0-9]{5,7}[0-9K]$/.test(run)) return false;
@@ -21,22 +43,23 @@ function validarRun(run) {
 }
 
 function CrearPerfil() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmarPassword, setConfirmarPassword] = useState("");
   const [error, setError] = useState("");
-  const [exito, setExito] = useState(false);
+  const [enviando, setEnviando] = useState(false);
 
-  function manejarEnvio(event) {
+  async function manejarEnvio(event) {
     event.preventDefault();
     setError("");
-    setExito(false);
 
     const datos = new FormData(event.currentTarget);
     const nombre = datos.get("nombre").trim();
     const apellido = datos.get("apellido").trim();
     const run = datos.get("rut").trim().toUpperCase();
+    const telefono = datos.get("telefono").trim();
     const correo = datos.get("correo").trim().toLowerCase();
-    const direccion = datos.get("direccion").trim();
 
     if (!nombre || nombre.length > 50) {
       setError("Ingresa tu nombre, con un máximo de 50 caracteres.");
@@ -61,22 +84,56 @@ function CrearPerfil() {
       return;
     }
 
-    if (!direccion || direccion.length > 300) {
-      setError("Ingresa una dirección, con un máximo de 300 caracteres.");
+    if (password !== confirmarPassword) {
+      setError("Las contraseñas deben coincidir.");
       return;
     }
 
-    if (password.length < 8 || !password.trim() || password !== confirmarPassword) {
+    if (!validarPassword(password)) {
       setError(
-        "Las contraseñas deben coincidir, tener al menos 8 caracteres y no pueden estar vacías.",
+        "La contraseña debe tener al menos 8 caracteres e incluir letras, números y un carácter especial.",
       );
       return;
     }
 
-    setExito(true);
-    event.currentTarget.reset();
-    setPassword("");
-    setConfirmarPassword("");
+    const credenciales = { email: correo, password };
+    setEnviando(true);
+
+    try {
+      await authService.register(credenciales);
+    } catch (err) {
+      setError(
+        err.response?.status === 409
+          ? "Ya existe una cuenta con este correo. Inicia sesión o usa otro correo."
+          : getApiErrorMessage(err),
+      );
+      setEnviando(false);
+      return;
+    }
+
+    try {
+      await authService.login(credenciales);
+      await usuarioService.create({
+        nombre,
+        apellido,
+        rut: run.slice(0, -1),
+        dv: run.slice(-1),
+        email: correo,
+        telefonoCelular: normalizarTelefono(telefono),
+        rolId: ROL_CLIENTE_ID,
+        estadoId: ESTADO_ACTIVO_ID,
+      });
+      await login(credenciales);
+    } catch (err) {
+      authService.logout();
+      setError(
+        `Tu cuenta se creó, pero no se pudo completar el perfil: ${getApiErrorMessage(err)}`,
+      );
+      setEnviando(false);
+      return;
+    }
+
+    navigate("/tienda", { replace: true });
   }
 
   return (
@@ -84,13 +141,6 @@ function CrearPerfil() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
-            {exito && (
-              <div className="alert alert-success" role="status">
-                Datos validados correctamente. Este registro es de demostración;
-                todavía no se guarda una cuenta.
-              </div>
-            )}
-
             <form
               className="card shadow-sm rounded-4 p-4"
               onSubmit={manejarEnvio}
@@ -191,58 +241,6 @@ function CrearPerfil() {
                   />
                 </div>
 
-                <div className="col-12">
-                  <label htmlFor="direccion" className="form-label">
-                    Dirección
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="direccion"
-                    name="direccion"
-                    maxLength={300}
-                    autoComplete="street-address"
-                    required
-                  />
-                </div>
-
-                <div className="col-12 col-md-6">
-                  <label htmlFor="comuna" className="form-label">
-                    Comuna
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="comuna"
-                    name="comuna"
-                    required
-                  />
-                </div>
-
-                <div className="col-12 col-md-6">
-                  <label htmlFor="region" className="form-label">
-                    Región
-                  </label>
-
-                  <select
-                    className="form-select"
-                    id="region"
-                    name="region"
-                    defaultValue=""
-                    required
-                  >
-                    <option value="">Selecciona una región</option>
-                    <option value="metropolitana">Región Metropolitana</option>
-                    <option value="valparaiso">Valparaíso</option>
-                    <option value="biobio">Biobío</option>
-                    <option value="araucania">La Araucanía</option>
-                    <option value="los-lagos">Los Lagos</option>
-                    <option value="otra">Otra</option>
-                  </select>
-                </div>
-
                 <div className="col-12 col-md-6">
                   <label htmlFor="password" className="form-label">
                     Contraseña
@@ -259,12 +257,14 @@ function CrearPerfil() {
                     onChange={(event) => {
                       setPassword(event.target.value);
                       setError("");
-                      setExito(false);
                     }}
                     required
                   />
 
-                  <div className="form-text">Mínimo 8 caracteres.</div>
+                  <div className="form-text">
+                    Mínimo 8 caracteres, con letras, números y un carácter
+                    especial.
+                  </div>
                 </div>
 
                 <div className="col-12 col-md-6">
@@ -283,7 +283,6 @@ function CrearPerfil() {
                     onChange={(event) => {
                       setConfirmarPassword(event.target.value);
                       setError("");
-                      setExito(false);
                     }}
                     required
                   />
@@ -306,8 +305,12 @@ function CrearPerfil() {
                 </div>
 
                 <div className="col-12">
-                  <button className="btn btn-primary w-100" type="submit">
-                    Registrar
+                  <button
+                    className="btn btn-primary w-100"
+                    type="submit"
+                    disabled={enviando}
+                  >
+                    {enviando ? "Creando cuenta..." : "Registrar"}
                   </button>
                 </div>
               </div>
