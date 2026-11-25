@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
 import productoService from "@/services/productoService";
+import { resolveErrorType } from "@/components/Mantenedor/utils/errors";
 
 import Loading from "@/components/Loading";
 import TableView from "@/components/Mantenedor/TableView";
 import SinConexion from "@/pages/Errores/SinConexion";
+import ErrorInesperado from "@/pages/Errores/Inesperado";
 
 function Productos() {
   const [productos, setProductos] = useState();
   const [categorias, setCategorias] = useState();
   const [metadata, setMetadata] = useState();
-  const [connectionError, setConnectionError] = useState(false);
+  const [errorType, setErrorType] = useState(null);
 
   const fetchInitialData = useCallback(() => {
     return Promise.all([
@@ -38,14 +40,12 @@ function Productos() {
         setProductos(productosRes);
       })
       .catch((err) => {
-        if (err.isConnectionError) {
-          setConnectionError(true);
-        }
+        setErrorType(resolveErrorType(err));
       });
   }, [fetchInitialData]);
 
   const handleRetry = async () => {
-    setConnectionError(false);
+    setErrorType(null);
 
     try {
       const [metadataRes, categoriasRes, productosRes] =
@@ -54,14 +54,16 @@ function Productos() {
       setCategorias(categoriasRes);
       setProductos(productosRes);
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
-  if (connectionError) {
+  if (errorType === "connection") {
     return <SinConexion onRetry={handleRetry} />;
+  }
+
+  if (errorType === "unexpected") {
+    return <ErrorInesperado onRetry={handleRetry} />;
   }
 
   if (!metadata || !categorias || !productos) {
@@ -73,9 +75,7 @@ function Productos() {
       await productoService.create(newProduct);
       await refreshProductosAndCategorias();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -84,9 +84,7 @@ function Productos() {
       await productoService.update(updatedProduct);
       await refreshProductosAndCategorias();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -96,9 +94,7 @@ function Productos() {
       const updatedCategories = await productoService.getCategories();
       setCategorias(updatedCategories);
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
@@ -107,9 +103,7 @@ function Productos() {
       await productoService.delete(id);
       await refreshProductosAndCategorias();
     } catch (err) {
-      if (err.isConnectionError) {
-        setConnectionError(true);
-      }
+      setErrorType(resolveErrorType(err));
     }
   };
 
