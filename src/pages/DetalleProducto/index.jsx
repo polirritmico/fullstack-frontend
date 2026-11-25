@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { productos } from "@/data/productos";
+import Loading from "@/components/Loading";
+import SinConexion from "@/pages/Errores/SinConexion";
+import productoService from "@/services/productoService";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
 
 import "@/styles/legacy.css";
@@ -8,7 +10,44 @@ import "@/styles/legacy.css";
 function DetalleProducto() {
   const { id } = useParams();
 
-  const producto = productos.find((item) => String(item.id) === id);
+  // undefined = cargando, null = no existe / no disponible
+  const [producto, setProducto] = useState();
+  const [errorConexion, setErrorConexion] = useState(false);
+
+  const cargarProducto = useCallback(() => {
+    return productoService
+      .getById(id)
+      .then((respuesta) => {
+        // Los productos desactivados no se muestran en la tienda.
+        setProducto(respuesta?.activo ? respuesta : null);
+      })
+      .catch((err) => {
+        if (err.response?.status === 404 || err.response?.status === 400) {
+          setProducto(null);
+        } else {
+          console.error(err);
+          setErrorConexion(true);
+        }
+      });
+  }, [id]);
+
+  useEffect(() => {
+    cargarProducto();
+  }, [cargarProducto]);
+
+  function reintentar() {
+    setProducto(undefined);
+    setErrorConexion(false);
+    cargarProducto();
+  }
+
+  if (errorConexion) {
+    return <SinConexion onRetry={reintentar} />;
+  }
+
+  if (producto === undefined) {
+    return <Loading />;
+  }
 
   if (!producto) {
     return (

@@ -1,4 +1,5 @@
 function FiltrosTienda({
+  categorias = [],
   categoria,
   onCambiarCategoria,
   precio,
@@ -20,10 +21,12 @@ function FiltrosTienda({
             value={categoria}
             onChange={(event) => onCambiarCategoria(event.target.value)}
           >
-            <option value="Todas">Todas las categorías</option>
-            <option value="Alimentos">Alimentos</option>
-            <option value="Juguetes">Juguetes</option>
-            <option value="Accesorios y cuidado">Accesorios y cuidado</option>
+            <option value="todos">Todas las categorías</option>
+            {categorias.map((cat) => (
+              <option key={cat.id} value={String(cat.id)}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </div>
 

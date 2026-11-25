@@ -1,22 +1,69 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import Carrusel from "@/components/Carrusel";
 import FiltrosTienda from "@/components/FiltrosTienda";
-import { productos } from "@/data/productos";
+import Loading from "@/components/Loading";
+import SinConexion from "@/pages/Errores/SinConexion";
+import productoService from "@/services/productoService";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
+
+export const TODAS_LAS_CATEGORIAS = "todos";
 
 function Tienda() {
   const { agregarProducto } = useContext(CarritoContext);
-  const [categoria, setCategoria] = useState("Todas");
+  const [categoria, setCategoria] = useState(TODAS_LAS_CATEGORIAS);
   const [precio, setPrecio] = useState("Todos");
+
+  // Datos que llegan desde product-api (a través del API Gateway).
+  const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(false);
+
+  const cargarCatalogo = useCallback(() => {
+    return Promise.all([
+      productoService.getCatalogo(),
+      productoService.getCategories(),
+    ])
+      .then(([productosRes, categoriasRes]) => {
+        setProductos(productosRes);
+        // La opción "Todos los productos" la maneja el propio filtro.
+        setCategorias(categoriasRes.filter((cat) => !cat.isDefault));
+        setError(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      })
+      .finally(() => setCargando(false));
+  }, []);
+
+  useEffect(() => {
+    cargarCatalogo();
+  }, [cargarCatalogo]);
+
+  function reintentar() {
+    setCargando(true);
+    setError(false);
+    cargarCatalogo();
+  }
 
   function agregarAlCarrito(producto) {
     agregarProducto(producto);
   }
 
+  if (cargando) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <SinConexion onRetry={reintentar} />;
+  }
+
   const productosFiltrados = productos.filter((producto) => {
     const cumpleCategoria =
-      categoria === "Todas" || producto.categoria === categoria;
+      categoria === TODAS_LAS_CATEGORIAS ||
+      String(producto.categoriaId) === categoria;
 
     let cumplePrecio = true;
 
@@ -46,6 +93,7 @@ function Tienda() {
       <div className="row g-4">
         <aside className="col-12 col-lg-3">
           <FiltrosTienda
+            categorias={categorias}
             categoria={categoria}
             onCambiarCategoria={setCategoria}
             precio={precio}

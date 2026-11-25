@@ -12,10 +12,14 @@ function mapProductoResponseToProducto(productoResponse) {
     descripcion: productoResponse.descripcion,
     caracteristicas: productoResponse.caracteristicas,
     imagen: productoResponse.imagen,
-    categoriaIdd: productoResponse.categoriaId,
-    precio: productoResponse.precio,
+    categoriaId: productoResponse.categoriaId,
+    categoria: productoResponse.categoria,
+    // BigDecimal llega como número JSON; Number() asegura el formateo CLP.
+    precio: Number(productoResponse.precio),
     stock: productoResponse.stock,
     estadoId: productoResponse.estadoId,
+    estado: productoResponse.estado,
+    activo: productoResponse.activo,
   };
 }
 
@@ -67,6 +71,12 @@ const productoService = {
   async getAll() {
     const res = await jkiltroApi.get("/api/v1/products");
     return res.data;
+  },
+
+  // Catálogo público de la tienda: solo productos activos (no requiere token).
+  async getCatalogo() {
+    const res = await jkiltroApi.get("/api/v1/products/active");
+    return res.data.map(mapProductoResponseToProducto);
   },
 
   async getById(id) {
