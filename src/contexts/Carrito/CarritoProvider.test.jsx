@@ -1,8 +1,14 @@
 import { useContext } from "react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { act, renderHook } from "@testing-library/react";
+import { AuthContext } from "@/contexts/Auth/AuthContext";
+import storeManagerService from "@/services/storeManagerService";
 import CarritoProvider from "./CarritoProvider";
 import { CarritoContext } from "./CarritoContext";
+
+vi.mock("@/services/storeManagerService", () => ({
+  default: { validarProducto: vi.fn() },
+}));
 
 const producto = {
   id: 1,
@@ -163,5 +169,164 @@ describe("CarritoProvider", () => {
     });
 
     expect(result.current.carrito).toEqual([]);
+  });
+});
+
+describe("CarritoProvider con sesión iniciada", () => {
+  function ConSesion({ children }) {
+    return (
+      <AuthContext value={{ user: { id: 7 } }}>
+        <CarritoProvider>{children}</CarritoProvider>
+      </AuthContext>
+    );
+  }
+
+  function renderCarritoConSesion() {
+    return renderHook(() => useContext(CarritoContext), { wrapper: ConSesion });
+  }
+
+  beforeEach(() => {
+    localStorage.clear();
+    vi.clearAllMocks();
+  });
+
+  it("no valida con store-manager cuando no hay sesión", async () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    await act(() => result.current.agregarProducto(producto));
+
+    expect(storeManagerService.validarProducto).not.toHaveBeenCalled();
+    expect(result.current.carrito).toEqual([{ ...producto, cantidad: 1 }]);
+  });
+
+  it("agrega el producto cuando store-manager lo valida", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 10,
+    });
+    const { result } = renderCarritoConSesion();
+
+    let agregado;
+    await act(async () => {
+      agregado = await result.current.agregarProducto(producto, 2);
+    });
+
+    expect(storeManagerService.validarProducto).toHaveBeenCalledWith(1);
+    expect(agregado).toBe(true);
+    expect(result.current.carrito).toEqual([{ ...producto, cantidad: 2 }]);
+    expect(result.current.aviso).toBe("");
+  });
+
+  it("no agrega y avisa cuando la cantidad supera el stock", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 2,
+    });
+    const { result } = renderCarritoConSesion();
+
+    await act(() => result.current.agregarProducto(producto, 3));
+
+    expect(result.current.carrito).toEqual([]);
+    expect(result.current.aviso).toBe(
+      "Solo quedan 2 unidades de Alimento Perro Adulto.",
+    );
+  });
+
+  it("considera lo que ya está en el carrito al comparar con el stock", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 1,
+    });
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([{ ...producto, cantidad: 1 }]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    await act(() => result.current.agregarProducto(producto));
+
+    expect(result.current.carrito).toEqual([{ ...producto, cantidad: 1 }]);
+    expect(result.current.aviso).toBe(
+      "Solo queda 1 unidad de Alimento Perro Adulto.",
+    );
+  });
+
+  it("no agrega y muestra el motivo cuando el producto no está disponible", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockRejectedValue({
+      response: { status: 409, data: "El producto no tiene stock disponible" },
+    });
+    const { result } = renderCarritoConSesion();
+
+    await act(() => result.current.agregarProducto(producto));
+
+    expect(result.current.carrito).toEqual([]);
+    expect(result.current.aviso).toBe(
+      "No se pudo agregar Alimento Perro Adulto: El producto no tiene stock disponible.",
+    );
+  });
+
+  it("limpia el aviso", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockRejectedValue({
+      response: { status: 404, data: "Producto no encontrado con ID: 1" },
+    });
+    const { result } = renderCarritoConSesion();
+
+    await act(() => result.current.agregarProducto(producto));
+    act(() => result.current.limpiarAviso());
+
+    expect(result.current.aviso).toBe("");
+  });
+
+  it("validarCarrito no informa problemas cuando todo está disponible", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 5,
+    });
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([{ ...producto, cantidad: 2 }]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    let problemas;
+    await act(async () => {
+      problemas = await result.current.validarCarrito();
+    });
+
+    expect(problemas).toEqual([]);
+  });
+
+  it("validarCarrito informa cada producto con problemas", async () => {
+    const pelota = { id: 2, nombre: "Pelota", precio: 4990 };
+    vi.mocked(storeManagerService.validarProducto).mockImplementation((id) =>
+      id === 1
+        ? Promise.resolve({ ...producto, stock: 1 })
+        : Promise.reject({
+            response: {
+              status: 409,
+              data: "El producto no tiene stock disponible",
+            },
+          }),
+    );
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([
+        { ...producto, cantidad: 3 },
+        { ...pelota, cantidad: 1 },
+      ]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    let problemas;
+    await act(async () => {
+      problemas = await result.current.validarCarrito();
+    });
+
+    expect(problemas).toEqual([
+      "Solo queda 1 unidad de Alimento Perro Adulto.",
+      "Pelota: El producto no tiene stock disponible.",
+    ]);
   });
 });

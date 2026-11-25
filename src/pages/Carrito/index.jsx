@@ -5,13 +5,19 @@ import { useAuth } from "@/contexts/Auth/AuthContext";
 import compraService from "@/services/compraService";
 
 function Carrito() {
-  const { carrito, quitarProducto, cambiarCantidad, vaciarCarrito } =
-    useContext(CarritoContext);
+  const {
+    carrito,
+    quitarProducto,
+    cambiarCantidad,
+    vaciarCarrito,
+    validarCarrito,
+  } = useContext(CarritoContext);
 
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+  const [validando, setValidando] = useState(false);
 
   const subtotal = carrito.reduce(
     (suma, producto) => suma + producto.precio * producto.cantidad,
@@ -29,7 +35,7 @@ function Carrito() {
     });
   }
 
-  function finalizarCompra() {
+  async function finalizarCompra() {
     setError("");
 
     if (carrito.length === 0) return;
@@ -38,6 +44,17 @@ function Carrito() {
       navigate("/login", {
         state: { from: "/tienda/carrito" },
       });
+      return;
+    }
+
+    setValidando(true);
+    const problemas = await validarCarrito();
+    setValidando(false);
+
+    if (problemas.length > 0) {
+      setError(
+        `No se puede finalizar la compra. ${problemas.join(" ")} Ajusta tu carrito e inténtalo nuevamente.`,
+      );
       return;
     }
 
@@ -200,10 +217,10 @@ function Carrito() {
               <button
                 className="btn btn-primary w-100 mt-4"
                 type="button"
-                disabled={carrito.length === 0}
+                disabled={carrito.length === 0 || validando}
                 onClick={finalizarCompra}
               >
-                Finalizar compra
+                {validando ? "Validando productos..." : "Finalizar compra"}
               </button>
 
               <p className="small text-body-secondary mt-3 mb-0">
