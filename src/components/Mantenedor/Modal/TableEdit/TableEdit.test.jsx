@@ -106,6 +106,32 @@ describe("TableEdit", () => {
     expect(output).toEqual(expected);
   });
 
+  it("debería mostrar el mensaje de error de la operación", () => {
+    const testCase = { error: "No se pudo actualizar el usuario." };
+    const expected = "No se pudo actualizar el usuario.";
+
+    renderTableEdit(testCase);
+
+    expect(screen.getByRole("alert")).toHaveTextContent(expected);
+  });
+
+  it("no debería mostrar mensaje de error si la operación no falla", () => {
+    renderTableEdit();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("debería deshabilitar el botón y mostrar un spinner mientras guarda", () => {
+    renderTableEdit({ isSubmitting: true });
+
+    const saveButton = screen.getByRole("button", {
+      name: /guardar los cambios/i,
+    });
+
+    expect(saveButton).toBeDisabled();
+    expect(saveButton).toHaveAttribute("aria-busy", "true");
+    expect(saveButton.querySelector(".spinner-border")).toBeInTheDocument();
+  });
+
   it("debería cerrar al presionar el botón de cerrar del header", async () => {
     const testCase = "Close";
     const expected = 1;

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -291,6 +291,44 @@ describe("TableView modales", () => {
 
       const output = within(dialog).getByText(expected);
       expect(output).toBeInTheDocument();
+    });
+  });
+
+  describe("Errores de operaciones", () => {
+    it("debería mostrar error del back y mantener abierto el modal al fallar la creación", async () => {
+      const testCase = "El usuario ya existe.";
+      const onAdd = vi.fn().mockRejectedValue({
+        response: { data: { message: testCase } },
+      });
+
+      render(<TableView {...defaultProps} onAdd={onAdd} />);
+      await userEvent.click(screen.getByRole("button", { name: "+ Agregar" }));
+      const dialog = await screen.findByRole("dialog");
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Crear Usuario" }),
+      );
+
+      const output = await within(dialog).findByRole("alert");
+      expect(output).toHaveTextContent(testCase);
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+    });
+
+    it("debería deshabilitar el botón mientras la creación está en curso", async () => {
+      const onAdd = vi.fn(() => new Promise(() => {}));
+
+      render(<TableView {...defaultProps} onAdd={onAdd} />);
+      await userEvent.click(screen.getByRole("button", { name: "+ Agregar" }));
+      const dialog = await screen.findByRole("dialog");
+      const saveButton = within(dialog).getByRole("button", {
+        name: "Crear Usuario",
+      });
+
+      await userEvent.click(saveButton);
+
+      expect(saveButton).toBeDisabled();
+      expect(saveButton).toHaveAttribute("aria-busy", "true");
+      expect(saveButton.querySelector(".spinner-border")).toBeInTheDocument();
     });
   });
 });

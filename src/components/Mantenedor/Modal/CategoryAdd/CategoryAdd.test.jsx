@@ -50,6 +50,27 @@ describe("CategoryAdd", () => {
     expect(output).toEqual(expected);
   });
 
+  it("debería mostrar el mensaje de error de la operación", () => {
+    const testCase = "No se pudo crear la categoría.";
+    const expected = "No se pudo crear la categoría.";
+
+    renderCategoryAdd({ error: testCase });
+
+    expect(screen.getByRole("alert")).toHaveTextContent(expected);
+  });
+
+  it("debería deshabilitar las acciones y mostrar un spinner mientras guarda", () => {
+    renderCategoryAdd({ isSubmitting: true });
+
+    const saveButton = screen.getByRole("button", { name: /guardar/i });
+    const cancelButton = screen.getByRole("button", { name: /cancelar/i });
+
+    expect(saveButton).toBeDisabled();
+    expect(saveButton).toHaveAttribute("aria-busy", "true");
+    expect(saveButton.querySelector(".spinner-border")).toBeInTheDocument();
+    expect(cancelButton).toBeDisabled();
+  });
+
   it("debería enviar el ícono seleccionado", async () => {
     const testCase = {
       nombre: "Juguete",

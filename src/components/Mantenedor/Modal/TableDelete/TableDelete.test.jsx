@@ -51,6 +51,27 @@ describe("TableDelete", () => {
     expect(output.correo).toBeInTheDocument();
   });
 
+  it("debería mostrar el mensaje de error de la operación", () => {
+    const testCase = "No se pudo eliminar el usuario.";
+    const expected = "No se pudo eliminar el usuario.";
+
+    renderTableDelete({ error: testCase });
+
+    expect(screen.getByRole("alert")).toHaveTextContent(expected);
+  });
+
+  it("debería deshabilitar las acciones y mostrar un spinner mientras elimina", () => {
+    renderTableDelete({ isSubmitting: true });
+
+    const deleteButton = screen.getByRole("button", { name: /eliminar/i });
+    const cancelButton = screen.getByRole("button", { name: /cancelar/i });
+
+    expect(deleteButton).toBeDisabled();
+    expect(deleteButton).toHaveAttribute("aria-busy", "true");
+    expect(deleteButton.querySelector(".spinner-border")).toBeInTheDocument();
+    expect(cancelButton).toBeDisabled();
+  });
+
   it("debería confirmar la eliminación", async () => {
     const { onConfirm } = renderTableDelete();
 
