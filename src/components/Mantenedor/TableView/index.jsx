@@ -8,6 +8,7 @@ import TableDelete from "@/components/Mantenedor/Modal/TableDelete";
 import TableDetails from "@/components/Mantenedor/Modal/TableDetails";
 import TableEdit from "@/components/Mantenedor/Modal/TableEdit";
 import TableToolbar from "@/components/Mantenedor/TableToolbar";
+import { getApiErrorMessage } from "@/services/utils/apiError";
 
 function TableView({
   data,
@@ -33,6 +34,13 @@ function TableView({
   const [entryToDelete, setEntryToDelete] = useState(null);
   const [entryToEdit, setEntryToEdit] = useState(null);
   const [entryToDetails, setEntryToDetails] = useState(null);
+
+  const [addError, setAddError] = useState(null);
+  const [categoryError, setCategoryError] = useState(null);
+  const [deleteError, setDeleteError] = useState(null);
+  const [editError, setEditError] = useState(null);
+
+  const [pendingAction, setPendingAction] = useState(null);
 
   const searchFields = metadata.columns
     .filter((col) => col.isSearchable)
@@ -77,30 +85,118 @@ function TableView({
   );
 
   async function handleSave(newData) {
-    if (onAdd) {
-      await onAdd(newData);
+    setAddError(null);
+    setPendingAction("add");
+
+    try {
+      if (onAdd) {
+        await onAdd(newData);
+      }
+      setShowAddModal(false);
+    } catch (err) {
+      setAddError(getApiErrorMessage(err));
+    } finally {
+      setPendingAction(null);
     }
-    setShowAddModal(false);
   }
 
   async function handleEditSave(updatedData) {
-    if (onEdit) {
-      await onEdit(updatedData);
+    setEditError(null);
+    setPendingAction("edit");
+
+    try {
+      if (onEdit) {
+        await onEdit(updatedData);
+      }
+      setEntryToEdit(null);
+    } catch (err) {
+      setEditError(getApiErrorMessage(err));
+    } finally {
+      setPendingAction(null);
     }
-    setEntryToEdit(null);
   }
 
   async function handleCategorySave(newData) {
-    if (onCategoryAdd) {
-      await onCategoryAdd(newData);
+    setCategoryError(null);
+    setPendingAction("category");
+
+    try {
+      if (onCategoryAdd) {
+        await onCategoryAdd(newData);
+      }
+      setShowCategoryModal(false);
+    } catch (err) {
+      setCategoryError(getApiErrorMessage(err));
+    } finally {
+      setPendingAction(null);
     }
-    setShowCategoryModal(false);
   }
 
   async function handleDelete() {
-    if (onDelete && entryToDelete) {
-      await onDelete(entryToDelete.id);
+    setDeleteError(null);
+    setPendingAction("delete");
+
+    try {
+      if (onDelete && entryToDelete) {
+        await onDelete(entryToDelete.id);
+      }
+      setEntryToDelete(null);
+    } catch (err) {
+      setDeleteError(getApiErrorMessage(err));
+    } finally {
+      setPendingAction(null);
     }
+  }
+
+  function openAddModal() {
+    setAddError(null);
+    setShowAddModal(true);
+  }
+
+  function closeAddModal() {
+    if (pendingAction === "add") {
+      return;
+    }
+    setAddError(null);
+    setShowAddModal(false);
+  }
+
+  function openCategoryModal() {
+    setCategoryError(null);
+    setShowCategoryModal(true);
+  }
+
+  function closeCategoryModal() {
+    if (pendingAction === "category") {
+      return;
+    }
+    setCategoryError(null);
+    setShowCategoryModal(false);
+  }
+
+  function openEditModal(entry) {
+    setEditError(null);
+    setEntryToEdit(entry);
+  }
+
+  function closeEditModal() {
+    if (pendingAction === "edit") {
+      return;
+    }
+    setEditError(null);
+    setEntryToEdit(null);
+  }
+
+  function openDeleteModal(entry) {
+    setDeleteError(null);
+    setEntryToDelete(entry);
+  }
+
+  function closeDeleteModal() {
+    if (pendingAction === "delete") {
+      return;
+    }
+    setDeleteError(null);
     setEntryToDelete(null);
   }
 
@@ -129,7 +225,7 @@ function TableView({
         data={sidebarCategories}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
-        onAddClick={() => setShowCategoryModal(true)}
+        onAddClick={openCategoryModal}
       />
 
       <div className="col-12 col-md-8 col-lg-9 col-xl-9 col-xxl-10 p-3">
@@ -141,14 +237,14 @@ function TableView({
           onSearchChange={setSearch}
           selectedStatus={selectedStatus}
           onStatusChange={setSelectedStatus}
-          onAddClick={() => setShowAddModal(true)}
+          onAddClick={openAddModal}
         />
         <Table
           data={filteredData}
           metadata={metadata}
           customClass={tableCustomClass}
-          onDeleteClick={setEntryToDelete}
-          onEditClick={setEntryToEdit}
+          onDeleteClick={openDeleteModal}
+          onEditClick={openEditModal}
           onDetailsClick={setEntryToDetails}
 
           categories={sidebarCategories}
@@ -173,7 +269,9 @@ function TableView({
         entityName={singleLabel}
         fields={formFields}
         show={showAddModal}
-        onHide={() => setShowAddModal(false)}
+        error={addError}
+        isSubmitting={pendingAction === "add"}
+        onHide={closeAddModal}
         onSave={handleSave}
       />
 
@@ -182,7 +280,9 @@ function TableView({
         fields={formFields}
         show={Boolean(entryToEdit)}
         entry={entryToEdit}
-        onHide={() => setEntryToEdit(null)}
+        error={editError}
+        isSubmitting={pendingAction === "edit"}
+        onHide={closeEditModal}
         onSave={handleEditSave}
       />
 
@@ -190,16 +290,20 @@ function TableView({
         show={Boolean(entryToDelete)}
         entry={entryToDelete}
         metadata={metadata}
-        onHide={() => setEntryToDelete(null)}
+        error={deleteError}
+        isSubmitting={pendingAction === "delete"}
+        onHide={closeDeleteModal}
         onConfirm={handleDelete}
       />
 
       <CategoryAdd
         show={showCategoryModal}
-        onHide={() => setShowCategoryModal(false)}
+        onHide={closeCategoryModal}
         onSave={handleCategorySave}
         title={metadata.category.addTitle}
         icons={metadata.category.icons}
+        error={categoryError}
+        isSubmitting={pendingAction === "category"}
       />
     </>
   );
