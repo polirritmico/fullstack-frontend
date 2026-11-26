@@ -70,40 +70,24 @@ function Usuarios() {
   }
 
   const handleCreateUser = async (newUser) => {
-    try {
-      await usuarioService.create(newUser);
-      await refreshUsersAndCategories();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await usuarioService.create(newUser);
+    await refreshUsersAndCategories();
   };
 
   const handleEditUser = async (updatedUser) => {
-    try {
-      await usuarioService.update(updatedUser);
-      await refreshUsersAndCategories();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await usuarioService.update(updatedUser);
+    await refreshUsersAndCategories();
   };
 
   const handleCreateRole = async (newRole) => {
-    try {
-      await usuarioService.createCategory(newRole);
-      const updatedRoles = await usuarioService.getCategories();
-      setRoles(updatedRoles);
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await usuarioService.createCategory(newRole);
+    const updatedRoles = await usuarioService.getCategories();
+    setRoles(updatedRoles);
   };
 
   const handleDeleteUser = async (id) => {
-    try {
-      await usuarioService.delete(id);
-      await refreshUsersAndCategories();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await usuarioService.delete(id);
+    await refreshUsersAndCategories();
   };
 
   return (
