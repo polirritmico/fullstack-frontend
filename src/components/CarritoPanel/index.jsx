@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
+import { alcanzoStock } from "@/contexts/Carrito/stock";
 import { useNavigate } from "react-router";
 
 function CarritoPanel() {
@@ -91,6 +92,7 @@ function CarritoPanel() {
                   <button
                     className="btn btn-sm btn-outline-secondary"
                     type="button"
+                    disabled={alcanzoStock(producto)}
                     aria-label={`Aumentar cantidad de ${producto.nombre}`}
                     onClick={() =>
                       cambiarCantidad(producto.id, producto.cantidad + 1)

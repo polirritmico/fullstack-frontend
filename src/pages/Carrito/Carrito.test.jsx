@@ -47,6 +47,29 @@ describe("Carrito", () => {
     vi.clearAllMocks();
   });
 
+  it("deshabilita aumentar cuando la cantidad llega al stock", () => {
+    mostrarCarrito({ carrito: [{ ...producto, stock: 1 }] });
+
+    expect(
+      screen.getByRole("button", {
+        name: `Aumentar cantidad de ${producto.nombre}`,
+      }),
+    ).toBeDisabled();
+  });
+
+  it("permite aumentar mientras quede stock", () => {
+    const cambiarCantidad = vi.fn();
+    mostrarCarrito({ carrito: [{ ...producto, stock: 3 }], cambiarCantidad });
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: `Aumentar cantidad de ${producto.nombre}`,
+      }),
+    );
+
+    expect(cambiarCantidad).toHaveBeenCalledWith(producto.id, 2);
+  });
+
   it("no finaliza la compra y muestra los problemas del carrito", async () => {
     const vaciarCarrito = vi.fn();
     mostrarCarrito({

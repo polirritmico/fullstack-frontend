@@ -13,8 +13,8 @@ const producto = {
   cantidad: 1,
 };
 
-function mostrarPanel() {
-  localStorage.setItem("jk-carrito", JSON.stringify([producto]));
+function mostrarPanel(productos = [producto]) {
+  localStorage.setItem("jk-carrito", JSON.stringify(productos));
 
   render(
     <MemoryRouter initialEntries={["/tienda"]}>
@@ -74,6 +74,21 @@ describe("CarritoPanel", () => {
 
     expect(screen.getByText("1")).toBeInTheDocument();
     expect(botonMenos).toBeDisabled();
+  });
+
+  it("deshabilita aumentar cuando la cantidad llega al stock", () => {
+    mostrarPanel([{ ...producto, stock: 2 }]);
+
+    const botonMas = screen.getByRole("button", {
+      name: `Aumentar cantidad de ${producto.nombre}`,
+    });
+
+    expect(botonMas).toBeEnabled();
+
+    fireEvent.click(botonMas);
+
+    expect(screen.getByText("2")).toBeInTheDocument();
+    expect(botonMas).toBeDisabled();
   });
 
   it("navega al carrito completo al presionar Ver carrito", () => {
