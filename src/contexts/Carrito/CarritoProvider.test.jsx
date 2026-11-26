@@ -99,6 +99,72 @@ describe("CarritoProvider", () => {
     expect(result.current.carrito[0].cantidad).toBe(3);
   });
 
+  it("no permite cambiar la cantidad por sobre el stock", () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    act(() => {
+      result.current.agregarProducto({ ...producto, stock: 3 });
+    });
+
+    act(() => {
+      result.current.cambiarCantidad(producto.id, 3);
+    });
+
+    act(() => {
+      result.current.cambiarCantidad(producto.id, 4);
+    });
+
+    expect(result.current.carrito[0].cantidad).toBe(3);
+    expect(result.current.aviso).toBe(
+      "Solo quedan 3 unidades de Alimento Perro Adulto.",
+    );
+  });
+
+  it("no agrega más unidades que el stock del catálogo sin sesión", async () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    let agregado;
+    await act(async () => {
+      agregado = await result.current.agregarProducto(
+        { ...producto, stock: 2 },
+        3,
+      );
+    });
+
+    expect(agregado).toBe(false);
+    expect(result.current.carrito).toEqual([]);
+    expect(result.current.aviso).toBe(
+      "Solo quedan 2 unidades de Alimento Perro Adulto.",
+    );
+  });
+
+  it("avisa que no quedan unidades cuando el stock es cero", async () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    await act(() => result.current.agregarProducto({ ...producto, stock: 0 }));
+
+    expect(result.current.carrito).toEqual([]);
+    expect(result.current.aviso).toBe(
+      "No quedan unidades de Alimento Perro Adulto.",
+    );
+  });
+
+  it("no agrega cantidades decimales", async () => {
+    const { result } = renderHook(() => useContext(CarritoContext), {
+      wrapper: CarritoProvider,
+    });
+
+    await act(() => result.current.agregarProducto(producto, 1.5));
+
+    expect(result.current.carrito).toEqual([]);
+  });
+
   it("rechaza cantidades menores a uno o que no sean enteras", () => {
     const { result } = renderHook(() => useContext(CarritoContext), {
       wrapper: CarritoProvider,
@@ -215,8 +281,28 @@ describe("CarritoProvider con sesión iniciada", () => {
 
     expect(storeManagerService.validarProducto).toHaveBeenCalledWith(1);
     expect(agregado).toBe(true);
-    expect(result.current.carrito).toEqual([{ ...producto, cantidad: 2 }]);
+    expect(result.current.carrito).toEqual([
+      { ...producto, stock: 10, cantidad: 2 },
+    ]);
     expect(result.current.aviso).toBe("");
+  });
+
+  it("actualiza el stock guardado con el informado por store-manager", async () => {
+    vi.mocked(storeManagerService.validarProducto).mockResolvedValue({
+      ...producto,
+      stock: 4,
+    });
+    localStorage.setItem(
+      "jk-carrito-7",
+      JSON.stringify([{ ...producto, stock: 30, cantidad: 1 }]),
+    );
+    const { result } = renderCarritoConSesion();
+
+    await act(() => result.current.agregarProducto({ ...producto, stock: 30 }));
+
+    expect(result.current.carrito).toEqual([
+      { ...producto, stock: 4, cantidad: 2 },
+    ]);
   });
 
   it("no agrega y avisa cuando la cantidad supera el stock", async () => {

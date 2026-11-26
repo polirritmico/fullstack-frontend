@@ -3,6 +3,7 @@ import { AuthContext } from "@/contexts/Auth/AuthContext";
 import storeManagerService from "@/services/storeManagerService";
 import { getApiErrorMessage } from "@/services/utils/apiError";
 import { CarritoContext } from "./CarritoContext";
+import { stockMaximo } from "./stock";
 
 function cargarCarrito(claveStorage) {
   try {
@@ -33,6 +34,10 @@ function CarritoProvider({ children }) {
 }
 
 function mensajeStockInsuficiente(producto, stock) {
+  if (stock <= 0) {
+    return `No quedan unidades de ${producto.nombre}.`;
+  }
+
   const unidades = stock === 1 ? "queda 1 unidad" : `quedan ${stock} unidades`;
   return `Solo ${unidades} de ${producto.nombre}.`;
 }
@@ -52,19 +57,33 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
   async function agregarProducto(producto, cantidad = 1) {
     setAviso("");
 
-    if (!conSesion) {
-      sumarAlCarrito(producto, cantidad);
-      return true;
+    if (!Number.isInteger(cantidad) || cantidad < 1) {
+      return false;
     }
 
     const cantidadEnCarrito =
       carrito.find((item) => item.id === producto.id)?.cantidad ?? 0;
 
+    if (!conSesion) {
+      const stock = stockMaximo(producto);
+
+      if (stock < cantidadEnCarrito + cantidad) {
+        setAviso(mensajeStockInsuficiente(producto, stock));
+        return false;
+      }
+
+      sumarAlCarrito(producto, cantidad);
+      return true;
+    }
+
+    let stockActual;
+
     try {
       const validado = await storeManagerService.validarProducto(producto.id);
+      stockActual = validado.stock;
 
-      if (validado.stock < cantidadEnCarrito + cantidad) {
-        setAviso(mensajeStockInsuficiente(producto, validado.stock));
+      if (stockActual < cantidadEnCarrito + cantidad) {
+        setAviso(mensajeStockInsuficiente(producto, stockActual));
         return false;
       }
     } catch (err) {
@@ -74,7 +93,7 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
       return false;
     }
 
-    sumarAlCarrito(producto, cantidad);
+    sumarAlCarrito({ ...producto, stock: stockActual }, cantidad);
     return true;
   }
 
@@ -109,7 +128,11 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
       if (existe) {
         return actual.map((item) =>
           item.id === producto.id
-            ? { ...item, cantidad: item.cantidad + cantidad }
+            ? {
+                ...item,
+                stock: producto.stock ?? item.stock,
+                cantidad: item.cantidad + cantidad,
+              }
             : item,
         );
       }
@@ -124,6 +147,14 @@ function EstadoCarrito({ children, claveStorage, conSesion }) {
 
   function cambiarCantidad(id, cantidad) {
     if (!Number.isInteger(cantidad) || cantidad < 1) return;
+
+    const producto = carrito.find((item) => item.id === id);
+    const stock = stockMaximo(producto);
+
+    if (producto && cantidad > stock) {
+      setAviso(mensajeStockInsuficiente(producto, stock));
+      return;
+    }
 
     setCarrito((actual) =>
       actual.map((producto) =>
