@@ -71,40 +71,24 @@ function Productos() {
   }
 
   const handleCreateProduct = async (newProduct) => {
-    try {
-      await productoService.create(newProduct);
-      await refreshProductosAndCategorias();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await productoService.create(newProduct);
+    await refreshProductosAndCategorias();
   };
 
   const handleEditProduct = async (updatedProduct) => {
-    try {
-      await productoService.update(updatedProduct);
-      await refreshProductosAndCategorias();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await productoService.update(updatedProduct);
+    await refreshProductosAndCategorias();
   };
 
   const handleCreateCategory = async (newCategory) => {
-    try {
-      await productoService.createCategory(newCategory);
-      const updatedCategories = await productoService.getCategories();
-      setCategorias(updatedCategories);
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await productoService.createCategory(newCategory);
+    const updatedCategories = await productoService.getCategories();
+    setCategorias(updatedCategories);
   };
 
   const handleDeleteProduct = async (id) => {
-    try {
-      await productoService.delete(id);
-      await refreshProductosAndCategorias();
-    } catch (err) {
-      setErrorType(resolveErrorType(err));
-    }
+    await productoService.delete(id);
+    await refreshProductosAndCategorias();
   };
 
   return (
