@@ -4,6 +4,7 @@ import Loading from "@/components/Loading";
 import SinConexion from "@/pages/Errores/SinConexion";
 import productoService from "@/services/productoService";
 import { CarritoContext } from "@/contexts/Carrito/CarritoContext";
+import { stockMaximo } from "@/contexts/Carrito/stock";
 
 import "@/styles/legacy.css";
 
@@ -68,7 +69,13 @@ function DetalleProducto() {
 
 function ContenidoProducto({ producto }) {
   const [cantidad, setCantidad] = useState(1);
-  const { agregarProducto } = useContext(CarritoContext);
+  const { carrito, agregarProducto } = useContext(CarritoContext);
+
+  const stock = stockMaximo(producto);
+  const enCarrito =
+    carrito.find((item) => item.id === producto.id)?.cantidad ?? 0;
+  const disponible = Math.max(stock - enCarrito, 0);
+  const conLimite = Number.isFinite(disponible);
 
   const precioFormateado = producto.precio.toLocaleString("es-CL", {
     style: "currency",
@@ -76,12 +83,33 @@ function ContenidoProducto({ producto }) {
     maximumFractionDigits: 0,
   });
 
-  const cantidadValida = cantidad >= 1;
+  const cantidadValida =
+    Number.isInteger(cantidad) && cantidad >= 1 && cantidad <= disponible;
 
-  function manejarAgregar() {
+  let ayudaCantidad = "";
+  if (stock === 0) {
+    ayudaCantidad = "Sin stock.";
+  } else if (conLimite && disponible === 0) {
+    ayudaCantidad = "Ya tienes en tu carrito todas las unidades disponibles.";
+  } else if (conLimite) {
+    ayudaCantidad =
+      enCarrito > 0
+        ? `Disponibles: ${disponible} (ya tienes ${enCarrito} en tu carrito).`
+        : `Disponibles: ${disponible}.`;
+  }
+
+  function cambiarCantidad(event) {
+    const valor = event.target.valueAsNumber;
+    setCantidad(conLimite && valor > disponible ? disponible : valor);
+  }
+
+  async function manejarAgregar() {
     if (!cantidadValida) return;
 
-    agregarProducto(producto, cantidad);
+    const agregado = await agregarProducto(producto, cantidad);
+    if (agregado) {
+      setCantidad(1);
+    }
   }
 
   return (
@@ -140,10 +168,22 @@ function ContenidoProducto({ producto }) {
                 className="form-control"
                 type="number"
                 step={1}
+                min={1}
+                max={conLimite ? disponible : undefined}
                 value={Number.isNaN(cantidad) ? "" : cantidad}
-                onChange={(event) => setCantidad(event.target.valueAsNumber)}
+                onChange={cambiarCantidad}
+                disabled={disponible === 0}
+                aria-describedby={
+                  ayudaCantidad ? "producto-cantidad-ayuda" : undefined
+                }
                 style={{ maxWidth: "100px" }}
               />
+
+              {ayudaCantidad && (
+                <div id="producto-cantidad-ayuda" className="form-text">
+                  {ayudaCantidad}
+                </div>
+              )}
             </div>
 
             <div className="d-flex flex-column flex-sm-row gap-2">
@@ -157,7 +197,7 @@ function ContenidoProducto({ producto }) {
                 aria-controls="offcanvasRight"
               >
                 <i className="bi bi-cart-plus me-2" aria-hidden="true"></i>
-                Agregar al carrito
+                {stock === 0 ? "Sin stock" : "Agregar al carrito"}
               </button>
 
               <Link to="/tienda" className="btn btn-outline-secondary btn-lg">
