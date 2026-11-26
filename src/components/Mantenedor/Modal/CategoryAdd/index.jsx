@@ -4,7 +4,18 @@ import Modal from "react-bootstrap/Modal";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
-function CategoryAdd({ show, onHide, onSave, title, icons }) {
+import ModalError from "../ModalError";
+import ModalSubmitButton from "../ModalSubmitButton";
+
+function CategoryAdd({
+  show,
+  onHide,
+  onSave,
+  title,
+  icons,
+  error,
+  isSubmitting = false,
+}) {
   const formId = "add-category-form";
 
   const handleSubmit = (ev) => {
@@ -21,6 +32,8 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
       </Modal.Header>
 
       <Modal.Body className="p-4">
+        <ModalError error={error} />
+
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="add-category-name">
             <Form.Label>Nombre:</Form.Label>
@@ -78,12 +91,22 @@ function CategoryAdd({ show, onHide, onSave, title, icons }) {
       </Modal.Body>
 
       <Modal.Footer className="justify-content-center">
-        <Button variant="outline-secondary" onClick={onHide}>
+        <Button
+          variant="outline-secondary"
+          onClick={onHide}
+          disabled={isSubmitting}
+        >
           Cancelar
         </Button>
-        <Button variant="primary" type="submit" form={formId} className="px-4">
+        <ModalSubmitButton
+          variant="primary"
+          type="submit"
+          form={formId}
+          className="px-4"
+          isSubmitting={isSubmitting}
+        >
           Guardar
-        </Button>
+        </ModalSubmitButton>
       </Modal.Footer>
     </Modal>
   );

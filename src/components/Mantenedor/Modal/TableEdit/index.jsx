@@ -1,6 +1,8 @@
-import { Button, Form, Modal, Row } from "react-bootstrap";
+import { Form, Modal, Row } from "react-bootstrap";
 
 import { parseValue } from "@/components/Mantenedor/utils/parsers";
+import ModalError from "../ModalError";
+import ModalSubmitButton from "../ModalSubmitButton";
 import TableField from "../TableField";
 
 function TableEdit({
@@ -8,6 +10,8 @@ function TableEdit({
   fields,
   show,
   entry,
+  error,
+  isSubmitting = false,
   onHide,
   onSave,
   onExited,
@@ -39,6 +43,8 @@ function TableEdit({
       </Modal.Header>
 
       <Modal.Body>
+        <ModalError error={error} />
+
         <Form onSubmit={handleSubmit} id={`edit-${entityName}-form`}>
           <Row>
             {fields.map((field) => {
@@ -60,14 +66,15 @@ function TableEdit({
       </Modal.Body>
 
       <Modal.Footer className="justify-content-center">
-        <Button
+        <ModalSubmitButton
           variant="primary"
           type="submit"
           form={`edit-${entityName}-form`}
+          isSubmitting={isSubmitting}
+          icon="bi bi-pencil-square"
         >
-          <i className="bi bi-pencil-square me-2 fs-5"></i>
           Guardar los cambios
-        </Button>
+        </ModalSubmitButton>
       </Modal.Footer>
     </Modal>
   );

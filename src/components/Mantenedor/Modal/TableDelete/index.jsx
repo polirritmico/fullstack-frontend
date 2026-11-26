@@ -1,7 +1,18 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function TableDelete({ show, entry, metadata, onHide, onConfirm }) {
+import ModalError from "../ModalError";
+import ModalSubmitButton from "../ModalSubmitButton";
+
+function TableDelete({
+  show,
+  entry,
+  metadata,
+  error,
+  isSubmitting = false,
+  onHide,
+  onConfirm,
+}) {
   const entityName = metadata.entity.singleLabel;
   const { nameKey, detailKey, detailLabel } = metadata.delete;
 
@@ -15,6 +26,8 @@ function TableDelete({ show, entry, metadata, onHide, onConfirm }) {
       </Modal.Header>
 
       <Modal.Body className="p-4 text-center">
+        <ModalError error={error} />
+
         <p className="fs-5 mb-2">
           ¿Estás seguro de que desea eliminar este {entityName.toLowerCase()}?
         </p>
@@ -34,12 +47,21 @@ function TableDelete({ show, entry, metadata, onHide, onConfirm }) {
       </Modal.Body>
 
       <Modal.Footer className="bg-light justify-content-center">
-        <Button variant="outline-secondary" onClick={onHide}>
+        <Button
+          variant="outline-secondary"
+          onClick={onHide}
+          disabled={isSubmitting}
+        >
           Cancelar
         </Button>
-        <Button variant="danger" className="px-4" onClick={onConfirm}>
+        <ModalSubmitButton
+          variant="danger"
+          className="px-4"
+          onClick={onConfirm}
+          isSubmitting={isSubmitting}
+        >
           Eliminar
-        </Button>
+        </ModalSubmitButton>
       </Modal.Footer>
     </Modal>
   );

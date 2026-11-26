@@ -1,11 +1,21 @@
 // fuente: https://react-bootstrap.netlify.app/docs/components/modal/#focus-on-specific-element
 
-import { Button, Form, Modal, Row } from "react-bootstrap";
+import { Form, Modal, Row } from "react-bootstrap";
 
 import { parseValue } from "@/components/Mantenedor/utils/parsers";
+import ModalError from "../ModalError";
+import ModalSubmitButton from "../ModalSubmitButton";
 import TableField from "../TableField";
 
-function TableAdd({ entityName, fields, show, onHide, onSave }) {
+function TableAdd({
+  entityName,
+  fields,
+  show,
+  error,
+  isSubmitting = false,
+  onHide,
+  onSave,
+}) {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const formData = new FormData(ev.target);
@@ -28,6 +38,8 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
       </Modal.Header>
 
       <Modal.Body>
+        <ModalError error={error} />
+
         <Form onSubmit={handleSubmit} id={`add-${entityName}-form`}>
           <Row>
             {fields.map((field) => {
@@ -44,10 +56,15 @@ function TableAdd({ entityName, fields, show, onHide, onSave }) {
       </Modal.Body>
 
       <Modal.Footer className="justify-content-center">
-        <Button variant="primary" type="submit" form={`add-${entityName}-form`}>
-          <i className="bi bi-floppy me-2 fs-5"></i>
+        <ModalSubmitButton
+          variant="primary"
+          type="submit"
+          form={`add-${entityName}-form`}
+          isSubmitting={isSubmitting}
+          icon="bi bi-floppy"
+        >
           Crear {entityName}
-        </Button>
+        </ModalSubmitButton>
       </Modal.Footer>
     </Modal>
   );
