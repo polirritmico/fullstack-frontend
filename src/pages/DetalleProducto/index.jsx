@@ -67,7 +67,7 @@ function DetalleProducto() {
 }
 
 function ContenidoProducto({ producto }) {
-  const [cantidad, setCantidad] = useState("1");
+  const [cantidad, setCantidad] = useState(1);
   const { agregarProducto } = useContext(CarritoContext);
 
   const precioFormateado = producto.precio.toLocaleString("es-CL", {
@@ -76,15 +76,12 @@ function ContenidoProducto({ producto }) {
     maximumFractionDigits: 0,
   });
 
-  const cantidadNumerica = Number(cantidad);
-
-  const cantidadValida =
-    Number.isInteger(cantidadNumerica) && cantidadNumerica >= 1;
+  const cantidadValida = cantidad >= 1;
 
   function manejarAgregar() {
     if (!cantidadValida) return;
 
-    agregarProducto(producto, cantidadNumerica);
+    agregarProducto(producto, cantidad);
   }
 
   return (
@@ -142,10 +139,9 @@ function ContenidoProducto({ producto }) {
                 id="producto-cantidad"
                 className="form-control"
                 type="number"
-                min="1"
-                step="1"
-                value={cantidad}
-                onChange={(event) => setCantidad(event.target.value)}
+                step={1}
+                value={Number.isNaN(cantidad) ? "" : cantidad}
+                onChange={(event) => setCantidad(event.target.valueAsNumber)}
                 style={{ maxWidth: "100px" }}
               />
             </div>
