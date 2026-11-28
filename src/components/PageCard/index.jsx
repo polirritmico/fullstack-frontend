@@ -10,7 +10,7 @@ function PageCard({ title, to, img, children, alt, btnText = "Ingresar" }) {
           <h1 className="card-title texto-fuerte">{title}</h1>
           <p className="card-text opacity-75 text-center">{children}</p>
 
-          <Link to={to} className="btn btn-primary">
+          <Link to={to} className="btn btn-primary mt-auto">
             {btnText}
           </Link>
         </div>
