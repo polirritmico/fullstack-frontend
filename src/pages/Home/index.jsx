@@ -1,5 +1,7 @@
-import "@/styles/legacy.css";
 import { Link } from "react-router";
+import PageCard from "@/components/PageCard";
+
+import "@/styles/legacy.css";
 
 function Home() {
   return (
@@ -7,59 +9,24 @@ function Home() {
       <section className="seccion-cards py-5">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-12 col-lg-5 col-xl-4 mb-4">
-              <div className="card shadow h-100 rounded-10p">
-                <img
-                  src="img/pexels-helenalopes-7980680.jpg"
-                  className="card-img-top card-img-top-css"
-                  alt="Veterinarios atendiendo a un perro"
-                />
+            <PageCard
+              title="Veterinaria"
+              to="/clinica"
+              alt="Veterinarios atendiendo a un gato"
+              img="img/pexels-helenalopes-7980680.jpg"
+            >
+              Agenda tu hora con nuestros veterinarios y conoce nuestros
+              servicios de salud animal.
+            </PageCard>
 
-                {/*<!-- no se centraba boton tuve que usar flexbox-->*/}
-                <div className="card-body d-flex flex-column align-items-center">
-                  <h1 className="card-title texto-fuerte">Veterinaria</h1>
-                  <p className="card-text opacity-75 text-center">
-                    Agenda tu hora con nuestros veterinarios y conoce nuestros
-                    servicios de salud animal.
-                  </p>
-
-                  {/*<!-- Botón centrado -->*/}
-
-                  <Link to="/clinica" className="btn btn-primary">
-                    Ingresar
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-lg-6 col-xl-4 mb-4">
-              <div className="card shadow h-100 rounded-10p">
-                <img
-                  src="img/pexels-1433506698-34667593.jpg"
-                  className="card-img-top card-img-top-css"
-                  alt="Varios gatos comiendo juntos"
-                />
-
-                {/* <!-- tambien aca-->*/}
-                <div className="card-body d-flex flex-column align-items-center">
-                  <h1 className="card-title texto-fuerte">Tienda</h1>
-                  <p className="card-text opacity-75 text-center">
-                    Conoce nuestras tiendas a lo largo de Chile
-                  </p>
-
-                  {/* <!-- lo mismo aca -->*/}
-                  {/*                   <a
-                    href="pages/login.html?redirect=tienda/index.html"
-                    className="btn btn-primary"
-                  >
-                    Ingresar
-                  </a> */}
-                  <Link to="/tienda" className="btn btn-primary">
-                    Ingresar
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <PageCard
+              title="Tienda"
+              to="/tienda"
+              alt="Varios gatos comiendo juntos"
+              img="img/pexels-1433506698-34667593.jpg"
+            >
+              Conoce nuestras tiendas a lo largo de Chile
+            </PageCard>
           </div>
         </div>
       </section>
